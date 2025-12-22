@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
         optimizeForMobile();
     }
     
+    // Обновление ссылок корзины для мобильных
+    updateCartLinksForMobile();
+    
     function optimizeForMobile() {
         console.log('Оптимизация для мобильных устройств');
         
@@ -31,6 +34,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Предотвращение масштабирования
         preventZoomOnFocus();
+    }
+    
+    // Функция для обновления ссылок корзины
+    function updateCartLinksForMobile() {
+        const cartLinks = document.querySelectorAll('a.cart-link');
+        
+        cartLinks.forEach(link => {
+            // Удаляем все существующие обработчики
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+            
+            // Добавляем новый обработчик
+            newLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'cart.html';
+            });
+        });
     }
     
     function improveMobileNavigation() {
@@ -294,7 +314,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function improveMobileCart() {
         const cartSidebar = document.querySelector('.cart-sidebar');
-        const cartItems = document.getElementById('cartItems');
         
         if (cartSidebar) {
             // Свайп для закрытия корзины

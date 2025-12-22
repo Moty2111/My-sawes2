@@ -105,28 +105,24 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartCount();
         renderCartItems();
         
-        // Открытие корзины
-        const cartLink = document.querySelector('.cart-link');
-        if (cartLink) {
-            cartLink.addEventListener('click', function(e) {
+        // Обработка всех ссылок корзины
+        const cartLinks = document.querySelectorAll('.cart-link');
+        cartLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                // На мобильных открываем страницу корзины
-                if (window.innerWidth <= 768) {
-                    window.location.href = 'cart.html';
-                    return;
-                }
-                
-                // На десктопе открываем сайдбар
-                if (cartSidebar) {
-                    cartSidebar.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    renderCartItems();
-                }
+                // Всегда переходим на страницу корзины
+                window.location.href = 'cart.html';
+            });
+        });
+        
+        // Если на странице корзины, делаем ссылку активной
+        if (window.location.pathname.includes('cart.html')) {
+            cartLinks.forEach(link => {
+                link.classList.add('active');
             });
         }
         
-        // Закрытие корзины
+        // Закрытие корзины (сайдбар)
         if (closeCart) {
             closeCart.addEventListener('click', function() {
                 if (cartSidebar) {
@@ -139,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Закрытие корзины при клике вне ее
         document.addEventListener('click', function(e) {
             if (cartSidebar && !e.target.closest('.cart-sidebar') && 
-                !e.target.closest('.cart-link') && 
                 cartSidebar.classList.contains('active')) {
                 cartSidebar.classList.remove('active');
                 document.body.style.overflow = '';
@@ -184,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Обработка кнопки оформления заказа
+        // Обработка кнопки оформления заказа в сайдбаре
         const checkoutBtn = document.querySelector('.checkout-btn');
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', function() {
