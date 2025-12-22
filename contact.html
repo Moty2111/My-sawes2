@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BuildCraft - Корзина</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <span class="logo-text">Build<span class="logo-highlight">Craft</span></span>
+                    </a>
+                </div>
+                
+                <div class="header-actions">
+                    <nav class="main-nav">
+                        <ul class="nav-list">
+                            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Главная</span></a></li>
+                            <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> <span>О нас</span></a></li>
+                            <li><a href="catalog.html" class="nav-link"><i class="fas fa-th-list"></i> <span>Каталог</span></a></li>
+                            <li><a href="services.html" class="nav-link"><i class="fas fa-tools"></i> <span>Услуги</span></a></li>
+                            <li><a href="contact.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Контакты</span></a></li>
+                        </ul>
+                    </nav>
+                    
+                    <a href="cart.html" class="cart-link active">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="cart-page-header">
+                <h2 class="section-title">Корзина покупок</h2>
+            </div>
+            
+            <div class="cart-page-content">
+                <div class="cart-page-items" id="cartPageItems">
+                    <div class="empty-cart-page">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Ваша корзина пуста</h3>
+                        <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
+                    </div>
+                </div>
+                
+                <div class="cart-page-summary">
+                    <h3>Итоги заказа</h3>
+                    <div class="summary-row">
+                        <span>Товары:</span>
+                        <span id="summaryItems">0 ₽</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Итого:</span>
+                        <span id="summaryTotal">0 ₽</span>
+                    </div>
+                    
+                    <button class="btn btn-primary checkout-page-btn">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 BuildCraft</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
