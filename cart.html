@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BuildCraft - О нас</title>
+    <title>BuildCraft - Корзина</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#4CAF50">
-    <meta name="mobile-web-app-capable" content="yes">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -33,14 +28,14 @@
                     <nav class="main-nav">
                         <ul class="nav-list">
                             <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Главная</span></a></li>
-                            <li><a href="about.html" class="nav-link active"><i class="fas fa-info-circle"></i> <span>О нас</span></a></li>
+                            <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> <span>О нас</span></a></li>
                             <li><a href="catalog.html" class="nav-link"><i class="fas fa-th-list"></i> <span>Каталог</span></a></li>
                             <li><a href="services.html" class="nav-link"><i class="fas fa-tools"></i> <span>Услуги</span></a></li>
                             <li><a href="contact.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Контакты</span></a></li>
                         </ul>
                     </nav>
                     
-                    <a href="cart.html" class="cart-link">
+                    <a href="cart.html" class="cart-link active">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-text">Корзина</span>
                         <span class="cart-count" id="cartCount">0</span>
@@ -54,129 +49,66 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <div class="about-header">
-                <h2 class="section-title">О компании BuildCraft</h2>
-                <p class="section-subtitle">Надежный поставщик строительных материалов с 2010 года</p>
+            <div class="cart-page-header">
+                <h2 class="section-title">Корзина покупок</h2>
+                <p class="section-subtitle">Оформление заказа</p>
             </div>
             
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="intro-text">Мы работаем на рынке строительных материалов с 2010 года, предлагая нашим клиентам только качественную продукцию от проверенных производителей.</p>
-                    
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Надежные поставщики</h4>
-                                <p>Работаем напрямую с производителями, что гарантирует качество и лучшие цены</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Опытные консультанты</h4>
-                                <p>Наши специалисты имеют строительное образование и опыт работы от 5 лет</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-warehouse"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Собственный склад</h4>
-                                <p>Площадь склада 5000 м² позволяет всегда иметь в наличии широкий ассортимент</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Гарантия на все товары</h4>
-                                <p>Предоставляем гарантию на все строительные материалы от 1 года</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mission">
-                        <h3>Наша миссия</h3>
-                        <p>Мы стремимся обеспечить наших клиентов качественными строительными материалами по доступным ценам, помогая воплощать в жизнь их строительные и ремонтные проекты.</p>
-                    </div>
+            <div class="cart-page-content">
+                <div class="cart-page-items" id="cartPageItems">
+                    <!-- Товары будут загружаться через JavaScript -->
                 </div>
-                <div class="about-image">
-                    <div class="construction-image">
-                        <div class="image-overlay">
-                            <h4>Наш складской комплекс</h4>
-                            <p>5000 м² современных складских помещений</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <div class="stat-number">12+</div>
-                        <div class="stat-label">Лет на рынке</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-boxes"></i>
-                        </div>
-                        <div class="stat-number">5000+</div>
-                        <div class="stat-label">Товаров в ассортименте</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-number">2500+</div>
-                        <div class="stat-label">Довольных клиентов</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Доставка по заявкам</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Team Section -->
-            <div class="team-section">
-                <h2 class="section-title">Наша команда</h2>
-                <p class="section-subtitle">Профессионалы с большим опытом в строительной сфере</p>
                 
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-photo photo1"></div>
-                        <h4>Иван Петров</h4>
-                        <div class="member-role">Генеральный директор</div>
-                        <div class="member-experience">Опыт работы: 15 лет</div>
+                <div class="cart-page-summary">
+                    <h3>Итоги заказа</h3>
+                    <div class="summary-row">
+                        <span>Товары:</span>
+                        <span id="summaryItems">0 ₽</span>
                     </div>
-                    <div class="team-member">
-                        <div class="member-photo photo2"></div>
-                        <h4>Анна Смирнова</h4>
-                        <div class="member-role">Технический директор</div>
-                        <div class="member-experience">Опыт работы: 12 лет</div>
+                    <div class="summary-row">
+                        <span>Доставка:</span>
+                        <span id="summaryDelivery">0 ₽</span>
                     </div>
-                    <div class="team-member">
-                        <div class="member-photo photo3"></div>
-                        <h4>Сергей Иванов</h4>
-                        <div class="member-role">Менеджер по закупкам</div>
-                        <div class="member-experience">Опыт работы: 10 лет</div>
+                    <div class="summary-row total">
+                        <span>Итого:</span>
+                        <span id="summaryTotal">0 ₽</span>
                     </div>
+                    
+                    <div class="delivery-options">
+                        <h4>Способ доставки</h4>
+                        <div class="delivery-option">
+                            <input type="radio" id="delivery1" name="delivery" checked>
+                            <label for="delivery1">Самовывоз (бесплатно)</label>
+                        </div>
+                        <div class="delivery-option">
+                            <input type="radio" id="delivery2" name="delivery">
+                            <label for="delivery2">Курьерская доставка (1500 ₽)</label>
+                        </div>
+                        <div class="delivery-option">
+                            <input type="radio" id="delivery3" name="delivery">
+                            <label for="delivery3">Экспресс доставка (3000 ₽)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-options">
+                        <h4>Способ оплаты</h4>
+                        <div class="delivery-option">
+                            <input type="radio" id="payment1" name="payment" checked>
+                            <label for="payment1">Наличными при получении</label>
+                        </div>
+                        <div class="delivery-option">
+                            <input type="radio" id="payment2" name="payment">
+                            <label for="payment2">Банковской картой онлайн</label>
+                        </div>
+                        <div class="delivery-option">
+                            <input type="radio" id="payment3" name="payment">
+                            <label for="payment3">Безналичный расчет для юр. лиц</label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary checkout-page-btn" style="width: 100%; margin-top: 20px;">Оформить заказ</button>
                 </div>
             </div>
         </div>

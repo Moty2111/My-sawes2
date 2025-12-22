@@ -125,20 +125,6 @@
         background: rgba(106, 180, 76, 0.15);
     }
     
-    /* Preloader */
-    .preloader-content {
-        padding: 0 var(--space-md);
-    }
-    
-    .crane-loader {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .preloader-text {
-        font-size: var(--text-base);
-    }
-    
     /* Корзина */
     .cart-sidebar {
         width: 100%;
@@ -832,14 +818,6 @@
     .form-group input::placeholder,
     .form-group textarea::placeholder {
         color: var(--gray-dark);
-    }
-    
-    .crane-base, .crane-tower, .crane-hook {
-        background: var(--secondary-color);
-    }
-    
-    .crane-arm {
-        background: var(--primary-color);
     }
     
     .newsletter-input input {
