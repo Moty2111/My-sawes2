@@ -1,5 +1,7 @@
-// mobile.js - Мобильные оптимизации и жесты
+// mobile.js - Исправленная версия для мобильных устройств
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Mobile JS loaded');
+    
     // Проверка мобильного устройства
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -8,40 +10,131 @@ document.addEventListener('DOMContentLoaded', function() {
         optimizeForMobile();
     }
     
-    // Обновление ссылок корзины для мобильных
-    updateCartLinksForMobile();
-    
     function optimizeForMobile() {
-        console.log('Оптимизация для мобильных устройств');
+        console.log('Optimizing for mobile devices');
         
-        // Улучшение навигации
-        improveMobileNavigation();
+        // Инициализация мобильного меню
+        initMobileMenu();
         
-        // Улучшение форм
-        improveMobileForms();
+        // Улучшение тач-интерфейса
+        improveTouchInterface();
         
-        // Улучшение галереи
-        improveMobileGallery();
+        // Исправление ссылок корзины
+        fixCartLinks();
         
-        // Оптимизация производительности
-        optimizePerformance();
-        
-        // Улучшение корзины
-        improveMobileCart();
-        
-        // Добавление жестов
-        addGestureSupport();
-        
-        // Предотвращение масштабирования
+        // Предотвращение масштабирования при фокусе
         preventZoomOnFocus();
+        
+        // Исправление футера для мобильных
+        fixFooterForMobile();
     }
     
-    // Функция для обновления ссылок корзины
-    function updateCartLinksForMobile() {
-        const cartLinks = document.querySelectorAll('a.cart-link');
+    function initMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.querySelector('.main-nav');
+        
+        if (!mobileMenuBtn || !mainNav) {
+            console.log('Mobile menu elements not found');
+            return;
+        }
+        
+        // Обработчик для кнопки меню
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            // Переключение класса active у меню
+            mainNav.classList.toggle('active');
+            
+            // Анимация кнопки меню
+            if (mainNav.classList.contains('active')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
+                document.body.style.overflow = 'hidden'; // Блокируем прокрутку
+            } else {
+                this.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = ''; // Разблокируем прокрутку
+            }
+            
+            // Вибрация если поддерживается
+            if ('vibrate' in navigator) {
+                navigator.vibrate(10);
+            }
+        });
+        
+        // Закрытие меню при клике на ссылку
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.main-nav') && 
+                !e.target.closest('.mobile-menu-btn') && 
+                mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Закрытие меню при свайпе вправо
+        let touchStartX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].screenX;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            // Если свайп вправо больше 50px и меню открыто - закрываем
+            if (swipeDistance > 50 && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    function improveTouchInterface() {
+        // Увеличиваем область касания для важных элементов
+        const touchElements = document.querySelectorAll('.btn, .nav-link, .filter-btn, .add-to-cart');
+        
+        touchElements.forEach(el => {
+            el.style.minHeight = '44px';
+            el.style.minWidth = '44px';
+            el.style.display = 'flex';
+            el.style.alignItems = 'center';
+            el.style.justifyContent = 'center';
+        });
+        
+        // Улучшаем input для мобильных
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                // Прокручиваем к input при фокусе
+                setTimeout(() => {
+                    this.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center',
+                        inline: 'nearest' 
+                    });
+                }, 300);
+            });
+        });
+    }
+    
+    function fixCartLinks() {
+        const cartLinks = document.querySelectorAll('.cart-link');
         
         cartLinks.forEach(link => {
-            // Удаляем все существующие обработчики
+            // Удаляем старые обработчики
             const newLink = link.cloneNode(true);
             link.parentNode.replaceChild(newLink, link);
             
@@ -53,376 +146,83 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    function improveMobileNavigation() {
-        const navLinks = document.querySelectorAll('.nav-link');
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navList = document.querySelector('.nav-list');
-        
-        // Закрытие меню при клике на ссылку
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navList.classList.contains('active')) {
-                    navList.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    
-                    // Анимация кнопки
-                    mobileMenuBtn.style.transform = 'scale(0.9)';
-                    setTimeout(() => {
-                        mobileMenuBtn.style.transform = 'scale(1)';
-                    }, 150);
-                }
-            });
-        });
-        
-        // Свайп для закрытия меню
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const swipeDistance = touchEndX - touchStartX;
-            
-            // Свайп вправо для закрытия меню
-            if (swipeDistance > swipeThreshold && navList.classList.contains('active')) {
-                navList.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        }
-        
-        // Вибрация (если поддерживается)
-        if ('vibrate' in navigator) {
-            mobileMenuBtn.addEventListener('touchstart', () => {
-                navigator.vibrate(10);
-            });
-        }
-    }
-    
-    function improveMobileForms() {
-        const inputs = document.querySelectorAll('input, select, textarea');
-        
-        inputs.forEach(input => {
-            // Оптимизация виртуальной клавиатуры
-            if (input.type === 'tel') {
-                input.setAttribute('inputmode', 'tel');
-                input.setAttribute('pattern', '[0-9]*');
-            }
-            
-            if (input.type === 'email') {
-                input.setAttribute('inputmode', 'email');
-            }
-            
-            // Улучшение фокуса
-            input.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-                
-                // Прокрутка к полю ввода
-                setTimeout(() => {
-                    this.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center',
-                        inline: 'nearest'
-                    });
-                }, 300);
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.classList.remove('focused');
-            });
-        });
-    }
-    
-    function improveMobileGallery() {
-        const productImages = document.querySelectorAll('.product-image');
-        
-        productImages.forEach(image => {
-            image.style.cursor = 'pointer';
-            
-            image.addEventListener('click', function() {
-                const productCard = this.closest('.product-card, .catalog-item');
-                const productName = productCard?.querySelector('h3')?.textContent || 'Товар';
-                
-                // Модальное окно для изображения
-                const modal = document.createElement('div');
-                modal.className = 'image-modal';
-                modal.innerHTML = `
-                    <div class="modal-overlay"></div>
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>${productName}</h4>
-                            <button class="modal-close"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="modal-image" style="background-image: ${this.style.backgroundImage}"></div>
-                    </div>
-                `;
-                
-                document.body.appendChild(modal);
-                
-                // Закрытие модального окна
-                modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
-                modal.querySelector('.modal-close').addEventListener('click', closeModal);
-                
-                // Закрытие по Escape
-                document.addEventListener('keydown', function escHandler(e) {
-                    if (e.key === 'Escape') {
-                        closeModal();
-                        document.removeEventListener('keydown', escHandler);
-                    }
-                });
-                
-                function closeModal() {
-                    modal.classList.add('closing');
-                    setTimeout(() => {
-                        modal.remove();
-                    }, 300);
-                }
-                
-                // Анимация появления
-                setTimeout(() => {
-                    modal.classList.add('active');
-                }, 10);
-            });
-        });
-        
-        // Добавление стилей для модального окна
-        const modalStyles = document.createElement('style');
-        modalStyles.textContent = `
-            .image-modal {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 2000;
-                display: none;
-            }
-            
-            .image-modal.active {
-                display: block;
-            }
-            
-            .modal-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                backdrop-filter: blur(5px);
-            }
-            
-            .modal-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) scale(0.9);
-                width: 90%;
-                max-width: 500px;
-                background: white;
-                border-radius: 15px;
-                overflow: hidden;
-                opacity: 0;
-                transition: all 0.3s ease;
-            }
-            
-            .image-modal.active .modal-content {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-            
-            .image-modal.closing .modal-content {
-                transform: translate(-50%, -50%) scale(0.9);
-                opacity: 0;
-            }
-            
-            .modal-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 20px;
-                background: linear-gradient(135deg, #FFD700, #4CAF50);
-                color: white;
-            }
-            
-            .modal-header h4 {
-                margin: 0;
-                font-size: 1.2rem;
-            }
-            
-            .modal-close {
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.2rem;
-                cursor: pointer;
-                padding: 5px;
-            }
-            
-            .modal-image {
-                height: 300px;
-                background-size: contain;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-color: #f5f5f5;
-            }
-            
-            @media (max-width: 768px) {
-                .modal-content {
-                    width: 95%;
-                }
-                
-                .modal-image {
-                    height: 250px;
-                }
-            }
-        `;
-        document.head.appendChild(modalStyles);
-    }
-    
-    function optimizePerformance() {
-        // Ленивая загрузка изображений
-        const images = document.querySelectorAll('img, .product-image');
-        
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    
-                    if (img.tagName === 'IMG' && img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    
-                    observer.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '50px 0px',
-            threshold: 0.1
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    }
-    
-    function improveMobileCart() {
-        const cartSidebar = document.querySelector('.cart-sidebar');
-        
-        if (cartSidebar) {
-            // Свайп для закрытия корзины
-            let cartTouchStartY = 0;
-            let cartTouchEndY = 0;
-            
-            cartSidebar.addEventListener('touchstart', e => {
-                cartTouchStartY = e.changedTouches[0].screenY;
-            }, { passive: true });
-            
-            cartSidebar.addEventListener('touchend', e => {
-                cartTouchEndY = e.changedTouches[0].screenY;
-                handleCartSwipe();
-            }, { passive: true });
-            
-            function handleCartSwipe() {
-                const swipeThreshold = 100;
-                const swipeDistance = cartTouchEndY - cartTouchStartY;
-                
-                // Свайп вниз для закрытия корзины
-                if (swipeDistance > swipeThreshold && cartSidebar.classList.contains('active')) {
-                    cartSidebar.classList.remove('active');
-                    document.body.style.overflow = '';
-                    
-                    if ('vibrate' in navigator) {
-                        navigator.vibrate(10);
-                    }
-                }
-            }
-        }
-    }
-    
-    function addGestureSupport() {
-        // Двойное касание для увеличения
-        let lastTap = 0;
-        
-        document.addEventListener('touchend', function(e) {
-            const currentTime = new Date().getTime();
-            const tapLength = currentTime - lastTap;
-            
-            if (tapLength < 500 && tapLength > 0) {
-                handleDoubleTap(e);
-            }
-            
-            lastTap = currentTime;
-        });
-        
-        function handleDoubleTap(e) {
-            const target = e.target;
-            
-            // Увеличение изображений товаров
-            if (target.closest('.product-image')) {
-                const productImage = target.closest('.product-image');
-                if (productImage) {
-                    productImage.style.transform = productImage.style.transform === 'scale(1.1)' 
-                        ? 'scale(1)' 
-                        : 'scale(1.1)';
-                    
-                    productImage.style.transition = 'transform 0.3s ease';
-                    
-                    setTimeout(() => {
-                        productImage.style.transform = 'scale(1)';
-                    }, 2000);
-                }
-            }
-        }
-    }
-    
     function preventZoomOnFocus() {
-        const viewport = document.querySelector('meta[name="viewport"]');
-        let originalContent = viewport.getAttribute('content');
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        let originalContent = viewportMeta.getAttribute('content');
         
         document.addEventListener('focusin', function(e) {
             if (e.target.matches('input, select, textarea')) {
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
             }
         });
         
         document.addEventListener('focusout', function() {
-            viewport.setAttribute('content', originalContent);
+            viewportMeta.setAttribute('content', originalContent);
         });
     }
+    
+    function fixFooterForMobile() {
+        // Убеждаемся, что футер всегда внизу
+        const mainContent = document.querySelector('.main-content');
+        const footer = document.querySelector('.footer');
+        
+        if (mainContent && footer) {
+            // Минимальная высота для контента
+            mainContent.style.minHeight = 'calc(100vh - 140px)';
+            
+            // Убедимся, что футер виден
+            footer.style.display = 'block';
+            footer.style.visibility = 'visible';
+            footer.style.opacity = '1';
+            
+            // Прокручиваем к верху страницы при загрузке
+            window.scrollTo(0, 0);
+        }
+        
+        // Исправление для iOS Safari
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.body.style.WebkitOverflowScrolling = 'touch';
+            
+            // Дополнительные отступы для фиксированных элементов
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.paddingTop = 'env(safe-area-inset-top)';
+            }
+            
+            if (footer) {
+                footer.style.paddingBottom = 'env(safe-area-inset-bottom)';
+            }
+        }
+    }
+    
+    // Адаптация к изменению ориентации
+    window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+            // Пересчитываем высоту элементов
+            fixFooterForMobile();
+            
+            // Перерисовываем страницу
+            window.dispatchEvent(new Event('resize'));
+        }, 300);
+    });
 });
 
-// Адаптация к изменению ориентации
-window.addEventListener('orientationchange', function() {
-    setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-    }, 300);
-});
-
-// Оптимизация для медленных сетей
+// Исправление для медленных сетей
 if ('connection' in navigator) {
     const connection = navigator.connection;
     
     if (connection.saveData === true || connection.effectiveType.includes('2g')) {
-        console.log('Режим экономии данных активирован');
+        console.log('Data saving mode enabled');
         
-        // Отключение тяжелых анимаций
-        document.body.classList.add('save-data-mode');
-        
-        const heavyElements = document.querySelectorAll('.floating-icon, .feature-icon, .service-icon');
-        heavyElements.forEach(el => {
+        // Отключаем тяжелые анимации
+        const heavyAnimations = document.querySelectorAll('.floating-icon, [data-animate]');
+        heavyAnimations.forEach(el => {
             el.style.animation = 'none';
         });
     }
 }
 
-// Исправление для iOS
-if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    document.body.style.WebkitOverflowScrolling = 'touch';
+// Исправление для Chrome на Android
+if (/Android/.test(navigator.userAgent) && /Chrome/.test(navigator.userAgent)) {
+    document.body.style.WebkitTapHighlightColor = 'transparent';
 }
