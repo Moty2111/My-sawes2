@@ -394,6 +394,7 @@
         padding: 20px;
     }
     
+    /* Плавающие иконки - ОРИГИНАЛЬНЫЕ СТИЛИ */
     .floating-icon {
         background: var(--gray-extra-light);
         border-radius: var(--radius-md);
@@ -401,16 +402,34 @@
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        color: var(--gray-color);
+        color: var(--primary-color);
         box-shadow: var(--shadow-sm);
-        border: 2px solid var(--accent-bright);
+        border: 1px solid var(--gray-light);
         transition: all 0.3s ease;
     }
     
-    .floating-icon:active {
+    .floating-icon:nth-child(1),
+    .floating-icon:nth-child(3) {
         background: var(--gradient-yellow-gray);
         color: var(--light-color);
-        border-color: transparent;
+        border: none;
+    }
+    
+    .floating-icon:nth-child(2),
+    .floating-icon:nth-child(4) {
+        background: var(--gradient-green-gray);
+        color: var(--light-color);
+        border: none;
+    }
+    
+    .floating-icon:nth-child(5),
+    .floating-icon:nth-child(6) {
+        background: var(--gradient-gray);
+        color: var(--light-color);
+        border: none;
+    }
+    
+    .floating-icon:active {
         transform: translateY(-5px) scale(1.05);
         box-shadow: var(--shadow-lg);
     }
@@ -582,7 +601,7 @@
     }
     
     .category-card:active .category-icon {
-        background: var(--gradient-yellow-gray);
+        background: var(--gradient-primary);
         color: var(--light-color);
         border-color: transparent;
         transform: translateY(-3px);
@@ -642,7 +661,7 @@
     }
     
     .feature-card:active .feature-icon {
-        background: var(--gradient-green-gray);
+        background: var(--gradient-primary);
         color: var(--light-color);
         border-color: transparent;
         transform: translateY(-3px);
@@ -1657,7 +1676,7 @@
     }
     
     .contact-promo-item:active i {
-        background: var(--gradient-gray);
+        background: var(--gradient-primary);
         color: var(--light-color);
         border-color: transparent;
     }
