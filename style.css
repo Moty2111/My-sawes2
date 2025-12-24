@@ -13,6 +13,7 @@
     --gray-light: #B0BEC5; /* Светлый серо-синий */
     --gray-extra-light: #ECEFF1; /* Очень светлый серый */
     --accent-color: #FF8A65; /* Приглушенный коралловый */
+    --accent-bright: #FF6B35; /* Ярко-оранжевый для обводки */
     
     /* Градиенты */
     --gradient-primary: linear-gradient(135deg, #E6B800, #2E7D32);
@@ -452,7 +453,7 @@ input, select, textarea {
     font-size: var(--text-lg);
 }
 
-/* Плавающие иконки на главной - ИСПРАВЛЕННЫЕ СТИЛИ */
+/* Плавающие иконки на главной */
 .hero-image {
     position: relative;
     height: 400px;
@@ -472,17 +473,17 @@ input, select, textarea {
     position: absolute;
     width: 70px;
     height: 70px;
-    background: var(--light-color);
+    background: var(--gray-extra-light);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: var(--text-2xl);
-    color: var(--primary-color);
+    color: var(--gray-color);
     box-shadow: var(--shadow-lg);
     animation: float 6s ease-in-out infinite;
     transition: var(--transition-normal);
-    border: 1px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
     z-index: 2;
 }
 
@@ -490,60 +491,45 @@ input, select, textarea {
     top: 20%;
     left: 10%;
     animation-delay: 0s;
-    background: var(--gradient-yellow-gray);
-    color: var(--light-color);
-    border: none;
 }
 
 .floating-icon:nth-child(2) {
     top: 10%;
     right: 20%;
     animation-delay: 1s;
-    background: var(--gradient-green-gray);
-    color: var(--light-color);
-    border: none;
 }
 
 .floating-icon:nth-child(3) {
     top: 50%;
     left: 20%;
     animation-delay: 2s;
-    background: var(--gradient-yellow-gray);
-    color: var(--light-color);
-    border: none;
 }
 
 .floating-icon:nth-child(4) {
     bottom: 20%;
     right: 10%;
     animation-delay: 3s;
-    background: var(--gradient-green-gray);
-    color: var(--light-color);
-    border: none;
 }
 
 .floating-icon:nth-child(5) {
     bottom: 10%;
     left: 30%;
     animation-delay: 4s;
-    background: var(--gradient-gray);
-    color: var(--light-color);
-    border: none;
 }
 
 .floating-icon:nth-child(6) {
     top: 30%;
     right: 5%;
     animation-delay: 5s;
-    background: var(--gradient-gray);
-    color: var(--light-color);
-    border: none;
 }
 
 .floating-icon:hover {
     transform: translateY(-10px) scale(1.1);
     box-shadow: var(--shadow-xl);
     z-index: 3;
+    background: var(--gradient-yellow-gray);
+    color: var(--light-color);
+    border-color: transparent;
 }
 
 @keyframes float {
@@ -637,12 +623,13 @@ input, select, textarea {
     color: var(--gray-color);
     margin-bottom: var(--space-lg);
     transition: var(--transition-normal);
-    border: 2px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
 }
 
 .category-card:hover .category-icon {
     background: var(--gradient-yellow-gray);
     color: var(--light-color);
+    border-color: transparent;
 }
 
 .category-card h3 {
@@ -699,12 +686,13 @@ input, select, textarea {
     color: var(--gray-color);
     font-size: var(--text-2xl);
     transition: var(--transition-normal);
-    border: 2px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
 }
 
 .feature-card:hover .feature-icon {
     background: var(--gradient-green-gray);
     color: var(--light-color);
+    border-color: transparent;
 }
 
 .feature-card h3 {
@@ -1053,7 +1041,7 @@ input, select, textarea {
 .highlight-icon {
     width: 50px;
     height: 50px;
-    background: var(--gradient-gray-light);
+    background: var(--gray-extra-light);
     border-radius: var(--radius-round);
     display: flex;
     align-items: center;
@@ -1061,12 +1049,14 @@ input, select, textarea {
     color: var(--gray-dark);
     font-size: var(--text-xl);
     flex-shrink: 0;
-    border: 1px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
+    transition: var(--transition-normal);
 }
 
 .highlight-item:hover .highlight-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
+    border-color: transparent;
 }
 
 .highlight-text h4 {
@@ -1177,7 +1167,7 @@ input, select, textarea {
 .stat-icon {
     width: 60px;
     height: 60px;
-    background: var(--gradient-gray-light);
+    background: var(--gray-extra-light);
     border-radius: var(--radius-round);
     display: flex;
     align-items: center;
@@ -1186,12 +1176,13 @@ input, select, textarea {
     color: var(--gray-dark);
     font-size: var(--text-xl);
     transition: var(--transition-normal);
-    border: 1px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
 }
 
 .stat-card:hover .stat-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
+    border-color: transparent;
 }
 
 .stat-number {
@@ -1477,15 +1468,16 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--space-lg);
-    color: var(--gray-dark);
+    color: var(--gray-color);
     font-size: var(--text-2xl);
     transition: var(--transition-normal);
-    border: 2px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
 }
 
 .service-card:hover .service-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
+    border-color: transparent;
 }
 
 .service-card h3 {
@@ -1578,14 +1570,22 @@ input, select, textarea {
 .contact-promo-item i {
     width: 50px;
     height: 50px;
-    background: var(--gradient-gray);
+    background: var(--gray-extra-light);
     border-radius: var(--radius-round);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--light-color);
+    color: var(--gray-color);
     font-size: var(--text-lg);
     flex-shrink: 0;
+    border: 3px solid var(--accent-bright);
+    transition: var(--transition-normal);
+}
+
+.contact-promo-item:hover i {
+    background: var(--gradient-gray);
+    color: var(--light-color);
+    border-color: transparent;
 }
 
 .contact-promo-item h4 {
@@ -1675,15 +1675,17 @@ input, select, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-dark);
+    color: var(--gray-color);
     font-size: var(--text-xl);
     flex-shrink: 0;
-    border: 1px solid var(--gray-light);
+    border: 3px solid var(--accent-bright);
+    transition: var(--transition-normal);
 }
 
 .contact-card:hover .contact-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
+    border-color: transparent;
 }
 
 .contact-details h3 {
