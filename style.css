@@ -1,4 +1,4 @@
-/* style.css - Приглушенная желто-зелено-серая цветовая схема */
+/* style.css - Приглушенная желто-зелено-серая цветовая схема с оранжевыми акцентами */
 :root {
     /* Основные цвета - приглушенная гамма */
     --primary-color: #E6B800; /* Темный золотистый желтый */
@@ -14,6 +14,7 @@
     --gray-extra-light: #ECEFF1; /* Очень светлый серый */
     --accent-color: #FF8A65; /* Приглушенный коралловый */
     --accent-bright: #FF6B35; /* Ярко-оранжевый для обводки */
+    --form-border: #FF6B35; /* Оранжевая обводка для форм */
     
     /* Градиенты */
     --gradient-primary: linear-gradient(135deg, #E6B800, #2E7D32);
@@ -364,7 +365,7 @@ input, select, textarea {
     border-radius: var(--radius-xl);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .hero::before {
@@ -445,11 +446,11 @@ input, select, textarea {
     background: var(--gray-extra-light);
     padding: 8px 12px;
     border-radius: var(--radius-md);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .hero-feature i {
-    color: var(--secondary-color);
+    color: var(--accent-bright);
     font-size: var(--text-lg);
 }
 
@@ -479,11 +480,11 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     font-size: var(--text-2xl);
-    color: var(--primary-color);
+    color: var(--accent-bright);
     box-shadow: var(--shadow-lg);
     animation: float 6s ease-in-out infinite;
     transition: var(--transition-normal);
-    border: 1px solid var(--gray-light);
+    border: 2px solid var(--accent-bright);
     z-index: 2;
 }
 
@@ -493,7 +494,7 @@ input, select, textarea {
     animation-delay: 0s;
     background: var(--gradient-yellow-gray);
     color: var(--light-color);
-    border: none;
+    border: 2px solid var(--accent-bright);
 }
 
 .floating-icon:nth-child(2) {
@@ -502,7 +503,7 @@ input, select, textarea {
     animation-delay: 1s;
     background: var(--gradient-green-gray);
     color: var(--light-color);
-    border: none;
+    border: 2px solid var(--accent-bright);
 }
 
 .floating-icon:nth-child(3) {
@@ -511,7 +512,7 @@ input, select, textarea {
     animation-delay: 2s;
     background: var(--gradient-yellow-gray);
     color: var(--light-color);
-    border: none;
+    border: 2px solid var(--accent-bright);
 }
 
 .floating-icon:nth-child(4) {
@@ -520,7 +521,7 @@ input, select, textarea {
     animation-delay: 3s;
     background: var(--gradient-green-gray);
     color: var(--light-color);
-    border: none;
+    border: 2px solid var(--accent-bright);
 }
 
 .floating-icon:nth-child(5) {
@@ -529,7 +530,7 @@ input, select, textarea {
     animation-delay: 4s;
     background: var(--gradient-gray);
     color: var(--light-color);
-    border: none;
+    border: 2px solid var(--accent-bright);
 }
 
 .floating-icon:nth-child(6) {
@@ -538,12 +539,13 @@ input, select, textarea {
     animation-delay: 5s;
     background: var(--gradient-gray);
     color: var(--light-color);
-    border: none;
+    border: 2px solid var(--accent-bright);
 }
 
 .floating-icon:hover {
     transform: translateY(-10px) scale(1.1);
     box-shadow: var(--shadow-xl);
+    border-color: var(--accent-color);
     z-index: 3;
 }
 
@@ -562,7 +564,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .section-title {
@@ -613,17 +615,18 @@ input, select, textarea {
     text-align: center;
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .category-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .category-card:hover .category-icon {
     transform: translateY(-5px) scale(1.1);
+    border-color: var(--accent-color);
 }
 
 .category-icon {
@@ -635,7 +638,7 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     font-size: var(--text-2xl);
-    color: var(--gray-color);
+    color: var(--accent-bright);
     margin-bottom: var(--space-lg);
     transition: var(--transition-normal);
     border: 3px solid var(--accent-bright);
@@ -644,7 +647,7 @@ input, select, textarea {
 .category-card:hover .category-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .category-card h3 {
@@ -676,17 +679,18 @@ input, select, textarea {
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .feature-card:hover .feature-icon {
     transform: translateY(-5px) scale(1.1);
+    border-color: var(--accent-color);
 }
 
 .feature-icon {
@@ -698,7 +702,7 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--space-lg);
-    color: var(--gray-color);
+    color: var(--accent-bright);
     font-size: var(--text-2xl);
     transition: var(--transition-normal);
     border: 3px solid var(--accent-bright);
@@ -707,7 +711,7 @@ input, select, textarea {
 .feature-card:hover .feature-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .feature-card h3 {
@@ -727,7 +731,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .section-header {
@@ -766,13 +770,13 @@ input, select, textarea {
     box-shadow: var(--shadow-sm);
     transition: var(--transition-normal);
     position: relative;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .product-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .product-image {
@@ -833,13 +837,13 @@ input, select, textarea {
     color: var(--gray-dark);
     transition: var(--transition-normal);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .product-wishlist:hover {
-    color: var(--primary-color);
+    color: var(--accent-bright);
     transform: scale(1.1);
-    border-color: var(--primary-color);
+    border-color: var(--accent-bright);
 }
 
 .product-info {
@@ -868,7 +872,7 @@ input, select, textarea {
 }
 
 .product-rating i {
-    color: var(--primary-color);
+    color: var(--accent-bright);
     font-size: var(--text-sm);
 }
 
@@ -908,7 +912,7 @@ input, select, textarea {
     margin-bottom: var(--space-2xl);
     color: var(--dark-color);
     position: relative;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .promo-content {
@@ -935,7 +939,7 @@ input, select, textarea {
 .promo-content .btn-secondary {
     background: transparent;
     color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    border-color: var(--form-border);
     align-self: flex-start;
 }
 
@@ -943,6 +947,7 @@ input, select, textarea {
     background: var(--secondary-color);
     color: var(--light-color);
     transform: translateY(-3px);
+    border-color: var(--secondary-color);
 }
 
 .promo-image {
@@ -985,25 +990,26 @@ input, select, textarea {
 .btn-secondary {
     background: transparent;
     color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    border-color: var(--form-border);
 }
 
 .btn-secondary:hover {
     background: var(--secondary-color);
     color: var(--light-color);
     transform: translateY(-3px);
+    border-color: var(--secondary-color);
 }
 
 .btn-outline {
     background: transparent;
     color: var(--gray-dark);
-    border-color: var(--gray-medium);
+    border-color: var(--form-border);
 }
 
 .btn-outline:hover {
     background: var(--gray-extra-light);
     color: var(--dark-color);
-    border-color: var(--gray-dark);
+    border-color: var(--accent-bright);
 }
 
 /* О нас */
@@ -1013,7 +1019,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .about-content {
@@ -1044,12 +1050,12 @@ input, select, textarea {
     border-radius: var(--radius-md);
     transition: var(--transition-normal);
     background: var(--gray-extra-light);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .highlight-item:hover {
     background: var(--light-color);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
     transform: translateY(-3px);
 }
 
@@ -1061,7 +1067,7 @@ input, select, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-dark);
+    color: var(--accent-bright);
     font-size: var(--text-xl);
     flex-shrink: 0;
     border: 3px solid var(--accent-bright);
@@ -1071,7 +1077,7 @@ input, select, textarea {
 .highlight-item:hover .highlight-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .highlight-text h4 {
@@ -1090,8 +1096,8 @@ input, select, textarea {
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
     margin-top: var(--space-xl);
-    border-left: 4px solid var(--secondary-color);
-    border: 1px solid var(--gray-light);
+    border-left: 4px solid var(--form-border);
+    border: 1px solid var(--form-border);
 }
 
 .mission h3 {
@@ -1109,7 +1115,7 @@ input, select, textarea {
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .construction-image {
@@ -1148,7 +1154,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .stats-grid {
@@ -1166,17 +1172,18 @@ input, select, textarea {
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .stat-card:hover .stat-icon {
     transform: translateY(-5px);
+    border-color: var(--accent-color);
 }
 
 .stat-icon {
@@ -1188,7 +1195,7 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--space-md);
-    color: var(--gray-dark);
+    color: var(--accent-bright);
     font-size: var(--text-xl);
     transition: var(--transition-normal);
     border: 3px solid var(--accent-bright);
@@ -1197,7 +1204,7 @@ input, select, textarea {
 .stat-card:hover .stat-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .stat-number {
@@ -1218,7 +1225,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .team-grid {
@@ -1236,13 +1243,13 @@ input, select, textarea {
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .team-member:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .member-photo {
@@ -1253,14 +1260,14 @@ input, select, textarea {
     background: var(--gradient-gray-light);
     background-size: cover;
     background-position: center;
-    border: 4px solid var(--light-color);
+    border: 4px solid var(--form-border);
     transition: var(--transition-normal);
     box-shadow: var(--shadow-md);
 }
 
 .team-member:hover .member-photo {
     transform: scale(1.05);
-    border-color: var(--secondary-color);
+    border-color: var(--accent-color);
 }
 
 .team-member h4 {
@@ -1286,7 +1293,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .catalog-tools {
@@ -1314,7 +1321,7 @@ input, select, textarea {
 .search-box input {
     width: 100%;
     padding: var(--space-md) var(--space-md) var(--space-md) var(--space-2xl);
-    border: 1px solid var(--gray-medium);
+    border: 1px solid var(--form-border);
     border-radius: var(--radius-md);
     font-size: var(--text-base);
     transition: var(--transition-normal);
@@ -1324,13 +1331,13 @@ input, select, textarea {
 
 .search-box input:focus {
     outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    border-color: var(--accent-bright);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .sort-box select {
     padding: var(--space-md);
-    border: 1px solid var(--gray-medium);
+    border: 1px solid var(--form-border);
     border-radius: var(--radius-md);
     font-size: var(--text-base);
     color: var(--dark-color);
@@ -1342,8 +1349,8 @@ input, select, textarea {
 
 .sort-box select:focus {
     outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    border-color: var(--accent-bright);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .catalog-filters {
@@ -1354,7 +1361,7 @@ input, select, textarea {
     padding: var(--space-xl);
     background: var(--gray-extra-light);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .filter-section h4 {
@@ -1372,7 +1379,7 @@ input, select, textarea {
 .filter-btn {
     padding: var(--space-sm) var(--space-md);
     background: var(--light-color);
-    border: 1px solid var(--gray-medium);
+    border: 1px solid var(--form-border);
     border-radius: var(--radius-md);
     font-size: var(--text-sm);
     color: var(--dark-color);
@@ -1381,8 +1388,8 @@ input, select, textarea {
 }
 
 .filter-btn:hover {
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
+    border-color: var(--accent-bright);
+    color: var(--accent-bright);
     background: var(--gray-extra-light);
 }
 
@@ -1407,13 +1414,13 @@ input, select, textarea {
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .catalog-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .catalog-item h3 {
@@ -1443,7 +1450,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .services-grid {
@@ -1461,17 +1468,18 @@ input, select, textarea {
     transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .service-card:hover .service-icon {
     transform: translateY(-5px) scale(1.1);
+    border-color: var(--accent-color);
 }
 
 .service-icon {
@@ -1483,7 +1491,7 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--space-lg);
-    color: var(--gray-color);
+    color: var(--accent-bright);
     font-size: var(--text-2xl);
     transition: var(--transition-normal);
     border: 3px solid var(--accent-bright);
@@ -1492,7 +1500,7 @@ input, select, textarea {
 .service-card:hover .service-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .service-card h3 {
@@ -1537,7 +1545,7 @@ input, select, textarea {
     border-radius: var(--radius-lg);
     padding: var(--space-2xl);
     margin-top: var(--space-xl);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .form-container {
@@ -1573,13 +1581,13 @@ input, select, textarea {
     background: var(--light-color);
     border-radius: var(--radius-md);
     transition: var(--transition-normal);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .contact-promo-item:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-sm);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .contact-promo-item i {
@@ -1590,7 +1598,7 @@ input, select, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-color);
+    color: var(--accent-bright);
     font-size: var(--text-lg);
     flex-shrink: 0;
     border: 3px solid var(--accent-bright);
@@ -1600,7 +1608,7 @@ input, select, textarea {
 .contact-promo-item:hover i {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .contact-promo-item h4 {
@@ -1625,7 +1633,7 @@ input, select, textarea {
 .form-group textarea {
     width: 100%;
     padding: var(--space-md);
-    border: 1px solid var(--gray-medium);
+    border: 1px solid var(--form-border);
     border-radius: var(--radius-md);
     font-size: var(--text-base);
     transition: var(--transition-normal);
@@ -1637,8 +1645,8 @@ input, select, textarea {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    border-color: var(--accent-bright);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 /* Контакты */
@@ -1648,7 +1656,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .contact-content {
@@ -1673,13 +1681,13 @@ input, select, textarea {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     transition: var(--transition-normal);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .contact-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .contact-icon {
@@ -1690,7 +1698,7 @@ input, select, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-color);
+    color: var(--accent-bright);
     font-size: var(--text-xl);
     flex-shrink: 0;
     border: 3px solid var(--accent-bright);
@@ -1700,7 +1708,7 @@ input, select, textarea {
 .contact-card:hover .contact-icon {
     background: var(--gradient-primary);
     color: var(--light-color);
-    border-color: transparent;
+    border-color: var(--accent-color);
 }
 
 .contact-details h3 {
@@ -1732,7 +1740,7 @@ input, select, textarea {
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     position: relative;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .map-placeholder {
@@ -1773,7 +1781,7 @@ input, select, textarea {
     box-shadow: var(--shadow-sm);
     max-width: 800px;
     margin: 0 auto var(--space-2xl);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .form-header {
@@ -1808,7 +1816,7 @@ input, select, textarea {
 .form-agreement input {
     width: 18px;
     height: 18px;
-    accent-color: var(--secondary-color);
+    accent-color: var(--form-border);
 }
 
 .form-agreement label {
@@ -1823,7 +1831,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .faq-list {
@@ -1838,7 +1846,7 @@ input, select, textarea {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: var(--transition-normal);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .faq-item:hover {
@@ -1868,7 +1876,7 @@ input, select, textarea {
 
 .faq-item.active .faq-question i {
     transform: rotate(180deg);
-    color: var(--secondary-color);
+    color: var(--accent-bright);
 }
 
 .faq-answer {
@@ -1895,7 +1903,7 @@ input, select, textarea {
     background: var(--light-color);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .cart-page-content {
@@ -1917,12 +1925,12 @@ input, select, textarea {
     background: var(--light-color);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .empty-cart-page i {
     font-size: 5rem;
-    color: var(--gray-medium);
+    color: var(--accent-bright);
     margin-bottom: var(--space-lg);
 }
 
@@ -1945,7 +1953,7 @@ input, select, textarea {
     box-shadow: var(--shadow-sm);
     position: sticky;
     top: 100px;
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .cart-page-summary h3 {
@@ -1993,18 +2001,18 @@ input, select, textarea {
     transition: var(--transition-normal);
     cursor: pointer;
     background: var(--gray-extra-light);
-    border: 1px solid var(--gray-light);
+    border: 1px solid var(--form-border);
 }
 
 .delivery-option:hover {
     background: var(--gray-light);
-    border-color: var(--gray-medium);
+    border-color: var(--accent-bright);
 }
 
 .delivery-option input {
     width: 18px;
     height: 18px;
-    accent-color: var(--secondary-color);
+    accent-color: var(--form-border);
 }
 
 .delivery-option label {
