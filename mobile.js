@@ -1,4 +1,4 @@
-// mobile.js - Полностью исправленная версия для мобильных устройств
+// mobile.js - Полностью исправленная версия для мобильных устройств с улучшенными иконками сердца
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Mobile JS initialized');
     
@@ -34,11 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 6. Проверка загрузки Font Awesome
         checkFontAwesome();
+        
+        // 7. Инициализация иконок сердца
+        initHeartIcons();
     }
     
     function applyTouchOptimizations() {
         // Увеличение области касания
-        const touchElements = document.querySelectorAll('.btn, .nav-link, .filter-btn, .add-to-cart, .category-card, .product-card');
+        const touchElements = document.querySelectorAll('.btn, .nav-link, .filter-btn, .add-to-cart, .category-card, .product-card, .product-wishlist');
         
         touchElements.forEach(el => {
             el.style.minHeight = '44px';
@@ -92,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Анимация кнопки
             if (isActive) {
                 this.innerHTML = '<i class="fas fa-times"></i>';
-                this.style.background = 'linear-gradient(135deg, #495057, #6C757D)';
+                this.style.background = 'var(--gradient-gray)';
                 document.body.style.overflow = 'hidden';
                 
                 // Вибрация если поддерживается
@@ -101,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } else {
                 this.innerHTML = '<i class="fas fa-bars"></i>';
-                this.style.background = 'linear-gradient(135deg, #6C757D, #ADB5BD)';
+                this.style.background = 'var(--gradient-gray)';
                 document.body.style.overflow = '';
             }
         });
@@ -140,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function closeMobileMenu() {
             mainNav.classList.remove('active');
             mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileMenuBtn.style.background = 'linear-gradient(135deg, #6C757D, #ADB5BD)';
+            mobileMenuBtn.style.background = 'var(--gradient-gray)';
             document.body.style.overflow = '';
         }
         
@@ -162,6 +165,99 @@ document.addEventListener('DOMContentLoaded', function() {
             // Если свайп вправо и меню открыто - закрываем
             if (deltaX > 50 && Math.abs(deltaY) < 50 && mainNav.classList.contains('active')) {
                 closeMobileMenu();
+            }
+        });
+    }
+    
+    function initHeartIcons() {
+        // Инициализация иконок сердца
+        const heartIcons = document.querySelectorAll('.product-wishlist');
+        
+        heartIcons.forEach(icon => {
+            // Проверяем, есть ли сохраненное состояние
+            const productId = icon.getAttribute('data-product-id') || icon.closest('.product-card')?.getAttribute('data-id');
+            if (productId) {
+                const isFavorite = localStorage.getItem(`heart_${productId}`) === 'true';
+                if (isFavorite) {
+                    icon.classList.add('active');
+                    const heartIcon = icon.querySelector('i');
+                    if (heartIcon) {
+                        heartIcon.classList.remove('far');
+                        heartIcon.classList.add('fas');
+                    }
+                }
+            }
+            
+            // Добавляем обработчик клика
+            icon.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const heartIcon = this.querySelector('i');
+                this.classList.toggle('active');
+                
+                if (this.classList.contains('active')) {
+                    heartIcon.classList.remove('far');
+                    heartIcon.classList.add('fas');
+                } else {
+                    heartIcon.classList.remove('fas');
+                    heartIcon.classList.add('far');
+                }
+                
+                // Сохраняем состояние
+                const productId = this.getAttribute('data-product-id') || this.closest('.product-card')?.getAttribute('data-id');
+                if (productId) {
+                    localStorage.setItem(`heart_${productId}`, this.classList.contains('active'));
+                }
+                
+                // Вибрация если поддерживается
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(10);
+                }
+                
+                // Анимация
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 300);
+            });
+        });
+        
+        // Обработчик для делегирования событий (если иконки добавляются динамически)
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.product-wishlist')) {
+                const heartIcon = e.target.closest('.product-wishlist');
+                const icon = heartIcon.querySelector('i');
+                
+                // Если клик был по иконке внутри
+                if (e.target.tagName === 'I' || e.target.closest('i')) {
+                    heartIcon.classList.toggle('active');
+                    
+                    if (heartIcon.classList.contains('active')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                    }
+                    
+                    // Сохраняем состояние
+                    const productId = heartIcon.getAttribute('data-product-id') || heartIcon.closest('.product-card')?.getAttribute('data-id');
+                    if (productId) {
+                        localStorage.setItem(`heart_${productId}`, heartIcon.classList.contains('active'));
+                    }
+                    
+                    // Вибрация если поддерживается
+                    if ('vibrate' in navigator) {
+                        navigator.vibrate(10);
+                    }
+                    
+                    // Анимация
+                    heartIcon.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        heartIcon.style.transform = 'scale(1)';
+                    }, 300);
+                }
             }
         });
     }
