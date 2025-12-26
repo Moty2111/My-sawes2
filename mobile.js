@@ -10,6 +10,9 @@
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     let isMenuOpen = false;
     
+    // Флаг для предотвращения двойного срабатывания
+    let isProcessingHeartClick = false;
+    
     // Основная инициализация
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM fully loaded, initializing mobile features...');
@@ -20,7 +23,7 @@
         // 2. Инициализация мобильного меню
         initMobileMenu();
         
-        // 3. Инициализация иконок сердца (ОБНОВЛЕНА)
+        // 3. Инициализация иконок сердца (ОБНОВЛЕНО - без конфликта)
         initHeartIcons();
         
         // 4. Обновление корзины
@@ -283,41 +286,35 @@
         console.log('Mobile menu initialized (without blur)');
     }
     
-    // ========== ИНИЦИАЛИЗАЦИЯ ИКОНОК СЕРДЦА (КРАСНЫХ) - ОБНОВЛЕНА ==========
+    // ========== ИНИЦИАЛИЗАЦИЯ ИКОНОК СЕРДЦА (ИСПРАВЛЕНО - БЕЗ КОНФЛИКТА) ==========
     function initHeartIcons() {
-        console.log('Initializing heart icons (RED)...');
+        console.log('Initializing heart icons (without conflicts)...');
         
-        const heartIcons = document.querySelectorAll('.product-wishlist');
+        // Восстановление состояния из localStorage при загрузке
+        restoreHeartIconsState();
         
-        if (heartIcons.length === 0) return;
-        
-        // Восстановление состояния из localStorage
-        heartIcons.forEach(icon => {
-            const productId = icon.getAttribute('data-product-id') || icon.getAttribute('data-id');
-            if (productId) {
-                const isFavorite = localStorage.getItem(`favorite_${productId}`) === 'true';
-                if (isFavorite) {
-                    icon.classList.add('active');
-                    const heartIcon = icon.querySelector('i');
-                    if (heartIcon) {
-                        heartIcon.className = 'fas fa-heart';
-                        heartIcon.style.color = '#e53935'; // Красный цвет
-                    }
-                }
-                // Убедимся, что data-id установлен
-                icon.setAttribute('data-id', productId);
-            }
-        });
-        
-        // Обработчик клика
+        // Обработчик клика на иконки сердца
         document.addEventListener('click', function(e) {
             const heartIcon = e.target.closest('.product-wishlist');
             if (!heartIcon) return;
             
+            // Если уже обрабатывается клик, выходим
+            if (isProcessingHeartClick) return;
+            
+            // Блокируем дальнейшую обработку
+            isProcessingHeartClick = true;
+            
             e.preventDefault();
             e.stopPropagation();
             
-            const productId = heartIcon.getAttribute('data-id');
+            const productId = heartIcon.getAttribute('data-id') || 
+                             heartIcon.getAttribute('data-product-id');
+            
+            if (!productId) {
+                isProcessingHeartClick = false;
+                return;
+            }
+            
             const isActive = heartIcon.classList.toggle('active');
             const iconElement = heartIcon.querySelector('i');
             
@@ -332,15 +329,13 @@
             }
             
             // Сохраняем в localStorage
-            if (productId) {
-                localStorage.setItem(`favorite_${productId}`, isActive);
-                
-                // Показываем уведомление с соответствующим цветом
-                if (isActive) {
-                    showNotification('❤️ Добавлено в избранное', 'success');
-                } else {
-                    showNotification('💔 Удалено из избранного', 'info');
-                }
+            localStorage.setItem(`favorite_${productId}`, isActive);
+            
+            // Показываем уведомление
+            if (isActive) {
+                showNotification('❤️ Добавлено в избранное', 'success');
+            } else {
+                showNotification('💔 Удалено из избранного', 'info');
             }
             
             // Анимация
@@ -350,8 +345,35 @@
             }, 300);
             
             // Вибрация на мобильных
-            if (navigator.vibrate) {
+            if (isMobile && navigator.vibrate) {
                 navigator.vibrate(20);
+            }
+            
+            // Разблокируем обработку через короткое время
+            setTimeout(() => {
+                isProcessingHeartClick = false;
+            }, 50);
+        });
+    }
+    
+    // Восстановление состояния иконок из localStorage
+    function restoreHeartIconsState() {
+        const heartIcons = document.querySelectorAll('.product-wishlist');
+        
+        heartIcons.forEach(icon => {
+            const productId = icon.getAttribute('data-id') || 
+                             icon.getAttribute('data-product-id');
+            
+            if (productId) {
+                const isFavorite = localStorage.getItem(`favorite_${productId}`) === 'true';
+                if (isFavorite) {
+                    icon.classList.add('active');
+                    const heartIcon = icon.querySelector('i');
+                    if (heartIcon) {
+                        heartIcon.className = 'fas fa-heart';
+                        heartIcon.style.color = '#e53935';
+                    }
+                }
             }
         });
     }
