@@ -1,4 +1,4 @@
-/* style.css - Приглушенная желто-зелено-серая цветовая схема с оранжевыми акцентами */
+/* style.css - Приглушенная желто-зелено-серая цветовая схема с оранжевыми акцентами и КРАСНЫМ сердцем */
 :root {
     /* Основные цвета - приглушенная гамма */
     --primary-color: #E6B800; /* Темный золотистый желтый */
@@ -15,6 +15,9 @@
     --accent-color: #FF8A65; /* Приглушенный коралловый */
     --accent-bright: #FF6B35; /* Ярко-оранжевый для обводки */
     --form-border: #FF6B35; /* Оранжевая обводка для форм */
+    --heart-color: #FF5252; /* ЯРКО КРАСНЫЙ для сердца */
+    --heart-hover: #FF1744; /* Еще более яркий при наведении */
+    --heart-active: #D32F2F; /* Темно-красный при активном состоянии */
     
     /* Градиенты */
     --gradient-primary: linear-gradient(135deg, #E6B800, #2E7D32);
@@ -823,27 +826,46 @@ input, select, textarea {
     background: var(--gradient-secondary);
 }
 
+/* ========== КРАСНОЕ СЕРДЦЕ ДЛЯ ИЗБРАННОГО ========== */
 .product-wishlist {
     position: absolute;
     top: var(--space-md);
     right: var(--space-md);
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     background: var(--light-color);
     border-radius: var(--radius-round);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-dark);
-    transition: var(--transition-normal);
+    color: var(--gray-medium); /* Серый по умолчанию */
+    transition: all var(--transition-normal);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--form-border);
+    border: 2px solid var(--gray-light);
+    cursor: pointer;
+    z-index: 10;
 }
 
 .product-wishlist:hover {
-    color: var(--accent-bright);
     transform: scale(1.1);
-    border-color: var(--accent-bright);
+    box-shadow: var(--shadow-md);
+    border-color: var(--heart-color);
+    color: var(--heart-color);
+    background: rgba(255, 82, 82, 0.05);
+}
+
+/* АКТИВНОЕ СОСТОЯНИЕ - КРАСНЫЙ */
+.product-wishlist.active {
+    color: var(--heart-color) !important;
+    border-color: var(--heart-color) !important;
+    background: rgba(255, 82, 82, 0.1) !important;
+    animation: heartBeat 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-wishlist.active:hover {
+    color: var(--heart-hover) !important;
+    border-color: var(--heart-hover) !important;
+    background: rgba(255, 82, 82, 0.15) !important;
 }
 
 .product-info {
@@ -1441,6 +1463,306 @@ input, select, textarea {
     font-weight: 700;
     color: var(--secondary-color);
     margin-bottom: var(--space-md);
+}
+
+/* ========== СТИЛИ ДЛЯ КАТАЛОГА ТОВАРОВ ========== */
+
+/* Бейджи товаров */
+.product-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    z-index: 2;
+}
+
+.product-badge {
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--light-color);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.product-badge.discount {
+    background: var(--gradient-gray);
+}
+
+.product-badge.new {
+    background: var(--gradient-primary);
+}
+
+.product-badge.popular {
+    background: var(--gradient-secondary);
+}
+
+.product-badge.out-of-stock {
+    background: var(--gray-dark);
+    opacity: 0.8;
+}
+
+/* Эмодзи товара */
+.product-emoji {
+    font-size: 48px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* Рейтинг товара */
+.product-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    margin: 10px 0;
+}
+
+.product-rating i {
+    color: var(--accent-bright);
+    font-size: 14px;
+}
+
+.product-rating span {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-left: 5px;
+}
+
+.reviews-count {
+    color: var(--gray-medium);
+    font-size: 12px;
+}
+
+/* Информация о товаре */
+.product-brand {
+    font-size: 12px;
+    color: var(--gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.product-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+    line-height: 1.3;
+}
+
+.product-description {
+    font-size: 14px;
+    color: var(--gray-color);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Особенности товара */
+.product-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.feature-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--gray-extra-light);
+    color: var(--gray-dark);
+    font-size: 11px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--form-border);
+}
+
+/* Цены */
+.product-pricing {
+    margin-bottom: 15px;
+}
+
+.price-old {
+    font-size: 16px;
+    color: var(--gray-medium);
+    text-decoration: line-through;
+    margin-bottom: 3px;
+}
+
+.price-current {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.price-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.price-currency {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.price-unit {
+    font-size: 14px;
+    color: var(--gray-medium);
+}
+
+/* Наличие товара */
+.product-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.product-stock i {
+    font-size: 16px;
+}
+
+.product-stock i.in-stock {
+    color: var(--secondary-color);
+}
+
+.product-stock i.out-of-stock {
+    color: var(--gray-medium);
+}
+
+.product-stock span {
+    color: var(--gray-dark);
+}
+
+/* Действия с товаром */
+.product-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.product-actions .btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.product-actions .btn-outline {
+    flex: 0 0 44px;
+    padding: 12px;
+}
+
+.product-actions .add-to-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.product-actions .add-to-cart:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--gray-light);
+    color: var(--gray-dark);
+}
+
+/* Состояние добавления в корзину */
+.product-actions .add-to-cart.added {
+    background: var(--secondary-color);
+    color: var(--light-color);
+}
+
+/* Для карточек в каталоге на мобильных */
+.catalog-item .product-wishlist {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-round);
+    border: 2px solid var(--form-border);
+    color: var(--gray-color);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(4px);
+}
+
+.catalog-item .product-wishlist:hover {
+    background: var(--light-color);
+    border-color: var(--heart-color);
+    color: var(--heart-color);
+}
+
+/* АКТИВНОЕ СЕРДЦЕ В КАТАЛОГЕ */
+.catalog-item .product-wishlist.active {
+    background: var(--heart-color) !important;
+    border-color: var(--heart-color) !important;
+    color: var(--light-color) !important;
+    box-shadow: 0 4px 12px rgba(255, 82, 82, 0.3);
+}
+
+.catalog-item .product-wishlist.active:hover {
+    background: var(--heart-hover) !important;
+    border-color: var(--heart-hover) !important;
+    color: var(--light-color) !important;
+    box-shadow: 0 6px 16px rgba(255, 82, 82, 0.4);
+}
+
+/* Анимация биения сердца */
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    75% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Стили для кнопок избранного в разделах */
+.product-actions .product-wishlist {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 44px;
+    height: 44px;
+    background: var(--gray-extra-light);
+    border: 2px solid var(--form-border);
+}
+
+.product-actions .product-wishlist.active {
+    background: var(--heart-color);
+    border-color: var(--heart-color);
+    color: var(--light-color);
+}
+
+/* Для страницы товара */
+.product-detail-actions .product-wishlist {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    background: var(--gray-extra-light);
+    border: 2px solid var(--form-border);
+}
+
+.product-detail-actions .product-wishlist.active {
+    background: var(--heart-color);
+    border-color: var(--heart-color);
+    color: var(--light-color);
 }
 
 /* Услуги */
@@ -2321,6 +2643,278 @@ input, select, textarea {
     opacity: 1;
 }
 
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--form-border);
+    border-radius: var(--radius-md);
+    color: var(--gray-dark);
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+}
+
+.page-link:hover {
+    border-color: var(--accent-bright);
+    color: var(--accent-bright);
+    transform: translateY(-2px);
+}
+
+.page-link.active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: var(--light-color);
+}
+
+.page-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-link.disabled:hover {
+    border-color: var(--form-border);
+    color: var(--gray-dark);
+    transform: none;
+}
+
+/* Сообщение "Товары не найдены" */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--light-color);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--form-border);
+}
+
+.no-results i {
+    font-size: 48px;
+    color: var(--accent-bright);
+    margin-bottom: 20px;
+}
+
+.no-results h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.no-results p {
+    color: var(--gray-color);
+    margin-bottom: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Кнопка сброса фильтров */
+.clear-filters {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--gray-extra-light);
+    color: var(--gray-dark);
+    border: 1px solid var(--form-border);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.clear-filters:hover {
+    background: var(--gray-light);
+    color: var(--dark-color);
+    border-color: var(--accent-bright);
+    transform: translateY(-2px);
+}
+
+/* Фильтр по цене */
+.price-filter {
+    background: var(--light-color);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--form-border);
+    margin-bottom: 20px;
+}
+
+.price-filter h4 {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    font-size: 16px;
+}
+
+.price-slider {
+    width: 100%;
+    height: 6px;
+    background: var(--gray-light);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--light-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.price-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--light-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: var(--gray-medium);
+    font-size: 14px;
+}
+
+/* Фильтры по брендам */
+.brand-filters {
+    background: var(--light-color);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--form-border);
+    margin-bottom: 20px;
+}
+
+.brand-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.brand-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-normal);
+}
+
+.brand-checkbox:hover {
+    background: var(--gray-extra-light);
+}
+
+.brand-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-bright);
+}
+
+.brand-checkbox span {
+    font-size: 14px;
+    color: var(--gray-dark);
+}
+
+/* Статус загрузки товаров */
+.loading-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+}
+
+.loading-products i {
+    font-size: 36px;
+    color: var(--accent-bright);
+    margin-bottom: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-products p {
+    color: var(--gray-color);
+    font-size: 16px;
+}
+
+/* ГЛОБАЛЬНЫЕ СТИЛИ ДЛЯ КРАСНОГО СЕРДЦА */
+.product-wishlist i {
+    transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.product-wishlist.active i {
+    color: var(--heart-color) !important;
+    animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Для всех состояний активного сердца */
+.product-wishlist.active,
+.product-wishlist[aria-pressed="true"],
+.product-wishlist[data-favorite="true"] {
+    color: var(--heart-color) !important;
+    border-color: var(--heart-color) !important;
+}
+
+/* Отключение стандартных стилей браузера */
+.product-wishlist:focus {
+    outline: 2px solid var(--heart-color);
+    outline-offset: 2px;
+}
+
+/* Для доступности */
+.product-wishlist[aria-label*="избранное"] i,
+.product-wishlist[title*="избранное"] i {
+    color: inherit;
+}
+
+/* Анимация появления товаров */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.catalog-item {
+    animation: fadeInUp 0.5s ease;
+}
+
 /* Адаптация для планшетов */
 @media (max-width: 1024px) {
     .header-content {
@@ -2348,6 +2942,22 @@ input, select, textarea {
     .floating-icon {
         width: 60px;
         height: 60px;
+    }
+    
+    .catalog-items {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    
+    .product-actions {
+        flex-direction: column;
+    }
+    
+    .product-actions .btn {
+        width: 100%;
+    }
+    
+    .product-actions .btn-outline {
+        flex: 1;
     }
 }
 
@@ -2400,5 +3010,73 @@ input, select, textarea {
     
     .footer-links {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .catalog-header {
+        padding: 20px;
+    }
+    
+    .catalog-header h1 {
+        font-size: 2rem;
+    }
+    
+    .catalog-items {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    
+    .product-title {
+        font-size: 16px;
+    }
+    
+    .price-value {
+        font-size: 20px;
+    }
+    
+    .product-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .page-link {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .product-wishlist {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .catalog-item .product-wishlist {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .catalog-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-card {
+        padding: 15px;
+    }
+    
+    .product-emoji {
+        font-size: 36px;
+        margin: 20px 0;
+    }
+    
+    .brand-checkboxes {
+        max-height: 150px;
     }
 }
