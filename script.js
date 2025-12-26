@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
         initScrollToTop();
         initHeaderScroll();
         initPriceSlider();
-        initHeartIcons(); // <-- Добавлена инициализация иконок сердца
         
         // Страничные инициализации
         if (document.querySelector('.contact-content')) initContactPage();
@@ -30,67 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('productDetail')) initProductDetailPage();
         
         console.log('BuildCraft initialized successfully');
-    }
-    
-    // ========== ИНИЦИАЛИЗАЦИЯ ИКОНОК СЕРДЦА (ДОБАВЛЕНА) ==========
-    function initHeartIcons() {
-        console.log('Initializing heart icons...');
-        
-        // Восстанавливаем состояние избранного из localStorage
-        document.querySelectorAll('.product-wishlist').forEach(icon => {
-            const productId = icon.getAttribute('data-id') || icon.getAttribute('data-product-id');
-            if (productId) {
-                const isFavorite = localStorage.getItem(`favorite_${productId}`) === 'true';
-                if (isFavorite) {
-                    icon.classList.add('active');
-                    const heartIcon = icon.querySelector('i');
-                    if (heartIcon) {
-                        heartIcon.className = 'fas fa-heart';
-                    }
-                }
-            }
-        });
-        
-        // Обработчик кликов по иконкам сердца
-        document.addEventListener('click', function(e) {
-            const wishlistBtn = e.target.closest('.product-wishlist');
-            if (wishlistBtn) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const productId = wishlistBtn.getAttribute('data-id') || wishlistBtn.getAttribute('data-product-id');
-                const isActive = wishlistBtn.classList.toggle('active');
-                const heartIcon = wishlistBtn.querySelector('i');
-                
-                // Обновляем иконку
-                if (heartIcon) {
-                    heartIcon.className = isActive ? 'fas fa-heart' : 'far fa-heart';
-                }
-                
-                // Сохраняем состояние в localStorage
-                if (productId) {
-                    localStorage.setItem(`favorite_${productId}`, isActive);
-                    
-                    // Показываем уведомление
-                    if (isActive) {
-                        showNotification('Товар добавлен в избранное ❤️', 'success');
-                    } else {
-                        showNotification('Товар удален из избранного', 'info');
-                    }
-                }
-                
-                // Анимация
-                wishlistBtn.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    wishlistBtn.style.transform = '';
-                }, 300);
-                
-                // Вибрация на мобильных
-                if ('vibrate' in navigator) {
-                    navigator.vibrate(20);
-                }
-            }
-        });
     }
     
     // ========== КОРЗИНА ==========
@@ -672,9 +610,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Инициализация обработчиков для кнопок "В корзину" на странице товара
         initAddToCartButtons();
-        
-        // Инициализация иконки сердца на странице товара
-        initHeartIcons();
     }
     
     function initProductTabs() {
@@ -988,6 +923,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
     
+    // ========== ИНИЦИАЛИЗАЦИЯ ИКОНОК СЕРДЦА (КОНФЛИКТ УДАЛЕН) ==========
+    // Удалена функция initHeartIcons из script.js, так как она есть в mobile.js
+    
     // ========== INIT ==========
     init();
     
@@ -995,7 +933,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.BuildCraft = {
         updateCartCount: updateCartCount,
         showNotification: showNotification,
-        initHeartIcons: initHeartIcons, // <-- Добавлена функция
         getCart: () => cart,
         getFavorites: () => favorites,
         getProducts: () => productsDB.getAllProducts(),
@@ -1181,6 +1118,16 @@ if (!document.querySelector('#buildcraft-animations')) {
         
         .product-wishlist i {
             transition: all 0.3s ease;
+        }
+        
+        /* Предотвращение конфликта иконок */
+        .product-wishlist {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-wishlist i.fa-heart {
+            pointer-events: none;
         }
     `;
     document.head.appendChild(style);
