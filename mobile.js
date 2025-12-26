@@ -1,450 +1,718 @@
-// mobile.js - Полностью исправленная версия для мобильных устройств с улучшенными иконками сердца
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Mobile JS initialized');
+// mobile.js - Исправленная версия с закрепленным футером и без блюра
+(function() {
+    'use strict';
     
-    // Проверка мобильного устройства
+    console.log('Mobile JS initializing...');
+    
+    // Проверка устройства
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    let isMenuOpen = false;
     
-    // Всегда оптимизируем для мобильных
-    optimizeForMobile();
-    
-    if (isMobile || isTouchDevice) {
-        console.log('Touch device detected, applying touch optimizations');
-        applyTouchOptimizations();
-    }
-    
-    function optimizeForMobile() {
-        console.log('Applying mobile optimizations');
+    // Основная инициализация
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded, initializing mobile features...');
         
-        // 1. Инициализация мобильного меню
+        // 1. Исправление layout для закрепления футера
+        fixLayoutForStickyFooter();
+        
+        // 2. Инициализация мобильного меню
         initMobileMenu();
         
-        // 2. Исправление корзины
-        fixCartFunctionality();
-        
-        // 3. Исправление футера
-        fixFooterPosition();
-        
-        // 4. Исправление прокрутки
-        fixScrollIssues();
-        
-        // 5. Исправление форм
-        fixFormIssues();
-        
-        // 6. Проверка загрузки Font Awesome
-        checkFontAwesome();
-        
-        // 7. Инициализация иконок сердца
+        // 3. Инициализация иконок сердца (ОБНОВЛЕНА)
         initHeartIcons();
+        
+        // 4. Обновление корзины
+        updateCartCount();
+        
+        // 5. Оптимизация для touch-устройств
+        if (isTouchDevice) {
+            optimizeForTouch();
+        }
+        
+        // 6. Исправления для iOS
+        if (isIOS) {
+            fixIOSIssues();
+        }
+        
+        // 7. Обработка изменения размера окна
+        initResizeHandler();
+        
+        // 8. Проверка Font Awesome
+        setTimeout(checkFontAwesome, 1000);
+        
+        // 9. Инициализация кнопки "Наверх"
+        initScrollToTop();
+        
+        console.log('Mobile features initialized successfully');
+    });
+    
+    // ========== ИСПРАВЛЕНИЕ LAYOUT ДЛЯ ЗАКРЕПЛЕНИЯ ФУТЕРА ==========
+    function fixLayoutForStickyFooter() {
+        console.log('Fixing layout for sticky footer...');
+        
+        // Создаем обертку для страницы если её нет
+        if (!document.querySelector('.page-wrapper')) {
+            const body = document.body;
+            const header = document.querySelector('.header');
+            const mainContent = document.querySelector('.main-content');
+            const footer = document.querySelector('.footer');
+            
+            if (header && mainContent && footer) {
+                // Создаем обертку
+                const wrapper = document.createElement('div');
+                wrapper.className = 'page-wrapper';
+                
+                // Перемещаем элементы в обертку
+                body.insertBefore(wrapper, header);
+                wrapper.appendChild(header);
+                wrapper.appendChild(mainContent);
+                wrapper.appendChild(footer);
+                
+                console.log('Page wrapper created for sticky footer');
+            }
+        }
+        
+        // Убедимся, что body имеет правильную высоту
+        document.body.style.display = 'flex';
+        document.body.style.flexDirection = 'column';
+        document.body.style.minHeight = '100vh';
+        
+        if (isIOS) {
+            document.body.style.minHeight = '-webkit-fill-available';
+        }
+        
+        // Проверяем и фиксируем высоту контента
+        setTimeout(() => {
+            const mainContent = document.querySelector('.main-content');
+            const footer = document.querySelector('.footer');
+            
+            if (mainContent && footer) {
+                // Устанавливаем минимальную высоту для контента
+                const headerHeight = document.querySelector('.header')?.offsetHeight || 70;
+                const footerHeight = footer.offsetHeight;
+                const windowHeight = window.innerHeight;
+                
+                const minContentHeight = windowHeight - headerHeight - footerHeight;
+                mainContent.style.minHeight = `${minContentHeight}px`;
+                
+                console.log('Content min-height set:', minContentHeight);
+            }
+        }, 100);
     }
     
-    function applyTouchOptimizations() {
-        // Увеличение области касания
-        const touchElements = document.querySelectorAll('.btn, .nav-link, .filter-btn, .add-to-cart, .category-card, .product-card, .product-wishlist');
+    // ========== МОБИЛЬНОЕ МЕНЮ БЕЗ БЛЮРА ==========
+    function initMobileMenu() {
+        console.log('Initializing mobile menu...');
+        
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.querySelector('.main-nav');
+        const body = document.body;
+        
+        if (!menuBtn || !mainNav) {
+            console.error('Mobile menu elements not found');
+            return;
+        }
+        
+        console.log('Found menu elements:', { menuBtn, mainNav });
+        
+        // Создаем overlay для меню (ТЕМНЫЙ БЕЗ БЛЮРА)
+        let overlay = document.querySelector('.mobile-menu-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'mobile-menu-overlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.85);
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+                pointer-events: none;
+            `;
+            document.body.appendChild(overlay);
+        }
+        
+        // Функция открытия меню
+        function openMenu() {
+            if (isMenuOpen) return;
+            
+            // Открываем меню
+            mainNav.classList.add('active');
+            menuBtn.classList.add('active');
+            overlay.classList.add('active');
+            body.style.overflow = 'hidden';
+            isMenuOpen = true;
+            
+            // Меняем иконку
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.className = 'fas fa-times';
+            }
+            
+            // Вибрация на мобильных
+            if (isMobile && navigator.vibrate) {
+                navigator.vibrate(10);
+            }
+            
+            // Блокируем скролл футера и контента
+            document.querySelectorAll('.main-content, .footer').forEach(el => {
+                el.style.overflow = 'hidden';
+            });
+            
+            console.log('Menu opened (without blur)');
+        }
+        
+        // Функция закрытия меню
+        function closeMenu() {
+            if (!isMenuOpen) return;
+            
+            // Закрываем меню
+            mainNav.classList.remove('active');
+            menuBtn.classList.remove('active');
+            overlay.classList.remove('active');
+            body.style.overflow = '';
+            isMenuOpen = false;
+            
+            // Меняем иконку
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.className = 'fas fa-bars';
+            }
+            
+            // Разблокируем скролл
+            document.querySelectorAll('.main-content, .footer').forEach(el => {
+                el.style.overflow = '';
+            });
+            
+            console.log('Menu closed');
+        }
+        
+        // Функция переключения меню
+        function toggleMenu() {
+            if (isMenuOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
+        
+        // Обработчик кнопки меню
+        menuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
+        
+        // Обработчик overlay
+        overlay.addEventListener('click', closeMenu);
+        
+        // Обработчик ссылок в меню
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Если это якорная ссылка
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    // Закрываем меню
+                    closeMenu();
+                    
+                    // Плавная прокрутка
+                    if (targetElement) {
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }, 300);
+                    }
+                } else if (isMobile) {
+                    // Для других ссылок на мобильных
+                    setTimeout(closeMenu, 100);
+                }
+            });
+        });
+        
+        // Обработчик клавиши ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isMenuOpen) {
+                closeMenu();
+            }
+        });
+        
+        // Обработчик свайпа для закрытия меню
+        if (isTouchDevice) {
+            let touchStartX = 0;
+            
+            overlay.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+            }, { passive: true });
+            
+            overlay.addEventListener('touchend', function(e) {
+                if (!isMenuOpen) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const deltaX = touchEndX - touchStartX;
+                
+                // Если свайп вправо больше 50px
+                if (deltaX > 50) {
+                    closeMenu();
+                }
+            }, { passive: true });
+        }
+        
+        // Закрытие меню при изменении ориентации
+        window.addEventListener('orientationchange', function() {
+            if (isMenuOpen) {
+                setTimeout(closeMenu, 100);
+            }
+        });
+        
+        console.log('Mobile menu initialized (without blur)');
+    }
+    
+    // ========== ИНИЦИАЛИЗАЦИЯ ИКОНОК СЕРДЦА (КРАСНЫХ) - ОБНОВЛЕНА ==========
+    function initHeartIcons() {
+        console.log('Initializing heart icons (RED)...');
+        
+        const heartIcons = document.querySelectorAll('.product-wishlist');
+        
+        if (heartIcons.length === 0) return;
+        
+        // Восстановление состояния из localStorage
+        heartIcons.forEach(icon => {
+            const productId = icon.getAttribute('data-product-id') || icon.getAttribute('data-id');
+            if (productId) {
+                const isFavorite = localStorage.getItem(`favorite_${productId}`) === 'true';
+                if (isFavorite) {
+                    icon.classList.add('active');
+                    const heartIcon = icon.querySelector('i');
+                    if (heartIcon) {
+                        heartIcon.className = 'fas fa-heart';
+                        heartIcon.style.color = '#e53935'; // Красный цвет
+                    }
+                }
+                // Убедимся, что data-id установлен
+                icon.setAttribute('data-id', productId);
+            }
+        });
+        
+        // Обработчик клика
+        document.addEventListener('click', function(e) {
+            const heartIcon = e.target.closest('.product-wishlist');
+            if (!heartIcon) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const productId = heartIcon.getAttribute('data-id');
+            const isActive = heartIcon.classList.toggle('active');
+            const iconElement = heartIcon.querySelector('i');
+            
+            // Обновляем иконку Font Awesome
+            if (iconElement) {
+                iconElement.className = isActive ? 'fas fa-heart' : 'far fa-heart';
+                if (isActive) {
+                    iconElement.style.color = '#e53935'; // Красный цвет для активного состояния
+                } else {
+                    iconElement.style.color = ''; // Сбрасываем цвет
+                }
+            }
+            
+            // Сохраняем в localStorage
+            if (productId) {
+                localStorage.setItem(`favorite_${productId}`, isActive);
+                
+                // Показываем уведомление с соответствующим цветом
+                if (isActive) {
+                    showNotification('❤️ Добавлено в избранное', 'success');
+                } else {
+                    showNotification('💔 Удалено из избранного', 'info');
+                }
+            }
+            
+            // Анимация
+            heartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                heartIcon.style.transform = '';
+            }, 300);
+            
+            // Вибрация на мобильных
+            if (navigator.vibrate) {
+                navigator.vibrate(20);
+            }
+        });
+    }
+    
+    // ========== ОБНОВЛЕНИЕ КОРЗИНЫ ==========
+    function updateCartCount() {
+        const cartCount = document.getElementById('cartCount');
+        if (!cartCount) return;
+        
+        try {
+            const cart = JSON.parse(localStorage.getItem('buildpro_cart')) || [];
+            const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+        } catch (error) {
+            console.error('Error updating cart count:', error);
+            cartCount.style.display = 'none';
+        }
+    }
+    
+    // ========== ОПТИМИЗАЦИЯ ДЛЯ TOUCH-УСТРОЙСТВ ==========
+    function optimizeForTouch() {
+        // Увеличиваем области касания
+        const touchElements = document.querySelectorAll(
+            '.btn, .nav-link, .filter-btn, .add-to-cart, .category-card, .product-card, .product-wishlist'
+        );
         
         touchElements.forEach(el => {
             el.style.minHeight = '44px';
             el.style.minWidth = '44px';
-            el.style.cursor = 'pointer';
-            
-            // Добавляем эффект при нажатии
-            el.addEventListener('touchstart', function() {
-                this.style.opacity = '0.8';
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            el.addEventListener('touchend', function() {
-                this.style.opacity = '1';
-                this.style.transform = 'scale(1)';
-            });
         });
         
         // Предотвращение масштабирования при фокусе
         const inputs = document.querySelectorAll('input, textarea, select');
         inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                // Прокручиваем к элементу
-                setTimeout(() => {
-                    this.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }, 300);
-            });
+            if (isIOS) {
+                input.style.fontSize = '16px';
+            }
         });
     }
     
-    function initMobileMenu() {
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.querySelector('.main-nav');
-        
-        if (!mobileMenuBtn || !mainNav) {
-            console.log('Mobile menu elements not found');
-            return;
+    // ========== ИСПРАВЛЕНИЯ ДЛЯ iOS ==========
+    function fixIOSIssues() {
+        // Исправление 100vh на iOS
+        function setRealViewportHeight() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            document.body.style.minHeight = `${window.innerHeight}px`;
         }
         
-        // Обработчик для кнопки меню
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Переключение меню
-            const isActive = mainNav.classList.toggle('active');
-            
-            // Анимация кнопки
-            if (isActive) {
-                this.innerHTML = '<i class="fas fa-times"></i>';
-                this.style.background = 'var(--gradient-gray)';
-                document.body.style.overflow = 'hidden';
-                
-                // Вибрация если поддерживается
-                if ('vibrate' in navigator) {
-                    navigator.vibrate(10);
+        setRealViewportHeight();
+        window.addEventListener('resize', setRealViewportHeight);
+        window.addEventListener('orientationchange', function() {
+            setTimeout(setRealViewportHeight, 100);
+            setTimeout(fixLayoutForStickyFooter, 200);
+        });
+        
+        // Исправление фиксированных элементов
+        document.body.style.WebkitOverflowScrolling = 'touch';
+    }
+    
+    // ========== ОБРАБОТКА ИЗМЕНЕНИЯ РАЗМЕРА ОКНА ==========
+    function initResizeHandler() {
+        let resizeTimer;
+        
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Закрываем меню при переходе на десктоп
+                if (window.innerWidth > 768 && isMenuOpen) {
+                    const menuBtn = document.getElementById('mobileMenuBtn');
+                    const mainNav = document.querySelector('.main-nav');
+                    const overlay = document.querySelector('.mobile-menu-overlay');
+                    
+                    if (mainNav && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        if (menuBtn) menuBtn.classList.remove('active');
+                        if (overlay) overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                        isMenuOpen = false;
+                        
+                        const icon = menuBtn?.querySelector('i');
+                        if (icon) icon.className = 'fas fa-bars';
+                    }
                 }
+                
+                // Обновляем layout для футера
+                fixLayoutForStickyFooter();
+                
+                // Обновляем счетчик корзины
+                updateCartCount();
+            }, 250);
+        });
+    }
+    
+    // ========== КНОПКА "НАВЕРХ" ==========
+    function initScrollToTop() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        if (!scrollToTopBtn) return;
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('visible');
             } else {
-                this.innerHTML = '<i class="fas fa-bars"></i>';
-                this.style.background = 'var(--gradient-gray)';
-                document.body.style.overflow = '';
+                scrollToTopBtn.classList.remove('visible');
             }
         });
         
-        // Закрытие меню при клике на ссылку
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Если это якорная ссылка, прокручиваем
-                const href = this.getAttribute('href');
-                if (href && href.includes('#')) {
-                    e.preventDefault();
-                    const targetId = href.split('#')[1];
-                    const targetElement = document.getElementById(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
-                
-                // Закрываем меню
-                closeMobileMenu();
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
-        
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.main-nav') && 
-                !e.target.closest('.mobile-menu-btn') && 
-                mainNav.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
-        
-        // Функция закрытия меню
-        function closeMobileMenu() {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileMenuBtn.style.background = 'var(--gradient-gray)';
-            document.body.style.overflow = '';
-        }
-        
-        // Обработчик для свайпа
-        let touchStartX = 0;
-        let touchStartY = 0;
-        
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        });
-        
-        document.addEventListener('touchend', function(e) {
-            const touchEndX = e.changedTouches[0].screenX;
-            const touchEndY = e.changedTouches[0].screenY;
-            const deltaX = touchEndX - touchStartX;
-            const deltaY = touchEndY - touchStartY;
-            
-            // Если свайп вправо и меню открыто - закрываем
-            if (deltaX > 50 && Math.abs(deltaY) < 50 && mainNav.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
     }
     
-    function initHeartIcons() {
-        // Инициализация иконок сердца
-        const heartIcons = document.querySelectorAll('.product-wishlist');
-        
-        heartIcons.forEach(icon => {
-            // Проверяем, есть ли сохраненное состояние
-            const productId = icon.getAttribute('data-product-id') || icon.closest('.product-card')?.getAttribute('data-id');
-            if (productId) {
-                const isFavorite = localStorage.getItem(`heart_${productId}`) === 'true';
-                if (isFavorite) {
-                    icon.classList.add('active');
-                    const heartIcon = icon.querySelector('i');
-                    if (heartIcon) {
-                        heartIcon.classList.remove('far');
-                        heartIcon.classList.add('fas');
-                    }
-                }
-            }
-            
-            // Добавляем обработчик клика
-            icon.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const heartIcon = this.querySelector('i');
-                this.classList.toggle('active');
-                
-                if (this.classList.contains('active')) {
-                    heartIcon.classList.remove('far');
-                    heartIcon.classList.add('fas');
-                } else {
-                    heartIcon.classList.remove('fas');
-                    heartIcon.classList.add('far');
-                }
-                
-                // Сохраняем состояние
-                const productId = this.getAttribute('data-product-id') || this.closest('.product-card')?.getAttribute('data-id');
-                if (productId) {
-                    localStorage.setItem(`heart_${productId}`, this.classList.contains('active'));
-                }
-                
-                // Вибрация если поддерживается
-                if ('vibrate' in navigator) {
-                    navigator.vibrate(10);
-                }
-                
-                // Анимация
-                this.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 300);
-            });
-        });
-        
-        // Обработчик для делегирования событий (если иконки добавляются динамически)
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.product-wishlist')) {
-                const heartIcon = e.target.closest('.product-wishlist');
-                const icon = heartIcon.querySelector('i');
-                
-                // Если клик был по иконке внутри
-                if (e.target.tagName === 'I' || e.target.closest('i')) {
-                    heartIcon.classList.toggle('active');
-                    
-                    if (heartIcon.classList.contains('active')) {
-                        icon.classList.remove('far');
-                        icon.classList.add('fas');
-                    } else {
-                        icon.classList.remove('fas');
-                        icon.classList.add('far');
-                    }
-                    
-                    // Сохраняем состояние
-                    const productId = heartIcon.getAttribute('data-product-id') || heartIcon.closest('.product-card')?.getAttribute('data-id');
-                    if (productId) {
-                        localStorage.setItem(`heart_${productId}`, heartIcon.classList.contains('active'));
-                    }
-                    
-                    // Вибрация если поддерживается
-                    if ('vibrate' in navigator) {
-                        navigator.vibrate(10);
-                    }
-                    
-                    // Анимация
-                    heartIcon.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        heartIcon.style.transform = 'scale(1)';
-                    }, 300);
-                }
-            }
-        });
-    }
-    
-    function fixCartFunctionality() {
-        // Обработка кликов по корзине
-        const cartLinks = document.querySelectorAll('.cart-link');
-        cartLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'cart.html';
-            });
-        });
-        
-        // Обновление счетчика корзины при загрузке
-        updateCartCount();
-    }
-    
-    function fixFooterPosition() {
-        // Убеждаемся что футер всегда внизу
-        const mainContent = document.querySelector('.main-content');
-        const footer = document.querySelector('.footer');
-        
-        if (mainContent && footer) {
-            // Исправление для iOS Safari
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-                // Добавляем отступы для безопасных зон
-                document.body.style.paddingTop = 'env(safe-area-inset-top)';
-                document.body.style.paddingBottom = 'env(safe-area-inset-bottom)';
-                
-                // Фиксируем высоту контента
-                const contentHeight = window.innerHeight - footer.offsetHeight;
-                mainContent.style.minHeight = contentHeight + 'px';
-            }
-        }
-    }
-    
-    function fixScrollIssues() {
-        // Исправление прокрутки на iOS
-        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-            document.body.style.WebkitOverflowScrolling = 'touch';
-            
-            // Исправление для фиксированных элементов
-            const fixedElements = document.querySelectorAll('.header, .footer');
-            fixedElements.forEach(el => {
-                el.style.WebkitTransform = 'translate3d(0,0,0)';
-            });
-        }
-        
-        // Предотвращение прокрутки при открытом меню
-        document.addEventListener('touchmove', function(e) {
-            const mainNav = document.querySelector('.main-nav');
-            if (mainNav && mainNav.classList.contains('active')) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-    }
-    
-    function fixFormIssues() {
-        // Увеличиваем размеры элементов форм для мобильных
-        const formElements = document.querySelectorAll('input, select, textarea, button[type="submit"]');
-        formElements.forEach(el => {
-            el.style.minHeight = '44px';
-            el.style.fontSize = '16px'; // Предотвращает зум в iOS
-        });
-        
-        // Исправление датапикеров
-        const dateInputs = document.querySelectorAll('input[type="date"], input[type="time"]');
-        dateInputs.forEach(input => {
-            // Добавляем подсказку
-            const placeholder = input.getAttribute('placeholder') || 'Выберите дату';
-            input.setAttribute('placeholder', placeholder);
-        });
-    }
-    
+    // ========== ПРОВЕРКА FONT AWESOME ==========
     function checkFontAwesome() {
-        // Проверяем загрузились ли иконки
+        const testIcon = document.createElement('i');
+        testIcon.className = 'fas fa-check';
+        testIcon.style.position = 'absolute';
+        testIcon.style.visibility = 'hidden';
+        testIcon.style.opacity = '0';
+        document.body.appendChild(testIcon);
+        
         setTimeout(() => {
-            const testIcon = document.createElement('i');
-            testIcon.className = 'fas fa-check';
-            testIcon.style.visibility = 'hidden';
-            document.body.appendChild(testIcon);
+            const computed = window.getComputedStyle(testIcon, '::before');
+            const content = computed.content;
             
-            // Проверка через 100ms
-            setTimeout(() => {
-                const computedStyle = window.getComputedStyle(testIcon, '::before');
-                const content = computedStyle.content;
-                
-                if (!content || content === 'none' || content === 'normal') {
-                    console.warn('Font Awesome not loaded properly');
-                    // Добавляем fallback
-                    addIconFallbacks();
-                }
-                
-                document.body.removeChild(testIcon);
-            }, 100);
-        }, 1000);
+            if (!content || content === 'none' || content === 'normal') {
+                console.warn('Font Awesome may not be loaded properly');
+                addIconFallbacks();
+            }
+            
+            document.body.removeChild(testIcon);
+        }, 100);
     }
     
     function addIconFallbacks() {
-        // Добавляем текстовые fallback для иконок
-        const icons = document.querySelectorAll('.category-icon i, .feature-icon i, .service-icon i');
-        icons.forEach(icon => {
-            const parent = icon.parentElement;
-            const iconClass = Array.from(icon.classList)
-                .find(cls => cls.startsWith('fa-'))
-                ?.replace('fa-', '');
+        const iconMap = {
+            'fa-shopping-cart': '🛒',
+            'fa-heart': '❤️',
+            'fa-bars': '☰',
+            'fa-times': '✕',
+            'fa-star': '★',
+            'fa-check': '✓',
+            'fa-phone': '📞',
+            'fa-envelope': '✉️',
+            'fa-map-marker': '📍',
+            'fa-clock': '🕒',
+            'fa-truck': '🚚',
+            'fa-shield-alt': '🛡️',
+            'fa-users': '👥',
+            'fa-tools': '🛠️'
+        };
+        
+        document.querySelectorAll('i[class*="fa-"]').forEach(icon => {
+            const classes = icon.className.split(' ');
+            const iconClass = classes.find(cls => cls.startsWith('fa-'));
             
-            if (iconClass && parent) {
-                parent.setAttribute('data-icon', iconClass);
-                parent.classList.add('has-fallback');
+            if (iconClass && iconMap[iconClass]) {
+                icon.setAttribute('data-fallback', iconMap[iconClass]);
             }
         });
     }
     
-    function updateCartCount() {
-        // Обновляем счетчик корзины
-        const cartCount = document.getElementById('cartCount');
-        if (cartCount) {
-            try {
-                const cart = JSON.parse(localStorage.getItem('buildpro_cart')) || [];
-                const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-                cartCount.textContent = totalItems;
-                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
-            } catch (e) {
-                cartCount.textContent = '0';
-                cartCount.style.display = 'none';
-            }
+    // ========== СИСТЕМА УВЕДОМЛЕНИЙ ==========
+    function showNotification(message, type = 'info') {
+        // Создаем контейнер если нет
+        let container = document.querySelector('.notification-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'notification-container';
+            container.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                max-width: 90%;
+            `;
+            document.body.appendChild(container);
         }
+        
+        // Создаем уведомление
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.style.cssText = `
+            background: ${type === 'success' ? '#2E7D32' : 
+                         type === 'error' ? '#C62828' : 
+                         type === 'warning' ? '#E6B800' : '#546E7A'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            word-break: break-word;
+        `;
+        
+        notification.innerHTML = `
+            <div class="notification-content" style="display: flex; align-items: center; gap: 10px; flex: 1;">
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 
+                              type === 'error' ? 'fa-exclamation-circle' : 
+                              type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle'}"></i>
+                <span>${message}</span>
+            </div>
+            <button class="notification-close" style="background: none; border: none; color: white; cursor: pointer; padding: 4px;">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        container.appendChild(notification);
+        
+        // Анимация появления
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+        
+        // Закрытие по клику
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+            notification.style.transform = 'translateX(150%)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        });
+        
+        // Автозакрытие
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.transform = 'translateX(150%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }
+        }, 5000);
     }
     
-    // Обработка изменения ориентации
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            fixFooterPosition();
+    // ========== ОБРАБОТКА ВИДИМОСТИ СТРАНИЦЫ ==========
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
             updateCartCount();
-        }, 250);
+        }
     });
     
-    // Обработка события beforeinstallprompt для PWA
-    if ('serviceWorker' in navigator) {
+    // ========== SERVICE WORKER ==========
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('/sw.js').catch(function(err) {
-                console.log('ServiceWorker registration failed: ', err);
+                console.log('ServiceWorker registration failed:', err);
             });
         });
     }
     
-    // Исправление для медленных сетей
-    if ('connection' in navigator) {
-        const connection = navigator.connection;
-        if (connection.saveData === true || connection.effectiveType.includes('2g')) {
-            // Отключаем тяжелые анимации
-            const heavyAnimations = document.querySelectorAll('.floating-icon, [class*="animate"]');
-            heavyAnimations.forEach(el => {
-                el.style.animation = 'none';
-            });
-        }
-    }
-});
-
-// Полифиллы для старых браузеров
-if (!Element.prototype.closest) {
-    Element.prototype.closest = function(s) {
-        var el = this;
-        if (!document.documentElement.contains(el)) return null;
-        do {
-            if (el.matches(s)) return el;
-            el = el.parentElement || el.parentNode;
-        } while (el !== null && el.nodeType === 1);
-        return null;
+    // ========== DEBUG HELPER ==========
+    window.debugMobileLayout = function() {
+        const header = document.querySelector('.header');
+        const mainContent = document.querySelector('.main-content');
+        const footer = document.querySelector('.footer');
+        const body = document.body;
+        
+        console.log('Mobile Layout Debug:');
+        console.log('- Window height:', window.innerHeight);
+        console.log('- Body height:', body.offsetHeight);
+        console.log('- Header height:', header?.offsetHeight);
+        console.log('- Main content height:', mainContent?.offsetHeight);
+        console.log('- Footer height:', footer?.offsetHeight);
+        console.log('- Total height:', (header?.offsetHeight || 0) + (mainContent?.offsetHeight || 0) + (footer?.offsetHeight || 0));
+        console.log('- Body min-height:', body.style.minHeight);
+        console.log('- isMenuOpen:', isMenuOpen);
     };
-}
+    
+    // Экспортируем функцию для отладки
+    if (typeof window !== 'undefined') {
+        window.mobileDebug = window.debugMobileLayout;
+    }
+    
+})();
 
-if (!Element.prototype.matches) {
-    Element.prototype.matches = 
-        Element.prototype.matchesSelector || 
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector || 
-        Element.prototype.oMatchesSelector || 
-        Element.prototype.webkitMatchesSelector ||
-        function(s) {
-            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-                i = matches.length;
-            while (--i >= 0 && matches.item(i) !== this) {}
-            return i > -1;
+// Полифиллы для совместимости
+(function() {
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(s) {
+            var el = this;
+            if (!document.documentElement.contains(el)) return null;
+            do {
+                if (el.matches(s)) return el;
+                el = el.parentElement || el.parentNode;
+            } while (el !== null && el.nodeType === 1);
+            return null;
         };
-}
+    }
+    
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = 
+            Element.prototype.matchesSelector || 
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector || 
+            Element.prototype.oMatchesSelector || 
+            Element.prototype.webkitMatchesSelector ||
+            function(s) {
+                var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                    i = matches.length;
+                while (--i >= 0 && matches.item(i) !== this) {}
+                return i > -1;
+            };
+    }
+})();
+
+// Финальная инициализация при полной загрузке
+window.addEventListener('load', function() {
+    console.log('Page fully loaded, finalizing mobile setup...');
+    
+    // Убедимся, что меню закрыто
+    const mainNav = document.querySelector('.main-nav');
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    
+    if (mainNav && mainNav.classList.contains('active')) {
+        mainNav.classList.remove('active');
+    }
+    
+    if (menuBtn && menuBtn.classList.contains('active')) {
+        menuBtn.classList.remove('active');
+        const icon = menuBtn.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
+    }
+    
+    // Скрываем overlay
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    if (overlay && overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+    }
+    
+    // Восстанавливаем скролл
+    document.body.style.overflow = '';
+    document.querySelectorAll('.main-content, .footer').forEach(el => {
+        el.style.overflow = '';
+    });
+    
+    // Финальная проверка layout
+    setTimeout(() => {
+        const footer = document.querySelector('.footer');
+        const body = document.body;
+        
+        if (footer && body.offsetHeight < window.innerHeight) {
+            console.log('Adjusting layout for sticky footer...');
+            footer.style.marginTop = 'auto';
+        }
+    }, 500);
+    
+    console.log('Mobile setup finalized with sticky footer');
+});
