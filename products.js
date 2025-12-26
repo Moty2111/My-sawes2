@@ -587,7 +587,8 @@ class ProductsDatabase {
     }
 
     // Генерация HTML для карточки товара (ОБНОВЛЕНА)
-    generateProductCardHTML(product, isFavorite = false) {
+       // Генерация HTML для карточки товара (ОБНОВЛЕНА)
+       generateProductCardHTML(product, isFavorite = false) {
         const discountPercent = product.oldPrice ? 
             Math.round((1 - product.price / product.oldPrice) * 100) : 0;
         
@@ -653,7 +654,6 @@ class ProductsDatabase {
                             </button>
                             <button class="btn btn-outline product-wishlist ${isFavorite ? 'active' : ''}" 
                                 data-id="${product.id}" 
-                                data-product-id="${product.id}"
                                 aria-label="${isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}">
                                 <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                             </button>
