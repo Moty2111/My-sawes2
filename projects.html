@@ -61,101 +61,23 @@
                 <p>За 12 лет работы мы участвовали в сотнях строительных проектов - от небольших ремонтов до масштабных строительных объектов. Ниже представлены некоторые из наших ключевых проектов, включая индивидуальное жилищное строительство.</p>
             </div>
             
+            <!-- Фильтры проектов -->
+            <div class="projects-filters">
+                <button class="filter-btn active" data-filter="all">Все проекты</button>
+                <button class="filter-btn" data-filter="residential">Жилые объекты</button>
+                <button class="filter-btn" data-filter="commercial">Коммерческие объекты</button>
+                <button class="filter-btn" data-filter="individual">Индивидуальные проекты</button>
+                <button class="filter-btn" data-filter="restoration">Реставрация</button>
+            </div>
+            
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image project-1">
-                        <div class="project-overlay">
-                            <h4>Жилой комплекс "Солнечный"</h4>
-                            <p>Москва, 2022-2023</p>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>ЖК "Солнечный"</h3>
-                        <div class="project-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Москва, ул. Солнечная</span>
-                            <span><i class="fas fa-calendar-alt"></i> 2022-2023</span>
-                        </div>
-                        <p class="project-description">Поставка строительных материалов для возведения 12-этажного жилого комплекса. Общая площадь - 25 000 м².</p>
-                        <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Поставлено 5000 тонн цемента</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> 1.2 млн кирпичей</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> 8000 м³ железобетонных изделий</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image project-2">
-                        <div class="project-overlay">
-                            <h4>Торговый центр "Стройград"</h4>
-                            <p>Московская область, 2021-2022</p>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>ТЦ "Стройград"</h3>
-                        <div class="project-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Московская область, г. Балашиха</span>
-                            <span><i class="fas fa-calendar-alt"></i> 2021-2022</span>
-                        </div>
-                        <p class="project-description">Полное обеспечение строительными и отделочными материалами для современного торгового центра.</p>
-                        <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Отделочные материалы для 150 магазинов</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Системы вентиляции и кондиционирования</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Напольные покрытия (15 000 м²)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image project-3">
-                        <div class="project-overlay">
-                            <h4>Школа №45 с бассейном</h4>
-                            <p>Москва, 2020-2021</p>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Школа №45</h3>
-                        <div class="project-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Москва, ЮЗАО</span>
-                            <span><i class="fas fa-calendar-alt"></i> 2020-2021</span>
-                        </div>
-                        <p class="project-description">Строительство современной школы на 1100 учащихся с бассейном и спортивным комплексом.</p>
-                        <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные материалы для детских учреждений</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Безопасные покрытия для спортзала и бассейна</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Энергоэффективные системы</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-image project-4">
-                        <div class="project-overlay">
-                            <h4>Реконструкция исторического здания</h4>
-                            <p>Москва, Центр, 2019-2020</p>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Историческое здание XIX века</h3>
-                        <div class="project-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Москва, Центральный округ</span>
-                            <span><i class="fas fa-calendar-alt"></i> 2019-2020</span>
-                        </div>
-                        <p class="project-description">Реставрация и реконструкция здания культурного наследия с сохранением исторического облика.</p>
-                        <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные реставрационные материалы</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Аутентичные отделочные материалы</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Укрепление конструкций</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- НОВЫЙ ПРОЕКТ: Индивидуальный жилой дом -->
-                <div class="project-card">
-                    <div class="project-image project-5">
+                <!-- Индивидуальный жилой дом из PDF -->
+                <div class="project-card" data-category="individual residential">
+                    <div class="project-image project-individual-house">
                         <div class="project-overlay">
                             <h4>Индивидуальный жилой дом</h4>
                             <p>Московская область, 2023</p>
+                            <span class="project-tag">Индивидуальный проект</span>
                         </div>
                     </div>
                     <div class="project-info">
@@ -163,22 +85,165 @@
                         <div class="project-meta">
                             <span><i class="fas fa-map-marker-alt"></i> Московская область</span>
                             <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                            <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                         </div>
-                        <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Общая площадь 142,85 м², строительный объем 574 м³.</p>
+                        <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект разработан с учетом всех современных строительных норм и требований к комфортному проживанию.</p>
+                        <div class="project-details">
+                            <h4>Технические характеристики:</h4>
+                            <div class="project-features">
+                                <span class="project-feature"><i class="fas fa-check-circle"></i> Общая площадь: 142,85 м²</span>
+                                <span class="project-feature"><i class="fas fa-check-circle"></i> Строительный объем: 574 м³</span>
+                                <span class="project-feature"><i class="fas fa-check-circle"></i> Высота здания: 6,6 м</span>
+                                <span class="project-feature"><i class="fas fa-check-circle"></i> Площадь застройки: 176,11 м²</span>
+                            </div>
+                            
+                            <h4>Конструктивные решения:</h4>
+                            <div class="project-features">
+                                <span class="project-feature"><i class="fas fa-cube"></i> Фундамент: монолитная ж/б плита с ребрами</span>
+                                <span class="project-feature"><i class="fas fa-cube"></i> Наружные стены: газосиликатные блоки 625x400x250 D500</span>
+                                <span class="project-feature"><i class="fas fa-cube"></i> Перекрытия: деревянные балки 50х200 мм</span>
+                                <span class="project-feature"><i class="fas fa-cube"></i> Кровля: металлочерепица (228,83 м²), холодная вальцовая</span>
+                                <span class="project-feature"><i class="fas fa-cube"></i> Стропильная система: деревянная, хвойные породы</span>
+                            </div>
+                            
+                            <h4>Инженерные системы:</h4>
+                            <div class="project-features">
+                                <span class="project-feature"><i class="fas fa-tint"></i> Водоснабжение: центральное + газовый котел</span>
+                                <span class="project-feature"><i class="fas fa-fire"></i> Отопление: водяное от газового котла</span>
+                                <span class="project-feature"><i class="fas fa-bolt"></i> Электроснабжение: от городских сетей</span>
+                                <span class="project-feature"><i class="fas fa-gas-pump"></i> Газоснабжение: центральные сети</span>
+                            </div>
+                            
+                            <h4>Особенности проекта:</h4>
+                            <div class="project-features">
+                                <span class="project-feature"><i class="fas fa-star"></i> Вентиляционные шахты из керамического кирпича</span>
+                                <span class="project-feature"><i class="fas fa-star"></i> Монолитный ж/б пояс по всем стенам</span>
+                                <span class="project-feature"><i class="fas fa-star"></i> Утепление ЭППС 50 мм в цоколе</span>
+                                <span class="project-feature"><i class="fas fa-star"></i> Армирование кладки согласно нормам</span>
+                            </div>
+                        </div>
+                        <div class="project-materials">
+                            <h4>Основные материалы проекта:</h4>
+                            <div class="materials-list">
+                                <span>• Газосиликатные блоки: 48,28 м³</span>
+                                <span>• Металлочерепица: 228,83 м²</span>
+                                <span>• Деревянные балки: 133 м³</span>
+                                <span>• Арматура Ø10 А400С: 1300 мм</span>
+                                <span>• Ж/б перемычки: 3ПБ16-37, 2ПБ22-3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Остальные существующие проекты -->
+                <div class="project-card" data-category="residential">
+                    <div class="project-image project-1">
+                        <div class="project-overlay">
+                            <h4>Жилой комплекс "Солнечный"</h4>
+                            <p>Москва, 2022-2023</p>
+                            <span class="project-tag">Многоквартирный дом</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>ЖК "Солнечный"</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Москва, ул. Солнечная</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2022-2023</span>
+                            <span><i class="fas fa-building"></i> 12 этажей</span>
+                        </div>
+                        <p class="project-description">Поставка строительных материалов для возведения 12-этажного жилого комплекса. Общая площадь - 25 000 м². Проект реализован в срок с соблюдением всех строительных норм.</p>
                         <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Монолитная ж/б плита фундамента с ребрами</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Стены из газосиликатных блоков 625x400x250 D500</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Деревянные междуэтажные перекрытия и стропильная система</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Кровля из металлочерепицы (228,83 м²)</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Полный комплект инженерных систем: водоснабжение, отопление, электроснабжение, газоснабжение</span>
-                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные решения для вентиляции и энергоэффективности</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Поставлено 5000 тонн цемента</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> 1.2 млн кирпичей</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> 8000 м³ железобетонных изделий</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Современные системы вентиляции</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Энергоэффективные решения</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="commercial">
+                    <div class="project-image project-2">
+                        <div class="project-overlay">
+                            <h4>Торговый центр "Стройград"</h4>
+                            <p>Московская область, 2021-2022</p>
+                            <span class="project-tag">Коммерческая недвижимость</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>ТЦ "Стройград"</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Московская область, г. Балашиха</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2021-2022</span>
+                            <span><i class="fas fa-store"></i> 150 магазинов</span>
+                        </div>
+                        <p class="project-description">Полное обеспечение строительными и отделочными материалами для современного торгового центра. Проект включал комплексные поставки для всех этапов строительства.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Отделочные материалы для 150 магазинов</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Системы вентиляции и кондиционирования</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Напольные покрытия (15 000 м²)</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Осветительные системы</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Сантехническое оборудование</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="commercial">
+                    <div class="project-image project-3">
+                        <div class="project-overlay">
+                            <h4>Школа №45 с бассейном</h4>
+                            <p>Москва, 2020-2021</p>
+                            <span class="project-tag">Социальный объект</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Школа №45</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Москва, ЮЗАО</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2020-2021</span>
+                            <span><i class="fas fa-users"></i> 1100 учащихся</span>
+                        </div>
+                        <p class="project-description">Строительство современной школы на 1100 учащихся с бассейном и спортивным комплексом. Особое внимание уделено безопасности и экологичности материалов.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные материалы для детских учреждений</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Безопасные покрытия для спортзала и бассейна</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Энергоэффективные системы</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Антибактериальные поверхности</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Пожаробезопасные материалы</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="restoration">
+                    <div class="project-image project-4">
+                        <div class="project-overlay">
+                            <h4>Реконструкция исторического здания</h4>
+                            <p>Москва, Центр, 2019-2020</p>
+                            <span class="project-tag">Реставрация</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Историческое здание XIX века</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Москва, Центральный округ</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2019-2020</span>
+                            <span><i class="fas fa-landmark"></i> Культурное наследие</span>
+                        </div>
+                        <p class="project-description">Реставрация и реконструкция здания культурного наследия с сохранением исторического облика. Проект требовал специальных материалов и технологий.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные реставрационные материалы</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Аутентичные отделочные материалы</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Укрепление конструкций</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Сохранение исторического фасада</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Современные инженерные системы</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="projects-stats">
-                <h3 class="section-title">Статистика проектов</h3>
+                <h3 class="section-title">Наша статистика</h3>
+                <p class="section-subtitle">Цифры, которые говорят о нашем опыте и надежности</p>
                 <div class="stats-grid">
                     <div class="project-stat">
                         <div class="stat-number">150+</div>
@@ -199,12 +264,43 @@
                 </div>
             </div>
             
+            <div class="individual-projects-info">
+                <div class="individual-projects-content">
+                    <h3>Индивидуальные проекты</h3>
+                    <p>Мы специализируемся на разработке и реализации индивидуальных строительных проектов, подобных представленному выше. Наши архитекторы и инженеры создадут для вас уникальный проект, учитывающий все ваши пожелания и особенности участка.</p>
+                    
+                    <div class="individual-features">
+                        <div class="individual-feature">
+                            <i class="fas fa-drafting-compass"></i>
+                            <h4>Проектирование</h4>
+                            <p>Разработка полного пакета документации от эскиза до рабочих чертежей</p>
+                        </div>
+                        <div class="individual-feature">
+                            <i class="fas fa-calculator"></i>
+                            <h4>Расчет материалов</h4>
+                            <p>Точный расчет необходимых материалов с учетом специфики проекта</p>
+                        </div>
+                        <div class="individual-feature">
+                            <i class="fas fa-truck"></i>
+                            <h4>Поставка материалов</h4>
+                            <p>Обеспечение строительства всеми необходимыми материалами</p>
+                        </div>
+                        <div class="individual-feature">
+                            <i class="fas fa-hard-hat"></i>
+                            <h4>Технический надзор</h4>
+                            <p>Контроль качества строительных работ на всех этапах</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="client-testimonials">
                 <h3 class="section-title">Отзывы клиентов</h3>
+                <p class="section-subtitle">Что говорят о нас наши партнеры и заказчики</p>
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"BuildCraft обеспечил бесперебойные поставки материалов на наш объект. Качество материалов и сервис на высшем уровне."</p>
+                            <p>"BuildCraft обеспечил бесперебойные поставки материалов на наш объект. Качество материалов и сервис на высшем уровне. Особенно ценим точность в расчетах и соблюдение сроков."</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar avatar-1"></div>
@@ -217,7 +313,7 @@
                     
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"Работаем с BuildCraft уже 5 лет. Надежный поставщик, всегда в срок, материалы соответствуют всем стандартам."</p>
+                            <p>"Работаем с BuildCraft уже 5 лет. Надежный поставщик, всегда в срок, материалы соответствуют всем стандартам. Для нашего индивидуального проекта подобрали оптимальные решения."</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar avatar-2"></div>
@@ -230,7 +326,7 @@
                     
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"Для реставрации исторического здания нужны были специальные материалы. BuildCraft нашел решения и обеспечил поставки."</p>
+                            <p>"Для реставрации исторического здания нужны были специальные материалы. BuildCraft нашел решения и обеспечил поставки. Профессионализм команды впечатляет!"</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar avatar-3"></div>
@@ -245,12 +341,72 @@
             
             <div class="projects-cta">
                 <div class="cta-content">
-                    <h3>Хотите стать частью наших успешных проектов?</h3>
+                    <h3>Хотите реализовать свой строительный проект?</h3>
                     <p>Свяжитесь с нами для обсуждения сотрудничества и получения коммерческого предложения. Мы разработаем для вас индивидуальный проект, как представленный выше, или обеспечим материалами для вашего строительства.</p>
                     <div class="cta-buttons">
-                        <a href="contact.html" class="btn btn-primary">Связаться с нами</a>
-                        <a href="catalog.html" class="btn btn-secondary">Посмотреть каталог</a>
+                        <a href="contact.html" class="btn btn-primary">
+                            <i class="fas fa-phone-alt"></i> Связаться с нами
+                        </a>
+                        <a href="catalog.html" class="btn btn-secondary">
+                            <i class="fas fa-th-list"></i> Посмотреть каталог
+                        </a>
+                        <a href="#" class="btn btn-outline" id="requestProjectBtn">
+                            <i class="fas fa-file-contract"></i> Запросить индивидуальный проект
+                        </a>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Форма запроса индивидуального проекта (скрыта по умолчанию) -->
+            <div class="project-request-form" id="projectRequestForm" style="display: none;">
+                <div class="form-container">
+                    <h3>Запрос на индивидуальный проект</h3>
+                    <p>Заполните форму, и наши специалисты свяжутся с вами для обсуждения деталей</p>
+                    
+                    <form id="individualProjectForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projectName">Ваше имя *</label>
+                                <input type="text" id="projectName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectPhone">Телефон *</label>
+                                <input type="tel" id="projectPhone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="projectEmail">Email</label>
+                            <input type="email" id="projectEmail" name="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="projectType">Тип проекта</label>
+                            <select id="projectType" name="projectType">
+                                <option value="individual_house">Индивидуальный жилой дом</option>
+                                <option value="cottage">Коттедж</option>
+                                <option value="dacha">Дача</option>
+                                <option value="commercial">Коммерческий объект</option>
+                                <option value="renovation">Реконструкция/ремонт</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="projectArea">Площадь объекта (м²)</label>
+                            <input type="number" id="projectArea" name="area" min="20" max="1000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="projectDescription">Опишите ваши пожелания</label>
+                            <textarea id="projectDescription" name="description" rows="4" placeholder="Этажность, материалы, сроки, бюджет..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Отправить запрос</button>
+                            <button type="button" class="btn btn-secondary" id="cancelRequestBtn">Отмена</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -306,12 +462,13 @@
                     </div>
                     
                     <div class="links-column">
-                        <h4>Полезное</h4>
+                        <h4>Проектирование</h4>
                         <ul>
-                            <li><a href="#">Блог о строительстве</a></li>
-                            <li><a href="#">Калькулятор материалов</a></li>
-                            <li><a href="#">Советы по ремонту</a></li>
-                            <li><a href="#">Для подрядчиков</a></li>
+                            <li><a href="projects.html#individual">Индивидуальные проекты</a></li>
+                            <li><a href="#">Типовые проекты домов</a></li>
+                            <li><a href="#">Архитектурное бюро</a></li>
+                            <li><a href="#">Сметный расчет</a></li>
+                            <li><a href="#">Технический надзор</a></li>
                         </ul>
                     </div>
                 </div>
@@ -348,5 +505,65 @@
 
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
+    <script>
+        // JavaScript для фильтрации проектов
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Удаляем активный класс у всех кнопок
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all') {
+                            card.style.display = 'flex';
+                        } else {
+                            const categories = card.getAttribute('data-category');
+                            if (categories && categories.includes(filterValue)) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Обработка формы запроса проекта
+            const requestProjectBtn = document.getElementById('requestProjectBtn');
+            const projectRequestForm = document.getElementById('projectRequestForm');
+            const cancelRequestBtn = document.getElementById('cancelRequestBtn');
+            
+            if (requestProjectBtn && projectRequestForm) {
+                requestProjectBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    projectRequestForm.style.display = 'block';
+                    projectRequestForm.scrollIntoView({ behavior: 'smooth' });
+                });
+                
+                cancelRequestBtn.addEventListener('click', function() {
+                    projectRequestForm.style.display = 'none';
+                });
+                
+                // Обработка отправки формы
+                const projectForm = document.getElementById('individualProjectForm');
+                if (projectForm) {
+                    projectForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        // Здесь должна быть логика отправки формы
+                        alert('Спасибо! Ваш запрос отправлен. Наши специалисты свяжутся с вами в ближайшее время.');
+                        projectForm.reset();
+                        projectRequestForm.style.display = 'none';
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
