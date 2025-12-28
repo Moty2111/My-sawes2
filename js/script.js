@@ -1132,3 +1132,32 @@ if (!document.querySelector('#buildcraft-animations')) {
     `;
     document.head.appendChild(style);
 }
+// Регистрация Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(registration => {
+          console.log('ServiceWorker зарегистрирован:', registration.scope);
+          
+          // Проверяем обновления Service Worker
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            console.log('Найдено обновление Service Worker');
+            
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed') {
+                console.log('Новый Service Worker установлен');
+              }
+            });
+          });
+        })
+        .catch(error => {
+          console.log('Ошибка регистрации ServiceWorker:', error);
+        });
+      
+      // Проверяем, контролирует ли Service Worker страницу
+      if (navigator.serviceWorker.controller) {
+        console.log('Эта страница контролируется Service Worker');
+      }
+    });
+  }

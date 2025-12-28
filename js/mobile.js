@@ -1,4 +1,15 @@
 // mobile.js - Исправленная версия с закрепленным футером и без блюра
+// Глобальный обработчик ошибок
+window.addEventListener('error', function(e) {
+    console.error('Произошла ошибка:', e.error);
+    return false;
+  });
+  
+  // Обработчик необработанных promise rejections
+  window.addEventListener('unhandledrejection', function(e) {
+    console.error('Необработанный rejection:', e.reason);
+    e.preventDefault();
+  });
 (function() {
     'use strict';
     
