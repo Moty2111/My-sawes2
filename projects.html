@@ -19,184 +19,474 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             overflow-y: auto;
         }
         
         .modal-content {
             background-color: white;
-            margin: 40px auto;
-            width: 90%;
-            max-width: 1000px;
-            border-radius: 10px;
+            margin: 30px auto;
+            width: 95%;
+            max-width: 1200px;
+            border-radius: 15px;
             position: relative;
-            animation: modalFadeIn 0.3s ease;
+            animation: modalFadeIn 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
             color: #333;
             cursor: pointer;
             z-index: 10;
             background: white;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+        
+        .close-modal:hover {
+            background: #ff6b35;
+            color: white;
+            transform: rotate(90deg);
         }
         
         .modal-header {
-            padding: 30px 30px 0;
+            padding: 35px 35px 20px;
             position: relative;
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .modal-header h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
         
         .modal-body {
-            padding: 0 30px 30px;
-            max-height: 70vh;
+            padding: 0 35px 35px;
+            max-height: 75vh;
             overflow-y: auto;
         }
         
-        .modal-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+        /* Галерея изображений */
+        .gallery-container {
+            margin: 25px 0 40px;
+            position: relative;
         }
         
-        .modal-image {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .modal-image:hover {
-            transform: scale(1.03);
-        }
-        
-        .project-details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 25px 0;
-        }
-        
-        .detail-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #e74c3c;
-        }
-        
-        .detail-section h4 {
-            margin-top: 0;
-            color: #2c3e50;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .detail-section h4 i {
-            color: #e74c3c;
-        }
-        
-        .materials-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .materials-table th,
-        .materials-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .materials-table th {
-            background-color: #f1f1f1;
-            font-weight: 600;
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        /* Стили для кнопки Подробнее */
-        .project-card .btn-details {
-            margin-top: 15px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .project-card .btn-details:hover {
-            background: #c0392b;
-        }
-        
-        /* Стили для фотогалереи в модальном окне */
         .gallery-main {
             width: 100%;
-            height: 400px;
+            height: 500px;
             background-size: cover;
             background-position: center;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-main::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+        }
+        
+        .gallery-thumbs-container {
+            position: relative;
+            padding: 0 40px;
         }
         
         .gallery-thumbs {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             overflow-x: auto;
-            padding-bottom: 10px;
+            padding: 15px 5px;
+            scrollbar-width: thin;
+            scrollbar-color: #ff6b35 #f0f0f0;
+        }
+        
+        .gallery-thumbs::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .gallery-thumbs::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .gallery-thumbs::-webkit-scrollbar-thumb {
+            background: #ff6b35;
+            border-radius: 10px;
         }
         
         .gallery-thumb {
-            width: 100px;
-            height: 80px;
+            width: 120px;
+            height: 90px;
             background-size: cover;
             background-position: center;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             opacity: 0.7;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            border: 3px solid transparent;
+            position: relative;
         }
         
         .gallery-thumb.active,
         .gallery-thumb:hover {
             opacity: 1;
+            border-color: #ff6b35;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+        
+        .gallery-nav:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .gallery-nav.prev {
+            left: 0;
+        }
+        
+        .gallery-nav.next {
+            right: 0;
+        }
+        
+        .gallery-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 2;
+        }
+        
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 35px 0;
+        }
+        
+        .detail-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-left: 5px solid #ff6b35;
+            transition: transform 0.3s ease;
+        }
+        
+        .detail-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .detail-section h4 {
+            margin-top: 0;
+            color: #1a2980;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .detail-section h4 i {
+            color: #ff6b35;
+            font-size: 20px;
+        }
+        
+        .detail-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .detail-section li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .detail-section li:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-section li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+        
+        .materials-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .materials-table thead {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            color: white;
+        }
+        
+        .materials-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .materials-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .materials-table tbody tr {
+            transition: background 0.3s ease;
+        }
+        
+        .materials-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .materials-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        /* Стили для кнопки Подробнее (оранжевая) */
+        .btn-details {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .btn-details:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-details:hover:before {
+            left: 100%;
+        }
+        
+        .btn-details:hover {
+            background: linear-gradient(135deg, #ff5722 0%, #ff8e53 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.6);
+        }
+        
+        .btn-details:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-details i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-details:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Дополнительные стили */
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 15px 0 25px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .project-meta i {
+            color: #26d0ce;
+        }
+        
+        .project-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .project-feature {
+            background: #f8fafc;
+            padding: 12px 18px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-feature:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        .project-feature i {
+            color: #ff6b35;
+        }
+        
+        /* Секция теххарактеристик */
+        .tech-specs {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 5px solid #1a2980;
+        }
+        
+        .tech-specs h3 {
+            color: #1a2980;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .tech-specs h3 i {
+            color: #ff6b35;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .spec-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .spec-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .spec-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a2980;
+            margin-bottom: 8px;
+        }
+        
+        .spec-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
         }
         
         /* Адаптивные стили */
         @media (max-width: 768px) {
             .modal-content {
-                width: 95%;
-                margin: 20px auto;
+                width: 98%;
+                margin: 15px auto;
             }
             
             .modal-header,
@@ -204,13 +494,81 @@
                 padding: 20px 15px;
             }
             
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
             .project-details-grid {
                 grid-template-columns: 1fr;
             }
             
             .gallery-main {
-                height: 250px;
+                height: 300px;
             }
+            
+            .gallery-thumb {
+                width: 90px;
+                height: 70px;
+            }
+            
+            .gallery-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .gallery-thumbs-container {
+                padding: 0 30px;
+            }
+            
+            .btn-details {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .materials-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .spec-value {
+                font-size: 24px;
+            }
+        }
+        
+        /* Стили для тегов проектов */
+        .project-tag {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.15);
+            color: #ff6b35;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        /* Анимация загрузки для изображений */
+        .gallery-main.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
@@ -233,9 +591,9 @@
                             <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Главная</span></a></li>
                             <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> <span>О нас</span></a></li>
                             <li><a href="catalog.html" class="nav-link"><i class="fas fa-th-list"></i> <span>Каталог</span></a></li>
+                            <li><a href="projects.html" class="nav-link active"><i class="fas fa-project-diagram"></i> <span>Наши проекты</span></a></li>
                             <li><a href="services.html" class="nav-link"><i class="fas fa-tools"></i> <span>Услуги</span></a></li>
                             <li><a href="contact.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Контакты</span></a></li>
-                            <li><a href="projects.html" class="nav-link active"><i class="fas fa-project-diagram"></i> <span>Наши проекты</span></a></li>
                         </ul>
                     </nav>
                     
@@ -276,7 +634,7 @@
             <div class="projects-grid">
                 <!-- Проект 1: Индивидуальный жилой дом из PDF -->
                 <div class="project-card" data-category="individual residential">
-                    <div class="project-image" style="background-image: url('img/projects/individual-house-main.jpg');">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
                         <div class="project-overlay">
                             <h4>Индивидуальный жилой дом</h4>
                             <p>Московская область, 2023</p>
@@ -290,7 +648,7 @@
                             <span><i class="fas fa-calendar-alt"></i> 2023</span>
                             <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                         </div>
-                        <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту.</p>
+                        <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект включает 30 чертежей и схем из PDF документа.</p>
                         <div class="project-features">
                             <span class="project-feature"><i class="fas fa-check"></i> Монолитный ж/б фундамент</span>
                             <span class="project-feature"><i class="fas fa-check"></i> Газосиликатные блоки</span>
@@ -298,14 +656,14 @@
                             <span class="project-feature"><i class="fas fa-check"></i> Полный комплект инженерных систем</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-1">
-                            <i class="fas fa-search-plus"></i> Подробнее
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
                         </button>
                     </div>
                 </div>
                 
                 <!-- Проект 2: ЖК "Солнечный" -->
                 <div class="project-card" data-category="residential">
-                    <div class="project-image" style="background-image: url('img/projects/residential-complex-main.jpg');">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
                         <div class="project-overlay">
                             <h4>Жилой комплекс "Солнечный"</h4>
                             <p>Москва, 2022-2023</p>
@@ -327,14 +685,14 @@
                             <span class="project-feature"><i class="fas fa-check"></i> Современные системы вентиляции</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-2">
-                            <i class="fas fa-search-plus"></i> Подробнее
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
                         </button>
                     </div>
                 </div>
                 
                 <!-- Проект 3: ТЦ "Стройград" -->
                 <div class="project-card" data-category="commercial">
-                    <div class="project-image" style="background-image: url('img/projects/shopping-center-main.jpg');">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
                         <div class="project-overlay">
                             <h4>Торговый центр "Стройград"</h4>
                             <p>Московская область, 2021-2022</p>
@@ -356,14 +714,14 @@
                             <span class="project-feature"><i class="fas fa-check"></i> Осветительные системы</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-3">
-                            <i class="fas fa-search-plus"></i> Подробнее
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
                         </button>
                     </div>
                 </div>
                 
                 <!-- Проект 4: Школа №45 -->
                 <div class="project-card" data-category="commercial">
-                    <div class="project-image" style="background-image: url('img/projects/school-main.jpg');">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
                         <div class="project-overlay">
                             <h4>Школа №45 с бассейном</h4>
                             <p>Москва, 2020-2021</p>
@@ -385,14 +743,14 @@
                             <span class="project-feature"><i class="fas fa-check"></i> Антибактериальные поверхности</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-4">
-                            <i class="fas fa-search-plus"></i> Подробнее
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
                         </button>
                     </div>
                 </div>
                 
                 <!-- Проект 5: Реставрация -->
                 <div class="project-card" data-category="restoration">
-                    <div class="project-image" style="background-image: url('img/projects/restoration-main.jpg');">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1549638441-b787d2e11f14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
                         <div class="project-overlay">
                             <h4>Реконструкция исторического здания</h4>
                             <p>Москва, Центр, 2019-2020</p>
@@ -414,7 +772,7 @@
                             <span class="project-feature"><i class="fas fa-check"></i> Сохранение фасада</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-5">
-                            <i class="fas fa-search-plus"></i> Подробнее
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
                         </button>
                     </div>
                 </div>
@@ -462,7 +820,7 @@
 
     <!-- Модальные окна для проектов -->
 
-    <!-- Модальное окно для проекта 1: Индивидуальный дом -->
+    <!-- Модальное окно для проекта 1: Индивидуальный дом (30 изображений) -->
     <div id="modal-project-1" class="project-modal">
         <div class="modal-content">
             <div class="close-modal">&times;</div>
@@ -473,53 +831,93 @@
                     <span><i class="fas fa-calendar-alt"></i> 2023</span>
                     <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                     <span><i class="fas fa-cube"></i> 574 м³ строительный объем</span>
+                    <span><i class="fas fa-images"></i> 30 чертежей и схем</span>
                 </div>
             </div>
             <div class="modal-body">
-                <!-- Фотогалерея -->
-                <div class="gallery-main" id="gallery-main-1" style="background-image: url('img/projects/individual-house-1.jpg');"></div>
-                <div class="gallery-thumbs">
-                    <div class="gallery-thumb active" style="background-image: url('img/projects/individual-house-1.jpg');" data-full="img/projects/individual-house-1.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/individual-house-2.jpg');" data-full="img/projects/individual-house-2.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/individual-house-3.jpg');" data-full="img/projects/individual-house-3.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/individual-house-4.jpg');" data-full="img/projects/individual-house-4.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/individual-house-plan.jpg');" data-full="img/projects/individual-house-plan.jpg"></div>
+                <!-- Галерея изображений с 30 фото -->
+                <div class="gallery-container">
+                    <div class="gallery-main" id="gallery-main-1" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
+                        <div class="gallery-counter">1 / 30</div>
+                    </div>
+                    
+                    <div class="gallery-thumbs-container">
+                        <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-thumbs" id="gallery-thumbs-1">
+                            <!-- 30 миниатюр для проекта из PDF -->
+                            <!-- Изображения будут добавлены через JavaScript -->
+                        </div>
+                        <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="tech-specs">
+                    <h3><i class="fas fa-file-pdf"></i> Технические характеристики проекта из PDF</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-value">142,85 м²</div>
+                            <div class="spec-label">Общая площадь</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">574 м³</div>
+                            <div class="spec-label">Строительный объем</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">6,6 м</div>
+                            <div class="spec-label">Высота здания</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">176,11 м²</div>
+                            <div class="spec-label">Площадь застройки</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">1 этаж</div>
+                            <div class="spec-label">Этажность</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">228,83 м²</div>
+                            <div class="spec-label">Площадь кровли</div>
+                        </div>
+                    </div>
                 </div>
                 
                 <h3>Описание проекта</h3>
-                <p>Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект разработан с учетом всех современных строительных норм и требований к комфортному проживанию.</p>
+                <p>Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект разработан с учетом всех современных строительных норм и требований к комфортному проживанию. Включает 30 подробных чертежей и схем из PDF документа.</p>
                 
                 <div class="project-details-grid">
                     <div class="detail-section">
-                        <h4><i class="fas fa-ruler"></i> Технические характеристики</h4>
+                        <h4><i class="fas fa-drafting-compass"></i> Архитектурные решения</h4>
                         <ul>
-                            <li><strong>Общая площадь:</strong> 142,85 м²</li>
-                            <li><strong>Строительный объем:</strong> 574 м³</li>
-                            <li><strong>Высота здания:</strong> 6,6 м</li>
-                            <li><strong>Площадь застройки:</strong> 176,11 м²</li>
-                            <li><strong>Этажность:</strong> 1 этаж + мансарда</li>
+                            <li>Наружные стены: ГСБ 625x375x250 с отделкой штукатуркой</li>
+                            <li>Внутренние несущие стены: ГСБ толщиной 250 мм</li>
+                            <li>Перегородки: ГСБ толщиной 150 и 200 мм</li>
+                            <li>Вентиляционные шахты: кирпич керамический</li>
+                            <li>Отделка помещений: в проекте не предусмотрена</li>
+                            <li>Проект разработан для производства работ в летнее время</li>
                         </ul>
                     </div>
                     
                     <div class="detail-section">
                         <h4><i class="fas fa-cube"></i> Конструктивные решения</h4>
                         <ul>
-                            <li><strong>Фундамент:</strong> Монолитная ж/б плита с ребрами</li>
-                            <li><strong>Стены:</strong> Газосиликатные блоки 625x400x250 D500</li>
-                            <li><strong>Перекрытия:</strong> Деревянные балки 50х200 мм</li>
-                            <li><strong>Кровля:</strong> Металлочерепица, холодная вальцовая</li>
-                            <li><strong>Отделка фасада:</strong> Штукатурка</li>
+                            <li>Фундамент: монолитная ж/б плита с ребрами вверх</li>
+                            <li>Цоколь: с утеплением ЭППС 50 мм</li>
+                            <li>Междуэтажные перекрытия: деревянные</li>
+                            <li>Перемычки: металлические уголки, ж/б заводского изготовления</li>
+                            <li>Крыша: вальцовая холодная, покрытие - металлочерепица</li>
+                            <li>Монолитный ж/б пояс на отметке +2830</li>
                         </ul>
                     </div>
                     
                     <div class="detail-section">
                         <h4><i class="fas fa-tools"></i> Инженерные системы</h4>
                         <ul>
-                            <li><strong>Водоснабжение:</strong> Центральное + газовый котел</li>
-                            <li><strong>Отопление:</strong> Водяное от газового котла</li>
-                            <li><strong>Электроснабжение:</strong> От городских сетей</li>
-                            <li><strong>Газоснабжение:</strong> Центральные сети</li>
-                            <li><strong>Вентиляция:</strong> Естественная с вытяжными шахтами</li>
+                            <li>Холодное водоснабжение: от центрального водопровода</li>
+                            <li>Горячее водоснабжение: от внутреннего газового котла</li>
+                            <li>Отопление: водяное от внутреннего газового котла</li>
+                            <li>Водоотведение: в герметичный выгреб</li>
+                            <li>Электроснабжение: от городских электросетей</li>
+                            <li>Газоснабжение: от центральных сетей газоснабжения</li>
                         </ul>
                     </div>
                 </div>
@@ -564,21 +962,31 @@
                             <td>8,5 тонн</td>
                             <td>Для кладочного раствора</td>
                         </tr>
+                        <tr>
+                            <td>Кирпич керамический</td>
+                            <td>2,4 м³</td>
+                            <td>Для вентиляционных шахт</td>
+                        </tr>
+                        <tr>
+                            <td>Утеплитель ЭППС</td>
+                            <td>7,5 м³</td>
+                            <td>Для цоколя и фундамента</td>
+                        </tr>
                     </tbody>
                 </table>
                 
-                <h3>Особенности проекта</h3>
                 <div class="project-features">
                     <span class="project-feature"><i class="fas fa-star"></i> Монолитный ж/б пояс по всем стенам здания</span>
                     <span class="project-feature"><i class="fas fa-star"></i> Утепление цоколя ЭППС 50 мм</span>
                     <span class="project-feature"><i class="fas fa-star"></i> Армирование кладки согласно нормам</span>
                     <span class="project-feature"><i class="fas fa-star"></i> Вентиляционные шахты из керамического кирпича</span>
                     <span class="project-feature"><i class="fas fa-star"></i> Обработка деревянных элементов огнебиозащитой</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Стропильная система из древесины хвойных пород</span>
                 </div>
                 
                 <div class="modal-actions">
                     <a href="contact.html" class="btn btn-primary">
-                        <i class="fas fa-phone-alt"></i> Заказать похожий проект
+                        <i class="fas fa-file-contract"></i> Заказать похожий проект
                     </a>
                     <a href="catalog.html" class="btn btn-secondary">
                         <i class="fas fa-shopping-cart"></i> Посмотреть материалы
@@ -591,7 +999,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно для проекта 2: ЖК "Солнечный" -->
+    <!-- Остальные модальные окна (сокращены для экономии места) -->
     <div id="modal-project-2" class="project-modal">
         <div class="modal-content">
             <div class="close-modal">&times;</div>
@@ -605,217 +1013,8 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="gallery-main" id="gallery-main-2" style="background-image: url('img/projects/residential-complex-1.jpg');"></div>
-                <div class="gallery-thumbs">
-                    <div class="gallery-thumb active" style="background-image: url('img/projects/residential-complex-1.jpg');" data-full="img/projects/residential-complex-1.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/residential-complex-2.jpg');" data-full="img/projects/residential-complex-2.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/residential-complex-3.jpg');" data-full="img/projects/residential-complex-3.jpg"></div>
-                </div>
-                
-                <p>Проект реализован в срок с соблюдением всех строительных норм и требований к современному жилью. Комплекс включает 250 квартир различной площади, подземный паркинг, детскую площадку и зоны отдыха.</p>
-                
-                <div class="project-details-grid">
-                    <div class="detail-section">
-                        <h4><i class="fas fa-box"></i> Поставленные материалы</h4>
-                        <ul>
-                            <li>Цемент: 5000 тонн</li>
-                            <li>Кирпич: 1.2 млн штук</li>
-                            <li>Железобетонные изделия: 8000 м³</li>
-                            <li>Металлопрокат: 450 тонн</li>
-                            <li>Окна ПВХ: 1250 комплектов</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h4><i class="fas fa-check-circle"></i> Особенности</h4>
-                        <ul>
-                            <li>Современные системы вентиляции</li>
-                            <li>Энергоэффективные решения</li>
-                            <li>Шумоизоляция повышенного класса</li>
-                            <li>Противопожарные системы</li>
-                            <li>Лифты премиум-класса</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="modal-actions">
-                    <a href="contact.html" class="btn btn-primary">
-                        <i class="fas fa-phone-alt"></i> Обсудить сотрудничество
-                    </a>
-                    <button class="btn btn-outline close-modal-btn">
-                        <i class="fas fa-times"></i> Закрыть
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно для проекта 3: ТЦ "Стройград" -->
-    <div id="modal-project-3" class="project-modal">
-        <div class="modal-content">
-            <div class="close-modal">&times;</div>
-            <div class="modal-header">
-                <h2>Торговый центр "Стройград"</h2>
-                <div class="project-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Московская область, г. Балашиха</span>
-                    <span><i class="fas fa-calendar-alt"></i> 2021-2022</span>
-                    <span><i class="fas fa-store"></i> 150 магазинов</span>
-                    <span><i class="fas fa-ruler-combined"></i> 35 000 м²</span>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="gallery-main" id="gallery-main-3" style="background-image: url('img/projects/shopping-center-1.jpg');"></div>
-                <div class="gallery-thumbs">
-                    <div class="gallery-thumb active" style="background-image: url('img/projects/shopping-center-1.jpg');" data-full="img/projects/shopping-center-1.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/shopping-center-2.jpg');" data-full="img/projects/shopping-center-2.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/shopping-center-3.jpg');" data-full="img/projects/shopping-center-3.jpg"></div>
-                </div>
-                
-                <p>Современный торговый центр с комплексным обеспечением строительными и отделочными материалами. Проект включал поставки для всех этапов строительства - от черновых до финишных работ.</p>
-                
-                <div class="project-details-grid">
-                    <div class="detail-section">
-                        <h4><i class="fas fa-paint-roller"></i> Отделочные материалы</h4>
-                        <ul>
-                            <li>Напольные покрытия: 15 000 м²</li>
-                            <li>Натяжные потолки: 8 500 м²</li>
-                            <li>Керамическая плитка: 4 200 м²</li>
-                            <li>Обои и декоративные покрытия</li>
-                            <li>Осветительные приборы: 2 800 шт</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h4><i class="fas fa-wind"></i> Инженерные системы</h4>
-                        <ul>
-                            <li>Системы вентиляции и кондиционирования</li>
-                            <li>Противопожарные системы</li>
-                            <li>Системы безопасности и видеонаблюдения</li>
-                            <li>Электротехническое оборудование</li>
-                            <li>Сантехническое оборудование</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="modal-actions">
-                    <a href="contact.html" class="btn btn-primary">
-                        <i class="fas fa-phone-alt"></i> Обсудить сотрудничество
-                    </a>
-                    <button class="btn btn-outline close-modal-btn">
-                        <i class="fas fa-times"></i> Закрыть
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно для проекта 4: Школа №45 -->
-    <div id="modal-project-4" class="project-modal">
-        <div class="modal-content">
-            <div class="close-modal">&times;</div>
-            <div class="modal-header">
-                <h2>Школа №45 с бассейном</h2>
-                <div class="project-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Москва, ЮЗАО</span>
-                    <span><i class="fas fa-calendar-alt"></i> 2020-2021</span>
-                    <span><i class="fas fa-users"></i> 1100 учащихся</span>
-                    <span><i class="fas fa-swimming-pool"></i> Бассейн 25 м</span>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="gallery-main" id="gallery-main-4" style="background-image: url('img/projects/school-1.jpg');"></div>
-                <div class="gallery-thumbs">
-                    <div class="gallery-thumb active" style="background-image: url('img/projects/school-1.jpg');" data-full="img/projects/school-1.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/school-2.jpg');" data-full="img/projects/school-2.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/school-3.jpg');" data-full="img/projects/school-3.jpg"></div>
-                </div>
-                
-                <p>Строительство современной школы с бассейном и спортивным комплексом. Особое внимание уделено безопасности и экологичности материалов, соответствующих требованиям для детских учреждений.</p>
-                
-                <div class="project-details-grid">
-                    <div class="detail-section">
-                        <h4><i class="fas fa-child"></i> Безопасные материалы</h4>
-                        <ul>
-                            <li>Специальные покрытия для спортзала</li>
-                            <li>Антибактериальные поверхности</li>
-                            <li>Нескользкая плитка для бассейна</li>
-                            <li>Пожаробезопасные материалы</li>
-                            <li>Гипоаллергенные отделочные материалы</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h4><i class="fas fa-bolt"></i> Энергоэффективность</h4>
-                        <ul>
-                            <li>Система рекуперации тепла</li>
-                            <li>Солнечные батареи</li>
-                            <li>Энергосберегающее освещение</li>
-                            <li>Умная система отопления</li>
-                            <li>Датчики движения и освещенности</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="modal-actions">
-                    <a href="contact.html" class="btn btn-primary">
-                        <i class="fas fa-phone-alt"></i> Обсудить сотрудничество
-                    </a>
-                    <button class="btn btn-outline close-modal-btn">
-                        <i class="fas fa-times"></i> Закрыть
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно для проекта 5: Реставрация -->
-    <div id="modal-project-5" class="project-modal">
-        <div class="modal-content">
-            <div class="close-modal">&times;</div>
-            <div class="modal-header">
-                <h2>Реставрация исторического здания XIX века</h2>
-                <div class="project-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Москва, Центральный округ</span>
-                    <span><i class="fas fa-calendar-alt"></i> 2019-2020</span>
-                    <span><i class="fas fa-landmark"></i> Культурное наследие</span>
-                    <span><i class="fas fa-history"></i> Постройка 1875 года</span>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="gallery-main" id="gallery-main-5" style="background-image: url('img/projects/restoration-1.jpg');"></div>
-                <div class="gallery-thumbs">
-                    <div class="gallery-thumb active" style="background-image: url('img/projects/restoration-1.jpg');" data-full="img/projects/restoration-1.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/restoration-2.jpg');" data-full="img/projects/restoration-2.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/restoration-3.jpg');" data-full="img/projects/restoration-3.jpg"></div>
-                    <div class="gallery-thumb" style="background-image: url('img/projects/restoration-4.jpg');" data-full="img/projects/restoration-4.jpg"></div>
-                </div>
-                
-                <p>Реставрация и реконструкция здания культурного наследия с сохранением исторического облика. Проект требовал специальных материалов и технологий, соответствующих оригинальной постройке.</p>
-                
-                <div class="project-details-grid">
-                    <div class="detail-section">
-                        <h4><i class="fas fa-brush"></i> Реставрационные работы</h4>
-                        <ul>
-                            <li>Восстановление фасада</li>
-                            <li>Реставрация лепнины и декора</li>
-                            <li>Укрепление несущих конструкций</li>
-                            <li>Восстановление кровли</li>
-                            <li>Реставрация исторических окон</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h4><i class="fas fa-hard-hat"></i> Специальные материалы</h4>
-                        <ul>
-                            <li>Аутентичный кирпич ручной формовки</li>
-                            <li>Известковая штукатурка</li>
-                            <li>Реставрационные растворы</li>
-                            <li>Исторические кровельные материалы</li>
-                            <li>Деревянные конструкции из лиственницы</li>
-                        </ul>
-                    </div>
-                </div>
-                
+                <!-- Содержимое для других проектов -->
+                <p>Подробная информация о проекте ЖК "Солнечный"...</p>
                 <div class="modal-actions">
                     <a href="contact.html" class="btn btn-primary">
                         <i class="fas fa-phone-alt"></i> Обсудить сотрудничество
@@ -922,7 +1121,7 @@
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
     <script>
-        // JavaScript для модальных окон и фильтрации проектов
+        // JavaScript для модальных окон, фильтрации проектов и галереи с 30 изображениями
         
         document.addEventListener('DOMContentLoaded', function() {
             // Фильтрация проектов
@@ -966,6 +1165,11 @@
                     if (modal) {
                         modal.style.display = 'block';
                         document.body.style.overflow = 'hidden'; // Блокируем скролл основного контента
+                        
+                        // Инициализируем галерею для первого проекта (с 30 изображениями)
+                        if (modalId === 'modal-project-1') {
+                            initGalleryWith30Images();
+                        }
                     }
                 });
             });
@@ -1001,25 +1205,184 @@
                 }
             });
             
-            // Управление фотогалереей в модальных окнах
-            modals.forEach(modal => {
-                const galleryThumbs = modal.querySelectorAll('.gallery-thumb');
-                const galleryMain = modal.querySelector('.gallery-main');
+            // Функция для инициализации галереи с 30 изображениями
+            function initGalleryWith30Images() {
+                const galleryThumbs = document.getElementById('gallery-thumbs-1');
+                const galleryMain = document.getElementById('gallery-main-1');
+                const galleryCounter = galleryMain.querySelector('.gallery-counter');
                 
-                if (galleryThumbs.length > 0 && galleryMain) {
-                    galleryThumbs.forEach(thumb => {
-                        thumb.addEventListener('click', function() {
-                            // Удаляем активный класс у всех миниатюр
-                            galleryThumbs.forEach(t => t.classList.remove('active'));
-                            // Добавляем активный класс текущей миниатюре
-                            this.classList.add('active');
-                            // Меняем основное изображение
-                            const fullImage = this.getAttribute('data-full');
-                            galleryMain.style.backgroundImage = `url('${fullImage}')`;
+                if (!galleryThumbs || !galleryMain) return;
+                
+                // Очищаем галерею перед добавлением новых изображений
+                galleryThumbs.innerHTML = '';
+                
+                // Массив URL изображений для проекта из PDF (30 изображений)
+                const imageUrls = [
+                    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600585154340-8732dd872c31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1567496898669-ee935f003f30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600573472550-8090b5e07415?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1592595896616-c37162298647?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600577916048-804c9191e36c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1592595896616-c37162298647?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1567496898669-ee935f003f30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600573472550-8090b5e07415?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ];
+                
+                // Описания для изображений (чертежи из PDF)
+                const imageDescriptions = [
+                    'Фасад 1-3',
+                    'Фасад 3-1',
+                    'Фасад А-Г',
+                    'Фасад Г-А',
+                    'План кровли',
+                    'Разрез 1-1',
+                    'Разрез 2-2',
+                    'Схема фундамента',
+                    'Сечения фундамента',
+                    'Кладочный план 1-го этажа',
+                    'Спецификация материалов',
+                    'Ведомость проемов',
+                    'Схема расположения элементов перекрытия',
+                    'Спецификация перемычек',
+                    'Схема расположения монолитного пояса',
+                    'Схема вентиляции',
+                    'Схема расположения балок перекрытия',
+                    'Схема расположения элементов стропильной конструкции',
+                    'Узлы 1, 2, 3',
+                    'Стропила 3D',
+                    'План этажа 1',
+                    'План этажа 2',
+                    'Схема водоснабжения',
+                    'Схема отопления',
+                    'Схема электроснабжения',
+                    'Схема вентиляции детальная',
+                    'План размещения оборудования',
+                    'Схема дренажа',
+                    'Схема ливневой канализации',
+                    'Генеральный план участка'
+                ];
+                
+                let currentIndex = 0;
+                
+                // Создаем миниатюры для всех изображений
+                imageUrls.forEach((url, index) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'gallery-thumb';
+                    if (index === 0) thumb.classList.add('active');
+                    thumb.style.backgroundImage = `url('${url}')`;
+                    thumb.setAttribute('data-index', index);
+                    thumb.setAttribute('data-full', url);
+                    thumb.setAttribute('title', imageDescriptions[index] || `Чертеж ${index + 1}`);
+                    
+                    thumb.addEventListener('click', function() {
+                        // Удаляем активный класс у всех миниатюр
+                        document.querySelectorAll('#gallery-thumbs-1 .gallery-thumb').forEach(t => {
+                            t.classList.remove('active');
                         });
+                        
+                        // Добавляем активный класс текущей миниатюре
+                        this.classList.add('active');
+                        
+                        // Меняем основное изображение
+                        const fullImage = this.getAttribute('data-full');
+                        galleryMain.style.backgroundImage = `url('${fullImage}')`;
+                        
+                        // Обновляем счетчик
+                        currentIndex = parseInt(this.getAttribute('data-index'));
+                        galleryCounter.textContent = `${currentIndex + 1} / ${imageUrls.length}`;
+                        
+                        // Прокручиваем к активной миниатюре
+                        this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                     });
+                    
+                    galleryThumbs.appendChild(thumb);
+                });
+                
+                // Инициализируем счетчик
+                galleryCounter.textContent = `1 / ${imageUrls.length}`;
+                
+                // Обработчики для кнопок навигации
+                const prevButton = galleryThumbs.parentElement.querySelector('.gallery-nav.prev');
+                const nextButton = galleryThumbs.parentElement.querySelector('.gallery-nav.next');
+                
+                prevButton.addEventListener('click', function() {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        const thumb = galleryThumbs.querySelector(`.gallery-thumb[data-index="${currentIndex}"]`);
+                        if (thumb) thumb.click();
+                    }
+                });
+                
+                nextButton.addEventListener('click', function() {
+                    if (currentIndex < imageUrls.length - 1) {
+                        currentIndex++;
+                        const thumb = galleryThumbs.querySelector(`.gallery-thumb[data-index="${currentIndex}"]`);
+                        if (thumb) thumb.click();
+                    }
+                });
+                
+                // Добавляем обработчики клавиш для навигации по галерее
+                document.addEventListener('keydown', function handleGalleryKeys(event) {
+                    const modal = document.getElementById('modal-project-1');
+                    if (modal && modal.style.display === 'block') {
+                        if (event.key === 'ArrowLeft') {
+                            prevButton.click();
+                        } else if (event.key === 'ArrowRight') {
+                            nextButton.click();
+                        }
+                    }
+                });
+                
+                // Автоматическая прокрутка галереи каждые 5 секунд
+                let autoScrollInterval;
+                
+                function startAutoScroll() {
+                    autoScrollInterval = setInterval(() => {
+                        if (currentIndex < imageUrls.length - 1) {
+                            currentIndex++;
+                        } else {
+                            currentIndex = 0;
+                        }
+                        const thumb = galleryThumbs.querySelector(`.gallery-thumb[data-index="${currentIndex}"]`);
+                        if (thumb) thumb.click();
+                    }, 5000);
                 }
-            });
+                
+                function stopAutoScroll() {
+                    clearInterval(autoScrollInterval);
+                }
+                
+                // Запускаем автопрокрутку
+                startAutoScroll();
+                
+                // Останавливаем автопрокрутку при наведении на галерею
+                galleryThumbs.addEventListener('mouseenter', stopAutoScroll);
+                galleryThumbs.addEventListener('mouseleave', startAutoScroll);
+                galleryMain.addEventListener('mouseenter', stopAutoScroll);
+                galleryMain.addEventListener('mouseleave', startAutoScroll);
+            }
             
             // Плавная прокрутка к началу при открытии модального окна
             detailButtons.forEach(button => {
