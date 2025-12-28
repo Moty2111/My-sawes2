@@ -1,13 +1,20 @@
-// Service Worker для BuildPro
-const CACHE_NAME = 'buildpro-v1.0';
+// Service Worker для BuildCraft (Исправленная версия)
+const CACHE_NAME = 'buildcraft-v1.0';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/about.html',
+  '/catalog.html',
+  '/projects.html',
+  '/services.html',
+  '/contact.html',
+  '/cart.html',
   '/style.css',
   '/mobile.css',
   '/script.js',
   '/mobile.js',
-  '/manifest.json'
+  '/manifest.json',
+  '/products.js'
 ];
 
 // Установка Service Worker
@@ -15,122 +22,139 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
+        console.log('[ServiceWorker] Opened cache');
         return cache.addAll(urlsToCache);
       })
+      .catch(error => {
+        console.error('[ServiceWorker] Cache addAll failed:', error);
+      })
   );
+  self.skipWaiting(); // Немедленная активация нового SW
 });
 
-// Активация и очистка старых кэшей
+// Активация
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    Promise.all([
+      // Очистка старых кэшей
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== CACHE_NAME) {
+              console.log('[ServiceWorker] Deleting old cache:', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      }),
+      // Немедленный контроль над всеми клиентами
+      self.clients.claim()
+    ])
   );
 });
 
-// Стратегия кэширования: Cache First, затем Network
+// Стратегия кэширования: Network First, затем Cache
 self.addEventListener('fetch', event => {
+  // Пропускаем не-GET запросы
+  if (event.request.method !== 'GET') return;
+  
+  // Пропускаем chrome-extension запросы
+  if (event.request.url.startsWith('chrome-extension://')) return;
+  
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then(response => {
-        // Кэш найден - возвращаем его
-        if (response) {
+        // Проверяем валидность ответа
+        if (!response || response.status !== 200 || response.type !== 'basic') {
           return response;
         }
 
-        // Клонируем запрос
-        const fetchRequest = event.request.clone();
+        // Клонируем ответ для кэша
+        const responseToCache = response.clone();
 
-        return fetch(fetchRequest).then(
-          response => {
-            // Проверяем валидность ответа
-            if (!response || response.status !== 200 || response.type !== 'basic') {
+        caches.open(CACHE_NAME)
+          .then(cache => {
+            cache.put(event.request, responseToCache);
+          })
+          .catch(error => {
+            console.error('[ServiceWorker] Cache put failed:', error);
+          });
+
+        return response;
+      })
+      .catch(() => {
+        // Если сеть недоступна, ищем в кэше
+        return caches.match(event.request)
+          .then(response => {
+            // Если нашли в кэше - возвращаем
+            if (response) {
               return response;
             }
-
-            // Клонируем ответ
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        ).catch(error => {
-          // Оффлайн режим: для HTML страниц показываем оффлайн страницу
-          if (event.request.headers.get('accept').includes('text/html')) {
-            return caches.match('/offline.html');
-          }
-        });
+            
+            // Для HTML-страниц возвращаем index.html
+            if (event.request.headers.get('accept').includes('text/html')) {
+              return caches.match('/index.html');
+            }
+            
+            return new Response('Network error occurred', {
+              status: 408,
+              headers: { 'Content-Type': 'text/plain' }
+            });
+          });
       })
   );
 });
 
-// Фоновая синхронизация
-self.addEventListener('sync', event => {
-  if (event.tag === 'sync-cart') {
-    event.waitUntil(syncCart());
-  }
-});
-
-// Функция синхронизации корзины
-function syncCart() {
-  return new Promise((resolve, reject) => {
-    // Здесь должна быть логика синхронизации с сервером
-    console.log('Синхронизация корзины...');
-    resolve();
-  });
-}
-
-// Получение push-уведомлений
+// Push-уведомления (упрощенная версия)
 self.addEventListener('push', event => {
+  if (!event.data) return;
+  
+  const data = event.data.json();
   const options = {
-    body: event.data ? event.data.text() : 'Новое уведомление от BuildPro',
+    body: data.body || 'Новое уведомление от BuildCraft',
     icon: 'icons/icon-192x192.png',
     badge: 'icons/icon-72x72.png',
-    vibrate: [100, 50, 100],
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: 1
-    },
-    actions: [
-      {
-        action: 'explore',
-        title: 'Перейти в магазин',
-        icon: 'icons/icon-72x72.png'
-      },
-      {
-        action: 'close',
-        title: 'Закрыть',
-        icon: 'icons/icon-72x72.png'
-      }
-    ]
+    tag: 'buildcraft-notification'
   };
 
   event.waitUntil(
-    self.registration.showNotification('BuildPro', options)
+    self.registration.showNotification('BuildCraft', options)
   );
 });
 
 // Обработка кликов по уведомлениям
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-
-  if (event.action === 'explore') {
-    // Открываем приложение
-    event.waitUntil(
-      clients.openWindow('/')
-    );
-  }
+  
+  event.waitUntil(
+    clients.matchAll({
+      type: 'window',
+      includeUncontrolled: true
+    }).then(clientList => {
+      // Если есть открытое окно, фокусируем его
+      for (const client of clientList) {
+        if (client.url === '/' && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // Иначе открываем новое окно
+      if (clients.openWindow) {
+        return clients.openWindow('/');
+      }
+    })
+  );
 });
+
+// Удалите или закомментируйте эту проблемную часть:
+// self.addEventListener('sync', event => {
+//   if (event.tag === 'sync-cart') {
+//     event.waitUntil(syncCart());
+//   }
+// });
+
+// function syncCart() {
+//   return new Promise((resolve, reject) => {
+//     console.log('Синхронизация корзины...');
+//     resolve();
+//   });
+// }
