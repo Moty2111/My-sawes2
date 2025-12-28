@@ -1133,7 +1133,8 @@ if (!document.querySelector('#buildcraft-animations')) {
     document.head.appendChild(style);
 }
 // Регистрация Service Worker
-if ('serviceWorker' in navigator) {
+// Временно закомментируйте регистрацию в script.js
+// if ('serviceWorker' in navigator) { ... }
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('sw.js')
         .then(registration => {
@@ -1160,4 +1161,4 @@ if ('serviceWorker' in navigator) {
         console.log('Эта страница контролируется Service Worker');
       }
     });
-  }
+  
