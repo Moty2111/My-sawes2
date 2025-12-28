@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>BuildCraft - Наши проекты</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <span class="logo-text">Build<span class="logo-highlight">Craft</span></span>
+                    </a>
+                </div>
+                
+                <div class="header-actions">
+                    <nav class="main-nav">
+                        <ul class="nav-list">
+                            <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>Главная</span></a></li>
+                            <li><a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> <span>О нас</span></a></li>
+                            <li><a href="catalog.html" class="nav-link"><i class="fas fa-th-list"></i> <span>Каталог</span></a></li>
+                            <li><a href="projects.html" class="nav-link active"><i class="fas fa-project-diagram"></i> <span>Наши проекты</span></a></li>
+                            <li><a href="services.html" class="nav-link"><i class="fas fa-tools"></i> <span>Услуги</span></a></li>
+                            <li><a href="contact.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Контакты</span></a></li>
+                        </ul>
+                    </nav>
+                    
+                    <a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-text">Корзина</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="projects-header">
+                <h2 class="section-title">Наши проекты</h2>
+                <p class="section-subtitle">Реализованные строительные и ремонтные проекты с использованием наших материалов</p>
+            </div>
+            
+            <div class="projects-intro">
+                <p>За 12 лет работы мы участвовали в сотнях строительных проектов - от небольших ремонтов до масштабных строительных объектов. Ниже представлены некоторые из наших ключевых проектов.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image project-1">
+                        <div class="project-overlay">
+                            <h4>Жилой комплекс "Солнечный"</h4>
+                            <p>Москва, 2022-2023</p>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>ЖК "Солнечный"</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Москва, ул. Солнечная</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2022-2023</span>
+                        </div>
+                        <p class="project-description">Поставка строительных материалов для возведения 12-этажного жилого комплекса. Общая площадь - 25 000 м².</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Поставлено 5000 тонн цемента</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> 1.2 млн кирпичей</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> 8000 м³ железобетонных изделий</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image project-2">
+                        <div class="project-overlay">
+                            <h4>Торговый центр "Стройград"</h4>
+                            <p>Московская область, 2021-2022</p>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>ТЦ "Стройград"</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Московская область, г. Балашиха</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2021-2022</span>
+                        </div>
+                        <p class="project-description">Полное обеспечение строительными и отделочными материалами для современного торгового центра.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Отделочные материалы для 150 магазинов</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Системы вентиляции и кондиционирования</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Напольные покрытия (15 000 м²)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image project-3">
+                        <div class="project-overlay">
+                            <h4>Школа №45 с бассейном</h4>
+                            <p>Москва, 2020-2021</p>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Школа №45</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Москва, ЮЗАО</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2020-2021</span>
+                        </div>
+                        <p class="project-description">Строительство современной школы на 1100 учащихся с бассейном и спортивным комплексом.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные материалы для детских учреждений</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Безопасные покрытия для спортзала и бассейна</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Энергоэффективные системы</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image project-4">
+                        <div class="project-overlay">
+                            <h4>Реконструкция исторического здания</h4>
+                            <p>Москва, Центр, 2019-2020</p>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Историческое здание XIX века</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Москва, Центральный округ</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2019-2020</span>
+                        </div>
+                        <p class="project-description">Реставрация и реконструкция здания культурного наследия с сохранением исторического облика.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Специальные реставрационные материалы</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Аутентичные отделочные материалы</span>
+                            <span class="project-feature"><i class="fas fa-check-circle"></i> Укрепление конструкций</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-stats">
+                <h3 class="section-title">Статистика проектов</h3>
+                <div class="stats-grid">
+                    <div class="project-stat">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Завершенных проектов</div>
+                    </div>
+                    <div class="project-stat">
+                        <div class="stat-number">500 000+</div>
+                        <div class="stat-label">м² построенной площади</div>
+                    </div>
+                    <div class="project-stat">
+                        <div class="stat-number">45</div>
+                        <div class="stat-label">Постоянных партнеров-застройщиков</div>
+                    </div>
+                    <div class="project-stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Проектов завершено в срок</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="client-testimonials">
+                <h3 class="section-title">Отзывы клиентов</h3>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"BuildCraft обеспечил бесперебойные поставки материалов на наш объект. Качество материалов и сервис на высшем уровне."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar avatar-1"></div>
+                            <div class="author-info">
+                                <h4>Александр Ковалев</h4>
+                                <p>Директор Строительной компании "Монолит"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Работаем с BuildCraft уже 5 лет. Надежный поставщик, всегда в срок, материалы соответствуют всем стандартам."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar avatar-2"></div>
+                            <div class="author-info">
+                                <h4>Марина Соколова</h4>
+                                <p>Генеральный подрядчик ЖК "Солнечный"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Для реставрации исторического здания нужны были специальные материалы. BuildCraft нашел решения и обеспечил поставки."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar avatar-3"></div>
+                            <div class="author-info">
+                                <h4>Дмитрий Орлов</h4>
+                                <p>Архитектор, реставратор</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-cta">
+                <div class="cta-content">
+                    <h3>Хотите стать частью наших успешных проектов?</h3>
+                    <p>Свяжитесь с нами для обсуждения сотрудничества и получения коммерческого предложения</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary">Связаться с нами</a>
+                        <a href="catalog.html" class="btn btn-secondary">Посмотреть каталог</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <span class="logo-text">Build<span class="logo-highlight">Craft</span></span>
+                    </div>
+                    <p class="footer-tagline">Ваш надежный партнер в строительстве с 2010 года</p>
+                    <div class="footer-social">
+                        <h4>Мы в социальных сетях</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon vk"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="social-icon telegram"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="links-column">
+                        <h4>Каталог</h4>
+                        <ul>
+                            <li><a href="catalog.html">Строительные материалы</a></li>
+                            <li><a href="catalog.html">Инструменты</a></li>
+                            <li><a href="catalog.html">Отделочные материалы</a></li>
+                            <li><a href="catalog.html">Сантехника</a></li>
+                            <li><a href="catalog.html">Электрика</a></li>
+                            <li><a href="catalog.html">Сад и участок</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="links-column">
+                        <h4>Компания</h4>
+                        <ul>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="projects.html">Наши проекты</a></li>
+                            <li><a href="services.html">Услуги</a></li>
+                            <li><a href="contact.html">Контакты</a></li>
+                            <li><a href="services.html">Доставка и оплата</a></li>
+                            <li><a href="services.html">Гарантия и возврат</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="links-column">
+                        <h4>Полезное</h4>
+                        <ul>
+                            <li><a href="#">Блог о строительстве</a></li>
+                            <li><a href="#">Калькулятор материалов</a></li>
+                            <li><a href="#">Советы по ремонту</a></li>
+                            <li><a href="#">Для подрядчиков</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Подпишитесь на рассылку</h4>
+                    <p>Узнавайте первыми о скидках, акциях и новых поступлениях товаров</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <h4>Принимаем к оплате:</h4>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-mir"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-info">
+                    <p>&copy; 2010-2023 BuildCraft. Все права защищены.</p>
+                    <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="mobile.js"></script>
+</body>
+</html>
