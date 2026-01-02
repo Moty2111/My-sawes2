@@ -154,6 +154,7 @@
             cursor: grab;
             user-select: none;
             -webkit-user-select: none;
+            touch-action: pan-x pan-y pinch-zoom;
         }
         
         .gallery-main-container.dragging {
@@ -198,6 +199,8 @@
             user-select: none;
             -webkit-user-select: none;
             pointer-events: none;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
         }
         
         .protected-image.active {
@@ -263,6 +266,35 @@
             font-size: 14px;
             user-select: none;
             -webkit-user-select: none;
+        }
+        
+        /* Мобильные элементы управления зумом */
+        .mobile-zoom-controls {
+            display: none;
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .mobile-zoom-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #333;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            user-select: none;
+            -webkit-user-select: none;
+            outline: none;
         }
         
         .gallery-thumbs-container {
@@ -839,15 +871,21 @@
             }
             
             .zoom-controls {
-                bottom: 10px;
-                left: 10px;
-                padding: 8px;
+                display: none;
             }
             
-            .zoom-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
+            .mobile-zoom-controls {
+                display: flex;
+            }
+            
+            .mobile-zoom-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .gallery-main-container {
+                touch-action: pan-x pan-y pinch-zoom;
             }
             
             .zoom-level {
@@ -936,6 +974,23 @@
         .zoom-hint i {
             color: #ff6b35;
             margin-right: 5px;
+        }
+        
+        /* Мобильная подсказка */
+        .mobile-zoom-hint {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #333;
+            z-index: 10;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+            display: none;
+            user-select: none;
+            -webkit-user-select: none;
         }
         
         /* Стили для placeholder изображений */
@@ -1567,6 +1622,9 @@
                     <div class="zoom-hint" id="zoom-hint-1">
                         <i class="fas fa-info-circle"></i> Зажмите Ctrl и используйте колесико мыши для масштабирования
                     </div>
+                    <div class="mobile-zoom-hint" id="mobile-zoom-hint-1">
+                        <i class="fas fa-info-circle"></i> Используйте два пальца для масштабирования
+                    </div>
                     <div class="gallery-main-container" id="gallery-main-container-1">
                         <div class="loading-spinner" id="loading-spinner-1"></div>
                         <div class="gallery-main" id="gallery-main-1">
@@ -1585,6 +1643,18 @@
                                 <i class="fas fa-sync-alt"></i>
                             </button>
                         </div>
+                        <!-- Мобильные кнопки управления зумом -->
+                        <div class="mobile-zoom-controls">
+                            <button class="mobile-zoom-btn" id="mobile-zoom-in-1" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-out-1" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-reset-1" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <div class="gallery-thumbs-container">
@@ -1598,7 +1668,7 @@
                 </div>
                 
                 <div class="tech-specs">
-                    <h3><i class="fas fa-file-pdf"></i> Технические характеристики проекта</h3>
+                    <h3><i class="fas fa-file-pdf"></i> Технические характеристики проекта из PDF</h3>
                     <div class="specs-grid">
                         <div class="spec-item">
                             <div class="spec-value">142,85 м²</div>
@@ -2049,6 +2119,7 @@
             const galleryThumbs = document.getElementById('gallery-thumbs-1');
             const loadingSpinner = document.getElementById('loading-spinner-1');
             const zoomHint = document.getElementById('zoom-hint-1');
+            const mobileZoomHint = document.getElementById('mobile-zoom-hint-1');
             const galleryCounter = galleryContainer.querySelector('.gallery-counter');
             
             if (!galleryContainer || !galleryMain || !galleryThumbs) return;
@@ -2069,7 +2140,12 @@
                 startY: 0,
                 translateX: 0,
                 translateY: 0,
-                element: null
+                element: null,
+                // Для управления касаниями (мобильные устройства)
+                touchStartDistance: 0,
+                touchStartZoom: 1,
+                isPinching: false,
+                lastTouchTime: 0
             };
             
             // Создаем изображения
@@ -2110,6 +2186,13 @@
                     const index = parseInt(this.getAttribute('data-index'));
                     showImage(index);
                 });
+                
+                // Добавляем обработчик для мобильных устройств
+                thumb.addEventListener('touchstart', function(e) {
+                    e.preventDefault(); // Предотвращаем прокрутку
+                    const index = parseInt(this.getAttribute('data-index'));
+                    showImage(index);
+                }, { passive: false });
                 
                 galleryThumbs.appendChild(thumb);
             }
@@ -2159,7 +2242,11 @@
                 }
                 
                 // Показываем подсказку при зуме > 100%
-                zoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
+                if (window.innerWidth > 768) {
+                    zoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
+                } else {
+                    mobileZoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
+                }
                 
                 // Сбрасываем позицию при уменьшении до 100%
                 if (currentGallery.zoomLevel <= 1) {
@@ -2197,6 +2284,11 @@
             document.getElementById('zoom-out-1').addEventListener('click', zoomOut);
             document.getElementById('zoom-reset-1').addEventListener('click', resetZoom);
             
+            // Обработчики для мобильных кнопок зума
+            document.getElementById('mobile-zoom-in-1').addEventListener('click', zoomIn);
+            document.getElementById('mobile-zoom-out-1').addEventListener('click', zoomOut);
+            document.getElementById('mobile-zoom-reset-1').addEventListener('click', resetZoom);
+            
             // Обработчики для навигации
             const prevButton = document.querySelector('#gallery-thumbs-1').parentElement.querySelector('.gallery-nav.prev');
             const nextButton = document.querySelector('#gallery-thumbs-1').parentElement.querySelector('.gallery-nav.next');
@@ -2213,7 +2305,22 @@
                 }
             });
             
-            // Обработчики для перетаскивания
+            // Добавляем обработчики для мобильной навигации
+            prevButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (currentGallery.currentIndex > 0) {
+                    showImage(currentGallery.currentIndex - 1);
+                }
+            }, { passive: false });
+            
+            nextButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (currentGallery.currentIndex < projectImages.length - 1) {
+                    showImage(currentGallery.currentIndex + 1);
+                }
+            }, { passive: false });
+            
+            // Обработчики для перетаскивания (десктоп)
             galleryContainer.addEventListener('mousedown', (e) => {
                 if (currentGallery.zoomLevel > 1) {
                     currentGallery.isDragging = true;
@@ -2249,7 +2356,114 @@
                 galleryContainer.classList.remove('dragging');
             });
             
-            // Обработчики для колесика мыши
+            // Обработчики для касаний (мобильные устройства)
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let initialTouches = [];
+            
+            galleryContainer.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    // Одно касание - начало перетаскивания
+                    if (currentGallery.zoomLevel > 1) {
+                        currentGallery.isDragging = true;
+                        touchStartX = e.touches[0].clientX;
+                        touchStartY = e.touches[0].clientY;
+                        galleryContainer.classList.add('dragging');
+                    }
+                } else if (e.touches.length === 2) {
+                    // Два касания - начало жеста pinch-to-zoom
+                    currentGallery.isPinching = true;
+                    currentGallery.isDragging = false;
+                    
+                    // Запоминаем начальное расстояние между пальцами
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    currentGallery.touchStartDistance = Math.sqrt(
+                        Math.pow(touch2.clientX - touch1.clientX, 2) + 
+                        Math.pow(touch2.clientY - touch1.clientY, 2)
+                    );
+                    currentGallery.touchStartZoom = currentGallery.zoomLevel;
+                    
+                    // Запоминаем начальные координаты касаний
+                    initialTouches = Array.from(e.touches).map(touch => ({
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    }));
+                }
+                
+                // Предотвращаем прокрутку страницы при взаимодействии с галереей
+                if (e.touches.length > 0) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            galleryContainer.addEventListener('touchmove', (e) => {
+                if (currentGallery.isPinching && e.touches.length === 2) {
+                    // Обработка жеста pinch-to-zoom
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const currentDistance = Math.sqrt(
+                        Math.pow(touch2.clientX - touch1.clientX, 2) + 
+                        Math.pow(touch2.clientY - touch1.clientY, 2)
+                    );
+                    
+                    if (currentGallery.touchStartDistance > 0) {
+                        // Вычисляем коэффициент масштабирования
+                        const scale = currentDistance / currentGallery.touchStartDistance;
+                        currentGallery.zoomLevel = Math.max(0.5, Math.min(3, currentGallery.touchStartZoom * scale));
+                        
+                        // Обновляем позицию для учета смещения центра масштабирования
+                        if (initialTouches.length === 2) {
+                            const centerX = (touch1.clientX + touch2.clientX) / 2;
+                            const centerY = (touch1.clientY + touch2.clientY) / 2;
+                            const initialCenterX = (initialTouches[0].clientX + initialTouches[1].clientX) / 2;
+                            const initialCenterY = (initialTouches[0].clientY + initialTouches[1].clientY) / 2;
+                            
+                            // Корректируем смещение
+                            currentGallery.translateX += (centerX - initialCenterX) * 0.5;
+                            currentGallery.translateY += (centerY - initialCenterY) * 0.5;
+                        }
+                        
+                        updateZoom();
+                    }
+                    e.preventDefault();
+                } else if (currentGallery.isDragging && e.touches.length === 1 && currentGallery.zoomLevel > 1) {
+                    // Обработка перетаскивания
+                    const touch = e.touches[0];
+                    const deltaX = touch.clientX - touchStartX;
+                    const deltaY = touch.clientY - touchStartY;
+                    
+                    // Ограничиваем перемещение
+                    const maxTranslate = (currentGallery.zoomLevel - 1) * 100;
+                    currentGallery.translateX = Math.max(Math.min(currentGallery.translateX + deltaX, maxTranslate), -maxTranslate);
+                    currentGallery.translateY = Math.max(Math.min(currentGallery.translateY + deltaY, maxTranslate), -maxTranslate);
+                    
+                    touchStartX = touch.clientX;
+                    touchStartY = touch.clientY;
+                    
+                    updateZoom();
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            galleryContainer.addEventListener('touchend', (e) => {
+                // Сбрасываем состояние перетаскивания и масштабирования
+                if (e.touches.length === 0) {
+                    currentGallery.isDragging = false;
+                    currentGallery.isPinching = false;
+                    galleryContainer.classList.remove('dragging');
+                } else if (e.touches.length === 1) {
+                    currentGallery.isPinching = false;
+                }
+                
+                // Обновляем начальные касания
+                initialTouches = Array.from(e.touches).map(touch => ({
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                }));
+            });
+            
+            // Обработчики для колесика мыши с Ctrl
             document.addEventListener('keydown', (e) => {
                 if (e.ctrlKey) isCtrlPressed = true;
             });
@@ -2269,12 +2483,29 @@
                 }
             }, { passive: false });
             
+            // Двойной тап для зума на мобильных устройствах
+            galleryContainer.addEventListener('touchstart', (e) => {
+                const now = Date.now();
+                if (now - currentGallery.lastTouchTime < 300) {
+                    // Двойной тап
+                    if (currentGallery.zoomLevel > 1) {
+                        resetZoom();
+                    } else {
+                        currentGallery.zoomLevel = 2;
+                        updateZoom();
+                    }
+                    e.preventDefault();
+                }
+                currentGallery.lastTouchTime = now;
+            }, { passive: false });
+            
             // Показываем первое изображение
             showImage(0);
             
             // Скрываем подсказку через 5 секунд
             setTimeout(() => {
                 zoomHint.style.display = 'none';
+                mobileZoomHint.style.display = 'none';
             }, 5000);
         }
         
