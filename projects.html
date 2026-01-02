@@ -18,17 +18,37 @@
             box-sizing: border-box;
         }
         
+        html {
+            height: 100%;
+        }
+        
         body {
+            min-height: 100%;
             font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Основной контент должен занимать всё пространство */
+        .main-content {
+            flex: 1 0 auto;
+            width: 100%;
+        }
+        
+        /* Футер прижат к низу */
+        .footer {
+            flex-shrink: 0;
+            width: 100%;
         }
         
         /* Стили для модальных окон проектов */
@@ -625,7 +645,7 @@
         }
         
         .project-feature:hover {
-            background: #e3f2fd;
+            background: #ffeae1;
             transform: translateX(5px);
         }
         
@@ -838,6 +858,25 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .projects-cta {
+                padding: 30px 20px;
+                margin: 40px 0;
+            }
+            
+            .cta-content h3 {
+                font-size: 24px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         /* Стили для тегов проектов */
@@ -1030,9 +1069,9 @@
             color: #666;
         }
         
-        /* CTA секция */
+        /* CTA секция с зеленым градиентом */
         .projects-cta {
-            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
             color: white;
             padding: 50px;
             border-radius: 20px;
@@ -1051,6 +1090,266 @@
             justify-content: center;
             margin-top: 30px;
             flex-wrap: wrap;
+        }
+        
+        /* Стили для футера */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-tagline {
+            margin: 20px 0;
+            color: #bdc3c7;
+            font-size: 16px;
+        }
+        
+        .footer-social h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: #ff6b35;
+        }
+        
+        .social-icon.vk:hover { background: #4c75a3; }
+        .social-icon.telegram:hover { background: #0088cc; }
+        .social-icon.instagram:hover { background: #e4405f; }
+        .social-icon.youtube:hover { background: #cd201f; }
+        .social-icon.whatsapp:hover { background: #25D366; }
+        
+        .footer-links {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .links-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+        
+        .links-column ul {
+            list-style: none;
+        }
+        
+        .links-column li {
+            margin-bottom: 12px;
+        }
+        
+        .links-column a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .links-column a:hover {
+            color: #4CAF50;
+        }
+        
+        .footer-newsletter {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-newsletter h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        
+        .footer-newsletter p {
+            color: #bdc3c7;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .newsletter-input input {
+            flex: 1;
+            border: none;
+            padding: 12px 20px;
+            outline: none;
+            font-size: 16px;
+        }
+        
+        .newsletter-input button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-input button:hover {
+            background: #388E3C;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .payment-methods {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-methods h4 {
+            font-size: 16px;
+            color: #bdc3c7;
+        }
+        
+        .payment-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 28px;
+        }
+        
+        .payment-icons i {
+            color: #bdc3c7;
+        }
+        
+        .footer-info {
+            text-align: right;
+        }
+        
+        .footer-info p {
+            margin-bottom: 10px;
+            color: #bdc3c7;
+        }
+        
+        .footer-info a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Мобильная адаптация футера */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 20px;
+                margin-top: 40px;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-logo, .footer-links, .footer-newsletter {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .payment-methods h4 {
+                margin-bottom: 10px;
+            }
+            
+            .footer-social {
+                justify-content: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .footer-info {
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                justify-content: center;
+            }
+            
+            .projects-cta {
+                padding: 30px 20px;
+                margin: 40px 0;
+            }
+            
+            .cta-content h3 {
+                font-size: 24px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -1123,7 +1422,7 @@
                             <h4>Индивидуальный жилой дом</h4>
                             <p>Московская область, 2023</p>
                             <span class="project-tag">Индивидуальный проект</span>
-                            <span class="project-tag">29 чертежей</span>
+                            <span class="project-tag">6 чертежей</span>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1133,7 +1432,7 @@
                             <span><i class="fas fa-calendar-alt"></i> 2023</span>
                             <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                         </div>
-                        <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект включает 29 подробных чертежей и схем.</p>
+                        <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект включает 6 подробных чертежей и схем.</p>
                         <div class="project-features">
                             <span class="project-feature"><i class="fas fa-check"></i> Монолитный ж/б фундамент</span>
                             <span class="project-feature"><i class="fas fa-check"></i> Газосиликатные блоки</span>
@@ -1228,6 +1527,7 @@
                 </div>
             </div>
             
+            <!-- CTA секция с зеленым градиентом -->
             <div class="projects-cta">
                 <div class="cta-content">
                     <h3>Хотите реализовать свой строительный проект?</h3>
@@ -1247,7 +1547,7 @@
 
     <!-- Модальные окна для проектов -->
 
-    <!-- Модальное окно для проекта 1: Индивидуальный дом (30 изображений с защитой) -->
+    <!-- Модальное окно для проекта 1: Индивидуальный дом (6 изображений с защитой) -->
     <div id="modal-project-1" class="project-modal">
         <div class="modal-content">
             <div class="close-modal">&times;</div>
@@ -1258,7 +1558,7 @@
                     <span><i class="fas fa-calendar-alt"></i> 2023</span>
                     <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                     <span><i class="fas fa-cube"></i> 574 м³ строительный объем</span>
-                    <span><i class="fas fa-images"></i> 29 изображений проекта</span>
+                    <span><i class="fas fa-images"></i> 6 изображений проекта</span>
                 </div>
             </div>
             <div class="modal-body">
@@ -1272,7 +1572,7 @@
                         <div class="gallery-main" id="gallery-main-1">
                             <!-- Защищенные изображения будут добавлены через JavaScript -->
                         </div>
-                        <div class="gallery-counter">1 / 30</div>
+                        <div class="gallery-counter">1 / 6</div>
                         <div class="zoom-controls">
                             <button class="zoom-btn" id="zoom-out-1" title="Уменьшить">
                                 <i class="fas fa-search-minus"></i>
@@ -1290,7 +1590,7 @@
                     <div class="gallery-thumbs-container">
                         <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
                         <div class="gallery-thumbs" id="gallery-thumbs-1">
-                            <!-- 30 миниатюр для проекта -->
+                            <!-- 6 миниатюр для проекта -->
                             <!-- Изображения будут добавлены через JavaScript -->
                         </div>
                         <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
@@ -1298,7 +1598,7 @@
                 </div>
                 
                 <div class="tech-specs">
-                    <h3><i class="fas fa-file-pdf"></i> Технические характеристики проекта из PDF</h3>
+                    <h3><i class="fas fa-file-pdf"></i> Технические характеристики проекта</h3>
                     <div class="specs-grid">
                         <div class="spec-item">
                             <div class="spec-value">142,85 м²</div>
@@ -1328,7 +1628,7 @@
                 </div>
                 
                 <h3>Описание проекта</h3>
-                <p>Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект разработан с учетом всех современных строительных норм и требований к комфортному проживанию. Включает 30 изображений проекта: обложку и 29 подробных чертежей и схем.</p>
+                <p>Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект разработан с учетом всех современных строительных норм и требований к комфортному проживанию. Включает 6 изображений проекта: обложку и 5 подробных чертежей и схем.</p>
                 
                 <div class="project-details-grid">
                     <div class="detail-section">
@@ -1547,12 +1847,91 @@
         </div>
     </div>
 
-    <!-- Подвал сайта -->
+    <!-- Полноценный футер -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-info">
-                <p>&copy; 2010-2023 BuildCraft. Все права защищены.</p>
-                <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <span class="logo-text">Build<span class="logo-highlight">Craft</span></span>
+                    </div>
+                    <p class="footer-tagline">Ваш надежный партнер в строительстве с 2010 года</p>
+                    <div class="footer-social">
+                        <h4>Мы в социальных сетях</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon vk"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="social-icon telegram"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="links-column">
+                        <h4>Каталог</h4>
+                        <ul>
+                            <li><a href="catalog.html">Строительные материалы</a></li>
+                            <li><a href="catalog.html">Инструменты</a></li>
+                            <li><a href="catalog.html">Отделочные материалы</a></li>
+                            <li><a href="catalog.html">Сантехника</a></li>
+                            <li><a href="catalog.html">Электрика</a></li>
+                            <li><a href="catalog.html">Сад и участок</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="links-column">
+                        <h4>Компания</h4>
+                        <ul>
+                            <li><a href="about.html">О нас</a></li>
+                            <li><a href="services.html">Услуги</a></li>
+                            <li><a href="contact.html">Контакты</a></li>
+                            <li><a href="services.html">Доставка и оплата</a></li>
+                            <li><a href="services.html">Гарантия и возврат</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="links-column">
+                        <h4>Полезное</h4>
+                        <ul>
+                            <li><a href="#">Блог о строительстве</a></li>
+                            <li><a href="#">Калькулятор материалов</a></li>
+                            <li><a href="#">Советы по ремонту</a></li>
+                            <li><a href="#">Для подрядчиков</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Подпишитесь на рассылку</h4>
+                    <p>Узнавайте первыми о скидках, акциях и новых поступлениях товаров</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <h4>Принимаем к оплате:</h4>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-mir"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-info">
+                    <p>&copy; 2010-2023 BuildCraft. Все права защищены.</p>
+                    <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+                </div>
             </div>
         </div>
     </footer>
@@ -1565,52 +1944,24 @@
         let isCtrlPressed = false;
         let currentGallery = null;
         
-        // Массив с путями к 30 изображениям (cover.jpg + 29 изображений individual-house-1.jpg до 29.jpg)
+        // Массив с путями к 6 изображениям
         const projectImages = [
             'img/projects/individual-house/individual-house-1.jpg',
             'img/projects/individual-house/individual-house-2.jpg',
             'img/projects/individual-house/individual-house-3.jpg',
             'img/projects/individual-house/individual-house-4.jpg',
             'img/projects/individual-house/individual-house-5.jpg',
-            'img/projects/individual-house/individual-house-6.jpg',
-            'img/projects/individual-house/individual-house-7.jpg',
-            'img/projects/individual-house/individual-house-8.jpg',
-            'img/projects/individual-house/individual-house-9.jpg',
-            'img/projects/individual-house/individual-house-10.jpg',
-            'img/projects/individual-house/individual-house-11.jpg',
-            'img/projects/individual-house/individual-house-12.jpg',
-            'img/projects/individual-house/individual-house-13.jpg',
-            'img/projects/individual-house/individual-house-14.jpg',
-            'img/projects/individual-house/individual-house-15.jpg',
-            'img/projects/individual-house/individual-house-16.jpg',
-            'img/projects/individual-house/individual-house-17.jpg',
-            'img/projects/individual-house/individual-house-18.jpg',
-            'img/projects/individual-house/individual-house-19.jpg',
-            'img/projects/individual-house/individual-house-20.jpg',
-            'img/projects/individual-house/individual-house-21.jpg',
-            'img/projects/individual-house/individual-house-22.jpg',
-            'img/projects/individual-house/individual-house-23.jpg',
-            'img/projects/individual-house/individual-house-24.jpg',
-            'img/projects/individual-house/individual-house-25.jpg',
-            'img/projects/individual-house/individual-house-26.jpg',
-            'img/projects/individual-house/individual-house-27.jpg',
-            'img/projects/individual-house/individual-house-28.jpg',
-            'img/projects/individual-house/individual-house-29.jpg'
+            'img/projects/individual-house/individual-house-6.jpg'
         ];
         
-        // Описания для 30 изображений
+        // Описания для 6 изображений
         const imageDescriptions = [
             'Обложка проекта',
-            'План 1-го этажа', 'Фасад 1-3', 'Фасад 3-1', 'Фасад А-Г',
-            'Фасад Г-А', 'План кровли', 'Разрез 1-1', 'Разрез 2-2', 'Схема фундамента',
-            'Сечения фундамента', 'Кладочный план 1-го этажа', 'Ведомость проемов',
-            'Схема расположения элементов перекрытия', 'Спецификация перемычек',
-            'Схема расположения монолитного пояса', 'Схема вентиляции',
-            'Схема расположения балок перекрытия', 'Схема расположения элементов стропильной конструкции',
-            'Узлы 1, 2, 3', 'Стропила 3D', 'План этажа 1', 'План этажа 2',
-            'Схема водоснабжения', 'Схема отопления', 'Схема электроснабжения',
-            'Схема вентиляции детальная', 'План размещения оборудования',
-            'Схема дренажа', 'Схема ливневой канализации'
+            'План 1-го этажа',
+            'Фасад 1-3',
+            'Фасад 3-1',
+            'План кровли',
+            'Разрез 1-1'
         ];
         
         // Функция для показа уведомлений
@@ -1918,7 +2269,7 @@
                 }
             }, { passive: false });
             
-            // Показываем первое изображение (cover.jpg)
+            // Показываем первое изображение
             showImage(0);
             
             // Скрываем подсказку через 5 секунд
@@ -2022,6 +2373,19 @@
                     const nav = document.querySelector('.main-nav');
                     if (nav) {
                         nav.classList.toggle('active');
+                    }
+                });
+            }
+            
+            // Обработка формы подписки
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    if (email) {
+                        showToast('Спасибо за подписку!', 'info');
+                        this.reset();
                     }
                 });
             }
