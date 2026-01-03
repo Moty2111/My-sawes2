@@ -1406,6 +1406,52 @@
                 justify-content: center;
             }
         }
+        
+        /* Дополнительные стили для детального отображения помещений */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .room-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #ff6b35;
+        }
+        
+        .room-name {
+            font-weight: 600;
+            color: #1a2980;
+            margin-bottom: 5px;
+        }
+        
+        .room-area {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Стили для списка чертежей */
+        .drawings-list {
+            columns: 2;
+            column-gap: 30px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .drawings-list {
+                columns: 1;
+            }
+        }
+        
+        .drawings-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            break-inside: avoid;
+        }
     </style>
 </head>
 <body>
@@ -1475,7 +1521,7 @@
                     <div class="project-image" style="background-image: url('img/projects/individual-house/cover.jpg');">
                         <div class="project-overlay">
                             <h4>Индивидуальный жилой дом</h4>
-                            <p>Московская область, 2023</p>
+                            <p>Челябинская область, 2025</p>
                             <span class="project-tag">Индивидуальный проект</span>
                             <span class="project-tag">6 чертежей</span>
                         </div>
@@ -1483,8 +1529,8 @@
                     <div class="project-info">
                         <h3>Индивидуальный жилой дом</h3>
                         <div class="project-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Московская область</span>
-                            <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Челябинск</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2025</span>
                             <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                         </div>
                         <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект включает 6 подробных чертежей и схем.</p>
@@ -1500,28 +1546,31 @@
                     </div>
                 </div>
                 
-                <!-- Проект 2: ЖК "Солнечный" -->
-                <div class="project-card" data-category="residential">
-                    <div class="project-image" style="background-image: url('https://via.placeholder.com/350x250/26d0ce/ffffff?text=ЖК+Солнечный');">
+                <!-- Проект 2: Проект дома для ипотеки и строительства 11-0084 -->
+                <div class="project-card" data-category="individual residential">
+                    <div class="project-image" style="background-image: url('img/projects/house-110084/cover.jpg');">
                         <div class="project-overlay">
-                            <h4>Жилой комплекс "Солнечный"</h4>
-                            <p>Москва, 2022-2023</p>
-                            <span class="project-tag">Многоквартирный дом</span>
+                            <h4>Проект дома </h4>
+                            <p>Челябинская область</p>
+                            <span class="project-tag">Газосиликатные блоки</span>
+                            <span class="project-tag">4 спальни</span>
+                            <span class="project-tag">9 чертежей</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>ЖК "Солнечный"</h3>
+                        <h3>Проект дома для ипотеки </h3>
                         <div class="project-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Москва, ул. Солнечная</span>
-                            <span><i class="fas fa-calendar-alt"></i> 2022-2023</span>
-                            <span><i class="fas fa-building"></i> 12 этажей</span>
+                            <span><i class="fas fa-map-marker-alt"></i>Челябинск</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2024</span>
+                            <span><i class="fas fa-home"></i> 147,89 м²</span>
+                            <span><i class="fas fa-bed"></i> 4 спальни</span>
                         </div>
-                        <p class="project-description">Поставка строительных материалов для возведения 12-этажного жилого комплекса. Общая площадь - 25 000 м².</p>
+                        <p class="project-description">Полный комплект архитектурно-строительных чертежей для получения ипотеки, уведомления Администрации и качественного строительства дома из газосиликатных блоков.</p>
                         <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check"></i> Цемент</span>
-                            <span class="project-feature"><i class="fas fa-check"></i> Кирпич</span>
-                            <span class="project-feature"><i class="fas fa-check"></i> Железобетонные изделия</span>
-                            <span class="project-feature"><i class="fas fa-check"></i> Современные системы вентиляции</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Для получения ипотеки</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Газосиликатные блоки 375 мм</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Монолитная ж/б плита</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> 4 спальни, 2 санузла</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-2">
                             <i class="fas fa-search-plus"></i> Подробнее о проекте
@@ -1657,12 +1706,12 @@
                     </div>
                     
                     <div class="gallery-thumbs-container">
-                        <button class="gallery-nav prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="gallery-nav prev" id="prev-1"><i class="fas fa-chevron-left"></i></button>
                         <div class="gallery-thumbs" id="gallery-thumbs-1">
                             <!-- 6 миниатюр для проекта -->
                             <!-- Изображения будут добавлены через JavaScript -->
                         </div>
-                        <button class="gallery-nav next"><i class="fas fa-chevron-right"></i></button>
+                        <button class="gallery-nav next" id="next-1"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
                 
@@ -1782,49 +1831,198 @@
         </div>
     </div>
 
-    <!-- Модальное окно для проекта 2 -->
+    <!-- Модальное окно для проекта 2: Проект дома для ипотеки и строительства 11-0084 (9 изображений) -->
     <div id="modal-project-2" class="project-modal">
         <div class="modal-content">
             <div class="close-modal">&times;</div>
             <div class="modal-header">
-                <h2>Жилой комплекс "Солнечный"</h2>
+                <h2>Проект дома для ипотеки и строительства</h2>
                 <div class="project-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Москва, ул. Солнечная</span>
-                    <span><i class="fas fa-calendar-alt"></i> 2022-2023</span>
-                    <span><i class="fas fa-building"></i> 12 этажей</span>
-                    <span><i class="fas fa-ruler-combined"></i> 25 000 м²</span>
+                    <span><i class="fas fa-ruler-combined"></i> 147,89 м² (14.42 x 12.15 м)</span>
+                    <span><i class="fas fa-bed"></i> 4 спальни, 2 санузла</span>
+                    <span><i class="fas fa-building"></i> 1 этаж</span>
+                    <span><i class="fas fa-images"></i> 9 изображений проекта</span>
                 </div>
             </div>
             <div class="modal-body">
-                <p>Проект реализован в срок с соблюдением всех строительных норм и требований к современному жилью. Комплекс включает 250 квартир различной площади, подземный паркинг, детскую площадку и зоны отдыха.</p>
+                <!-- Галерея изображений с защитой -->
+                <div class="gallery-container">
+                    <div class="zoom-hint" id="zoom-hint-2">
+                        <i class="fas fa-info-circle"></i> Зажмите Ctrl и используйте колесико мыши для масштабирования
+                    </div>
+                    <div class="mobile-zoom-hint" id="mobile-zoom-hint-2">
+                        <i class="fas fa-info-circle"></i> Используйте два пальца для масштабирования
+                    </div>
+                    <div class="gallery-main-container" id="gallery-main-container-2">
+                        <div class="loading-spinner" id="loading-spinner-2"></div>
+                        <div class="gallery-main" id="gallery-main-2">
+                            <!-- Защищенные изображения будут добавлены через JavaScript -->
+                        </div>
+                        <div class="gallery-counter">1 / 9</div>
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" id="zoom-out-2" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <div class="zoom-level" id="zoom-level-2">100%</div>
+                            <button class="zoom-btn" id="zoom-in-2" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="zoom-btn" id="zoom-reset-2" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <!-- Мобильные кнопки управления зумом -->
+                        <div class="mobile-zoom-controls">
+                            <button class="mobile-zoom-btn" id="mobile-zoom-in-2" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-out-2" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-reset-2" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-thumbs-container">
+                        <button class="gallery-nav prev" id="prev-2"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-thumbs" id="gallery-thumbs-2">
+                            <!-- 9 миниатюр для проекта -->
+                            <!-- Изображения будут добавлены через JavaScript -->
+                        </div>
+                        <button class="gallery-nav next" id="next-2"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="tech-specs">
+                    <h3><i class="fas fa-home"></i> Характеристики проекта</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-value">147,89 м²</div>
+                            <div class="spec-label">Общая площадь с крыльцом</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">145,12 м²</div>
+                            <div class="spec-label">Площадь без крыльца</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">77 м²</div>
+                            <div class="spec-label">Площадь застройки</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">6,36 м</div>
+                            <div class="spec-label">Высота в коньке</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Описание проекта</h3>
+                <p>Проект содержит все то, что необходимо для получения ипотеки в банке, для качественного и экономного строительства дома, для уведомления Администрации о начале строительства, для составления технического плана, для разработки проекта на подвод газа.</p>
+                
+                <p>Проект предоставляется на бумажном альбоме формата А-4 в количестве одного экземпляра с голубой печатью организации и необходимым описанием для получения ипотеки в банке. Комплект архитектурно-строительных чертежей (АР+КР) разработан в соответствии с СНиП, ГОСТ.</p>
+                
+                <p>Проект дома для средней полосы России, возможна адаптация под другой регион. В проекте содержатся подробные чертежи и узлы, информация о количестве строительных материалах на всех этапах строительства коробки. Все чертежи легко читаемы даже для людей не имеющих строительного образования. Материалы указанные в проекте доступны в продаже в любом регионе России, при строительстве могут быть заменены на аналогичные.</p>
                 
                 <div class="project-details-grid">
                     <div class="detail-section">
-                        <h4><i class="fas fa-box"></i> Поставленные материалы</h4>
+                        <h4><i class="fas fa-cube"></i> Конструктивные решения</h4>
                         <ul>
-                            <li>Цемент</li>
-                            <li>Кирпич</li>
-                            <li>Железобетонные изделия</li>
-                            <li>Металлопрокат</li>
-                            <li>Окна ПВХ</li>
+                            <li>Фундамент: монолитная ж/б плита с ребрами вверх</li>
+                            <li>Стены: газосиликатный блок 375 мм</li>
+                            <li>Перегородки: газосиликатные блоки 150 мм, 200 мм</li>
+                            <li>Отделка наружная: декоративная штукатурка</li>
+                            <li>Покрытие крыши: металлочерепица</li>
+                            <li>Высота потолков в чистоте: 1 эт – 2,83 м</li>
+                            <li>Перекрытия: фундамент – монолитная плита, потолок – деревянные балки</li>
                         </ul>
                     </div>
                     
                     <div class="detail-section">
-                        <h4><i class="fas fa-check-circle"></i> Особенности</h4>
+                        <h4><i class="fas fa-door-closed"></i> План помещений 1 этажа</h4>
+                        <div class="rooms-grid">
+                            <div class="room-item">
+                                <div class="room-name">Крыльцо</div>
+                                <div class="room-area">2,77 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Тамбур</div>
+                                <div class="room-area">7,7 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Котельная</div>
+                                <div class="room-area">6,08 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Кладовая</div>
+                                <div class="room-area">5,71 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Спальня 1</div>
+                                <div class="room-area">17,22 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Спальня 2</div>
+                                <div class="room-area">17,18 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Спальня 3</div>
+                                <div class="room-area">13,86 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Спальня 4</div>
+                                <div class="room-area">13,86 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Кухня-столовая</div>
+                                <div class="room-area">24,32 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Санузел 1</div>
+                                <div class="room-area">9,26 м²</div>
+                            </div>
+                            <div class="room-item">
+                                <div class="room-name">Санузел 2</div>
+                                <div class="room-area">3,3 м²</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-check-circle"></i> Преимущества проекта</h4>
                         <ul>
-                            <li>Современные системы вентиляции</li>
-                            <li>Энергоэффективные решения</li>
-                            <li>Шумоизоляция повышенного класса</li>
-                            <li>Противопожарные системы</li>
-                            <li>Лифты премиум-класса</li>
+                            <li>Полный комплект для получения ипотеки в банке</li>
+                            <li>Соответствие всем СНиП и ГОСТ</li>
+                            <li>Подробные чертежи и узлы</li>
+                            <li>Информация о количестве материалов</li>
+                            <li>Адаптация под любой регион России</li>
+                            <li>Легко читаемые чертежи</li>
+                            <li>Доступные материалы в любом регионе</li>
                         </ul>
                     </div>
                 </div>
                 
+              
+                
+                <h3>Дополнительные услуги</h3>
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-edit"></i> Доработка проекта и внесение необходимых изменений</span>
+                    <span class="project-feature"><i class="fas fa-exchange-alt"></i> Разработка зеркального варианта проекта</span>
+                    <span class="project-feature"><i class="fas fa-ruler-combined"></i> Разработка индивидуального проекта дома по Вашим размерам</span>
+                    <span class="project-feature"><i class="fas fa-map-marked-alt"></i> Схема расположения дома на земельном участке</span>
+                    <span class="project-feature"><i class="fas fa-calculator"></i> Смета для ипотеки и на строительство дома</span>
+                    <span class="project-feature"><i class="fas fa-copy"></i> Дополнительные копии проекта в любом формате</span>
+                    <span class="project-feature"><i class="fas fa-file-pdf"></i> Электронная версия проекта в формате PDF</span>
+                    <span class="project-feature"><i class="fas fa-cube"></i> Разработка 3D-визуализации дома с привязкой к выбранным материалам</span>
+                    <span class="project-feature"><i class="fas fa-file-contract"></i> Подготовка Вашего проекта для получения ипотеки</span>
+                </div>
+                
                 <div class="modal-actions">
                     <a href="contact.html" class="btn btn-primary">
-                        <i class="fas fa-phone-alt"></i> Обсудить сотрудничество
+                        <i class="fas fa-file-contract"></i> Заказать проект
+                    </a>
+                    <a href="catalog.html" class="btn btn-secondary">
+                        <i class="fas fa-shopping-cart"></i> Материалы для строительства
                     </a>
                     <button class="btn btn-outline close-modal-btn">
                         <i class="fas fa-times"></i> Закрыть
@@ -1981,7 +2179,7 @@
         let isCtrlPressed = false;
         let currentGallery = null;
         
-        // Массив с путями к 6 изображениям
+        // Массив с путями к 6 изображениям для первого проекта
         const projectImages = [
             'img/projects/individual-house/individual-house-1.jpg',
             'img/projects/individual-house/individual-house-2.jpg',
@@ -1991,9 +2189,35 @@
             'img/projects/individual-house/individual-house-6.jpg'
         ];
         
-        // Описания для 6 изображений
+        // Описания для 6 изображений первого проекта
         const imageDescriptions = [
             'Обложка проекта',
+            'План 1-го этажа',
+            'Фасад 1-3',
+            'Фасад 3-1',
+            'План кровли',
+            'Разрез 1-1'
+        ];
+        
+        // Массив с путями к 9 изображениям для второго проекта
+        const house110084Images = [
+            'img/projects/house-110084/house-1.jpg',
+            'img/projects/house-110084/house-2.jpg',
+            'img/projects/house-110084/house-3.jpg',
+            'img/projects/house-110084/house-4.jpg',
+            'img/projects/house-110084/house-5.jpg',
+            'img/projects/house-110084/house-6.jpg',
+            'img/projects/house-110084/house-7.jpg',
+            'img/projects/house-110084/house-8.jpg',
+            'img/projects/house-110084/house-9.jpg'
+        ];
+        
+        // Описания для 9 изображений второго проекта
+        const house110084Descriptions = [
+            'Цветной 3D фасад 1',
+            'Цветной 3D фасад 2',
+            'Цветной 3D фасад 3',
+            'Цветной 3D фасад 4',
             'План 1-го этажа',
             'Фасад 1-3',
             'Фасад 3-1',
@@ -2052,9 +2276,11 @@
             document.body.style.overflow = 'hidden';
             currentModal = modalId;
             
-            // Инициализируем галерею для первого проекта
+            // Инициализируем галерею для соответствующего проекта
             if (modalId === 'modal-project-1') {
-                initGallery();
+                initGallery('1', projectImages, imageDescriptions);
+            } else if (modalId === 'modal-project-2') {
+                initGallery('2', house110084Images, house110084Descriptions);
             }
         }
         
@@ -2079,14 +2305,14 @@
             currentGallery = null;
         }
         
-        // Функция для инициализации галереи
-        function initGallery() {
-            const galleryContainer = document.getElementById('gallery-main-container-1');
-            const galleryMain = document.getElementById('gallery-main-1');
-            const galleryThumbs = document.getElementById('gallery-thumbs-1');
-            const loadingSpinner = document.getElementById('loading-spinner-1');
-            const zoomHint = document.getElementById('zoom-hint-1');
-            const mobileZoomHint = document.getElementById('mobile-zoom-hint-1');
+        // Универсальная функция для инициализации галереи
+        function initGallery(suffix, images, descriptions) {
+            const galleryContainer = document.getElementById(`gallery-main-container-${suffix}`);
+            const galleryMain = document.getElementById(`gallery-main-${suffix}`);
+            const galleryThumbs = document.getElementById(`gallery-thumbs-${suffix}`);
+            const loadingSpinner = document.getElementById(`loading-spinner-${suffix}`);
+            const zoomHint = document.getElementById(`zoom-hint-${suffix}`);
+            const mobileZoomHint = document.getElementById(`mobile-zoom-hint-${suffix}`);
             const galleryCounter = galleryContainer.querySelector('.gallery-counter');
             
             if (!galleryContainer || !galleryMain || !galleryThumbs) return;
@@ -2118,14 +2344,14 @@
             // Создаем изображения
             const loadPromises = [];
             
-            for (let i = 0; i < projectImages.length; i++) {
-                const imagePath = projectImages[i];
-                const description = imageDescriptions[i] || `Изображение ${i + 1}`;
+            for (let i = 0; i < images.length; i++) {
+                const imagePath = images[i];
+                const description = descriptions[i] || `Изображение ${i + 1}`;
                 
                 // Создаем основное изображение
                 const mainImg = document.createElement('div');
                 mainImg.className = 'protected-image';
-                mainImg.id = `main-img-${i}`;
+                mainImg.id = `main-img-${suffix}-${i}`;
                 mainImg.setAttribute('data-index', i);
                 mainImg.setAttribute('data-src', imagePath);
                 mainImg.setAttribute('title', description);
@@ -2151,14 +2377,14 @@
                 // Обработчик клика на миниатюру
                 thumb.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-index'));
-                    showImage(index);
+                    showImage(index, suffix, images.length);
                 });
                 
                 // Добавляем обработчик для мобильных устройств
                 thumb.addEventListener('touchstart', function(e) {
                     e.preventDefault(); // Предотвращаем прокрутку
                     const index = parseInt(this.getAttribute('data-index'));
-                    showImage(index);
+                    showImage(index, suffix, images.length);
                 }, { passive: false });
                 
                 galleryThumbs.appendChild(thumb);
@@ -2167,52 +2393,52 @@
             // После загрузки всех изображений скрываем спиннер
             Promise.all(loadPromises).then(() => {
                 loadingSpinner.style.display = 'none';
-                // Показываем первое изображение (cover.jpg)
-                showImage(0);
+                // Показываем первое изображение
+                showImage(0, suffix, images.length);
             }).catch(error => {
                 console.error('Ошибка загрузки изображений:', error);
                 loadingSpinner.style.display = 'none';
                 showToast('Не удалось загрузить некоторые изображения', 'warning');
-                showImage(0);
+                showImage(0, suffix, images.length);
             });
             
             // Функция для показа изображения
-            function showImage(index) {
-                if (index < 0 || index >= projectImages.length) return;
+            function showImage(index, suffix, totalImages) {
+                if (index < 0 || index >= totalImages) return;
                 
                 currentGallery.currentIndex = index;
                 
                 // Обновляем активную миниатюру
-                document.querySelectorAll('#gallery-thumbs-1 .gallery-thumb').forEach((thumb, i) => {
+                document.querySelectorAll(`#gallery-thumbs-${suffix} .gallery-thumb`).forEach((thumb, i) => {
                     thumb.classList.toggle('active', i === index);
                 });
                 
                 // Обновляем основное изображение
-                document.querySelectorAll('#gallery-main-1 .protected-image').forEach((img, i) => {
+                document.querySelectorAll(`#gallery-main-${suffix} .protected-image`).forEach((img, i) => {
                     img.classList.toggle('active', i === index);
                 });
                 
                 // Обновляем счетчик
-                galleryCounter.textContent = `${index + 1} / ${projectImages.length}`;
+                galleryCounter.textContent = `${index + 1} / ${totalImages}`;
                 
                 // Сбрасываем зум
-                resetZoom();
+                resetZoom(suffix);
             }
             
             // Функции для зума
-            function updateZoom() {
-                document.getElementById('zoom-level-1').textContent = `${Math.round(currentGallery.zoomLevel * 100)}%`;
+            function updateZoom(suffix) {
+                document.getElementById(`zoom-level-${suffix}`).textContent = `${Math.round(currentGallery.zoomLevel * 100)}%`;
                 
-                const activeImage = document.querySelector('#gallery-main-1 .protected-image.active');
+                const activeImage = document.querySelector(`#gallery-main-${suffix} .protected-image.active`);
                 if (activeImage) {
                     activeImage.style.transform = `scale(${currentGallery.zoomLevel}) translate(${currentGallery.translateX}px, ${currentGallery.translateY}px)`;
                 }
                 
                 // Показываем подсказку при зуме > 100%
                 if (window.innerWidth > 768) {
-                    zoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
+                    if (zoomHint) zoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
                 } else {
-                    mobileZoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
+                    if (mobileZoomHint) mobileZoomHint.style.display = currentGallery.zoomLevel > 1 ? 'block' : 'none';
                 }
                 
                 // Сбрасываем позицию при уменьшении до 100%
@@ -2225,67 +2451,49 @@
                 }
             }
             
-            function zoomIn() {
+            function zoomIn(suffix) {
                 if (currentGallery.zoomLevel < 3) {
                     currentGallery.zoomLevel += 0.25;
-                    updateZoom();
+                    updateZoom(suffix);
                 }
             }
             
-            function zoomOut() {
+            function zoomOut(suffix) {
                 if (currentGallery.zoomLevel > 0.5) {
                     currentGallery.zoomLevel -= 0.25;
-                    updateZoom();
+                    updateZoom(suffix);
                 }
             }
             
-            function resetZoom() {
+            function resetZoom(suffix) {
                 currentGallery.zoomLevel = 1;
                 currentGallery.translateX = 0;
                 currentGallery.translateY = 0;
-                updateZoom();
+                updateZoom(suffix);
             }
             
             // Обработчики для кнопок зума
-            document.getElementById('zoom-in-1').addEventListener('click', zoomIn);
-            document.getElementById('zoom-out-1').addEventListener('click', zoomOut);
-            document.getElementById('zoom-reset-1').addEventListener('click', resetZoom);
+            document.getElementById(`zoom-in-${suffix}`).addEventListener('click', () => zoomIn(suffix));
+            document.getElementById(`zoom-out-${suffix}`).addEventListener('click', () => zoomOut(suffix));
+            document.getElementById(`zoom-reset-${suffix}`).addEventListener('click', () => resetZoom(suffix));
             
             // Обработчики для мобильных кнопок зума
-            document.getElementById('mobile-zoom-in-1').addEventListener('click', zoomIn);
-            document.getElementById('mobile-zoom-out-1').addEventListener('click', zoomOut);
-            document.getElementById('mobile-zoom-reset-1').addEventListener('click', resetZoom);
+            document.getElementById(`mobile-zoom-in-${suffix}`).addEventListener('click', () => zoomIn(suffix));
+            document.getElementById(`mobile-zoom-out-${suffix}`).addEventListener('click', () => zoomOut(suffix));
+            document.getElementById(`mobile-zoom-reset-${suffix}`).addEventListener('click', () => resetZoom(suffix));
             
             // Обработчики для навигации
-            const prevButton = document.querySelector('#gallery-thumbs-1').parentElement.querySelector('.gallery-nav.prev');
-            const nextButton = document.querySelector('#gallery-thumbs-1').parentElement.querySelector('.gallery-nav.next');
-            
-            prevButton.addEventListener('click', () => {
+            document.getElementById(`prev-${suffix}`).addEventListener('click', () => {
                 if (currentGallery.currentIndex > 0) {
-                    showImage(currentGallery.currentIndex - 1);
+                    showImage(currentGallery.currentIndex - 1, suffix, images.length);
                 }
             });
             
-            nextButton.addEventListener('click', () => {
-                if (currentGallery.currentIndex < projectImages.length - 1) {
-                    showImage(currentGallery.currentIndex + 1);
+            document.getElementById(`next-${suffix}`).addEventListener('click', () => {
+                if (currentGallery.currentIndex < images.length - 1) {
+                    showImage(currentGallery.currentIndex + 1, suffix, images.length);
                 }
             });
-            
-            // Добавляем обработчики для мобильной навигации
-            prevButton.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                if (currentGallery.currentIndex > 0) {
-                    showImage(currentGallery.currentIndex - 1);
-                }
-            }, { passive: false });
-            
-            nextButton.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                if (currentGallery.currentIndex < projectImages.length - 1) {
-                    showImage(currentGallery.currentIndex + 1);
-                }
-            }, { passive: false });
             
             // Обработчики для перетаскивания (десктоп)
             galleryContainer.addEventListener('mousedown', (e) => {
@@ -2309,7 +2517,7 @@
                 currentGallery.translateX = Math.max(Math.min(x, maxTranslate), -maxTranslate);
                 currentGallery.translateY = Math.max(Math.min(y, maxTranslate), -maxTranslate);
                 
-                updateZoom();
+                updateZoom(suffix);
                 e.preventDefault();
             });
             
@@ -2391,7 +2599,7 @@
                             currentGallery.translateY += (centerY - initialCenterY) * 0.5;
                         }
                         
-                        updateZoom();
+                        updateZoom(suffix);
                     }
                     e.preventDefault();
                 } else if (currentGallery.isDragging && e.touches.length === 1 && currentGallery.zoomLevel > 1) {
@@ -2408,7 +2616,7 @@
                     touchStartX = touch.clientX;
                     touchStartY = touch.clientY;
                     
-                    updateZoom();
+                    updateZoom(suffix);
                     e.preventDefault();
                 }
             }, { passive: false });
@@ -2443,9 +2651,9 @@
                 if (isCtrlPressed) {
                     e.preventDefault();
                     if (e.deltaY < 0) {
-                        zoomIn();
+                        zoomIn(suffix);
                     } else {
-                        zoomOut();
+                        zoomOut(suffix);
                     }
                 }
             }, { passive: false });
@@ -2456,10 +2664,10 @@
                 if (now - currentGallery.lastTouchTime < 300) {
                     // Двойной тап
                     if (currentGallery.zoomLevel > 1) {
-                        resetZoom();
+                        resetZoom(suffix);
                     } else {
                         currentGallery.zoomLevel = 2;
-                        updateZoom();
+                        updateZoom(suffix);
                     }
                     e.preventDefault();
                 }
@@ -2467,12 +2675,12 @@
             }, { passive: false });
             
             // Показываем первое изображение
-            showImage(0);
+            showImage(0, suffix, images.length);
             
             // Скрываем подсказку через 5 секунд
             setTimeout(() => {
-                zoomHint.style.display = 'none';
-                mobileZoomHint.style.display = 'none';
+                if (zoomHint) zoomHint.style.display = 'none';
+                if (mobileZoomHint) mobileZoomHint.style.display = 'none';
             }, 5000);
         }
         
@@ -2589,7 +2797,7 @@
             }
         });
     </script>
-      <script src="js/script.js"></script>
-      <script src="js/mobile.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/mobile.js"></script>
 </body>
 </html>
