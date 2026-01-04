@@ -14,6 +14,515 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#4CAF50">
     <meta name="mobile-web-app-capable" content="yes">
+    <style>
+        /* Уникальные стили для блока "Наши направления" */
+        .our-directions-wrapper {
+            margin-top: 50px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .our-directions-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .our-directions-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #263238;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .our-directions-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--accent-bright));
+            border-radius: 2px;
+        }
+        
+        .our-directions-header p {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .our-directions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .direction-card {
+            background: var(--light-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+            border: 2px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .direction-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-bright);
+        }
+        
+        .direction-card-1 {
+            border-top: 5px solid var(--secondary-color);
+        }
+        
+        .direction-card-2 {
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .direction-card-3 {
+            border-top: 5px solid var(--accent-bright);
+        }
+        
+        .direction-card-header {
+            padding: 25px 25px 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            border-bottom: 1px solid rgba(176, 190, 197, 0.3);
+            background: var(--gradient-light);
+        }
+        
+        .direction-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .direction-card-1 .direction-icon {
+            background: var(--gradient-secondary);
+            color: var(--light-color);
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .direction-card-2 .direction-icon {
+            background: var(--gradient-primary);
+            color: var(--light-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .direction-card-3 .direction-icon {
+            background: linear-gradient(135deg, var(--accent-bright), var(--accent-color));
+            color: var(--light-color);
+            border: 2px solid var(--accent-bright);
+        }
+        
+        .direction-title-wrapper {
+            flex: 1;
+        }
+        
+        .direction-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .direction-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .direction-badge.stable {
+            background: rgba(46, 125, 50, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid rgba(46, 125, 50, 0.3);
+        }
+        
+        .direction-badge.new {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent-bright);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .direction-year {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-medium);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .direction-year i {
+            font-size: 1rem;
+        }
+        
+        .direction-card-content {
+            padding: 20px 25px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .direction-card p {
+            color: var(--gray-color);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .direction-features {
+            margin-top: 15px;
+        }
+        
+        .direction-features h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .direction-features h4 i {
+            color: var(--accent-bright);
+        }
+        
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(176, 190, 197, 0.1);
+            color: var(--gray-color);
+            font-size: 0.85rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(176, 190, 197, 0.3);
+            transition: all var(--transition-normal);
+        }
+        
+        .direction-card-1 .feature-tag {
+            background: rgba(46, 125, 50, 0.05);
+            border-color: rgba(46, 125, 50, 0.2);
+        }
+        
+        .direction-card-2 .feature-tag {
+            background: rgba(230, 184, 0, 0.05);
+            border-color: rgba(230, 184, 0, 0.2);
+        }
+        
+        .direction-card-3 .feature-tag {
+            background: rgba(255, 107, 53, 0.05);
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+        
+        /* Стили для дополнительного изображения под основным изображением */
+        .about-additional-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+            align-items: start;
+        }
+        
+        .about-highlights-column {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .additional-image-container {
+            height: 400px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            border: 1px solid var(--form-border);
+            background: var(--gradient-gray-light);
+        }
+        
+        .additional-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        /* Обновленные стили для оверлея второго изображения - такой же стиль как в первом */
+        .additional-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--space-xl);
+            background: linear-gradient(transparent, rgba(38, 50, 56, 0.9));
+            color: var(--light-color);
+        }
+        
+        .additional-image-overlay h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--light-color);
+        }
+        
+        .additional-image-overlay p {
+            color: var(--gray-light);
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .our-directions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-additional-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .additional-image-container {
+                height: 350px;
+                order: -1;
+            }
+            
+            .additional-image-overlay h4 {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .our-directions-header h2 {
+                font-size: var(--text-3xl);
+            }
+            
+            .our-directions-header p {
+                font-size: var(--text-lg);
+                padding: 0 15px;
+            }
+            
+            .our-directions-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .direction-card-header {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .direction-icon {
+                margin: 0 auto;
+            }
+            
+            .direction-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .direction-card-content {
+                padding: 20px;
+            }
+            
+            .additional-image-container {
+                height: 300px;
+            }
+            
+            .additional-image-overlay {
+                padding: var(--space-lg);
+            }
+            
+            .additional-image-overlay h4 {
+                font-size: 1.3rem;
+            }
+            
+            .additional-image-overlay p {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .our-directions-header h2 {
+                font-size: var(--text-2xl);
+            }
+            
+            .our-directions-header p {
+                font-size: var(--text-base);
+            }
+            
+            .direction-card-header {
+                padding: 15px;
+            }
+            
+            .direction-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .direction-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .direction-card-content {
+                padding: 15px;
+            }
+            
+            .features-list {
+                flex-direction: column;
+            }
+            
+            .additional-image-container {
+                height: 250px;
+            }
+            
+            .additional-image-overlay {
+                padding: var(--space-md);
+            }
+            
+            .additional-image-overlay h4 {
+                font-size: 1.1rem;
+            }
+            
+            .additional-image-overlay p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Декоративные элементы */
+        .directions-decoration {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .directions-decoration-2 {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(46, 125, 50, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        /* Анимация для дополнительного изображения */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .additional-image-container {
+            animation: fadeInScale 0.8s ease-out;
+        }
+        
+        /* Специальные оранжевые стили для новых направлений и эффекты для первого */
+        /* Общие эффекты при наведении на карточку */
+        .direction-card:hover .direction-icon {
+            border-color: var(--accent-bright);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .direction-card:hover .feature-tag {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--accent-bright);
+            color: var(--accent-bright);
+        }
+        
+        .direction-card:hover {
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15);
+        }
+        
+        /* Акцентные оранжевые цвета для иконок в направлениях */
+        .direction-card-2 .direction-year i,
+        .direction-card-3 .direction-year i {
+            color: var(--accent-bright);
+        }
+        
+        .direction-card-2 .direction-badge i,
+        .direction-card-3 .direction-badge i {
+            color: var(--accent-bright);
+        }
+        
+        /* Для иконки звезды в features */
+        .direction-features h4 i {
+            color: var(--accent-bright);
+        }
+        
+        /* Специальные эффекты для первого направления */
+        .direction-card-1:hover .direction-year i {
+            color: var(--accent-bright);
+        }
+        
+        .direction-card-1:hover .direction-badge i {
+            color: var(--accent-bright);
+        }
+        
+        .direction-card-1:hover .direction-badge {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent-bright);
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+        
+        /* Оранжевое свечение для иконки первого направления при наведении */
+        .direction-card-1:hover .direction-icon {
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -60,62 +569,187 @@
         <div class="container">
             <div class="about-header">
                 <h2 class="section-title">О компании BuildCraft</h2>
-                <p class="section-subtitle">Надежный поставщик строительных материалов с 2010 года</p>
+                <p class="section-subtitle">От надежного партнера специализирующегося на заготовке, хранение, переработке и реализации лома чёрных и цветных металлов — к комплексным решениям для строительства и комфорта</p>
             </div>
             
             <div class="about-content">
                 <div class="about-text">
-                    <p class="intro-text">Мы работаем на рынке строительных материалов с 2010 года, предлагая нашим клиентам только качественную продукцию от проверенных производителей.</p>
+                    <p class="intro-text">Мы — динамично развивающаяся компания с десятилетней историей надежности и экспертизы. С 15 января 2015 года нашим фундаментом и основным направлением лицензионной деятельности является заготовка, хранение, переработка и реализация лома черных и цветных металлов. За это время мы заслужили репутацию стабильного партнера, обеспечивающего качество и оперативность.</p>
                     
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Надежные поставщики</h4>
-                                <p>Работаем напрямую с производителями, что гарантирует качество и лучшие цены</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Опытные консультанты</h4>
-                                <p>Наши специалисты имеют строительное образование и опыт работы от 5 лет</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-warehouse"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Собственный склад</h4>
-                                <p>Площадь склада 5000 м² позволяет всегда иметь в наличии широкий ассортимент</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="highlight-text">
-                                <h4>Гарантия на все товары</h4>
-                                <p>Предоставляем гарантию на все строительные материалы от 1 года</p>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="intro-text">Опираясь на накопленный опыт, понимание рынка и доверие клиентов, в декабре 2025 года мы приняли стратегическое решение о диверсификации и выходе на новые рынки. Это естественный этап нашего развития, позволяющий предложить комплексный сервис для строительства и обустройства комфортного жилья.</p>
                     
+                    <!-- Этот блок будет перемещен под изображение -->
                     <div class="mission">
-                        <h3>Наша миссия</h3>
-                        <p>Мы стремимся обеспечить наших клиентов качественными строительными материалами по доступным ценам, помогая воплощать в жизнь их строительные и ремонтные проекты.</p>
+                        <h3>Наша философия</h3>
+                        <p><strong>От прочного каркаса до уютного дома и его идеальной отделки.</strong> Мы создаем ценность, качество и доверие на каждом этапе.</p>
                     </div>
                 </div>
                 <div class="about-image">
-                    <div class="construction-image">
+                    <div class="construction-image" style="background-image: url('img/about/warehouse.webp');">
                         <div class="image-overlay">
-                            <h4>Наш складской комплекс</h4>
-                            <p>5000 м² современных складских помещений</p>
+                            <h4>От металла к комфорту</h4>
+                            <p>10 лет экспертизы в металлопереработке — основа для качественного строительства</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Новый блок с двумя колонками: левая - блоки с текстом, правая - дополнительное изображение -->
+            <div class="about-additional-content">
+                <div class="about-highlights-column">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <div class="highlight-text">
+                            <h4>10 лет надежности</h4>
+                            <p>С 2015 года — эксперты в заготовке и переработке металлолома, заслужившие доверие клиентов</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="highlight-text">
+                            <h4>Дома под ключ</h4>
+                            <p>С 2025 года — строительство индивидуальных жилых домов полного цикла с современными проектами</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <div class="highlight-text">
+                            <h4>Комплектация материалов</h4>
+                            <p>Широкий ассортимент напольных покрытий и строительных материалов для отделки любого масштаба</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="highlight-text">
+                            <h4>Комплексный подход</h4>
+                            <p>От работы с металлом до строительства домов — единый стандарт качества и надежности</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="additional-image-container">
+                    <img src="img\about\sklad.jpg" 
+                         alt="Наш склад строительных материалов" 
+                         class="additional-image">
+                    <div class="additional-image-overlay">
+                        <h4>Современный логистический комплекс</h4>
+                        <p>Площадь склада более 5000 м² с современным оборудованием для хранения и обработки строительных материалов</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Блок "Наши направления" под изображением -->
+            <div class="our-directions-wrapper">
+                <div class="directions-decoration"></div>
+                <div class="directions-decoration-2"></div>
+                
+                <div class="our-directions-header">
+                    <h2>Наши направления</h2>
+                    <p>Три ключевых направления деятельности, которые позволяют нам предлагать комплексные решения для строительства и комфорта</p>
+                </div>
+                
+                <div class="our-directions-grid">
+                    <!-- Направление 1 -->
+                    <div class="direction-card direction-card-1">
+                        <div class="direction-card-header">
+                            <div class="direction-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="direction-title-wrapper">
+                                <h3>Работа с клиентами</h3>
+                                <div class="direction-badge stable">
+                                    <i class="fas fa-check-circle"></i> Стабильное направление
+                                </div>
+                                <div class="direction-year">
+                                    <i class="fas fa-calendar-alt"></i> Работаем с 2015 года
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="direction-card-content">
+                            <p>Обслуживание оптовых и розничных клиентов, строительных организаций с 2015 года. Долгосрочные партнерские отношения, индивидуальный подход к каждому клиенту, гарантии качества и надежности поставок.</p>
+                            
+                            <div class="direction-features">
+                                <h4><i class="fas fa-star"></i> Ключевые особенности:</h4>
+                                <div class="features-list">
+                                    <span class="feature-tag">Оптовые поставки</span>
+                                    <span class="feature-tag">Розничные продажи</span>
+                                    <span class="feature-tag">Долгосрочные контракты</span>
+                                    <span class="feature-tag">Индивидуальный подход</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Направление 2 -->
+                    <div class="direction-card direction-card-2">
+                        <div class="direction-card-header">
+                            <div class="direction-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="direction-title-wrapper">
+                                <h3>Строительство домов под ключ (ИЖС)</h3>
+                                <div class="direction-badge new">
+                                    <i class="fas fa-bolt"></i> Новое направление
+                                </div>
+                                <div class="direction-year">
+                                    <i class="fas fa-rocket"></i> Запущено в 2025
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="direction-card-content">
+                            <p>Новое направление с 2025 года: полный цикл строительства индивидуальных жилых домов, современные проекты, надежные материалы и контроль на всех этапах — от архитектурного решения до сдачи «под ключ».</p>
+                            
+                            <div class="direction-features">
+                                <h4><i class="fas fa-star"></i> Ключевые особенности:</h4>
+                                <div class="features-list">
+                                    <span class="feature-tag">Полный цикл строительства</span>
+                                    <span class="feature-tag">Современные проекты</span>
+                                    <span class="feature-tag">Контроль качества</span>
+                                    <span class="feature-tag">Архитектурные решения</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Направление 3 -->
+                    <div class="direction-card direction-card-3">
+                        <div class="direction-card-header">
+                            <div class="direction-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="direction-title-wrapper">
+                                <h3>Комплектация и торговля строительными материалами</h3>
+                                <div class="direction-badge new">
+                                    <i class="fas fa-bolt"></i> Новое направление
+                                </div>
+                                <div class="direction-year">
+                                    <i class="fas fa-rocket"></i> Запущено в 2025
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="direction-card-content">
+                            <p>Новое направление с 2025 года: широкий ассортимент напольных покрытий (ламинат, паркет, плитка, линолеум), сопутствующие строительные товары и материалы для отделки, консультации и подбор материалов для объектов любого масштаба.</p>
+                            
+                            <div class="direction-features">
+                                <h4><i class="fas fa-star"></i> Ключевые особенности:</h4>
+                                <div class="features-list">
+                                    <span class="feature-tag">Напольные покрытия</span>
+                                    <span class="feature-tag">Отделочные материалы</span>
+                                    <span class="feature-tag">Профессиональные консультации</span>
+                                    <span class="feature-tag">Доставка и монтаж</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,56 +761,63 @@
                         <div class="stat-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
-                        <div class="stat-number">12+</div>
-                        <div class="stat-label">Лет на рынке</div>
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Лет надежной работы</div>
+                        <div class="stat-detail">С 15 января 2015 года</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-boxes"></i>
+                            <i class="fas fa-layer-group"></i>
                         </div>
-                        <div class="stat-number">5000+</div>
-                        <div class="stat-label">Товаров в ассортименте</div>
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Основных направления</div>
+                        <div class="stat-detail">Металл, строительство, материалы</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-hard-hat"></i>
                         </div>
-                        <div class="stat-number">2500+</div>
-                        <div class="stat-label">Довольных клиентов</div>
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Новых направления с 2025</div>
+                        <div class="stat-detail">Строительство и комплектация</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-truck"></i>
+                            <i class="fas fa-award"></i>
                         </div>
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Доставка по заявкам</div>
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Фокус на качестве</div>
+                        <div class="stat-detail">От металла до готового дома</div>
                     </div>
                 </div>
             </div>
             
             <!-- Team Section -->
             <div class="team-section">
-                <h2 class="section-title">Наша команда</h2>
-                <p class="section-subtitle">Профессионалы с большим опытом в строительной сфере</p>
+                <h2 class="section-title">Наша экспертиза</h2>
+                <p class="section-subtitle">Профессионалы, сочетающие опыт в металлопереработке и современном строительстве</p>
                 
                 <div class="team-grid">
                     <div class="team-member">
-                        <div class="member-photo photo1"></div>
-                        <h4>Иван Петров</h4>
-                        <div class="member-role">Генеральный директор</div>
-                        <div class="member-experience">Опыт работы: 15 лет</div>
+                        <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                        <h4>Александр Волков</h4>
+                        <div class="member-role">Основатель, генеральный директор</div>
+                        <div class="member-experience">Эксперт в металлопереработке с 2015 года</div>
+                        <div class="member-detail">Под его руководством компания выросла от узкой специализации к комплексным решениям</div>
                     </div>
                     <div class="team-member">
-                        <div class="member-photo photo2"></div>
-                        <h4>Анна Смирнова</h4>
-                        <div class="member-role">Технический директор</div>
-                        <div class="member-experience">Опыт работы: 12 лет</div>
+                        <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                        <h4>Мария Соколова</h4>
+                        <div class="member-role">Технический директор по строительству</div>
+                        <div class="member-experience">Опыт в строительстве ИЖС: 8 лет</div>
+                        <div class="member-detail">Возглавила новое направление строительства домов под ключ с 2025 года</div>
                     </div>
                     <div class="team-member">
-                        <div class="member-photo photo3"></div>
-                        <h4>Сергей Иванов</h4>
-                        <div class="member-role">Менеджер по закупкам</div>
-                        <div class="member-experience">Опыт работы: 10 лет</div>
+                        <div class="member-photo" style="background-image: url('https://images.unsplash.com/photo-1556157382-2eda2afc49d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')"></div>
+                        <h4>Дмитрий Ковалев</h4>
+                        <div class="member-role">Директор по развитию и комплектации</div>
+                        <div class="member-experience">Эксперт в строительных материалах: 6 лет</div>
+                        <div class="member-detail">Отвечает за подбор и поставку качественных материалов для строительства и отделки</div>
                     </div>
                 </div>
             </div>
@@ -184,7 +825,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+      <!-- Footer -->
+      <footer class="footer">
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo">
@@ -194,7 +836,7 @@
                         </div>
                         <span class="logo-text">Build<span class="logo-highlight">Craft</span></span>
                     </div>
-                    <p class="footer-tagline">Ваш надежный партнер в строительстве с 2010 года</p>
+                    <p class="footer-tagline">Ваш надежный партнер в строительстве с 2015 года</p>
                     <div class="footer-social">
                         <h4>Мы в социальных сетях</h4>
                         <div class="social-icons">
@@ -265,7 +907,7 @@
                 </div>
                 
                 <div class="footer-info">
-                    <p>&copy; 2010-2023 BuildCraft. Все права защищены.</p>
+                    <p>&copy; 2015-2026 BuildCraft. Все права защищены.</p>
                     <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
                 </div>
             </div>
