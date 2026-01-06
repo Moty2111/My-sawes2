@@ -14,6 +14,261 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#4CAF50">
     <meta name="mobile-web-app-capable" content="yes">
+    <style>
+        /* Дополнительные стили для проектов на главной */
+        .project-tag {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+            margin-right: 5px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        /* Стили для кнопки Подробнее (оранжевая) */
+        .btn-details {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            user-select: none;
+            -webkit-user-select: none;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        .btn-details:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-details:hover:before {
+            left: 100%;
+        }
+        
+        .btn-details:hover {
+            background: linear-gradient(135deg, #ff5722 0%, #ff8e53 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.6);
+        }
+        
+        .btn-details:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-details i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-details:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Стили для карточек проектов */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .project-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+        }
+        
+        .project-overlay h4 {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        
+        .project-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 15px;
+            color: #1a2980;
+            font-size: 24px;
+        }
+        
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .project-meta i {
+            color: #ff6b35;
+        }
+        
+        .project-description {
+            margin-bottom: 20px;
+            color: #666;
+            flex-grow: 1;
+        }
+        
+        .project-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .project-feature {
+            background: #f8fafc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14.5px;
+        }
+        
+        .project-feature i {
+            color: #ff6b35;
+        }
+        
+        /* Стили для блока статистики */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .project-stat {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-stat:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card {
+                margin-bottom: 30px;
+            }
+            
+            .project-image {
+                height: 200px;
+            }
+            
+            .btn-details {
+                padding: 12px 25px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .project-stat {
+                padding: 20px 15px;
+            }
+            
+            .stat-number {
+                font-size: 32px;
+            }
+            
+            .stat-label {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -61,208 +316,430 @@
             <!-- Hero Section -->
             <div class="hero">
                 <div class="hero-content">
-                    <div class="hero-badge">Проверенное качество</div>
-                    <h1 class="hero-title">Строительные материалы <span class="hero-highlight">для профессионалов</span></h1>
-                    <p class="hero-subtitle">Более 5000 наименований товаров для строительства и ремонта от ведущих производителей с гарантией качества</p>
+                    <div class="hero-badge">Специализация</div>
+                    <h1 class="hero-title">Строительство домов ИЖС и отделочные материалы <span class="hero-highlight">под ключ</span></h1>
+                    <p class="hero-subtitle">Профессиональное строительство частных домов, комплексная поставка напольных покрытий и сантехнического оборудования</p>
                     <div class="hero-buttons">
-                        <a href="catalog.html" class="btn btn-primary">
-                            <i class="fas fa-box-open"></i> Смотреть каталог
+                        <a href="#doma-ijs" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Проекты
                         </a>
-                        <a href="services.html" class="btn btn-secondary">
-                            <i class="fas fa-concierge-bell"></i> Наши услуги
+                        <a href="#napolnye-pokrytiya" class="btn btn-secondary">
+                            <i class="fas fa-layer-group"></i> Напольные покрытия
                         </a>
                     </div>
                     <div class="hero-features">
                         <div class="hero-feature">
                             <i class="fas fa-check-circle"></i>
-                            <span>Гарантия на все товары</span>
+                            <span>Индивидуальные проекты домов</span>
                         </div>
                         <div class="hero-feature">
                             <i class="fas fa-truck"></i>
-                            <span>Доставка за 24 часа</span>
+                            <span>Прямые поставки материалов</span>
                         </div>
                         <div class="hero-feature">
                             <i class="fas fa-headset"></i>
-                            <span>Круглосуточная поддержка</span>
+                            <span>Полное сопровождение</span>
                         </div>
                     </div>
                 </div>
                 <div class="hero-image">
                     <div class="floating-icons">
-                        <div class="floating-icon"><i class="fas fa-hammer"></i></div>
-                        <div class="floating-icon"><i class="fas fa-paint-roller"></i></div>
-                        <div class="floating-icon"><i class="fas fa-tools"></i></div>
-                        <div class="floating-icon"><i class="fas fa-ruler-combined"></i></div>
+                        <div class="floating-icon"><i class="fas fa-home"></i></div>
+                        <div class="floating-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="floating-icon"><i class="fas fa-faucet"></i></div>
+                        <div class="floating-icon"><i class="fas fa-fire"></i></div>
+                        <div class="floating-icon"><i class="fas fa-tint"></i></div>
                         <div class="floating-icon"><i class="fas fa-hard-hat"></i></div>
-                        <div class="floating-icon"><i class="fas fa-truck-loading"></i></div>
                     </div>
                 </div>
             </div>
             
-            <!-- Categories -->
+            <!-- Основные направления -->
             <div class="categories">
-                <h2 class="section-title">Категории товаров</h2>
+                <h2 class="section-title">Наши основные направления</h2>
+                <p class="section-subtitle">Специализируемся на трех ключевых направлениях для вашего комфорта и надежности</p>
                 <div class="categories-grid">
-                    <a href="catalog.html" class="category-card">
+                    <a href="#doma-ijs" class="category-card">
                         <div class="category-icon">
-                            <i class="fas fa-cube"></i>
+                            <i class="fas fa-home"></i>
                         </div>
-                        <h3>Строительные материалы</h3>
-                        <p>Цемент, кирпич, песок, щебень и другие</p>
+                        <h3>Дома ИЖС</h3>
+                        <p>Строительство частных домов под ключ по индивидуальным проектам</p>
                     </a>
-                    <a href="catalog.html" class="category-card">
+                    <a href="#napolnye-pokrytiya" class="category-card">
                         <div class="category-icon">
-                            <i class="fas fa-toolbox"></i>
+                            <i class="fas fa-layer-group"></i>
                         </div>
-                        <h3>Инструменты</h3>
-                        <p>Электроинструменты, ручной инструмент</p>
+                        <h3>Напольные покрытия</h3>
+                        <p>Ламинат, паркет, плитка, линолеум от ведущих производителей</p>
                     </a>
-                    <a href="catalog.html" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <h3>Отделочные материалы</h3>
-                        <p>Краски, обои, плитка, ламинат</p>
-                    </a>
-                    <a href="catalog.html" class="category-card">
+                    <a href="#santehnika" class="category-card">
                         <div class="category-icon">
                             <i class="fas fa-faucet"></i>
                         </div>
-                        <h3>Сантехника</h3>
-                        <p>Смесители, раковины, ванны, трубы</p>
-                    </a>
-                    <a href="catalog.html" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3>Электрика</h3>
-                        <p>Кабели, розетки, выключатели, светильники</p>
-                    </a>
-                    <a href="catalog.html" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-tree"></i>
-                        </div>
-                        <h3>Сад и участок</h3>
-                        <p>Строительные материалы для участка</p>
+                        <h3>Сантехника, котлы, насосы</h3>
+                        <p>Комплектация инженерными системами и оборудованием</p>
                     </a>
                 </div>
             </div>
             
-            <!-- Features -->
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>Гарантия качества</h3>
-                    <p>Все материалы проходят строгий контроль качества</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shipping-fast"></i>
-                    </div>
-                    <h3>Быстрая доставка</h3>
-                    <p>Доставка материалов на объект в течение 24 часов</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>Профессиональные консультации</h3>
-                    <p>Помощь в выборе материалов от опытных специалистов</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-percentage"></i>
-                    </div>
-                    <h3>Выгодные цены</h3>
-                    <p>Скидки постоянным клиентам и строительным компаниям</p>
-                </div>
-            </div>
-            
-            <!-- Popular Products -->
-            <div class="popular-products">
+            <!-- 1. Дома ИЖС -->
+            <section id="doma-ijs" class="popular-products">
                 <div class="section-header">
-                    <h2 class="section-title">Популярные товары</h2>
-                    <a href="catalog.html" class="view-all">Все товары <i class="fas fa-arrow-right"></i></a>
+                    <h2 class="section-title">Наши проекты</h2>
+                    <a href="projects.html" class="view-all">Все проекты <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-image cement">
-                            <div class="product-badge sale">-15%</div>
-                            <button class="product-wishlist"><i class="far fa-heart"></i></button>
+                
+                <div class="projects-intro">
+                    <p>За 12 лет работы мы участвовали в сотнях строительных проектов - от небольших ремонтов до масштабных строительных объектов. Ниже представлены некоторые из наших ключевых проектов, включая индивидуальное жилищное строительство.</p>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Проект 1: Индивидуальный жилой дом -->
+                    <div class="project-card">
+                        <div class="project-image" style="background-image: url('img/projects/individual-house/cover.jpg');">
+                            <div class="project-overlay">
+                                <h4>Индивидуальный жилой дом</h4>
+                                <p>Челябинская область, 2025</p>
+                                <span class="project-tag">Индивидуальный проект</span>
+                                <span class="project-tag">6 чертежей</span>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h3>Цемент М500 Д0</h3>
-                            <p>Высококачественный цемент для любых строительных работ</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="rating-count">(42)</span>
+                        <div class="project-info">
+                            <h3>Индивидуальный жилой дом</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Челябинск</span>
+                                <span><i class="fas fa-calendar-alt"></i> 2025</span>
+                                <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                             </div>
-                            <div class="product-price">
-                                <span class="current-price">450 ₽</span>
-                                <span class="old-price">530 ₽</span>
+                            <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект включает 6 подробных чертежей и схем.</p>
+                            <div class="project-features">
+                                <div class="project-feature"><i class="fas fa-check"></i> Монолитный ж/б фундамент</div>
+                                <div class="project-feature"><i class="fas fa-check"></i> Газосиликатные блоки</div>
+                                <div class="project-feature"><i class="fas fa-check"></i> Металлочерепичная кровля</div>
+                                <div class="project-feature"><i class="fas fa-check"></i> Полный комплект инженерных систем</div>
                             </div>
-                            <button class="btn btn-primary add-to-cart" data-id="1">В корзину</button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image bricks">
-                            <div class="product-badge new">Новинка</div>
-                            <button class="product-wishlist"><i class="far fa-heart"></i></button>
-                        </div>
-                        <div class="product-info">
-                            <h3>Кирпич строительный</h3>
-                            <p>Красный кирпич для кладки стен и перегородок</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="rating-count">(28)</span>
-                            </div>
-                            <div class="product-price">
-                                <span class="current-price">25 ₽/шт</span>
-                            </div>
-                            <button class="btn btn-primary add-to-cart" data-id="2">В корзину</button>
+                            <a href="projects.html" class="btn-details">
+                                <i class="fas fa-search-plus"></i> Подробнее о проекте
+                            </a>
                         </div>
                     </div>
-                    <div class="product-card">
-                        <div class="product-image boards">
-                            <div class="product-badge hit">Хит продаж</div>
-                            <button class="product-wishlist"><i class="far fa-heart"></i></button>
-                        </div>
-                        <div class="product-info">
-                            <h3>Доска обрезная</h3>
-                            <p>Сосновая доска для строительства и отделки</p>
-                            <div class="product-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="rating-count">(56)</span>
+                    
+                    <!-- Проект 2: Проект дома для ипотеки и строительства 11-0084 -->
+                    <div class="project-card">
+                        <div class="project-image" style="background-image: url('img/projects/house-110084/cover.jpg');">
+                            <div class="project-overlay">
+                                <h4>Проект дома для ипотеки</h4>
+                                <p>Челябинская область, 2024</p>
+                                <span class="project-tag">Газосиликатные блоки</span>
+                                <span class="project-tag">4 спальни</span>
+                                <span class="project-tag">9 чертежей</span>
                             </div>
-                            <div class="product-price">
-                                <span class="current-price">12 000 ₽/м³</span>
-                            </div>
-                            <button class="btn btn-primary add-to-cart" data-id="3">В корзину</button>
                         </div>
+                        <div class="project-info">
+                            <h3>Проект дома для ипотеки и строительства</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Челябинск</span>
+                                <span><i class="fas fa-calendar-alt"></i> 2024</span>
+                                <span><i class="fas fa-home"></i> 147,89 м²</span>
+                                <span><i class="fas fa-bed"></i> 4 спальни</span>
+                            </div>
+                            <p class="project-description">Полный комплект архитектурно-строительных чертежей для получения ипотеки, уведомления Администрации и качественного строительства дома из газосиликатных блоков.</p>
+                            <div class="project-features">
+                                <div class="project-feature"><i class="fas fa-check"></i> Для получения ипотеки</div>
+                                <div class="project-feature"><i class="fas fa-check"></i> Газосиликатные блоки 375 мм</div>
+                                <div class="project-feature"><i class="fas fa-check"></i> Монолитная ж/б плита</div>
+                                <div class="project-feature"><i class="fas fa-check"></i> 4 спальни, 2 санузла</div>
+                            </div>
+                            <a href="projects.html" class="btn-details">
+                                <i class="fas fa-search-plus"></i> Подробнее о проекте
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="projects.html" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> Посмотреть все проекты
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">
+                        <i class="fas fa-phone-alt"></i> Заказать консультацию
+                    </a>
+                </div>
+            </section>
+            
+            <!-- 2. Напольные покрытия -->
+            <section id="napolnye-pokrytiya" class="popular-products">
+                <div class="section-header">
+                    <h2 class="section-title">Напольные покрытия</h2>
+                    <a href="catalog.html" class="view-all">Весь каталог <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="projects-intro">
+                    <p>Мы предлагаем широкий ассортимент напольных покрытий от ведущих производителей. Качество, надежность и современный дизайн для вашего комфорта.</p>
+                </div>
+                
+                <div class="catalog-items">
+                    <!-- Пример товара 1 -->
+                    <div class="catalog-item" data-id="floor_001" data-category="flooring" data-price="1850">
+                        <div class="product-card">
+                            <div class="product-badges">
+                                <span class="product-badge popular">Популярный</span>
+                            </div>
+                            
+                            <div class="product-image">
+                                <div class="product-emoji">🪵</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.6</span>
+                                    <span class="reviews-count">(74)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="product-info">
+                                <div class="product-brand">Egger</div>
+                                <h3 class="product-title">Ламинат 33 класса Classic</h3>
+                                <p class="product-description">Влагостойкий ламинат для жилых и коммерческих помещений с замковым соединением.</p>
+                                
+                                <div class="product-features">
+                                    <span class="feature-tag">Класс 33</span>
+                                    <span class="feature-tag">Влагостойкий</span>
+                                </div>
+                                
+                                <div class="product-pricing">
+                                    <div class="price-current">
+                                        <span class="price-value">1850</span>
+                                        <span class="price-currency"> ₽</span>
+                                        <span class="price-unit">/упаковка</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-stock">
+                                    <i class="fas fa-check-circle in-stock"></i>
+                                    <span>В наличии: 280 упаковок</span>
+                                </div>
+                                
+                                <div class="product-actions">
+                                    <button class="btn btn-primary add-to-cart" data-id="floor_001">
+                                        <i class="fas fa-cart-plus"></i>
+                                        <span>В корзину</span>
+                                    </button>
+                                    <button class="btn btn-outline product-wishlist" data-id="floor_001" data-product-id="floor_001">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Пример товара 2 -->
+                    <div class="catalog-item" data-id="floor_002" data-category="flooring" data-price="2850">
+                        <div class="product-card">
+                            <div class="product-badges">
+                                <span class="product-badge new">Новинка</span>
+                            </div>
+                            
+                            <div class="product-image">
+                                <div class="product-emoji">🧱</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8</span>
+                                    <span class="reviews-count">(42)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="product-info">
+                                <div class="product-brand">Kerama Marazzi</div>
+                                <h3 class="product-title">Плитка напольная 30x30</h3>
+                                <p class="product-description">Керамическая плитка повышенной износостойкости для помещений с высокой проходимостью.</p>
+                                
+                                <div class="product-features">
+                                    <span class="feature-tag">Износостойкая</span>
+                                    <span class="feature-tag">Противоскользящая</span>
+                                </div>
+                                
+                                <div class="product-pricing">
+                                    <div class="price-current">
+                                        <span class="price-value">2850</span>
+                                        <span class="price-currency"> ₽</span>
+                                        <span class="price-unit">/м²</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-stock">
+                                    <i class="fas fa-check-circle in-stock"></i>
+                                    <span>В наличии: 150 м²</span>
+                                </div>
+                                
+                                <div class="product-actions">
+                                    <button class="btn btn-primary add-to-cart" data-id="floor_002">
+                                        <i class="fas fa-cart-plus"></i>
+                                        <span>В корзину</span>
+                                    </button>
+                                    <button class="btn btn-outline product-wishlist" data-id="floor_002" data-product-id="floor_002">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Пример товара 3 -->
+                    <div class="catalog-item" data-id="floor_003" data-category="flooring" data-price="1250">
+                        <div class="product-card">
+                            <div class="product-badges">
+                                <span class="product-badge discount">-15%</span>
+                            </div>
+                            
+                            <div class="product-image">
+                                <div class="product-emoji">📏</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.4</span>
+                                    <span class="reviews-count">(31)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="product-info">
+                                <div class="product-brand">Tarkett</div>
+                                <h3 class="product-title">Линолеум коммерческий 3мм</h3>
+                                <p class="product-description">Износостойкий линолеум для коммерческих помещений с защитным слоем от истирания.</p>
+                                
+                                <div class="product-features">
+                                    <span class="feature-tag">Толщина 3мм</span>
+                                    <span class="feature-tag">Защитный слой</span>
+                                </div>
+                                
+                                <div class="product-pricing">
+                                    <div class="price-old">1470 ₽</div>
+                                    <div class="price-current">
+                                        <span class="price-value">1250</span>
+                                        <span class="price-currency"> ₽</span>
+                                        <span class="price-unit">/м²</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="product-stock">
+                                    <i class="fas fa-check-circle in-stock"></i>
+                                    <span>В наличии: 85 м²</span>
+                                </div>
+                                
+                                <div class="product-actions">
+                                    <button class="btn btn-primary add-to-cart" data-id="floor_003">
+                                        <i class="fas fa-cart-plus"></i>
+                                        <span>В корзину</span>
+                                    </button>
+                                    <button class="btn btn-outline product-wishlist" data-id="floor_003" data-product-id="floor_003">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="catalog.html" class="btn btn-primary">
+                        <i class="fas fa-box-open"></i> Перейти в каталог
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">
+                        <i class="fas fa-ruler-combined"></i> Заказать замер
+                    </a>
+                </div>
+            </section>
+            
+            <!-- 3. Сантехника, котлы, насосы -->
+            <section id="santehnika" class="popular-products">
+                <div class="section-header">
+                    <h2 class="section-title">Сантехника, котлы, насосы</h2>
+                </div>
+                
+                <div class="projects-intro">
+                    <div class="feature-card" style="background: var(--gray-extra-light); border: 2px dashed var(--form-border);">
+                        <div class="feature-icon" style="background: var(--light-color);">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Раздел в разработке</h3>
+                        <p>Мы активно работаем над заключением договоров с ведущими производителями сантехники, котлов и насосного оборудования. Скоро здесь появится полный каталог продукции.</p>
+                        <p style="margin-top: 15px; font-weight: 600; color: var(--secondary-color);">
+                            <i class="fas fa-clock"></i> Ожидайте обновления в ближайшее время
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="features" style="margin-top: 30px;">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-faucet"></i>
+                        </div>
+                        <h3>Сантехническое оборудование</h3>
+                        <p>Смесители, раковины, унитазы, ванны и душевые кабины от проверенных брендов</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>Котлы и отопительное оборудование</h3>
+                        <p>Газовые, электрические и твердотопливные котлы для систем отопления</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Насосное оборудование</h3>
+                        <p>Циркуляционные, повысительные и дренажные насосы для водоснабжения</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Инженерные системы</h3>
+                        <p>Комплексные решения для водоснабжения, отопления и канализации</p>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Получить информацию
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">
+                        <i class="fas fa-phone-alt"></i> Стать поставщиком
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Статистика -->
+            <div class="projects-stats">
+                <h3 class="section-title">Наша статистика</h3>
+                <p class="section-subtitle">Цифры, которые говорят о нашем опыте и надежности</p>
+                <div class="stats-grid">
+                    <div class="project-stat">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Завершенных проектов</div>
+                    </div>
+                    <div class="project-stat">
+                        <div class="stat-number">500 000+</div>
+                        <div class="stat-label">м² построенной площади</div>
+                    </div>
+                    <div class="project-stat">
+                        <div class="stat-number">45</div>
+                        <div class="stat-label">Постоянных партнеров-застройщиков</div>
+                    </div>
+                    <div class="project-stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Проектов завершено в срок</div>
                     </div>
                 </div>
             </div>
             
-            <!-- Promo Banner -->
+            <!-- CTA Section -->
             <div class="promo-banner">
                 <div class="promo-content">
-                    <h3>Специальное предложение для строительных бригад!</h3>
-                    <p>При заказе от 50 000 ₽ - скидка 10% и бесплатная доставка</p>
-                    <a href="contact.html" class="btn btn-secondary">Получить скидку</a>
+                    <h3>Нужна консультация по строительству или материалам?</h3>
+                    <p>Наши специалисты помогут подобрать оптимальное решение для вашего проекта</p>
+                    <a href="contact.html" class="btn btn-secondary">
+                        <i class="fas fa-headset"></i> Бесплатная консультация
+                    </a>
                 </div>
                 <div class="promo-image"></div>
             </div>
@@ -295,14 +772,11 @@
                 
                 <div class="footer-links">
                     <div class="links-column">
-                        <h4>Каталог</h4>
+                        <h4>Наши направления</h4>
                         <ul>
-                            <li><a href="catalog.html">Строительные материалы</a></li>
-                            <li><a href="catalog.html">Инструменты</a></li>
-                            <li><a href="catalog.html">Отделочные материалы</a></li>
-                            <li><a href="catalog.html">Сантехника</a></li>
-                            <li><a href="catalog.html">Электрика</a></li>
-                            <li><a href="catalog.html">Сад и участок</a></li>
+                            <li><a href="#napolnye-pokrytiya">Напольные покрытия</a></li>
+                            <li><a href="#santehnika">Сантехника и оборудование</a></li>
+                            <li><a href="projects.html">Наши проекты</a></li>
                         </ul>
                     </div>
                     
@@ -330,7 +804,7 @@
                 
                 <div class="footer-newsletter">
                     <h4>Подпишитесь на рассылку</h4>
-                    <p>Узнавайте первыми о скидках, акциях и новых поступлениях товаров</p>
+                    <p>Узнавайте первыми о новых проектах, акциях и поступлениях материалов</p>
                     <form class="newsletter-form" id="newsletterForm">
                         <div class="newsletter-input">
                             <input type="email" placeholder="Ваш email" required>
@@ -358,7 +832,12 @@
         </div>
     </footer>
 
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
+    
 </body>
 </html>
