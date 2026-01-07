@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>BuildCraft - Каталог</title>
+    <title>BuildCraft - Каталог напольных покрытий</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -53,19 +53,21 @@
     <main class="main-content">
         <div class="container">
             <div class="catalog-header">
-                <h2 class="section-title">Каталог товаров</h2>
-                <p class="section-subtitle">Более 5000 наименований строительных материалов</p>
+                <h2 class="section-title">Напольные покрытия</h2>
+                <p class="section-subtitle">Широкий выбор качественных напольных покрытий от ведущих брендов</p>
                 
                 <div class="catalog-tools">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Поиск товаров...">
+                        <input type="text" id="searchInput" placeholder="Поиск напольных покрытий...">
                     </div>
                     <div class="sort-box">
                         <select id="sortSelect">
                             <option value="default">По умолчанию</option>
                             <option value="price-low">Сначала дешевые</option>
                             <option value="price-high">Сначала дорогие</option>
+                            <option value="rating-desc">По рейтингу</option>
+                            <option value="popular">По популярности</option>
                         </select>
                     </div>
                 </div>
@@ -73,41 +75,52 @@
             
             <div class="catalog-filters">
                 <div class="filter-section">
-                    <h4>Категории</h4>
+                    <h4>Тип покрытия</h4>
                     <div class="filter-buttons">
-                        <button class="filter-btn active" data-filter="all">Все товары</button>
-                        <button class="filter-btn" data-filter="materials">Стройматериалы</button>
-                        <button class="filter-btn" data-filter="tools">Инструменты</button>
-                        <button class="filter-btn" data-filter="finishing">Отделочные</button>
-                        <button class="filter-btn" data-filter="plumbing">Сантехника</button>
-                        <button class="filter-btn" data-filter="electrical">Электрика</button>
+                        <button class="filter-btn active" data-filter="all">Все покрытия</button>
+                        <button class="filter-btn" data-filter="laminate">Ламинат</button>
+                        <button class="filter-btn" data-filter="parquet">Паркет</button>
+                        <button class="filter-btn" data-filter="vinyl">Винил</button>
+                        <button class="filter-btn" data-filter="carpet">Ковролин</button>
+                        <button class="filter-btn" data-filter="cork">Пробка</button>
+                        <button class="filter-btn" data-filter="engineering">Инженерная доска</button>
+                        <button class="filter-btn" data-filter="solid">Массив</button>
                     </div>
                 </div>
                 <div class="filter-section">
                     <h4>Цена</h4>
                     <div class="price-range">
-                        <input type="range" min="0" max="100000" value="50000" class="price-slider">
+                        <input type="range" min="500" max="10000" value="5000" step="100" class="price-slider">
                         <div class="price-values">
-                            <span>0 ₽</span>
-                            <span>100 000 ₽</span>
+                            <span>500 ₽</span>
+                            <span>10 000 ₽</span>
                         </div>
+                        <div class="current-price-display">До 5 000 ₽</div>
                     </div>
                 </div>
             </div>
             
+            <div class="brand-filters">
+                <!-- Бренды будут загружаться через JavaScript -->
+            </div>
+            
             <div class="catalog-status">
                 <div class="catalog-info">
-                    <span>Найдено товаров: <span id="productCount">16</span></span>
+                    <span>Найдено покрытий: <span id="productCount">8</span></span>
                     <button class="clear-filters">Сбросить фильтры</button>
                 </div>
             </div>
             
             <div class="catalog-items">
-                <!-- Товары будут загружаться через JavaScript -->
+                <!-- Напольные покрытия будут загружаться через JavaScript -->
             </div>
             
-            <div class="load-more">
-                <button class="btn btn-outline">Показать еще</button>
+            <div class="pagination">
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <span class="page-link disabled">...</span>
+                <a href="#" class="page-link">5</a>
             </div>
         </div>
     </main>
@@ -140,12 +153,11 @@
                     <div class="links-column">
                         <h4>Каталог</h4>
                         <ul>
-                            <li><a href="catalog.html">Строительные материалы</a></li>
-                            <li><a href="catalog.html">Инструменты</a></li>
-                            <li><a href="catalog.html">Отделочные материалы</a></li>
-                            <li><a href="catalog.html">Сантехника</a></li>
-                            <li><a href="catalog.html">Электрика</a></li>
-                            <li><a href="catalog.html">Сад и участок</a></li>
+                            <li><a href="catalog.html">Напольные покрытия</a></li>
+                            <li><a href="catalog.html">Стеновые материалы</a></li>
+                            <li><a href="catalog.html">Потолочные системы</a></li>
+                            <li><a href="catalog.html">Изоляционные материалы</a></li>
+                            <li><a href="catalog.html">Клеи и герметики</a></li>
                         </ul>
                     </div>
                     
@@ -165,8 +177,8 @@
                         <ul>
                             <li><a href="#">Блог о строительстве</a></li>
                             <li><a href="#">Калькулятор материалов</a></li>
-                            <li><a href="#">Советы по ремонту</a></li>
-                            <li><a href="#">Для подрядчиков</a></li>
+                            <li><a href="#">Советы по укладке полов</a></li>
+                            <li><a href="#">Сертификаты качества</a></li>
                         </ul>
                     </div>
                 </div>
@@ -204,5 +216,210 @@
     <script src="js/products.js"></script>
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
+    
+    <script>
+        // Дополнительная инициализация для каталога напольных покрытий
+        document.addEventListener('DOMContentLoaded', function() {
+            // Карта соответствия фильтров и категорий из базы данных
+            const filterMap = {
+                'all': 'all',
+                'laminate': 'laminate',
+                'parquet': 'parquet',
+                'vinyl': 'vinyl',
+                'carpet': 'carpet',
+                'cork': 'cork',
+                'engineering': 'engineering',
+                'solid': 'solid'
+            };
+            
+            // Связываем кнопки фильтров с категориями из базы данных
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filterKey = this.getAttribute('data-filter');
+                    const category = filterMap[filterKey] || 'all';
+                    
+                    // Обновляем фильтр в глобальном объекте
+                    if (window.BuildCraft && window.BuildCraft.filterCatalogItems) {
+                        window.BuildCraft.filterCatalogItems(category);
+                    }
+                });
+            });
+            
+            // Расширяем функционал сортировки
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    if (window.BuildCraft && window.BuildCraft.sortCatalogItems) {
+                        window.BuildCraft.sortCatalogItems(this.value);
+                    }
+                });
+            }
+            
+            // Расширяем функционал поиска
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.trim();
+                    if (window.BuildCraft && window.BuildCraft.filterCatalogItems) {
+                        window.BuildCraft.filterCatalogItems('all', searchTerm);
+                    }
+                });
+            }
+            
+            // Кнопка сброса фильтров
+            const clearFiltersBtn = document.querySelector('.clear-filters');
+            if (clearFiltersBtn) {
+                clearFiltersBtn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.getAttribute('data-filter') === 'all') {
+                            btn.classList.add('active');
+                        }
+                    });
+                    
+                    if (searchInput) searchInput.value = '';
+                    if (sortSelect) sortSelect.value = 'default';
+                    
+                    const priceSlider = document.querySelector('.price-slider');
+                    if (priceSlider) {
+                        priceSlider.value = 5000;
+                        updatePriceDisplay(5000);
+                    }
+                    
+                    if (window.BuildCraft && window.BuildCraft.filterCatalogItems) {
+                        window.BuildCraft.filterCatalogItems('all');
+                    }
+                });
+            }
+            
+            // Обновление отображения цены
+            function updatePriceDisplay(value) {
+                const currentPriceDisplay = document.querySelector('.current-price-display');
+                if (currentPriceDisplay) {
+                    currentPriceDisplay.textContent = `До ${value.toLocaleString()} ₽`;
+                }
+            }
+            
+            // Инициализация слайдера цены
+            const priceSlider = document.querySelector('.price-slider');
+            if (priceSlider) {
+                priceSlider.addEventListener('input', function() {
+                    updatePriceDisplay(parseInt(this.value));
+                    
+                    // Фильтрация по цене
+                    if (window.BuildCraft && window.BuildCraft.filterCatalogItems) {
+                        const maxPrice = parseInt(this.value);
+                        const category = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+                        const searchTerm = searchInput?.value || '';
+                        window.BuildCraft.filterCatalogItems(filterMap[category] || 'all', searchTerm, maxPrice);
+                    }
+                });
+            }
+            
+            // Показ сообщения о пустом результате поиска
+            function showEmptyResultsMessage(container, show) {
+                const existingMessage = container.querySelector('.no-results-message');
+                if (existingMessage) existingMessage.remove();
+                
+                if (show) {
+                    const message = document.createElement('div');
+                    message.className = 'no-results-message';
+                    message.innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px; background: var(--gray-extra-light); border-radius: var(--radius-lg);">
+                            <i class="fas fa-search" style="font-size: 3rem; color: var(--accent-bright); margin-bottom: 20px;"></i>
+                            <h3>Напольные покрытия не найдены</h3>
+                            <p style="margin-bottom: 20px;">Попробуйте изменить параметры поиска или выбрать другую категорию</p>
+                            <button class="btn btn-outline" onclick="document.querySelector('.clear-filters').click()">
+                                <i class="fas fa-redo"></i> Сбросить фильтры
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(message);
+                }
+            }
+            
+            // Инициализация брендов
+            function initBrandFilters() {
+                const brandsContainer = document.querySelector('.brand-filters');
+                if (!brandsContainer || !window.ProductsDB) return;
+                
+                const brands = window.ProductsDB.getAllBrands();
+                if (brands.length === 0) {
+                    brandsContainer.style.display = 'none';
+                    return;
+                }
+                
+                let html = '<div class="brand-filter-section"><h4>Бренды</h4><div class="brand-checkboxes">';
+                
+                brands.forEach(brand => {
+                    html += `
+                        <label class="brand-checkbox">
+                            <input type="checkbox" value="${brand}" checked>
+                            <span>${brand}</span>
+                        </label>
+                    `;
+                });
+                
+                html += '</div></div>';
+                brandsContainer.innerHTML = html;
+                
+                // Обработка выбора брендов
+                brandsContainer.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const selectedBrands = Array.from(
+                            document.querySelectorAll('.brand-checkbox input:checked')
+                        ).map(cb => cb.value);
+                        
+                        if (selectedBrands.length > 0) {
+                            // Фильтрация по брендам
+                            if (window.BuildCraft && window.BuildCraft.filterProducts) {
+                                const filtered = window.BuildCraft.filterProducts({ brands: selectedBrands });
+                                renderFilteredProducts(filtered);
+                            }
+                        } else {
+                            // Показать все товары
+                            if (window.BuildCraft && window.BuildCraft.filterCatalogItems) {
+                                window.BuildCraft.filterCatalogItems('all');
+                            }
+                        }
+                    });
+                });
+            }
+            
+            // Рендер отфильтрованных товаров
+            function renderFilteredProducts(products) {
+                const container = document.querySelector('.catalog-items');
+                if (!container) return;
+                
+                if (products.length === 0) {
+                    showEmptyResultsMessage(container, true);
+                    document.getElementById('productCount').textContent = '0';
+                    return;
+                }
+                
+                let html = '';
+                products.forEach(product => {
+                    const isFavorite = localStorage.getItem(`favorite_${product.id}`) === 'true';
+                    if (window.ProductsDB && window.ProductsDB.generateProductCardHTML) {
+                        html += window.ProductsDB.generateProductCardHTML(product, isFavorite);
+                    }
+                });
+                
+                container.innerHTML = html;
+                document.getElementById('productCount').textContent = products.length;
+            }
+            
+            // Инициализация после загрузки ProductsDB
+            setTimeout(() => {
+                if (window.ProductsDB) {
+                    initBrandFilters();
+                    
+                    // Показ всех товаров при загрузке
+                    const products = window.ProductsDB.getAllProducts();
+                    renderFilteredProducts(products);
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html>
