@@ -1,37 +1,38 @@
-// products.js - База данных товаров BuildCraft (Только напольные покрытия)
+// products.js - База данных товаров BuildCraft (Напольные покрытия)
 class ProductsDatabase {
     constructor() {
         this.products = [];
-        this.categories = {};
         this.init();
     }
 
     init() {
         this.products = [
-            // НАПОЛЬНЫЕ ПОКРЫТИЯ
             {
                 id: "floor_001",
                 name: "Ламинат Egger Classic Дуб светлый",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
+                type: "laminate",
                 price: 1850,
                 oldPrice: 2100,
                 unit: "упаковка 2м²",
-                brand: "Egger",
                 rating: 4.6,
                 reviews: 74,
                 inStock: true,
                 stockCount: 280,
-                description: "Влагостойкий ламинат 33 класса для жилых и коммерческих помещений с замковым соединением Click.",
-                features: ["Класс износостойкости: 33", "Толщина: 12 мм", "Влагостойкость", "Замок Click"],
+                description: "Влагостойкий ламинат 33 класса для жилых и коммерческих помещений с замковым соединением Click. Идеально подходит для гостиных, спален и офисных помещений. Обладает повышенной износостойкостью и устойчивостью к влаге.",
+                features: ["Класс износостойкости: 33", "Толщина: 12 мм", "Влагостойкость", "Замок Click", "Гарантия: 15 лет", "Размер доски: 1292x193 мм"],
                 specifications: {
                     "Размер доски": "1292x193 мм",
                     "Толщина": "12 мм",
                     "В упаковке": "8 шт (1.996 м²)",
                     "Класс": "33 AC5",
-                    "Гарантия": "15 лет в жилых помещениях"
+                    "Гарантия": "15 лет в жилых помещениях",
+                    "Соединение": "Click",
+                    "Влагостойкость": "H2O-Resist",
+                    "Фаска": "4 стороны"
                 },
-                image: "🪵",
+                image: "img/catalog/laminate_oak_light.jpg",
                 tags: ["ламинат", "пол", "отделка", "дуб", "спецпредложение"],
                 delivery: {
                     available: true,
@@ -42,56 +43,62 @@ class ProductsDatabase {
             },
             {
                 id: "floor_002",
-                name: "Паркетная доска Barlinek Дуб натуральный",
+                name: "Ламинат Kronospan Premium Дуб темный",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
-                price: 4250,
-                unit: "м²",
-                brand: "Barlinek",
-                rating: 4.8,
-                reviews: 89,
+                type: "laminate",
+                price: 2450,
+                unit: "упаковка 2.4м²",
+                rating: 4.7,
+                reviews: 92,
                 inStock: true,
-                stockCount: 120,
-                description: "Трехслойная паркетная доска из натурального дуба с покрытием из матового лака.",
-                features: ["Толщина: 14 мм", "Дуб натуральный", "Покрытие: матовый лак", "Замковое соединение"],
+                stockCount: 150,
+                description: "Премиальный ламинат 34 класса с тисненой поверхностью под натуральную древесину. Подходит для помещений с высокой проходимостью, выдерживает большие нагрузки. Поверхность с антистатическим покрытием.",
+                features: ["Класс износостойкости: 34", "Толщина: 12 мм", "Тисненая поверхность", "Замок 5G", "Гарантия: 20 лет", "Размер доски: 1380x193 мм"],
                 specifications: {
-                    "Размер доски": "2400x200 мм",
-                    "Толщина": "14 мм",
-                    "Покрытие": "7 слоев матового лака",
-                    "Срок службы": "25+ лет"
+                    "Размер доски": "1380x193 мм",
+                    "Толщина": "12 мм",
+                    "В упаковке": "9 шт (2.397 м²)",
+                    "Класс": "34 AC6",
+                    "Гарантия": "20 лет",
+                    "Соединение": "5G Click",
+                    "Поверхность": "Тиснение под дерево",
+                    "Фаска": "4 стороны V-образная"
                 },
-                image: "🪚",
-                tags: ["паркет", "доска", "дуб", "натуральное", "премиум"],
+                image: "img/catalog/laminate_oak_dark.jpg",
+                tags: ["ламинат", "премиум", "дуб", "тиснение"],
                 delivery: {
                     available: true,
                     minDays: 3,
                     maxDays: 7,
-                    cost: 1000
+                    cost: 800
                 }
             },
             {
                 id: "floor_003",
-                name: "Плитка ПВХ Quick-Step Impressive Ultra",
+                name: "Кварц-винил Art Vinyl Дуб натуральный",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
-                price: 2850,
-                oldPrice: 3200,
+                type: "quartz-vinyl",
+                price: 3250,
                 unit: "м²",
-                brand: "Quick-Step",
-                rating: 4.7,
-                reviews: 56,
+                rating: 4.8,
+                reviews: 67,
                 inStock: true,
-                stockCount: 350,
-                description: "Водостойкий виниловый ламинат с высокой износостойкостью для любых помещений.",
-                features: ["100% водостойкость", "Толщина: 5 мм", "Класс износостойкости: 34", "Простая укладка"],
+                stockCount: 200,
+                description: "Водостойкий кварц-винил с высокой износостойкостью для любых помещений, включая ванные комнаты и кухни. Абсолютная влагостойкость и устойчивость к химическим воздействиям. Легкая укладка на клей или плавающим способом.",
+                features: ["100% водостойкость", "Толщина: 5.5 мм", "Класс износостойкости: 43", "Простая укладка", "Антибактериальное покрытие", "Устойчивость к бытовой химии"],
                 specifications: {
                     "Размер": "1200x180 мм",
-                    "Толщина": "5 мм",
-                    "Подложка": "Встроенная акустическая",
-                    "Укладка": "Клеевая"
+                    "Толщина": "5.5 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 T",
+                    "Укладка": "Клеевая или плавающая",
+                    "Влагостойкость": "100%",
+                    "Теплоизоляция": "Встроенная подложка"
                 },
-                image: "🧱",
-                tags: ["плитка пвх", "винил", "водостойкий", "кухня", "ванная"],
+                image: "img/catalog/quartz_vinyl_oak.jpg",
+                tags: ["кварц-винил", "водостойкий", "кухня", "ванная"],
                 delivery: {
                     available: true,
                     minDays: 2,
@@ -101,153 +108,102 @@ class ProductsDatabase {
             },
             {
                 id: "floor_004",
-                name: "Ковролин Tarkett Galaxy",
+                name: "Кварц-винил SPC Floor Дуб серый",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
-                price: 950,
+                type: "quartz-vinyl",
+                price: 2850,
                 unit: "м²",
-                brand: "Tarkett",
-                rating: 4.4,
-                reviews: 42,
+                rating: 4.5,
+                reviews: 45,
                 inStock: true,
                 stockCount: 180,
-                description: "Коммерческий ковролин с высокой износостойкостью для офисов и общественных помещений.",
-                features: ["Класс: 33", "Материал: полиамид", "Высота ворса: 4 мм", "Огнестойкость"],
+                description: "Кварц-виниловая плитка с SPC основой для повышенной стабильности и долговечности. Идеально подходит для систем теплый пол, не деформируется при перепадах температур. Прочное каменно-полимерное ядро обеспечивает стабильность геометрии.",
+                features: ["SPC основа", "Толщина: 6 мм", "Замковое соединение", "Теплоизоляция", "Для теплого пола", "Ударопрочность"],
                 specifications: {
-                    "Ширина рулона": "4 м",
-                    "Вес": "2100 г/м²",
-                    "Цветовая гамма": "12 цветов",
-                    "Уход": "Влажная уборка"
+                    "Размер": "1220x180 мм",
+                    "Толщина": "6 мм",
+                    "Основа": "SPC каменная",
+                    "Укладка": "Плавающая",
+                    "Класс": "43 T",
+                    "Теплый пол": "Да, водяной и электрический",
+                    "Гарантия": "25 лет"
                 },
-                image: "🧶",
-                tags: ["ковролин", "офис", "коммерческий", "мягкое покрытие"],
+                image: "img/catalog/quartz_vinyl_gray_oak.jpg",
+                tags: ["кварц-винил", "spc", "стабильный", "теплый пол"],
                 delivery: {
                     available: true,
                     minDays: 3,
                     maxDays: 6,
-                    cost: 500
+                    cost: 550
                 }
             },
             {
                 id: "floor_005",
-                name: "Пробковое покрытие Wicanders 3D",
+                name: "SPC-ламинат StoneFloor Дуб беленый",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
-                price: 3650,
+                type: "spc-laminate",
+                price: 3850,
                 unit: "м²",
-                brand: "Wicanders",
-                rating: 4.5,
-                reviews: 31,
+                rating: 4.9,
+                reviews: 78,
                 inStock: true,
-                stockCount: 75,
-                description: "Натуральное пробковое покрытие с 3D эффектом для создания теплого и экологичного пола.",
-                features: ["Натуральная пробка", "3D текстура", "Теплоизоляция", "Антистатичность"],
+                stockCount: 95,
+                description: "SPC-ламинат для систем теплый пол с максимальной стабильностью геометрии и влагостойкостью. Премиум-класс с улучшенными звукоизоляционными свойствами. Идеально подходит для коммерческих помещений с высокой проходимостью.",
+                features: ["Для теплого пола", "Толщина: 8 мм", "100% водостойкий", "Прочный SPC сердечник", "Усиленная звукоизоляция", "Класс износостойкости: 43"],
                 specifications: {
-                    "Толщина": "10 мм",
-                    "Покрытие": "УФ-лак",
-                    "Экологичность": "E1 класс",
-                    "Срок службы": "20+ лет"
+                    "Размер": "1800x180 мм",
+                    "Толщина": "8 мм",
+                    "Сердечник": "SPC каменный",
+                    "Гарантия": "25 лет",
+                    "Класс": "43 AC6",
+                    "Теплый пол": "Да, все типы",
+                    "Звукоизоляция": "Дополнительный слой 2 мм"
                 },
-                image: "🪹",
-                tags: ["пробка", "натуральное", "теплый пол", "экология"],
+                image: "img/catalog/spc_laminate_bleached_oak.jpg",
+                tags: ["spc-ламинат", "теплый пол", "водостойкий", "элитное"],
                 delivery: {
                     available: true,
                     minDays: 4,
-                    maxDays: 10,
-                    cost: 800
+                    maxDays: 8,
+                    cost: 900
                 }
             },
             {
                 id: "floor_006",
-                name: "Инженерная доска Coswick Дуб беленый",
+                name: "SPC-ламинат AquaFloor Орех",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
-                price: 5850,
+                type: "spc-laminate",
+                price: 4250,
                 unit: "м²",
-                brand: "Coswick",
-                rating: 4.9,
-                reviews: 67,
+                rating: 4.7,
+                reviews: 52,
                 inStock: true,
-                stockCount: 45,
-                description: "Многослойная инженерная доска для систем теплый пол стабильность геометрии.",
-                features: ["Для теплого пола", "Толщина: 16 мм", "Слой дуба: 4 мм", "Масляное покрытие"],
+                stockCount: 65,
+                description: "Водостойкий SPC-ламинат с повышенной прочностью для коммерческих помещений с высокой нагрузкой. Специальное защитное покрытие от царапин и истирания. Антистатическая поверхность, легкий уход и обслуживание.",
+                features: ["Класс: 43 T", "Толщина: 10 мм", "Ударопрочный", "Антистатичный", "Защита от царапин", "Для коммерческого использования"],
                 specifications: {
-                    "Размер": "1800x180 мм",
-                    "Толщина": "16 мм",
-                    "Укладка": "Плавающая или клеевая",
-                    "Гарантия": "20 лет"
+                    "Размер": "1220x200 мм",
+                    "Толщина": "10 мм",
+                    "Защитный слой": "0.8 мм",
+                    "Применение": "Коммерческое",
+                    "Класс": "43 AC6",
+                    "Устойчивость к ударам": "IC4",
+                    "Гарантия": "30 лет"
                 },
-                image: "🪵",
-                tags: ["инженерная доска", "теплый пол", "дуб", "элитное"],
+                image: "img/catalog/spc_laminate_walnut.jpg",
+                tags: ["spc-ламинат", "коммерческий", "прочный", "водостойкий"],
                 delivery: {
                     available: true,
                     minDays: 5,
-                    maxDays: 14,
-                    cost: 1200
-                }
-            },
-            {
-                id: "floor_007",
-                name: "Линолеум Tarkett Acczent Mineral",
-                category: "finishing",
-                subcategory: "Напольные покрытия",
-                price: 1250,
-                oldPrice: 1450,
-                unit: "м²",
-                brand: "Tarkett",
-                rating: 4.3,
-                reviews: 95,
-                inStock: true,
-                stockCount: 420,
-                description: "Гомогенный коммерческий линолеum с мраморной крошкой для помещений с высокой нагрузкой.",
-                features: ["Гомогенный", "Толщина: 2.5 мм", "Класс: 34", "Антибактериальное"],
-                specifications: {
-                    "Ширина рулона": "2 м",
-                    "Толщина": "2.5 мм",
-                    "Основа": "Вспененный ПВХ",
-                    "Уход": "Моющее средство"
-                },
-                image: "📜",
-                tags: ["линолеум", "коммерческий", "износостойкий", "кухня"],
-                delivery: {
-                    available: true,
-                    minDays: 2,
-                    maxDays: 4,
-                    cost: 400
-                }
-            },
-            {
-                id: "floor_008",
-                name: "Массивная доска Kahrs Орех американский",
-                category: "finishing",
-                subcategory: "Напольные покрытия",
-                price: 7250,
-                unit: "м²",
-                brand: "Kahrs",
-                rating: 4.8,
-                reviews: 38,
-                inStock: true,
-                stockCount: 28,
-                description: "Массивная деревянная доска из американского ореха с обработкой натуральным маслом.",
-                features: ["Массив дерева", "Толщина: 20 мм", "Покрытие: натуральное масло", "Ручная брашировка"],
-                specifications: {
-                    "Размер": "2400x180 мм",
-                    "Толщина": "20 мм",
-                    "Порода": "Американский орех",
-                    "Укладка": "Шпунтованная"
-                },
-                image: "🌰",
-                tags: ["массив", "орех", "элитное", "натуральное", "брашировка"],
-                delivery: {
-                    available: true,
-                    minDays: 7,
-                    maxDays: 21,
-                    cost: 1500
+                    maxDays: 10,
+                    cost: 1000
                 }
             }
         ];
 
-        // Инициализация категорий (только отделочные материалы с напольными покрытиями)
         this.initCategories();
     }
 
@@ -255,62 +211,56 @@ class ProductsDatabase {
         this.categories = {
             "finishing": {
                 name: "Напольные покрытия",
-                subcategories: ["Ламинат", "Паркет", "Виниловые покрытия", "Ковролин", "Пробка", "Массив"]
+                subcategories: ["Ламинат", "Кварц-винил", "SPC-ламинат"]
             }
         };
     }
 
-    // ========== ОСНОВНЫЕ МЕТОДЫ ==========
-
-    // Получить все товары
+    // Основные методы
     getAllProducts() {
         return this.products;
     }
 
-    // Получить товар по ID
     getProductById(id) {
         return this.products.find(product => product.id === id);
     }
 
-    // Получить товары по категории
     getProductsByCategory(category) {
         if (category === 'all') return this.products;
         return this.products.filter(product => product.category === category);
     }
 
-    // Получить товары по подкатегории
-    getProductsBySubcategory(subcategory) {
-        return this.products.filter(product => product.subcategory === subcategory);
+    getProductsByType(type) {
+        if (type === 'all') return this.products;
+        return this.products.filter(product => product.type === type);
     }
 
-    // Поиск товаров
     searchProducts(query) {
+        if (!query || query.trim() === '') return this.products;
+        
         const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 0);
         
         return this.products.filter(product => {
             const searchableText = `
                 ${product.name.toLowerCase()}
                 ${product.description.toLowerCase()}
-                ${product.brand.toLowerCase()}
                 ${product.tags.join(' ').toLowerCase()}
                 ${product.category.toLowerCase()}
                 ${product.subcategory.toLowerCase()}
+                ${product.type ? product.type.toLowerCase() : ''}
             `;
             
             return searchTerms.every(term => searchableText.includes(term));
         });
     }
 
-    // Фильтрация товаров
     filterProducts(filters = {}) {
         let filteredProducts = [...this.products];
 
-        // Фильтр по категории
-        if (filters.category && filters.category !== 'all') {
-            filteredProducts = filteredProducts.filter(p => p.category === filters.category);
+        if (filters.type && filters.type !== 'all') {
+            filteredProducts = filteredProducts.filter(p => p.type === filters.type);
         }
 
-        // Фильтр по цене
         if (filters.minPrice !== undefined) {
             filteredProducts = filteredProducts.filter(p => p.price >= filters.minPrice);
         }
@@ -318,17 +268,10 @@ class ProductsDatabase {
             filteredProducts = filteredProducts.filter(p => p.price <= filters.maxPrice);
         }
 
-        // Фильтр по наличию
         if (filters.inStock !== undefined) {
             filteredProducts = filteredProducts.filter(p => p.inStock === filters.inStock);
         }
 
-        // Фильтр по бренду
-        if (filters.brands && filters.brands.length > 0) {
-            filteredProducts = filteredProducts.filter(p => filters.brands.includes(p.brand));
-        }
-
-        // Фильтр по рейтингу
         if (filters.minRating !== undefined) {
             filteredProducts = filteredProducts.filter(p => p.rating >= filters.minRating);
         }
@@ -336,7 +279,6 @@ class ProductsDatabase {
         return filteredProducts;
     }
 
-    // Сортировка товаров как в index.html (без сложной логики)
     sortProducts(products, sortType = 'default') {
         const sorted = [...products];
 
@@ -350,13 +292,10 @@ class ProductsDatabase {
             case 'popular':
                 return sorted.sort((a, b) => b.reviews - a.reviews);
             default:
-                // По умолчанию - как в index.html (популярные первыми)
                 return sorted.sort((a, b) => {
-                    // Сначала товары со скидкой
                     if (a.oldPrice && !b.oldPrice) return -1;
                     if (!a.oldPrice && b.oldPrice) return 1;
                     
-                    // Затем по рейтингу и отзывам
                     const scoreA = a.rating * 10 + (a.reviews / 100);
                     const scoreB = b.rating * 10 + (b.reviews / 100);
                     return scoreB - scoreA;
@@ -364,147 +303,59 @@ class ProductsDatabase {
         }
     }
 
-    // Получить все бренды
-    getAllBrands() {
-        const brands = new Set(this.products.map(product => product.brand));
-        return Array.from(brands);
+    getAllTypes() {
+        const types = new Set(this.products.map(product => product.type));
+        return Array.from(types);
     }
 
-    // Получить все подкатегории
-    getAllSubcategories() {
-        const subcategories = new Set(this.products.map(product => product.subcategory));
-        return Array.from(subcategories);
-    }
-
-    // Получить статистику по товарам
-    getProductsStats() {
-        const stats = {
-            totalProducts: this.products.length,
-            inStock: this.products.filter(p => p.inStock).length,
-            outOfStock: this.products.filter(p => !p.inStock).length,
-            categories: {},
-            priceRange: {
-                min: Math.min(...this.products.map(p => p.price)),
-                max: Math.max(...this.products.map(p => p.price)),
-                avg: Math.round(this.products.reduce((sum, p) => sum + p.price, 0) / this.products.length)
-            }
-        };
-
-        // Статистика по категориям
-        Object.keys(this.categories).forEach(category => {
-            const categoryProducts = this.getProductsByCategory(category);
-            stats.categories[category] = {
-                name: this.categories[category].name,
-                count: categoryProducts.length,
-                avgPrice: Math.round(categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length)
-            };
-        });
-
-        return stats;
-    }
-
-    // Получить похожие товары
     getSimilarProducts(productId, limit = 4) {
         const product = this.getProductById(productId);
         if (!product) return [];
 
         return this.products
-            .filter(p => p.id !== productId && p.category === product.category)
+            .filter(p => p.id !== productId && p.type === product.type)
             .sort((a, b) => {
-                // Сначала по рейтингу, потом по цене
                 if (b.rating !== a.rating) return b.rating - a.rating;
                 return a.price - b.price;
             })
             .slice(0, limit);
     }
 
-    // Получить товары со скидкой
-    getDiscountedProducts() {
-        return this.products.filter(product => product.oldPrice && product.oldPrice > product.price);
-    }
-
-    // Получить новинки (последние добавленные товары)
-    getNewProducts(limit = 6) {
-        // В реальном приложении здесь была бы сортировка по дате добавления
-        return this.products.slice(0, limit);
-    }
-
-    // Получить популярные товары (по рейтингу и отзывам)
-    getPopularProducts(limit = 6) {
-        return this.products
-            .filter(p => p.rating >= 4.0)
-            .sort((a, b) => {
-                const scoreA = a.rating * 10 + (a.reviews / 100);
-                const scoreB = b.rating * 10 + (b.reviews / 100);
-                return scoreB - scoreA;
-            })
-            .slice(0, limit);
-    }
-
-    // Обновить количество товара на складе
-    updateStock(productId, quantity) {
-        const product = this.getProductById(productId);
-        if (product && product.inStock) {
-            product.stockCount -= quantity;
-            if (product.stockCount <= 0) {
-                product.stockCount = 0;
-                product.inStock = false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    // Проверить наличие товара
-    checkAvailability(productId, quantity = 1) {
-        const product = this.getProductById(productId);
-        if (!product) return { available: false, reason: 'Товар не найден' };
-        if (!product.inStock) return { available: false, reason: 'Нет в наличии' };
-        if (product.stockCount < quantity) return { 
-            available: false, 
-            reason: `Доступно только ${product.stockCount} шт.` 
+    getTypeName(type) {
+        const typeNames = {
+            'laminate': 'Ламинат',
+            'quartz-vinyl': 'Кварц-винил',
+            'spc-laminate': 'SPC-ламинат'
         };
-        return { available: true };
+        return typeNames[type] || type;
     }
 
-    // Получить информацию о доставке товара
-    getDeliveryInfo(productId) {
-        const product = this.getProductById(productId);
-        if (!product || !product.delivery) {
-            return {
-                available: false,
-                message: 'Доставка не доступна для данного товара'
-            };
-        }
-
-        return product.delivery;
-    }
-
-    // Генерация HTML для карточки товара (ОБНОВЛЕНА)
     generateProductCardHTML(product, isFavorite = false) {
         const discountPercent = product.oldPrice ? 
             Math.round((1 - product.price / product.oldPrice) * 100) : 0;
         
-        // Для напольных покрытий определим метки по типу
-        const isWood = product.name.includes('доска') || product.name.includes('паркет') || product.name.includes('массив');
-        const isVinyl = product.name.includes('ПВХ') || product.name.includes('винил');
-        const isCarpet = product.name.includes('ковролин');
-        const isPremium = product.price > 5000;
+        const isLaminate = product.type === 'laminate';
+        const isQuartzVinyl = product.type === 'quartz-vinyl';
+        const isSpcLaminate = product.type === 'spc-laminate';
+        const isPremium = product.price > 3000;
         
         return `
-            <div class="catalog-item" data-id="${product.id}" data-category="${product.category}" data-price="${product.price}">
+            <div class="catalog-item" data-id="${product.id}" data-category="${product.category}" data-type="${product.type}" data-price="${product.price}">
                 <div class="product-card">
                     <div class="product-badges">
                         ${discountPercent > 0 ? `<span class="product-badge discount">-${discountPercent}%</span>` : ''}
-                        ${isWood ? '<span class="product-badge new">Натуральное</span>' : ''}
-                        ${isVinyl ? '<span class="product-badge new">Водостойкий</span>' : ''}
-                        ${isCarpet ? '<span class="product-badge popular">Мягкий</span>' : ''}
+                        ${isLaminate ? '<span class="product-badge new">Ламинат</span>' : ''}
+                        ${isQuartzVinyl ? '<span class="product-badge popular">Кварц-винил</span>' : ''}
+                        ${isSpcLaminate ? '<span class="product-badge premium">SPC</span>' : ''}
                         ${isPremium ? '<span class="product-badge premium">Премиум</span>' : ''}
                         ${!product.inStock ? '<span class="product-badge out-of-stock">Нет в наличии</span>' : ''}
                     </div>
                     
                     <div class="product-image">
-                        <div class="product-emoji">${product.image}</div>
+                        <div class="image-container">
+                            <img src="${product.image}" alt="${product.name}" class="product-img" 
+                                 onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
+                        </div>
                         ${product.rating ? `
                             <div class="product-rating">
                                 <i class="fas fa-star"></i>
@@ -515,7 +366,7 @@ class ProductsDatabase {
                     </div>
                     
                     <div class="product-info">
-                        <div class="product-brand">${product.brand || 'BuildCraft'}</div>
+                        <div class="product-type">${this.getTypeName(product.type)}</div>
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-description">${product.description.substring(0, 80)}${product.description.length > 80 ? '...' : ''}</p>
                         
@@ -551,10 +402,12 @@ class ProductsDatabase {
                                 <span>${!product.inStock ? 'Нет в наличии' : 'В корзину'}</span>
                             </button>
                             <button class="btn btn-outline product-wishlist ${isFavorite ? 'active' : ''}" 
-                                data-id="${product.id}" 
-                                aria-label="${isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}">
+                                data-id="${product.id}">
                                 <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                             </button>
+                            <button class="btn btn-outline view-details" data-id="${product.id}">
+                                <i class="fas fa-eye"></i> Подробнее
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -562,151 +415,196 @@ class ProductsDatabase {
         `;
     }
 
-    // Генерация HTML для детальной страницы товара (ОБНОВЛЕНА)
-    generateProductDetailHTML(product, isFavorite = false) {
+    generateProductModalHTML(product, isFavorite = false) {
         const discountPercent = product.oldPrice ? 
             Math.round((1 - product.price / product.oldPrice) * 100) : 0;
-            
-        return `
-            <div class="product-detail">
-                <div class="product-detail-header">
-                    <div class="product-detail-image">
-                        <div class="product-detail-emoji">${product.image}</div>
-                        ${discountPercent > 0 ? `<div class="detail-badge">-${discountPercent}%</div>` : ''}
-                    </div>
-                    <div class="product-detail-info">
-                        <h1>${product.name}</h1>
-                        <div class="product-detail-meta">
-                            <span class="product-brand">${product.brand}</span>
-                            <span class="product-rating">
-                                <i class="fas fa-star"></i> ${product.rating} (${product.reviews} отзывов)
-                            </span>
-                            <span class="product-category">Напольное покрытие</span>
-                        </div>
-                        <div class="product-detail-pricing">
-                            ${product.oldPrice ? `
-                                <div class="old-price">${product.oldPrice} ₽</div>
-                                <div class="current-price">${product.price} ₽</div>
-                                <div class="discount">Скидка ${discountPercent}%</div>
-                            ` : `
-                                <div class="current-price">${product.price} ₽</div>
-                            `}
-                            <div class="price-unit">/${product.unit}</div>
-                        </div>
-                        <div class="product-detail-actions">
-                            <button class="btn btn-primary btn-lg add-to-cart" data-id="${product.id}" 
-                                ${!product.inStock ? 'disabled' : ''}>
-                                <i class="fas fa-cart-plus"></i>
-                                ${!product.inStock ? 'Нет в наличии' : 'Добавить в корзину'}
-                            </button>
-                            <button class="btn btn-outline btn-lg product-wishlist ${isFavorite ? 'active' : ''}" 
-                                data-id="${product.id}" 
-                                data-product-id="${product.id}"
-                                aria-label="${isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}">
-                                <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i> В избранное
-                            </button>
-                        </div>
-                        <div class="product-detail-delivery">
-                            <h3><i class="fas fa-truck"></i> Доставка</h3>
-                            <p>${product.delivery ? 
-                                `Доставка за ${product.delivery.minDays}-${product.delivery.maxDays} дней, стоимость: ${product.delivery.cost} ₽` : 
-                                'Доставка не доступна'
-                            }</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-detail-content">
-                    <div class="product-tabs">
-                        <button class="tab-btn active" data-tab="description">Описание</button>
-                        <button class="tab-btn" data-tab="specifications">Характеристики</button>
-                        <button class="tab-btn" data-tab="features">Особенности</button>
-                        <button class="tab-btn" data-tab="reviews">Отзывы</button>
-                    </div>
-                    
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="description">
-                            <h3>Описание товара</h3>
-                            <p>${product.description}</p>
-                            <p>Идеально подходит для: ${product.tags.slice(1, 3).join(', ')}</p>
-                        </div>
-                        
-                        <div class="tab-pane" id="specifications">
-                            <h3>Технические характеристики</h3>
-                            <table class="specifications-table">
-                                ${Object.entries(product.specifications || {}).map(([key, value]) => `
-                                    <tr>
-                                        <th>${key}</th>
-                                        <td>${value}</td>
-                                    </tr>
-                                `).join('')}
-                            </table>
-                        </div>
-                        
-                        <div class="tab-pane" id="features">
-                            <h3>Особенности</h3>
-                            <ul class="features-list">
-                                ${product.features.map(feature => `<li>${feature}</li>`).join('')}
-                            </ul>
-                        </div>
-                        
-                        <div class="tab-pane" id="reviews">
-                            <h3>Отзывы покупателей</h3>
-                            <p>Рейтинг: ${product.rating}/5 на основе ${product.reviews} отзывов</p>
-                        </div>
-                    </div>
-                </div>
-                
-                ${this.generateSimilarProductsHTML(product.id)}
-            </div>
-        `;
-    }
-
-    // Генерация HTML для похожих товаров (ОБНОВЛЕНА)
-    generateSimilarProductsHTML(productId) {
-        const similarProducts = this.getSimilarProducts(productId, 4);
-        if (similarProducts.length === 0) return '';
-
-        return `
-            <div class="similar-products">
-                <h3>Похожие напольные покрытия</h3>
+        
+        const featuresHTML = product.features.map(feature => `
+            <li>
+                <i class="fas fa-check" style="color: #4CAF50;"></i>
+                ${feature}
+            </li>
+        `).join('');
+        
+        const specificationsHTML = Object.entries(product.specifications || {}).map(([key, value]) => `
+            <tr>
+                <td><strong>${key}</strong></td>
+                <td>${value}</td>
+            </tr>
+        `).join('');
+        
+        const tagsHTML = product.tags.map(tag => `
+            <span class="product-tag">${tag}</span>
+        `).join('');
+        
+        const similarProducts = this.getSimilarProducts(product.id, 4);
+        const similarProductsHTML = similarProducts.length > 0 ? `
+            <div class="similar-products-section">
+                <h3>Похожие товары</h3>
                 <div class="similar-products-grid">
-                    ${similarProducts.map(product => {
-                        const isFavorite = localStorage.getItem(`favorite_${product.id}`) === 'true';
-                        const discountPercent = product.oldPrice ? 
-                            Math.round((1 - product.price / product.oldPrice) * 100) : 0;
-                            
+                    ${similarProducts.map(similar => {
+                        const similarDiscountPercent = similar.oldPrice ? 
+                            Math.round((1 - similar.price / similar.oldPrice) * 100) : 0;
                         return `
-                        <div class="similar-product" data-id="${product.id}">
-                            ${discountPercent > 0 ? `<div class="similar-badge">-${discountPercent}%</div>` : ''}
-                            <div class="similar-product-image">${product.image}</div>
-                            <h4>${product.name}</h4>
+                        <div class="similar-product" data-id="${similar.id}">
+                            ${similarDiscountPercent > 0 ? `<div class="similar-badge">-${similarDiscountPercent}%</div>` : ''}
+                            <div class="similar-product-image">
+                                <img src="${similar.image}" alt="${similar.name}" 
+                                     onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
+                            </div>
+                            <h4>${similar.name}</h4>
                             <div class="similar-product-price">
-                                ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ₽</span>` : ''}
-                                <span class="current-price">${product.price} ₽</span>
+                                ${similar.oldPrice ? `<span class="old-price">${similar.oldPrice} ₽</span>` : ''}
+                                <span class="current-price">${similar.price} ₽</span>
                             </div>
                             <div class="similar-product-actions">
-                                <button class="btn btn-sm btn-outline add-to-cart" data-id="${product.id}">
+                                <button class="btn btn-sm btn-outline add-to-cart" data-id="${similar.id}">
                                     <i class="fas fa-cart-plus"></i> В корзину
                                 </button>
-                                <button class="btn btn-sm btn-outline product-wishlist ${isFavorite ? 'active' : ''}" 
-                                    data-id="${product.id}" 
-                                    data-product-id="${product.id}">
-                                    <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
+                                <button class="btn btn-sm btn-outline view-details" data-id="${similar.id}">
+                                    <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
                     `}).join('')}
                 </div>
             </div>
+        ` : '';
+        
+        return `
+            <div class="product-modal-content">
+                <div class="product-modal-header">
+                    <h2>${product.name}</h2>
+                    <div class="product-modal-meta">
+                        <span><i class="fas fa-tag"></i> ${this.getTypeName(product.type)}</span>
+                        <span><i class="fas fa-star"></i> ${product.rating} (${product.reviews} отзывов)</span>
+                        <span><i class="fas fa-warehouse"></i> ${product.inStock ? 'В наличии' : 'Нет в наличии'}</span>
+                    </div>
+                </div>
+                
+                <div class="product-modal-body">
+                    <div class="product-modal-main">
+                        <div class="product-modal-image">
+                            <img src="${product.image}" alt="${product.name}" 
+                                 onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
+                            ${discountPercent > 0 ? `<div class="product-discount-badge">-${discountPercent}%</div>` : ''}
+                        </div>
+                        
+                        <div class="product-modal-info">
+                            <div class="product-modal-price">
+                                ${product.oldPrice ? `
+                                    <div class="old-price">${product.oldPrice} ₽</div>
+                                    <div class="current-price">${product.price} ₽</div>
+                                    <div class="discount-text">Скидка ${discountPercent}%</div>
+                                ` : `
+                                    <div class="current-price">${product.price} ₽</div>
+                                `}
+                                <div class="price-unit">/${product.unit}</div>
+                            </div>
+                            
+                            <div class="product-modal-availability">
+                                <i class="fas ${product.inStock ? 'fa-check-circle' : 'fa-times-circle'}" 
+                                   style="color: ${product.inStock ? '#4CAF50' : '#f44336'}"></i>
+                                ${product.inStock ? 
+                                    `<strong>В наличии:</strong> ${product.stockCount} ${product.unit}` : 
+                                    '<strong>Нет в наличии</strong>'
+                                }
+                            </div>
+                            
+                            <div class="product-modal-actions">
+                                <button class="btn btn-primary btn-lg add-to-cart-modal" data-id="${product.id}" 
+                                    ${!product.inStock ? 'disabled' : ''}>
+                                    <i class="fas fa-cart-plus"></i>
+                                    ${!product.inStock ? 'Нет в наличии' : 'Добавить в корзину'}
+                                </button>
+                                <button class="btn btn-outline btn-lg product-wishlist-modal ${isFavorite ? 'active' : ''}" 
+                                    data-id="${product.id}">
+                                    <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i> 
+                                    ${isFavorite ? 'В избранном' : 'В избранное'}
+                                </button>
+                            </div>
+                            
+                            <div class="product-modal-delivery">
+                                <h4><i class="fas fa-truck"></i> Доставка</h4>
+                                <p>${product.delivery ? 
+                                    `Доставка за ${product.delivery.minDays}-${product.delivery.maxDays} дней, стоимость: ${product.delivery.cost} ₽` : 
+                                    'Доставка не доступна'
+                                }</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-modal-tabs">
+                        <div class="product-tabs">
+                            <button class="tab-btn active" data-tab="description">Описание</button>
+                            <button class="tab-btn" data-tab="features">Характеристики</button>
+                            <button class="tab-btn" data-tab="specifications">Технические данные</button>
+                            <button class="tab-btn" data-tab="delivery">Доставка и оплата</button>
+                        </div>
+                        
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="description">
+                                <h4>Описание товара</h4>
+                                <p>${product.description}</p>
+                                <div class="product-tags">
+                                    ${tagsHTML}
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane" id="features">
+                                <h4>Основные характеристики</h4>
+                                <ul class="product-features-list">
+                                    ${featuresHTML}
+                                </ul>
+                            </div>
+                            
+                            <div class="tab-pane" id="specifications">
+                                <h4>Технические характеристики</h4>
+                                <table class="product-specifications">
+                                    ${specificationsHTML}
+                                </table>
+                            </div>
+                            
+                            <div class="tab-pane" id="delivery">
+                                <h4>Доставка и оплата</h4>
+                                <div class="delivery-info">
+                                    ${product.delivery ? `
+                                        <div class="delivery-item">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <div>
+                                                <h5>Сроки доставки</h5>
+                                                <p>${product.delivery.minDays}-${product.delivery.maxDays} дней</p>
+                                            </div>
+                                        </div>
+                                        <div class="delivery-item">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                            <div>
+                                                <h5>Стоимость доставки</h5>
+                                                <p>${product.delivery.cost} ₽</p>
+                                            </div>
+                                        </div>
+                                        <div class="delivery-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <div>
+                                                <h5>Доступность</h5>
+                                                <p>${product.delivery.available ? 'Доступна' : 'Недоступна'}</p>
+                                            </div>
+                                        </div>
+                                    ` : '<p>Доставка не доступна для данного товара</p>'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${similarProductsHTML}
+                </div>
+            </div>
         `;
     }
 }
 
-// Создаем глобальный экземпляр базы данных товаров
 const ProductsDB = new ProductsDatabase();
 
-// Экспортируем для использования в других файлах
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ProductsDB;
 } else {
