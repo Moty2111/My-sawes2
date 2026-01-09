@@ -1433,25 +1433,6 @@
             font-size: 14px;
             color: #666;
         }
-        
-        /* Стили для списка чертежей */
-        .drawings-list {
-            columns: 2;
-            column-gap: 30px;
-            margin: 20px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .drawings-list {
-                columns: 1;
-            }
-        }
-        
-        .drawings-list li {
-            padding: 8px 0;
-            border-bottom: 1px dashed #e0e0e0;
-            break-inside: avoid;
-        }
     </style>
 </head>
 <body>
@@ -1531,7 +1512,7 @@
                         <div class="project-meta">
                             <span><i class="fas fa-map-marker-alt"></i> Челябинск</span>
                             <span><i class="fas fa-calendar-alt"></i> 2025</span>
-                            <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
+                            <span><i class="fas fa-home"></i> 142,85 м²</span>
                         </div>
                         <p class="project-description">Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект включает 6 подробных чертежей и схем.</p>
                         <div class="project-features">
@@ -1658,8 +1639,8 @@
             <div class="modal-header">
                 <h2>Индивидуальный жилой дом</h2>
                 <div class="project-meta">
-                    <span><i class="fas fa-map-marker-alt"></i> Московская область</span>
-                    <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Челябинская область</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2025</span>
                     <span><i class="fas fa-ruler-combined"></i> 142,85 м²</span>
                     <span><i class="fas fa-images"></i> 6 изображений проекта</span>
                 </div>
@@ -1716,7 +1697,7 @@
                 </div>
                 
                 <div class="tech-specs">
-                    <h3><i class="fas fa-file-pdf"></i> Технические характеристики проекта из PDF</h3>
+                    <h3><i class="fas fa-home"></i> Характеристики проекта</h3>
                     <div class="specs-grid">
                         <div class="spec-item">
                             <div class="spec-value">142,85 м²</div>
@@ -1730,11 +1711,17 @@
                             <div class="spec-value">228,83 м²</div>
                             <div class="spec-label">Площадь кровли</div>
                         </div>
+                        <div class="spec-item">
+                            <div class="spec-value">6,4 м</div>
+                            <div class="spec-label">Высота в коньке</div>
+                        </div>
                     </div>
                 </div>
                 
                 <h3>Описание проекта</h3>
-                <p>Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект разработан с учетом всех современных строительных норм и требований к комфортному проживанию. Включает 6 изображений проекта: обложку и 5 подробных чертежей и схем.</p>
+                <p>Полный цикл строительства одноэтажного дома с мансардой по индивидуальному архитектурно-строительному проекту. Проект содержит все необходимое для качественного и экономного строительства дома, для уведомления Администрации о начале строительства, для составления технического плана, для разработки проекта на подвод газа.</p>
+                
+                <p>Проект предоставляется в виде полного комплекта архитектурно-строительных чертежей (АР+КР), разработанных в соответствии с СНиП, ГОСТ. Проект дома для средней полосы России, возможна адаптация под другой регион. Все чертежи легко читаемы даже для людей не имеющих строительного образования.</p>
                 
                 <div class="project-details-grid">
                     <div class="detail-section">
@@ -1745,30 +1732,87 @@
                             <li>Перегородки: ГСБ толщиной 150 и 200 мм</li>
                             <li>Вентиляционные шахты: кирпич керамический</li>
                             <li>Проект разработан для производства работ в летнее время</li>
+                            <li>Высота потолков в чистоте: 1 эт – 2,83 м</li>
+                            <li>Отделка наружная: декоративная штукатурка</li>
                         </ul>
                     </div>
                     
                     <div class="detail-section">
                         <h4><i class="fas fa-cube"></i> Конструктивные решения</h4>
                         <ul>
-                            <li>Крыша: вальцовая холодная, покрытие - металлочерепица</li>
                             <li>Фундамент: монолитная ж/б плита с ребрами вверх</li>
-                            <li>Цоколь: с утеплением</li>
+                            <li>Стены: газосиликатный блок 375 мм</li>
+                            <li>Крыша: вальцовая холодная, покрытие - металлочерепица</li>
+                            <li>Цоколь: с утеплением ЭППС 50 мм</li>
                             <li>Междуэтажные перекрытия: деревянные</li>
                             <li>Монолитный ж/б пояс на отметке +2830</li>
+                            <li>Обработка деревянных элементов огнебиозащитой</li>
                         </ul>
                     </div>
                     
                     <div class="detail-section">
-                        <h4><i class="fas fa-tools"></i> Инженерные системы</h4>
+                        <h4><i class="fas fa-check-circle"></i> Преимущества проекта</h4>
                         <ul>
-                            <li>Холодное водоснабжение: от центрального водопровода</li>
-                            <li>Горячее водоснабжение: от внутреннего газового котла</li>
-                            <li>Отопление: водяное от внутреннего газового котла</li>
-                            <li>Водоотведение: в герметичный выгреб</li>
-                            <li>Электроснабжение: от городских электросетей</li>
-                            <li>Газоснабжение: от центральных сетей газоснабжения</li>
+                            <li>Полный комплект для строительства</li>
+                            <li>Соответствие всем СНиП и ГОСТ</li>
+                            <li>Подробные чертежи и узлы</li>
+                            <li>Информация о количестве материалов</li>
+                            <li>Адаптация под любой регион России</li>
+                            <li>Легко читаемые чертежи</li>
+                            <li>Доступные материалы в любом регионе</li>
                         </ul>
+                    </div>
+                </div>
+                
+                <h3>План помещений</h3>
+                <div class="rooms-grid">
+                    <div class="room-item">
+                        <div class="room-name">Тамбур</div>
+                        <div class="room-area">5,2 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Холл</div>
+                        <div class="room-area">12,8 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Гостиная</div>
+                        <div class="room-area">24,6 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Кухня-столовая</div>
+                        <div class="room-area">18,4 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 1</div>
+                        <div class="room-area">16,5 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 2</div>
+                        <div class="room-area">14,2 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Кабинет (мансарда)</div>
+                        <div class="room-area">12,8 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 3 (мансарда)</div>
+                        <div class="room-area">15,6 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Санузел 1</div>
+                        <div class="room-area">6,4 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Санузел 2 (мансарда)</div>
+                        <div class="room-area">4,8 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Котельная</div>
+                        <div class="room-area">7,2 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Гардеробная</div>
+                        <div class="room-area">4,5 м²</div>
                     </div>
                 </div>
                 
@@ -1804,6 +1848,12 @@
                         <tr>
                             <td>Утеплитель ЭППС</td>
                         </tr>
+                        <tr>
+                            <td>Гидроизоляция фундамента</td>
+                        </tr>
+                        <tr>
+                            <td>Штукатурка декоративная</td>
+                        </tr>
                     </tbody>
                 </table>
                 
@@ -1814,6 +1864,17 @@
                     <span class="project-feature"><i class="fas fa-star"></i> Вентиляционные шахты из керамического кирпича</span>
                     <span class="project-feature"><i class="fas fa-star"></i> Обработка деревянных элементов огнебиозащитой</span>
                     <span class="project-feature"><i class="fas fa-star"></i> Стропильная система из древесины хвойных пород</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Двухконтурная система отопления</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Принудительная вентиляция санузлов</span>
+                </div>
+                
+                <h3>Дополнительные услуги</h3>
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-edit"></i> Доработка проекта и внесение необходимых изменений</span>
+                    <span class="project-feature"><i class="fas fa-exchange-alt"></i> Разработка зеркального варианта проекта</span>
+                    <span class="project-feature"><i class="fas fa-ruler-combined"></i> Разработка индивидуального проекта дома по Вашим размерам</span>
+                    <span class="project-feature"><i class="fas fa-calculator"></i> Смета для ипотеки и на строительство дома</span>
+                    <span class="project-feature"><i class="fas fa-file-pdf"></i> Электронная версия проекта в формате PDF</span>
                 </div>
                 
                 <div class="modal-actions">
@@ -1907,11 +1968,11 @@
                             <div class="spec-label">Площадь без крыльца</div>
                         </div>
                         <div class="spec-item">
-                            <div class="spec-value">77 м²</div>
+                            <div class="spec-value">176,11 м²</div>
                             <div class="spec-label">Площадь застройки</div>
                         </div>
                         <div class="spec-item">
-                            <div class="spec-value">6,36 м</div>
+                            <div class="spec-value">6,4 м</div>
                             <div class="spec-label">Высота в коньке</div>
                         </div>
                     </div>
@@ -1926,66 +1987,29 @@
                 
                 <div class="project-details-grid">
                     <div class="detail-section">
-                        <h4><i class="fas fa-cube"></i> Конструктивные решения</h4>
+                        <h4><i class="fas fa-drafting-compass"></i> Архитектурные решения</h4>
                         <ul>
-                            <li>Фундамент: монолитная ж/б плита с ребрами вверх</li>
-                            <li>Стены: газосиликатный блок 375 мм</li>
-                            <li>Перегородки: газосиликатные блоки 150 мм, 200 мм</li>
-                            <li>Отделка наружная: декоративная штукатурка</li>
-                            <li>Покрытие крыши: металлочерепица</li>
+                            <li>Наружные стены: газосиликатный блок 375 мм</li>
+                            <li>Внутренние несущие стены: ГСБ толщиной 250 мм</li>
+                            <li>Перегородки: ГСБ толщиной 150 и 200 мм</li>
+                            <li>Вентиляционные шахты: кирпич керамический</li>
                             <li>Высота потолков в чистоте: 1 эт – 2,83 м</li>
-                            <li>Перекрытия: фундамент – монолитная плита, потолок – деревянные балки</li>
+                            <li>Отделка наружная: декоративная штукатурка</li>
+                            <li>Проект разработан для производства работ в летнее время</li>
                         </ul>
                     </div>
                     
                     <div class="detail-section">
-                        <h4><i class="fas fa-door-closed"></i> План помещений 1 этажа</h4>
-                        <div class="rooms-grid">
-                            <div class="room-item">
-                                <div class="room-name">Крыльцо</div>
-                                <div class="room-area">2,77 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Тамбур</div>
-                                <div class="room-area">7,7 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Котельная</div>
-                                <div class="room-area">6,08 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Кладовая</div>
-                                <div class="room-area">5,71 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Спальня 1</div>
-                                <div class="room-area">17,22 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Спальня 2</div>
-                                <div class="room-area">17,18 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Спальня 3</div>
-                                <div class="room-area">13,86 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Спальня 4</div>
-                                <div class="room-area">13,86 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Кухня-столовая</div>
-                                <div class="room-area">24,32 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Санузел 1</div>
-                                <div class="room-area">9,26 м²</div>
-                            </div>
-                            <div class="room-item">
-                                <div class="room-name">Санузел 2</div>
-                                <div class="room-area">3,3 м²</div>
-                            </div>
-                        </div>
+                        <h4><i class="fas fa-cube"></i> Конструктивные решения</h4>
+                        <ul>
+                            <li>Фундамент: монолитная ж/б плита с ребрами вверх</li>
+                            <li>Крыша: вальцовая холодная, покрытие - металлочерепица</li>
+                            <li>Цоколь: с утеплением ЭППС 50 мм</li>
+                            <li>Междуэтажные перекрытия: деревянные</li>
+                            <li>Монолитный ж/б пояс на отметке +2830</li>
+                            <li>Обработка деревянных элементов огнебиозащитой</li>
+                            <li>Стропильная система из древесины хвойных пород</li>
+                        </ul>
                     </div>
                     
                     <div class="detail-section">
@@ -2002,19 +2026,111 @@
                     </div>
                 </div>
                 
-              
+                <h3>План помещений</h3>
+                <div class="rooms-grid">
+                    <div class="room-item">
+                        <div class="room-name">Крыльцо</div>
+                        <div class="room-area">2,77 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Тамбур</div>
+                        <div class="room-area">7,7 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Котельная</div>
+                        <div class="room-area">6,08 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Кладовая</div>
+                        <div class="room-area">5,71 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 1</div>
+                        <div class="room-area">17,22 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 2</div>
+                        <div class="room-area">17,18 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 3</div>
+                        <div class="room-area">13,86 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спальня 4</div>
+                        <div class="room-area">13,86 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Кухня-столовая</div>
+                        <div class="room-area">24,32 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Санузел 1</div>
+                        <div class="room-area">9,26 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Санузел 2</div>
+                        <div class="room-area">3,3 м²</div>
+                    </div>
+                </div>
+                
+                <h3>Основные материалы проекта</h3>
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>Материал</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Газосиликатные блоки 375 мм</td>
+                        </tr>
+                        <tr>
+                            <td>Газосиликатные блоки 200 мм</td>
+                        </tr>
+                        <tr>
+                            <td>Газосиликатные блоки 150 мм</td>
+                        </tr>
+                        <tr>
+                            <td>Металлочерепица</td>
+                        </tr>
+                        <tr>
+                            <td>Арматура Ø12 А400С</td>
+                        </tr>
+                        <tr>
+                            <td>Бетон В22,5</td>
+                        </tr>
+                        <tr>
+                            <td>Цемент М500</td>
+                        </tr>
+                        <tr>
+                            <td>Кирпич керамический</td>
+                        </tr>
+                        <tr>
+                            <td>Утеплитель ЭППС</td>
+                        </tr>
+                        <tr>
+                            <td>Деревянные балки 200x150 мм</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-star"></i> Монолитный ж/б пояс по всем стенам здания</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Утепление цоколя ЭППС 50 мм</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Армирование кладки согласно нормам</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Вентиляционные шахты из керамического кирпича</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Обработка деревянных элементов огнебиозащитой</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Стропильная система из древесины хвойных пород</span>
+                </div>
                 
                 <h3>Дополнительные услуги</h3>
                 <div class="project-features">
                     <span class="project-feature"><i class="fas fa-edit"></i> Доработка проекта и внесение необходимых изменений</span>
                     <span class="project-feature"><i class="fas fa-exchange-alt"></i> Разработка зеркального варианта проекта</span>
                     <span class="project-feature"><i class="fas fa-ruler-combined"></i> Разработка индивидуального проекта дома по Вашим размерам</span>
-                    <span class="project-feature"><i class="fas fa-map-marked-alt"></i> Схема расположения дома на земельном участке</span>
                     <span class="project-feature"><i class="fas fa-calculator"></i> Смета для ипотеки и на строительство дома</span>
-                    <span class="project-feature"><i class="fas fa-copy"></i> Дополнительные копии проекта в любом формате</span>
                     <span class="project-feature"><i class="fas fa-file-pdf"></i> Электронная версия проекта в формате PDF</span>
-                    <span class="project-feature"><i class="fas fa-cube"></i> Разработка 3D-визуализации дома с привязкой к выбранным материалам</span>
-                    <span class="project-feature"><i class="fas fa-file-contract"></i> Подготовка Вашего проекта для получения ипотеки</span>
                 </div>
                 
                 <div class="modal-actions">
