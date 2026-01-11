@@ -6,7 +6,8 @@ class ProductsDatabase {
     }
 
     init() {
-        this.products = [
+        // Основные 6 товаров (оригинальные)
+        const initialProducts = [
             {
                 id: "floor_001",
                 name: "Ламинат Egger Classic Дуб светлый",
@@ -204,7 +205,150 @@ class ProductsDatabase {
             }
         ];
 
+        this.products = [...initialProducts];
+
+        // Генерируем 191 дополнительный товар для общего количества 197
+        this.generateAdditionalProducts(191);
+
         this.initCategories();
+    }
+
+    generateAdditionalProducts(count) {
+        const brands = ["Egger", "Kronospan", "Krono", "Quick-Step", "Balterio", "Tarkett", "Pergo", "BerryAlloc", "Art Vinyl", "FloorWood"];
+        const woodTypes = ["Дуб", "Ясень", "Орех", "Бук", "Вишня", "Сосна", "Ольха", "Клен", "Береза", "Груша"];
+        const colors = ["светлый", "темный", "натуральный", "серый", "беленый", "дымчатый", "золотистый", "коричневый", "черный", "белый"];
+        const finishes = ["матовый", "глянцевый", "полуматовый", "структурный", "брашированный", "вощеный", "старинный"];
+        const collections = ["Classic", "Premium", "Luxury", "Elegance", "Nature", "Modern", "Vintage", "Rustic", "Urban", "Scandi"];
+
+        const baseProducts = [
+            {
+                type: "laminate",
+                priceRange: { min: 1200, max: 3500 },
+                ratingRange: { min: 3.8, max: 4.9 },
+                reviewsRange: { min: 10, max: 150 },
+                thickness: ["8 мм", "10 мм", "12 мм"],
+                classes: ["31", "32", "33", "34"],
+                unit: "упаковка 1.5-2.5м²",
+                featuresBase: ["Влагостойкость", "Замок Click", "Антистатическое покрытие", "Ударопрочность", "Легкий монтаж"]
+            },
+            {
+                type: "quartz-vinyl",
+                priceRange: { min: 2500, max: 5000 },
+                ratingRange: { min: 4.0, max: 5.0 },
+                reviewsRange: { min: 5, max: 120 },
+                thickness: ["4 мм", "5 мм", "5.5 мм", "6 мм"],
+                classes: ["41", "42", "43"],
+                unit: "м²",
+                featuresBase: ["100% водостойкость", "SPC основа", "Для теплого пола", "Антибактериальное покрытие", "Легкая укладка"]
+            },
+            {
+                type: "spc-laminate",
+                priceRange: { min: 3500, max: 6000 },
+                ratingRange: { min: 4.2, max: 5.0 },
+                reviewsRange: { min: 15, max: 100 },
+                thickness: ["8 мм", "9 мм", "10 мм", "12 мм"],
+                classes: ["43", "44"],
+                unit: "м²",
+                featuresBase: ["SPC сердечник", "Для теплого пола", "Усиленная звукоизоляция", "Защита от царапин", "Коммерческое применение"]
+            }
+        ];
+
+        let productId = 7; // Продолжаем нумерацию с 7
+
+        for (let i = 0; i < count; i++) {
+            const typeIndex = i % 3;
+            const productType = baseProducts[typeIndex];
+            const type = productType.type;
+            
+            const brand = brands[Math.floor(Math.random() * brands.length)];
+            const wood = woodTypes[Math.floor(Math.random() * woodTypes.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const finish = finishes[Math.floor(Math.random() * finishes.length)];
+            const collection = collections[Math.floor(Math.random() * collections.length)];
+            
+            const price = Math.floor(Math.random() * (productType.priceRange.max - productType.priceRange.min + 1) + productType.priceRange.min);
+            const rating = parseFloat((Math.random() * (productType.ratingRange.max - productType.ratingRange.min) + productType.ratingRange.min).toFixed(1));
+            const reviews = Math.floor(Math.random() * (productType.reviewsRange.max - productType.reviewsRange.min + 1) + productType.reviewsRange.min);
+            const thickness = productType.thickness[Math.floor(Math.random() * productType.thickness.length)];
+            const productClass = productType.classes[Math.floor(Math.random() * productType.classes.length)];
+            
+            const hasOldPrice = Math.random() > 0.7;
+            const oldPrice = hasOldPrice ? Math.floor(price * 1.2) : null;
+            
+            const name = type === "laminate" ? `Ламинат ${brand} ${collection} ${wood} ${color}` :
+                        type === "quartz-vinyl" ? `Кварц-винил ${brand} ${wood} ${color} ${finish}` :
+                        `SPC-ламинат ${brand} ${collection} ${wood} ${color}`;
+            
+            const description = type === "laminate" ?
+                `Качественный ламинат ${productClass} класса с отделкой ${finish}. Подходит для ${Math.random() > 0.5 ? "жилых" : "коммерческих"} помещений. ${hasOldPrice ? "Специальное предложение!" : ""}` :
+                type === "quartz-vinyl" ?
+                `Современный кварц-винил с отделкой ${finish} для любых помещений. ${Math.random() > 0.7 ? "Идеально подходит для систем теплый пол." : ""}` :
+                `Прочный SPC-ламинат ${productClass} класса для требовательных потребителей. ${Math.random() > 0.5 ? "Выдерживает высокие нагрузки." : ""}`;
+            
+            const features = [
+                `Класс износостойкости: ${productClass}`,
+                `Толщина: ${thickness}`,
+                ...productType.featuresBase.slice(0, 3 + Math.floor(Math.random() * 2))
+            ];
+            
+            if (type === "quartz-vinyl" || type === "spc-laminate") {
+                if (Math.random() > 0.5) features.push("Для теплого пола");
+                if (Math.random() > 0.5) features.push("Водостойкий");
+            }
+            
+            const specifications = {
+                "Размер": `${Math.floor(Math.random() * 300 + 1200)}x${Math.floor(Math.random() * 50 + 150)} мм`,
+                "Толщина": thickness,
+                "Класс": `${productClass} AC${Math.floor(Math.random() * 3 + 3)}`,
+                "Гарантия": `${Math.floor(Math.random() * 15 + 5)} лет`,
+                "Влагостойкость": type === "laminate" ? (Math.random() > 0.3 ? "Да" : "Нет") : "100%"
+            };
+            
+            if (type === "laminate") {
+                specifications["В упаковке"] = `${Math.floor(Math.random() * 3 + 7)} шт (${(Math.random() * 1 + 1.5).toFixed(2)} м²)`;
+                specifications["Соединение"] = Math.random() > 0.5 ? "Click" : "5G Click";
+            }
+            
+            const tags = [type === "laminate" ? "ламинат" : type === "quartz-vinyl" ? "кварц-винил" : "spc-ламинат"];
+            if (hasOldPrice) tags.push("спецпредложение");
+            if (price > 3000) tags.push("премиум");
+            if (rating > 4.5) tags.push("популярный");
+            
+            const inStock = Math.random() > 0.1;
+            const stockCount = inStock ? Math.floor(Math.random() * 200 + 20) : 0;
+            
+            const deliveryCost = Math.floor(Math.random() * 500 + 500);
+            
+            this.products.push({
+                id: `floor_${productId.toString().padStart(3, '0')}`,
+                name,
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type,
+                price,
+                oldPrice,
+                unit: productType.unit,
+                rating,
+                reviews,
+                inStock,
+                stockCount,
+                description,
+                features,
+                specifications,
+                image: type === "laminate" ? "img/catalog/laminate_generic.jpg" :
+                      type === "quartz-vinyl" ? "img/catalog/quartz_vinyl_generic.jpg" :
+                      "img/catalog/spc_laminate_generic.jpg",
+                tags,
+                delivery: {
+                    available: true,
+                    minDays: Math.floor(Math.random() * 3 + 1),
+                    maxDays: Math.floor(Math.random() * 5 + 3),
+                    cost: deliveryCost
+                }
+            });
+            
+            productId++;
+        }
     }
 
     initCategories() {
@@ -291,6 +435,13 @@ class ProductsDatabase {
                 return sorted.sort((a, b) => b.rating - a.rating);
             case 'popular':
                 return sorted.sort((a, b) => b.reviews - a.reviews);
+            case 'newest':
+                // Сортировка по ID (предполагая, что больший ID = новее)
+                return sorted.sort((a, b) => {
+                    const idA = parseInt(a.id.split('_')[1]);
+                    const idB = parseInt(b.id.split('_')[1]);
+                    return idB - idA;
+                });
             default:
                 return sorted.sort((a, b) => {
                     if (a.oldPrice && !b.oldPrice) return -1;
@@ -328,6 +479,24 @@ class ProductsDatabase {
             'spc-laminate': 'SPC-ламинат'
         };
         return typeNames[type] || type;
+    }
+
+    getProductsCount() {
+        return this.products.length;
+    }
+
+    getProductsByPage(page, pageSize, filters = {}) {
+        let filteredProducts = this.filterProducts(filters);
+        const sortedProducts = this.sortProducts(filteredProducts, filters.sortType || 'default');
+        
+        const startIndex = (page - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        
+        return {
+            products: sortedProducts.slice(startIndex, endIndex),
+            total: sortedProducts.length,
+            totalPages: Math.ceil(sortedProducts.length / pageSize)
+        };
     }
 
     generateProductCardHTML(product, isFavorite = false) {

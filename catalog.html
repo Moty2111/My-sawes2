@@ -11,7 +11,306 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="manifest" href="manifest.json">
     <style>
-        /* Дополнительные стили для каталога */
+        /* Стили для пагинации */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 30px;
+            padding: 20px 0;
+            border-top: 1px solid var(--gray-light);
+            border-bottom: 1px solid var(--gray-light);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+        
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--gray-extra-light);
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            padding: 0 8px;
+        }
+        
+        .page-link:hover:not(.active):not(.disabled) {
+            background: var(--accent-color);
+            color: rgb(255, 255, 255) !important;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-color);
+        }
+        
+        .page-link.active {
+            background: var(--accent-bright);
+            color: white !important;
+            border-color: var(--accent-bright);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+        
+        .page-link.active:hover {
+            background: var(--accent-dark);
+            color: rgb(255, 123, 0) !important;
+            border-color: var(--accent-dark);
+        }
+        
+        .page-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .page-link.disabled:hover {
+            background: var(--gray-extra-light);
+            color: var(--dark-color) !important;
+            transform: none;
+            box-shadow: none;
+            border-color: transparent;
+        }
+        
+        .page-ellipsis {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 44px;
+            color: var(--gray-medium);
+            font-size: 1.2rem;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .pagination-nav {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .page-prev, .page-next {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--gray-extra-light);
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            padding: 0 16px;
+            gap: 8px;
+        }
+        
+        .page-prev:hover:not(.disabled), .page-next:hover:not(.disabled) {
+            background: var(--accent-color);
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-color);
+        }
+        
+        .page-prev.disabled, .page-next.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .page-prev.disabled:hover, .page-next.disabled:hover {
+            background: var(--gray-extra-light);
+            color: var(--dark-color) !important;
+            transform: none;
+            box-shadow: none;
+            border-color: transparent;
+        }
+        
+        .page-info {
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+            background: var(--gray-extra-light);
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--form-border);
+            white-space: nowrap;
+        }
+        
+        .page-info strong {
+            color: var(--accent-bright);
+        }
+        
+        /* Стили для выбора количества товаров на странице */
+        .page-size-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-medium);
+            font-size: 0.95rem;
+        }
+        
+        .page-size-selector select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--form-border);
+            background: white;
+            color: var(--dark-color);
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            min-width: 100px;
+        }
+        
+        .page-size-selector select:hover {
+            border-color: var(--accent-color);
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 992px) {
+            .pagination-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .pagination-controls {
+                justify-content: center;
+                order: 2;
+            }
+            
+            .page-size-selector {
+                order: 1;
+                justify-content: center;
+            }
+            
+            .page-info {
+                order: 3;
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .pagination {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px;
+            }
+            
+            .page-link {
+                min-width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+            }
+            
+            .page-prev, .page-next {
+                min-width: 90px;
+                height: 40px;
+                font-size: 0.9rem;
+                padding: 0 12px;
+            }
+            
+            .page-ellipsis {
+                min-width: 40px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .pagination {
+                gap: 3px;
+            }
+            
+            .page-link {
+                min-width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .page-prev, .page-next {
+                min-width: 80px;
+                height: 36px;
+                font-size: 0.85rem;
+                padding: 0 10px;
+            }
+            
+            .page-ellipsis {
+                min-width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            
+            .page-info {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
+        
+        /* Стили для кнопок пагинации на очень маленьких экранах */
+        .mobile-pagination {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: var(--gray-extra-light);
+            border-radius: 12px;
+            border: 1px solid var(--form-border);
+        }
+        
+        .mobile-page-info {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--dark-color);
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+        
+        .mobile-page-info strong {
+            color: var(--accent-bright);
+        }
+        
+        @media (max-width: 480px) {
+            .pagination-container {
+                display: none;
+            }
+            
+            .mobile-pagination {
+                display: flex;
+            }
+            
+            .mobile-pagination .page-prev,
+            .mobile-pagination .page-next {
+                min-width: auto;
+                width: 100px;
+                height: 40px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Остальные стили остаются без изменений */
         .product-card {
             position: relative;
             border: 1px solid var(--gray-light);
@@ -32,11 +331,11 @@
         }
         
         .product-image-container {
-            height: 320px; /* Увеличенная высота */
+            height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px; /* Уменьшенный padding для большего изображения */
+            padding: 15px;
             background: var(--gray-extra-light);
             overflow: hidden;
             position: relative;
@@ -47,15 +346,15 @@
         
         .product-image {
             width: 100%;
-            height: 100%; /* Изменено на 100% высоты */
-            max-height: 280px; /* Увеличенная максимальная высота */
-            object-fit: contain; /* Сохраняем пропорции */
+            height: 100%;
+            max-height: 280px;
+            object-fit: contain;
             transition: transform 0.5s ease;
             border-radius: var(--radius-md);
         }
         
         .product-card:hover .product-image {
-            transform: scale(1.08); /* Увеличенный эффект масштабирования */
+            transform: scale(1.08);
         }
         
         .product-info {
@@ -176,7 +475,6 @@
             z-index: 10;
         }
         
-        /* Стили кнопки Подробнее (оранжевая, как в проектах) */
         .btn-details {
             width: 100%;
             background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
@@ -269,7 +567,6 @@
             background: var(--secondary-dark);
         }
         
-        /* СЕРДЦЕ ИЗБРАННОГО - правильные стили */
         .product-wishlist {
             position: absolute;
             top: 20px;
@@ -305,7 +602,6 @@
             color: var(--heart-color);
         }
         
-        /* АКТИВНОЕ СОСТОЯНИЕ - КРАСНЫЙ */
         .product-wishlist.active {
             background: var(--heart-color) !important;
             border-color: var(--heart-color) !important;
@@ -348,12 +644,12 @@
             }
             
             .product-image-container {
-                height: 280px; /* Увеличенная высота для мобильных */
-                padding: 10px; /* Уменьшенный padding */
+                height: 280px;
+                padding: 10px;
             }
             
             .product-image {
-                max-height: 240px; /* Увеличенная максимальная высота */
+                max-height: 240px;
             }
             
             .product-title {
@@ -453,7 +749,7 @@
         
         .product-modal-image-container {
             width: 100%;
-            height: 600px; /* УВЕЛИЧЕНА ВЫСОТА */
+            height: 600px;
             border-radius: 12px;
             margin: 25px 0 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -463,15 +759,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px; /* Уменьшенный padding для большего изображения */
+            padding: 20px;
             box-sizing: border-box;
         }
         
         .product-modal-image {
-            width: auto; /* Изменено с max-width на width */
-            height: auto; /* Изменено с max-height на height */
-            max-width: 130%; /* Ограничение по ширине */
-            max-height: 95%; /* Ограничение по высоте */
+            width: auto;
+            height: auto;
+            max-width: 130%;
+            max-height: 95%;
             object-fit: contain;
             border-radius: 8px;
         }
@@ -731,7 +1027,7 @@
             }
             
             .product-modal-image-container {
-                height: 350px; /* Увеличенная высота для мобильных */
+                height: 350px;
                 padding: 15px;
                 margin: 15px 0 20px;
             }
@@ -879,6 +1175,7 @@
                     <div class="sort-box">
                         <select id="sortSelect">
                             <option value="default">По умолчанию</option>
+                            <option value="newest">Сначала новые</option>
                             <option value="price-low">Сначала дешевые</option>
                             <option value="price-high">Сначала дорогие</option>
                             <option value="rating-desc">По рейтингу</option>
@@ -922,8 +1219,56 @@
                 <!-- Напольные покрытия будут загружаться через JavaScript -->
             </div>
             
-            <div class="pagination">
-                <a href="#" class="page-link active">1</a>
+            <!-- Пагинация для десктопа -->
+            <div class="pagination-container">
+                <div class="page-size-selector">
+                    <span>Показывать:</span>
+                    <select id="pageSizeSelect">
+                        <option value="9">9 товаров</option>
+                        <option value="12" selected>12 товаров</option>
+                        <option value="18">18 товаров</option>
+                        <option value="24">24 товара</option>
+                        <option value="36">36 товаров</option>
+                    </select>
+                </div>
+                
+                <div class="pagination-controls">
+                    <div class="pagination" id="pagination">
+                        <!-- Страницы будут генерироваться через JavaScript -->
+                    </div>
+                    
+                    <div class="pagination-nav">
+                        <a href="#" class="page-prev" id="pagePrev">
+                            <i class="fas fa-chevron-left"></i>
+                            <span>Назад</span>
+                        </a>
+                        <a href="#" class="page-next" id="pageNext">
+                            <span>Вперед</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="page-info">
+                    Страница <strong id="currentPageNum">1</strong> из <strong id="totalPagesNum">19</strong>
+                </div>
+            </div>
+            
+            <!-- Пагинация для мобильных -->
+            <div class="mobile-pagination">
+                <a href="#" class="page-prev" id="mobilePagePrev">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Назад</span>
+                </a>
+                
+                <div class="mobile-page-info">
+                    Страница <strong id="mobileCurrentPage">1</strong> из <strong id="mobileTotalPages">19</strong>
+                </div>
+                
+                <a href="#" class="page-next" id="mobilePageNext">
+                    <span>Вперед</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
             </div>
         </div>
     </main>
@@ -1023,11 +1368,14 @@
     <script src="js/products.js"></script>
     
     <script>
-        // Основной JavaScript код для каталога
+        // Основной JavaScript код для каталога с пагинацией
         
         // Переменные для управления состоянием
         let currentProductModal = null;
         let allProducts = [];
+        let currentPage = 1;
+        let pageSize = 12; // Количество товаров на странице
+        let totalPages = 19; // Всего страниц для 197 товаров (197/12=16.42, округляем вверх)
         
         // Функция для загрузки товаров из products.js
         function loadProducts() {
@@ -1035,11 +1383,15 @@
             if (typeof ProductsDB !== 'undefined' && ProductsDB.getAllProducts) {
                 allProducts = ProductsDB.getAllProducts();
                 console.log('Загружено товаров из products.js:', allProducts.length);
+                
+                // Для 197 товаров при 12 на странице показываем 17 страниц (197/12=16.42)
+                totalPages = Math.ceil(allProducts.length / pageSize);
             } else {
                 // Если ProductsDB не загружен, показываем ошибку
                 console.error('ProductsDB не загружен. Проверьте подключение файла products.js');
                 showNotification('Ошибка загрузки товаров', 'error');
                 allProducts = [];
+                totalPages = 1;
             }
             
             applyFilters();
@@ -1245,41 +1597,29 @@
             `;
         }
         
-        // Вспомогательные функции
-        function getTypeLabel(type) {
-            const labels = {
-                'laminate': 'Ламинат',
-                'quartz-vinyl': 'Кварц-винил',
-                'spc-laminate': 'SPC-ламинат'
-            };
-            return labels[type] || type;
-        }
-        
-        function generateRatingStars(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            
-            for (let i = 0; i < 5; i++) {
-                if (i < fullStars) {
-                    stars += '<i class="fas fa-star"></i>';
-                } else if (i === fullStars && hasHalfStar) {
-                    stars += '<i class="fas fa-star-half-alt"></i>';
-                } else {
-                    stars += '<i class="far fa-star"></i>';
-                }
-            }
-            return stars;
-        }
-        
-        function formatPrice(price) {
-            return price.toLocaleString('ru-RU');
-        }
-        
-        // Функция для отображения товаров
+        // Функция для отображения товаров с пагинацией
         function renderProducts(products) {
             const container = document.getElementById('catalogItems');
             if (!container) return;
+            
+            // Рассчитываем общее количество страниц
+            totalPages = Math.ceil(products.length / pageSize);
+            if (totalPages === 0) totalPages = 1;
+            
+            // Обновляем информацию о страницах
+            updatePageInfo();
+            
+            // Рассчитываем товары для текущей страницы
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, products.length);
+            const productsToShow = products.slice(startIndex, endIndex);
+            
+            if (productsToShow.length === 0 && products.length > 0) {
+                // Если на текущей странице нет товаров, но товары есть, переходим на первую страницу
+                currentPage = 1;
+                renderProducts(products);
+                return;
+            }
             
             if (products.length === 0) {
                 container.innerHTML = `
@@ -1295,11 +1635,13 @@
                 
                 document.getElementById('resetFiltersBtn')?.addEventListener('click', resetFilters);
                 document.getElementById('productCount').textContent = '0';
+                updatePageInfo();
+                renderPagination();
                 return;
             }
             
             let html = '';
-            products.forEach(product => {
+            productsToShow.forEach(product => {
                 const isFavorite = localStorage.getItem(`favorite_${product.id}`) === 'true';
                 html += generateProductCardHTML(product, isFavorite);
             });
@@ -1307,8 +1649,143 @@
             container.innerHTML = html;
             document.getElementById('productCount').textContent = products.length;
             
+            // Обновляем пагинацию
+            renderPagination();
+            
             // Инициализация обработчиков событий для карточек товаров
             initProductCardEvents();
+        }
+        
+        // Функция для обновления информации о страницах
+        function updatePageInfo() {
+            const currentPageNum = document.getElementById('currentPageNum');
+            const totalPagesNum = document.getElementById('totalPagesNum');
+            const mobileCurrentPage = document.getElementById('mobileCurrentPage');
+            const mobileTotalPages = document.getElementById('mobileTotalPages');
+            
+            if (currentPageNum) currentPageNum.textContent = currentPage;
+            if (totalPagesNum) totalPagesNum.textContent = totalPages;
+            if (mobileCurrentPage) mobileCurrentPage.textContent = currentPage;
+            if (mobileTotalPages) mobileTotalPages.textContent = totalPages;
+        }
+        
+        // Функция для рендеринга пагинации как на изображении
+        function renderPagination() {
+            const paginationContainer = document.getElementById('pagination');
+            if (!paginationContainer) return;
+            
+            let paginationHTML = '';
+            
+            // Всегда показываем первые 5 страниц, потом многоточие, потом последнюю
+            if (totalPages <= 7) {
+                // Если страниц мало, показываем все
+                for (let i = 1; i <= totalPages; i++) {
+                    paginationHTML += `
+                        <a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</a>
+                    `;
+                }
+            } else {
+                // Показываем первые 5 страниц
+                for (let i = 1; i <= 5; i++) {
+                    paginationHTML += `
+                        <a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</a>
+                    `;
+                }
+                
+                // Многоточие
+                paginationHTML += `<span class="page-ellipsis">...</span>`;
+                
+                // Последняя страница
+                paginationHTML += `
+                    <a href="#" class="page-link ${currentPage === totalPages ? 'active' : ''}" data-page="${totalPages}">${totalPages}</a>
+                `;
+            }
+            
+            paginationContainer.innerHTML = paginationHTML;
+            
+            // Обновляем состояние кнопок "Назад" и "Вперед"
+            const pagePrev = document.getElementById('pagePrev');
+            const pageNext = document.getElementById('pageNext');
+            const mobilePagePrev = document.getElementById('mobilePagePrev');
+            const mobilePageNext = document.getElementById('mobilePageNext');
+            
+            if (currentPage === 1) {
+                if (pagePrev) pagePrev.classList.add('disabled');
+                if (mobilePagePrev) mobilePagePrev.classList.add('disabled');
+            } else {
+                if (pagePrev) pagePrev.classList.remove('disabled');
+                if (mobilePagePrev) mobilePagePrev.classList.remove('disabled');
+            }
+            
+            if (currentPage === totalPages) {
+                if (pageNext) pageNext.classList.add('disabled');
+                if (mobilePageNext) mobilePageNext.classList.add('disabled');
+            } else {
+                if (pageNext) pageNext.classList.remove('disabled');
+                if (mobilePageNext) mobilePageNext.classList.remove('disabled');
+            }
+            
+            // Добавляем обработчики событий для ссылок пагинации
+            document.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('active') || this.classList.contains('disabled')) {
+                        return;
+                    }
+                    const page = parseInt(this.getAttribute('data-page'));
+                    goToPage(page);
+                });
+            });
+            
+            // Обработчики для кнопок "Назад" и "Вперед"
+            if (pagePrev) {
+                pagePrev.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage - 1);
+                });
+            }
+            
+            if (pageNext) {
+                pageNext.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage + 1);
+                });
+            }
+            
+            if (mobilePagePrev) {
+                mobilePagePrev.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage - 1);
+                });
+            }
+            
+            if (mobilePageNext) {
+                mobilePageNext.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage + 1);
+                });
+            }
+        }
+        
+        // Функция перехода на конкретную страницу
+        function goToPage(page) {
+            if (page < 1 || page > totalPages || page === currentPage) return;
+            
+            currentPage = page;
+            applyFilters();
+            
+            // Прокрутка к началу каталога
+            const catalogItems = document.querySelector('.catalog-items');
+            if (catalogItems) {
+                catalogItems.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
         
         // Функция для фильтрации товаров
@@ -1350,6 +1827,13 @@
                     return sorted.sort((a, b) => b.rating - a.rating);
                 case 'popular':
                     return sorted.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+                case 'newest':
+                    // Сортировка по ID (предполагая, что больший ID = новее)
+                    return sorted.sort((a, b) => {
+                        const idA = parseInt(a.id.split('_')[1]) || 0;
+                        const idB = parseInt(b.id.split('_')[1]) || 0;
+                        return idB - idA;
+                    });
                 default:
                     return sorted;
             }
@@ -1358,9 +1842,9 @@
         // Функция применения фильтров
         function applyFilters() {
             const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
-            const searchTerm = document.getElementById('searchInput').value;
-            const maxPrice = parseInt(document.getElementById('priceSlider').value);
-            const sortType = document.getElementById('sortSelect').value;
+            const searchTerm = document.getElementById('searchInput')?.value || '';
+            const maxPrice = parseInt(document.getElementById('priceSlider')?.value || 5000);
+            const sortType = document.getElementById('sortSelect')?.value || 'default';
             
             let filteredProducts = filterProducts(activeFilter, maxPrice, searchTerm);
             filteredProducts = sortProducts(filteredProducts, sortType);
@@ -1377,21 +1861,76 @@
                 }
             });
             
-            document.getElementById('searchInput').value = '';
-            document.getElementById('sortSelect').value = 'default';
-            document.getElementById('priceSlider').value = 5000;
-            document.getElementById('currentPriceDisplay').textContent = 'До 5 000 ₽';
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) sortSelect.value = 'default';
+            
+            const priceSlider = document.getElementById('priceSlider');
+            if (priceSlider) priceSlider.value = 5000;
+            
+            const currentPriceDisplay = document.getElementById('currentPriceDisplay');
+            if (currentPriceDisplay) currentPriceDisplay.textContent = 'До 5 000 ₽';
+            
+            const pageSizeSelect = document.getElementById('pageSizeSelect');
+            if (pageSizeSelect) pageSizeSelect.value = '12';
+            
+            currentPage = 1;
+            pageSize = 12;
             
             applyFilters();
         }
         
-        // Функции для работы с корзиной (совместимые с cart.html)
+        // Вспомогательные функции
+        function getTypeLabel(type) {
+            const labels = {
+                'laminate': 'Ламинат',
+                'quartz-vinyl': 'Кварц-винил',
+                'spc-laminate': 'SPC-ламинат'
+            };
+            return labels[type] || type;
+        }
+        
+        function generateRatingStars(rating) {
+            if (!rating) return '<i class="far fa-star"></i>'.repeat(5);
+            
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < 5; i++) {
+                if (i < fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+        
+        function formatPrice(price) {
+            if (typeof price !== 'number') return '0';
+            return price.toLocaleString('ru-RU');
+        }
+        
+        // Функции для работы с корзиной
         function getCart() {
-            return JSON.parse(localStorage.getItem('buildpro_cart')) || [];
+            try {
+                return JSON.parse(localStorage.getItem('buildpro_cart')) || [];
+            } catch (e) {
+                return [];
+            }
         }
         
         function saveCart(cart) {
-            localStorage.setItem('buildpro_cart', JSON.stringify(cart));
+            try {
+                localStorage.setItem('buildpro_cart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Ошибка сохранения корзины:', e);
+            }
             updateCartCount();
             updateCartButtons();
         }
@@ -1401,7 +1940,6 @@
             return cart.some(item => item.id == productId);
         }
         
-        // Функция добавления в корзину (совместимая с cart.html)
         function addToCart(productId, quantity = 1) {
             const product = allProducts.find(p => p.id == productId);
             if (!product) {
@@ -1411,7 +1949,6 @@
             
             let cart = getCart();
             
-            // Проверяем, есть ли уже товар в корзине
             const existingItem = cart.find(item => item.id == productId);
             
             if (existingItem) {
@@ -1441,9 +1978,12 @@
             let modal = document.getElementById(`product-modal-${productId}`);
             if (!modal) {
                 const modalHTML = generateProductModalHTML(product);
-                document.getElementById('productModalsContainer').insertAdjacentHTML('beforeend', modalHTML);
-                modal = document.getElementById(`product-modal-${productId}`);
-                initProductModalEvents(productId);
+                const modalsContainer = document.getElementById('productModalsContainer');
+                if (modalsContainer) {
+                    modalsContainer.insertAdjacentHTML('beforeend', modalHTML);
+                    modal = document.getElementById(`product-modal-${productId}`);
+                    initProductModalEvents(productId);
+                }
             }
             
             // Закрываем текущее модальное окно, если есть
@@ -1452,9 +1992,11 @@
             }
             
             // Открываем новое модальное окно
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            currentProductModal = productId;
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                currentProductModal = productId;
+            }
         }
         
         // Функция для закрытия модального окна товара
@@ -1494,10 +2036,10 @@
             });
         }
         
-        // Функция обновления счетчика корзины (совместимая с cart.html)
+        // Функция обновления счетчика корзины
         function updateCartCount() {
             const cart = getCart();
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
             const cartCountElement = document.getElementById('cartCount');
             if (cartCountElement) {
                 cartCountElement.textContent = totalItems;
@@ -1688,28 +2230,57 @@
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
+                    currentPage = 1; // Сбрасываем на первую страницу при изменении фильтра
                     applyFilters();
                 });
             });
             
             // Инициализация поиска
-            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    currentPage = 1; // Сбрасываем на первую страницу при поиске
+                    applyFilters();
+                });
+            }
             
             // Инициализация сортировки
-            document.getElementById('sortSelect').addEventListener('change', applyFilters);
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    currentPage = 1; // Сбрасываем на первую страницу при сортировке
+                    applyFilters();
+                });
+            }
             
             // Инициализация слайдера цены
             const priceSlider = document.getElementById('priceSlider');
             const currentPriceDisplay = document.getElementById('currentPriceDisplay');
             
-            priceSlider.addEventListener('input', function() {
-                const value = parseInt(this.value);
-                currentPriceDisplay.textContent = `До ${value.toLocaleString()} ₽`;
-                applyFilters();
-            });
+            if (priceSlider && currentPriceDisplay) {
+                priceSlider.addEventListener('input', function() {
+                    const value = parseInt(this.value);
+                    currentPriceDisplay.textContent = `До ${value.toLocaleString()} ₽`;
+                    currentPage = 1; // Сбрасываем на первую страницу при изменении цены
+                    applyFilters();
+                });
+            }
+            
+            // Инициализация выбора количества товаров на странице
+            const pageSizeSelect = document.getElementById('pageSizeSelect');
+            if (pageSizeSelect) {
+                pageSizeSelect.addEventListener('change', function() {
+                    pageSize = parseInt(this.value);
+                    currentPage = 1; // Сбрасываем на первую страницу при изменении количества
+                    applyFilters();
+                });
+            }
             
             // Инициализация кнопки сброса фильтров
-            document.getElementById('clearFiltersBtn').addEventListener('click', resetFilters);
+            const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+            if (clearFiltersBtn) {
+                clearFiltersBtn.addEventListener('click', resetFilters);
+            }
             
             // Обновление счетчика корзины
             updateCartCount();
