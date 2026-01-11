@@ -55,12 +55,12 @@
             border: 2px solid transparent;
             user-select: none;
             -webkit-user-select: none;
-            padding: 0 8px;
+            padding: 0 20px;
         }
         
         .page-link:hover:not(.active):not(.disabled) {
             background: var(--accent-color);
-            color: rgb(255, 255, 255) !important;
+            color: white !important;
             transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
             border-color: var(--accent-color);
@@ -75,7 +75,7 @@
         
         .page-link.active:hover {
             background: var(--accent-dark);
-            color: rgb(255, 123, 0) !important;
+            color: white !important;
             border-color: var(--accent-dark);
         }
         
@@ -1198,12 +1198,12 @@
                 <div class="filter-section">
                     <h4>Цена</h4>
                     <div class="price-range">
-                        <input type="range" min="500" max="10000" value="5000" step="100" class="price-slider" id="priceSlider">
+                        <input type="range" min="500" max="10000" value="10000" step="100" class="price-slider" id="priceSlider">
                         <div class="price-values">
                             <span>500 ₽</span>
                             <span>10 000 ₽</span>
                         </div>
-                        <div class="current-price-display" id="currentPriceDisplay">До 5 000 ₽</div>
+                        <div class="current-price-display" id="currentPriceDisplay">До 10 000 ₽</div>
                     </div>
                 </div>
             </div>
@@ -1376,16 +1376,59 @@
         let currentPage = 1;
         let pageSize = 12; // Количество товаров на странице
         let totalPages = 19; // Всего страниц для 197 товаров (197/12=16.42, округляем вверх)
+        let filteredProducts = [];
         
         // Функция для загрузки товаров из products.js
         function loadProducts() {
             // Используем ProductsDB из products.js
             if (typeof ProductsDB !== 'undefined' && ProductsDB.getAllProducts) {
-                allProducts = ProductsDB.getAllProducts();
-                console.log('Загружено товаров из products.js:', allProducts.length);
-                
-                // Для 197 товаров при 12 на странице показываем 17 страниц (197/12=16.42)
-                totalPages = Math.ceil(allProducts.length / pageSize);
+                try {
+                    allProducts = ProductsDB.getAllProducts();
+                    console.log('Загружено товаров из products.js:', allProducts.length);
+                    
+                    // Проверяем структуру товаров
+                    if (allProducts.length > 0) {
+                        console.log('Пример товара:', allProducts[0]);
+                        
+                        // Убедимся, что у всех товаров есть необходимые поля
+                        allProducts = allProducts.map((product, index) => {
+                            // Убедимся, что у товара есть ID
+                            if (!product.id) {
+                                product.id = `product_${index + 1}`;
+                            }
+                            
+                            // Убедимся, что у товара есть цена
+                            if (!product.price) {
+                                product.price = Math.floor(Math.random() * 9500) + 500;
+                            }
+                            
+                            // Убедимся, что у товара есть рейтинг
+                            if (!product.rating) {
+                                product.rating = (Math.random() * 2 + 3).toFixed(1);
+                            }
+                            
+                            // Убедимся, что у товара есть отзывы
+                            if (!product.reviews) {
+                                product.reviews = Math.floor(Math.random() * 100);
+                            }
+                            
+                            // Убедимся, что у товара есть единица измерения
+                            if (!product.unit) {
+                                product.unit = 'м²';
+                            }
+                            
+                            return product;
+                        });
+                    }
+                    
+                    // Для 197 товаров при 12 на странице показываем 17 страниц (197/12=16.42)
+                    totalPages = Math.ceil(allProducts.length / pageSize);
+                } catch (error) {
+                    console.error('Ошибка при загрузке товаров:', error);
+                    showNotification('Ошибка загрузки товаров', 'error');
+                    allProducts = [];
+                    totalPages = 1;
+                }
             } else {
                 // Если ProductsDB не загружен, показываем ошибку
                 console.error('ProductsDB не загружен. Проверьте подключение файла products.js');
@@ -1408,30 +1451,41 @@
                 f.toLowerCase().includes('влагостойк') || f.toLowerCase().includes('водостойк')
             );
             
-            // Формируем описание из features
-            const shortDescription = product.features ? product.features.slice(0, 2).join(', ') : product.description;
+            // Формируем описание из features или description
+            let shortDescription = '';
+            if (product.features && product.features.length > 0) {
+                shortDescription = product.features.slice(0, 2).join(', ');
+            } else if (product.description) {
+                shortDescription = product.description.length > 100 ? 
+                    product.description.substring(0, 100) + '...' : product.description;
+            } else {
+                shortDescription = 'Качественное напольное покрытие';
+            }
+            
+            // Получаем цену
+            const price = product.price || 0;
             
             return `
-                <div class="product-card" data-id="${product.id}" data-type="${product.type}">
+                <div class="product-card" data-id="${product.id}" data-type="${product.type || 'laminate'}">
                     <button class="product-wishlist ${isFavorite ? 'active' : ''}" data-id="${product.id}" title="${isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}">
                         <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
                     </button>
                     
                     <div class="product-image-container">
-                        <img src="${product.image}" alt="${product.name}" class="product-image" 
+                        <img src="${product.image || 'img/catalog/default-floor.jpg'}" alt="${product.name || 'Товар'}" class="product-image" 
                              onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
                     </div>
                     
                     <div class="product-info">
                         <div class="product-header">
-                            <h3 class="product-title">${product.name}</h3>
+                            <h3 class="product-title">${product.name || 'Напольное покрытие'}</h3>
                         </div>
                         
-                        <span class="product-type">${getTypeLabel(product.type)}</span>
+                        <span class="product-type">${getTypeLabel(product.type || 'laminate')}</span>
                         
                         <div class="product-rating">
-                            ${generateRatingStars(product.rating)}
-                            <span>${product.rating}</span>
+                            ${generateRatingStars(product.rating || 4.0)}
+                            <span>${product.rating || 4.0}</span>
                             <span class="reviews-count">(${product.reviews || 0})</span>
                         </div>
                         
@@ -1444,8 +1498,8 @@
                         </div>
                         
                         <div class="product-price-section">
-                            <div class="product-price">${formatPrice(product.price)} ₽</div>
-                            <div class="product-unit">${product.unit}</div>
+                            <div class="product-price">${formatPrice(price)} ₽</div>
+                            <div class="product-unit">${product.unit || 'м²'}</div>
                         </div>
                         
                         <div class="product-actions">
@@ -1487,10 +1541,16 @@
             
             // Генерация списка особенностей
             let featuresHTML = '';
-            if (product.features) {
+            if (product.features && product.features.length > 0) {
                 featuresHTML = product.features.map(feature => 
-                    `<li><i class="fas fa-check" style="color: #4CAF50;"></i> ${feature}</li>`
+                    `<div class="product-modal-feature"><i class="fas fa-check"></i> ${feature}</div>`
                 ).join('');
+            } else {
+                featuresHTML = `
+                    <div class="product-modal-feature"><i class="fas fa-check"></i> Высокая износостойкость</div>
+                    <div class="product-modal-feature"><i class="fas fa-check"></i> Легкость укладки</div>
+                    <div class="product-modal-feature"><i class="fas fa-check"></i> Экологически безопасный</div>
+                `;
             }
             
             return `
@@ -1498,17 +1558,17 @@
                     <div class="product-modal-content">
                         <button class="product-close-modal">&times;</button>
                         <div class="product-modal-header">
-                            <h2>${product.name}</h2>
+                            <h2>${product.name || 'Напольное покрытие'}</h2>
                             <div class="product-modal-meta">
-                                <span><i class="fas fa-tag"></i> ${getTypeLabel(product.type)}</span>
-                                <span><i class="fas fa-star"></i> Рейтинг: ${product.rating} (${product.reviews || 0} отзывов)</span>
+                                <span><i class="fas fa-tag"></i> ${getTypeLabel(product.type || 'laminate')}</span>
+                                <span><i class="fas fa-star"></i> Рейтинг: ${product.rating || 4.0} (${product.reviews || 0} отзывов)</span>
                                 <span><i class="fas fa-ruler"></i> Толщина: ${productThickness}</span>
                                 <span><i class="fas fa-layer-group"></i> Класс: ${productClass}</span>
                             </div>
                         </div>
                         <div class="product-modal-body">
                             <div class="product-modal-image-container">
-                                <img src="${product.image}" alt="${product.name}" class="product-modal-image"
+                                <img src="${product.image || 'img/catalog/default-floor.jpg'}" alt="${product.name || 'Товар'}" class="product-modal-image"
                                      onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
                             </div>
                             
@@ -1516,8 +1576,8 @@
                                 <h3><i class="fas fa-home"></i> Характеристики покрытия</h3>
                                 <div class="product-modal-specs-grid">
                                     <div class="product-modal-spec-item">
-                                        <div class="product-modal-spec-value">${formatPrice(product.price)} ₽</div>
-                                        <div class="product-modal-spec-label">Цена за ${product.unit}</div>
+                                        <div class="product-modal-spec-value">${formatPrice(product.price || 0)} ₽</div>
+                                        <div class="product-modal-spec-label">Цена за ${product.unit || 'м²'}</div>
                                     </div>
                                     <div class="product-modal-spec-item">
                                         <div class="product-modal-spec-value">${productThickness}</div>
@@ -1535,7 +1595,7 @@
                             </div>
                             
                             <h3>Описание товара</h3>
-                            <p>${product.description}</p>
+                            <p>${product.description || 'Качественное напольное покрытие с отличными эксплуатационными характеристиками. Подходит для использования в жилых и коммерческих помещениях.'}</p>
                             
                             <div class="product-modal-details-grid">
                                 <div class="product-modal-detail-section">
@@ -1552,7 +1612,7 @@
                                 <div class="product-modal-detail-section">
                                     <h4><i class="fas fa-clipboard-list"></i> Технические характеристики</h4>
                                     <ul>
-                                        <li>Тип: ${getTypeLabel(product.type)}</li>
+                                        <li>Тип: ${getTypeLabel(product.type || 'laminate')}</li>
                                         <li>Толщина: ${productThickness}</li>
                                         <li>Класс износостойкости: ${productClass}</li>
                                         <li>Размеры: ${dimensions}</li>
@@ -1602,9 +1662,19 @@
             const container = document.getElementById('catalogItems');
             if (!container) return;
             
+            filteredProducts = products;
+            
             // Рассчитываем общее количество страниц
             totalPages = Math.ceil(products.length / pageSize);
             if (totalPages === 0) totalPages = 1;
+            
+            // Проверяем, что текущая страница в допустимых пределах
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
             
             // Обновляем информацию о страницах
             updatePageInfo();
@@ -1669,36 +1739,48 @@
             if (mobileTotalPages) mobileTotalPages.textContent = totalPages;
         }
         
-        // Функция для рендеринга пагинации как на изображении
+        // Функция для рендеринга пагинации с динамическим отображением соседних страниц
         function renderPagination() {
             const paginationContainer = document.getElementById('pagination');
             if (!paginationContainer) return;
             
             let paginationHTML = '';
             
-            // Всегда показываем первые 5 страниц, потом многоточие, потом последнюю
-            if (totalPages <= 7) {
-                // Если страниц мало, показываем все
-                for (let i = 1; i <= totalPages; i++) {
-                    paginationHTML += `
-                        <a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</a>
-                    `;
-                }
-            } else {
-                // Показываем первые 5 страниц
-                for (let i = 1; i <= 5; i++) {
-                    paginationHTML += `
-                        <a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</a>
-                    `;
-                }
-                
-                // Многоточие
+            // Всегда показываем первую страницу
+            paginationHTML += `<a href="#" class="page-link ${currentPage === 1 ? 'active' : ''}" data-page="1">1</a>`;
+            
+            // Определяем, какие страницы показывать
+            let startPage = Math.max(2, currentPage - 2);
+            let endPage = Math.min(totalPages - 1, currentPage + 2);
+            
+            // Если мы близко к началу, показываем больше страниц в конце
+            if (currentPage <= 3) {
+                endPage = Math.min(totalPages - 1, 5);
+            }
+            
+            // Если мы близко к концу, показываем больше страниц в начале
+            if (currentPage >= totalPages - 2) {
+                startPage = Math.max(2, totalPages - 4);
+            }
+            
+            // Показываем многоточие после первой страницы, если есть разрыв
+            if (startPage > 2) {
                 paginationHTML += `<span class="page-ellipsis">...</span>`;
-                
-                // Последняя страница
-                paginationHTML += `
-                    <a href="#" class="page-link ${currentPage === totalPages ? 'active' : ''}" data-page="${totalPages}">${totalPages}</a>
-                `;
+            }
+            
+            // Показываем страницы в диапазоне
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `<a href="#" class="page-link ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</a>`;
+            }
+            
+            // Показываем многоточие перед последней страницей, если есть разрыв
+            if (endPage < totalPages - 1) {
+                paginationHTML += `<span class="page-ellipsis">...</span>`;
+            }
+            
+            // Показываем последнюю страницу, если она не первая
+            if (totalPages > 1) {
+                paginationHTML += `<a href="#" class="page-link ${currentPage === totalPages ? 'active' : ''}" data-page="${totalPages}">${totalPages}</a>`;
             }
             
             paginationContainer.innerHTML = paginationHTML;
@@ -1709,6 +1791,7 @@
             const mobilePagePrev = document.getElementById('mobilePagePrev');
             const mobilePageNext = document.getElementById('mobilePageNext');
             
+            // Обновляем классы disabled
             if (currentPage === 1) {
                 if (pagePrev) pagePrev.classList.add('disabled');
                 if (mobilePagePrev) mobilePagePrev.classList.add('disabled');
@@ -1736,39 +1819,6 @@
                     goToPage(page);
                 });
             });
-            
-            // Обработчики для кнопок "Назад" и "Вперед"
-            if (pagePrev) {
-                pagePrev.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
-                    goToPage(currentPage - 1);
-                });
-            }
-            
-            if (pageNext) {
-                pageNext.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
-                    goToPage(currentPage + 1);
-                });
-            }
-            
-            if (mobilePagePrev) {
-                mobilePagePrev.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
-                    goToPage(currentPage - 1);
-                });
-            }
-            
-            if (mobilePageNext) {
-                mobilePageNext.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
-                    goToPage(currentPage + 1);
-                });
-            }
         }
         
         // Функция перехода на конкретную страницу
@@ -1776,7 +1826,19 @@
             if (page < 1 || page > totalPages || page === currentPage) return;
             
             currentPage = page;
-            applyFilters();
+            
+            // Восстанавливаем отфильтрованные товары
+            if (filteredProducts.length === 0) {
+                applyFilters();
+            } else {
+                // Рассчитываем товары для текущей страницы
+                const startIndex = (currentPage - 1) * pageSize;
+                const endIndex = Math.min(startIndex + pageSize, filteredProducts.length);
+                const productsToShow = filteredProducts.slice(startIndex, endIndex);
+                
+                // Обновляем отображение
+                renderProducts(filteredProducts);
+            }
             
             // Прокрутка к началу каталога
             const catalogItems = document.querySelector('.catalog-items');
@@ -1794,19 +1856,19 @@
             
             // Фильтрация по типу
             if (type !== 'all') {
-                filtered = filtered.filter(product => product.type === type);
+                filtered = filtered.filter(product => (product.type || 'laminate') === type);
             }
             
             // Фильтрация по цене
-            filtered = filtered.filter(product => product.price <= maxPrice);
+            filtered = filtered.filter(product => (product.price || 0) <= maxPrice);
             
             // Фильтрация по поисковому запросу
             if (searchTerm.trim() !== '') {
                 const term = searchTerm.toLowerCase();
                 filtered = filtered.filter(product => 
-                    product.name.toLowerCase().includes(term) || 
-                    product.description.toLowerCase().includes(term) ||
-                    getTypeLabel(product.type).toLowerCase().includes(term) ||
+                    (product.name || '').toLowerCase().includes(term) || 
+                    (product.description || '').toLowerCase().includes(term) ||
+                    getTypeLabel(product.type || 'laminate').toLowerCase().includes(term) ||
                     (product.tags && product.tags.some(tag => tag.toLowerCase().includes(term)))
                 );
             }
@@ -1820,11 +1882,11 @@
             
             switch(sortType) {
                 case 'price-low':
-                    return sorted.sort((a, b) => a.price - b.price);
+                    return sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
                 case 'price-high':
-                    return sorted.sort((a, b) => b.price - a.price);
+                    return sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
                 case 'rating-desc':
-                    return sorted.sort((a, b) => b.rating - a.rating);
+                    return sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
                 case 'popular':
                     return sorted.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
                 case 'newest':
@@ -1835,7 +1897,12 @@
                         return idB - idA;
                     });
                 default:
-                    return sorted;
+                    return sorted.sort((a, b) => {
+                        // Сортировка по умолчанию - по ID
+                        const idA = parseInt(a.id.split('_')[1]) || 0;
+                        const idB = parseInt(b.id.split('_')[1]) || 0;
+                        return idA - idB;
+                    });
             }
         }
         
@@ -1843,11 +1910,14 @@
         function applyFilters() {
             const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
             const searchTerm = document.getElementById('searchInput')?.value || '';
-            const maxPrice = parseInt(document.getElementById('priceSlider')?.value || 5000);
+            const maxPrice = parseInt(document.getElementById('priceSlider')?.value || 10000);
             const sortType = document.getElementById('sortSelect')?.value || 'default';
             
             let filteredProducts = filterProducts(activeFilter, maxPrice, searchTerm);
             filteredProducts = sortProducts(filteredProducts, sortType);
+            
+            // Сбрасываем текущую страницу на первую при применении фильтров
+            currentPage = 1;
             
             renderProducts(filteredProducts);
         }
@@ -1868,10 +1938,10 @@
             if (sortSelect) sortSelect.value = 'default';
             
             const priceSlider = document.getElementById('priceSlider');
-            if (priceSlider) priceSlider.value = 5000;
+            if (priceSlider) priceSlider.value = 10000;
             
             const currentPriceDisplay = document.getElementById('currentPriceDisplay');
-            if (currentPriceDisplay) currentPriceDisplay.textContent = 'До 5 000 ₽';
+            if (currentPriceDisplay) currentPriceDisplay.textContent = 'До 10 000 ₽';
             
             const pageSizeSelect = document.getElementById('pageSizeSelect');
             if (pageSizeSelect) pageSizeSelect.value = '12';
@@ -1889,15 +1959,14 @@
                 'quartz-vinyl': 'Кварц-винил',
                 'spc-laminate': 'SPC-ламинат'
             };
-            return labels[type] || type;
+            return labels[type] || 'Ламинат';
         }
         
         function generateRatingStars(rating) {
-            if (!rating) return '<i class="far fa-star"></i>'.repeat(5);
-            
+            const numRating = parseFloat(rating) || 0;
             let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
+            const fullStars = Math.floor(numRating);
+            const hasHalfStar = numRating % 1 >= 0.5;
             
             for (let i = 0; i < 5; i++) {
                 if (i < fullStars) {
@@ -1956,17 +2025,17 @@
             } else {
                 cart.push({
                     id: product.id,
-                    name: product.name,
-                    price: product.price,
+                    name: product.name || 'Напольное покрытие',
+                    price: product.price || 0,
                     quantity: quantity,
-                    image: product.image,
-                    type: product.type,
-                    unit: product.unit
+                    image: product.image || 'img/catalog/default-floor.jpg',
+                    type: product.type || 'laminate',
+                    unit: product.unit || 'м²'
                 });
             }
             
             saveCart(cart);
-            showNotification(`Товар "${product.name}" добавлен в корзину`);
+            showNotification(`Товар "${product.name || 'Напольное покрытие'}" добавлен в корзину`);
         }
         
         // Функция для открытия модального окна товара
@@ -2223,6 +2292,49 @@
             });
         }
         
+        // Инициализация обработчиков для кнопок пагинации (добавляем один раз)
+        function initPaginationHandlers() {
+            // Обработчик для кнопки "Назад" (десктоп)
+            const pagePrev = document.getElementById('pagePrev');
+            if (pagePrev) {
+                pagePrev.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage - 1);
+                });
+            }
+            
+            // Обработчик для кнопки "Вперед" (десктоп)
+            const pageNext = document.getElementById('pageNext');
+            if (pageNext) {
+                pageNext.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage + 1);
+                });
+            }
+            
+            // Обработчик для кнопки "Назад" (мобильная)
+            const mobilePagePrev = document.getElementById('mobilePagePrev');
+            if (mobilePagePrev) {
+                mobilePagePrev.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage - 1);
+                });
+            }
+            
+            // Обработчик для кнопки "Вперед" (мобильная)
+            const mobilePageNext = document.getElementById('mobilePageNext');
+            if (mobilePageNext) {
+                mobilePageNext.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.classList.contains('disabled')) return;
+                    goToPage(currentPage + 1);
+                });
+            }
+        }
+        
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация фильтров
@@ -2230,7 +2342,6 @@
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    currentPage = 1; // Сбрасываем на первую страницу при изменении фильтра
                     applyFilters();
                 });
             });
@@ -2239,7 +2350,6 @@
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchInput.addEventListener('input', function() {
-                    currentPage = 1; // Сбрасываем на первую страницу при поиске
                     applyFilters();
                 });
             }
@@ -2248,7 +2358,6 @@
             const sortSelect = document.getElementById('sortSelect');
             if (sortSelect) {
                 sortSelect.addEventListener('change', function() {
-                    currentPage = 1; // Сбрасываем на первую страницу при сортировке
                     applyFilters();
                 });
             }
@@ -2261,7 +2370,6 @@
                 priceSlider.addEventListener('input', function() {
                     const value = parseInt(this.value);
                     currentPriceDisplay.textContent = `До ${value.toLocaleString()} ₽`;
-                    currentPage = 1; // Сбрасываем на первую страницу при изменении цены
                     applyFilters();
                 });
             }
@@ -2271,7 +2379,6 @@
             if (pageSizeSelect) {
                 pageSizeSelect.addEventListener('change', function() {
                     pageSize = parseInt(this.value);
-                    currentPage = 1; // Сбрасываем на первую страницу при изменении количества
                     applyFilters();
                 });
             }
@@ -2281,6 +2388,9 @@
             if (clearFiltersBtn) {
                 clearFiltersBtn.addEventListener('click', resetFilters);
             }
+            
+            // Инициализация обработчиков для кнопок пагинации
+            initPaginationHandlers();
             
             // Обновление счетчика корзины
             updateCartCount();
