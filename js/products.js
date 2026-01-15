@@ -8,7 +8,7 @@ class ProductsDatabase {
     init() {
         // Все 197 товаров
         const allProducts = [
-            // Группа 1: Ламинат Egger Classic (33 товара)
+            // Группа 1: Ламинат обычный
             {
                 id: "floor_001",
                 name: "Ламинат Дуб Бирта",
@@ -885,7 +885,7 @@ class ProductsDatabase {
                 tags: ["ламинат", "дуб", "старинный", "винтажный"]
             },
 
-            // Группа 2: Ламинат Kronospan Premium (33 товара)
+            
             {
                 id: "floor_034",
                 name: "Ламинат Дуб Оливер",
@@ -1737,7 +1737,7 @@ class ProductsDatabase {
                 tags: ["ламинат", "премиум", "дуб", "старинный"]
             },
 
-            // Группа 4: SPC-ламинат  (67 товаров)
+            // Группа 4: SPC-ламинат  
             {
                 id: "floor_067",
                 name: "SPC-ламинат Дуб Робертс",
@@ -3488,7 +3488,7 @@ class ProductsDatabase {
                 tags: ["spc-ламинат", "водостойкий", "клен", "японский"]
             },
 
-            // Группа 5: SPC-ламинат StoneFloor (33 товара)
+            // Группа 5: SPC-ламинат 
             {
                 id: "floor_133",
                 name: "SPC-ламинат Бриошь Дерево",
@@ -4331,7 +4331,7 @@ class ProductsDatabase {
                 tags: ["spc-ламинат", "водостойкий", "дуб", "старинный"]
             },
 
-            // Группа 6: ламинат
+            // Группа 6: Ламинат
             {
                 id: "floor_166",
                 name: "NC69 Дуб Арчер",
@@ -4599,7 +4599,7 @@ class ProductsDatabase {
             },
             {
                 id: "floor_176",
-                name: "Ламинат",
+                name: "Ламинат Дуб Альбионе",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4621,12 +4621,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/",
+                image: "img/catalog/artego/Дуб Альбионе.jpg",
                 tags: ["ламинат", "груша", "садовая", "розовый", "спецпредложение"]
             },
             {
                 id: "floor_177",
-                name: "Ламинат Дуб",
+                name: "Ламинат Дуб Блэкстайл",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4647,12 +4647,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Венге Африканский.jpg",
+                image: "img/catalog/artego/Дуб Блэкстайл.jpg",
                 tags: ["ламинат", "венге", "африканский", "экзотический"]
             },
             {
                 id: "floor_178",
-                name: "Ламинат Мербау Тропический",
+                name: "Ламинат Дуб Виньоне",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4674,12 +4674,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Мербау Тропический.jpg",
+                image: "img/catalog/artego/Дуб Виньоне.jpg",
                 tags: ["ламинат", "мербау", "тропический", "экзотический", "спецпредложение"]
             },
             {
                 id: "floor_179",
-                name: "Ламинат Тик Индонезийский",
+                name: "Ламинат Дуб Грандор",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4700,12 +4700,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Тик Индонезийский.jpg",
+                image: "img/catalog/artego/Дуб Грандор.jpg",
                 tags: ["ламинат", "тик", "индонезийский", "элитный"]
             },
             {
                 id: "floor_180",
-                name: "Ламинат Дуб Выбеленный",
+                name: "Ламинат Дуб Кортадо",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4727,12 +4727,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Выбеленный.jpg",
+                image: "img/catalog/artego/Дуб Кортадо.jpg",
                 tags: ["ламинат", "дуб", "выбеленный", "светлый", "спецпредложение"]
             },
             {
                 id: "floor_181",
-                name: "Ламинат Дуб Антрацит",
+                name: "Ламинат Дуб Лейквил",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4753,12 +4753,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Антрацит.jpg",
+                image: "img/catalog/artego/Дуб Лейквил.jpg",
                 tags: ["ламинат", "дуб", "антрацит", "современный"]
             },
             {
                 id: "floor_182",
-                name: "Ламинат Дуб Шоколадный",
+                name: "Ламинат Дуб Ривертон",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4780,12 +4780,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Шоколадный.jpg",
+                image: "img/catalog/artego/Дуб Ривертон.jpg",
                 tags: ["ламинат", "дуб", "шоколадный", "коричневый", "спецпредложение"]
             },
             {
                 id: "floor_183",
-                name: "Ламинат Ясень Прованс",
+                name: "Ламинат Дуб Серенити",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4806,12 +4806,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ясень Прованс.jpg",
+                image: "img/catalog/artego/Дуб Серенити.jpg",
                 tags: ["ламинат", "ясень", "прованс", "французский"]
             },
             {
                 id: "floor_184",
-                name: "Ламинат Орех Императорский",
+                name: "Ламинат Дуб Флетчер",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4833,12 +4833,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Орех Императорский.jpg",
+                image: "img/catalog/artego/Дуб Флетчер.jpg",
                 tags: ["ламинат", "орех", "императорский", "роскошный", "спецпредложение"]
             },
             {
                 id: "floor_185",
-                name: "Ламинат Бук Английский",
+                name: "Ламинат Марио Сиера",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4859,12 +4859,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Бук Английский.jpg",
+                image: "img/catalog/artego/Марио Сиера.jpg",
                 tags: ["ламинат", "бук", "английский", "классический"]
             },
             {
                 id: "floor_186",
-                name: "Ламинат Вишня Бордовая",
+                name: "Ламинат Нуарель",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4886,12 +4886,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Вишня Бордовая.jpg",
+                image: "img/catalog/artego/Нуарель.jpg",
                 tags: ["ламинат", "вишня", "бордовая", "насыщенная", "спецпредложение"]
             },
             {
                 id: "floor_187",
-                name: "Ламинат Сосна Таежная",
+                name: "Ламинат Санстоун",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4912,12 +4912,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Сосна Таежная.jpg",
+                image: "img/catalog/artego/Санстоун.jpg",
                 tags: ["ламинат", "сосна", "таежная", "природная"]
             },
             {
                 id: "floor_188",
-                name: "Ламинат Ольха Серебристая",
+                name: "Ламинат Дуб Аскер",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4939,12 +4939,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ольха Серебристая.jpg",
+                image: "img/catalog/paradigma/Дуб Аскер.jpg",
                 tags: ["ламинат", "ольха", "серебристая", "холодный", "спецпредложение"]
             },
             {
                 id: "floor_189",
-                name: "Ламинат Клен Японский",
+                name: "Ламинат Дуб Асти",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4965,12 +4965,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Клен Японский.jpg",
+                image: "img/catalog/paradigma/Дуб Асти.jpg",
                 tags: ["ламинат", "клен", "японский", "восточный"]
             },
             {
                 id: "floor_190",
-                name: "Ламинат Береза Карликовая",
+                name: "Ламинат Дуб Бертран",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -4992,12 +4992,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Береза Карликовая.jpg",
+                image: "img/catalog/paradigma/Дуб Бертран.jpg",
                 tags: ["ламинат", "береза", "карликовая", "текстура", "спецпредложение"]
             },
             {
                 id: "floor_191",
-                name: "Ламинат Груша Дикая",
+                name: "Ламинат Дуб Гровери",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5018,12 +5018,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Груша Дикая.jpg",
+                image: "img/catalog/paradigma/Дуб Гровери.jpg",
                 tags: ["ламинат", "груша", "дикая", "естественная"]
             },
             {
                 id: "floor_192",
-                name: "Ламинат Дуб Мореный",
+                name: "Ламинат Дуб Линео",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5045,12 +5045,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Мореный.jpg",
+                image: "img/catalog/paradigma/Дуб Линео.jpg",
                 tags: ["ламинат", "дуб", "мореный", "темный", "спецпредложение"]
             },
             {
                 id: "floor_193",
-                name: "Ламинат Ясень Песочный",
+                name: "Ламинат Дуб Новион",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5071,12 +5071,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ясень Песочный.jpg",
+                image: "img/catalog/paradigma/Дуб Новион.jpg",
                 tags: ["ламинат", "ясень", "песочный", "теплый"]
             },
             {
                 id: "floor_194",
-                name: "Ламинат Орех Кедровый",
+                name: "Ламинат Дуб Риман",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5098,12 +5098,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Орех Кедровый.jpg",
+                image: "img/catalog/paradigma/Дуб Риман.jpg",
                 tags: ["ламинат", "орех", "кедровый", "красный", "спецпредложение"]
             },
             {
                 id: "floor_195",
-                name: "Ламинат Бук Горный",
+                name: "Ламинат Дуб Руссен",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5124,12 +5124,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Бук Горный.jpg",
+                image: "img/catalog/paradigma/Дуб Руссен.jpg",
                 tags: ["ламинат", "бук", "горный", "текстура"]
             },
             {
                 id: "floor_196",
-                name: "Ламинат Вишня Викторианская",
+                name: "Ламинат Дуб Сельберг",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5151,12 +5151,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Вишня Викторианская.jpg",
+                image: "img/catalog/paradigma/Дуб Сельберг.jpg",
                 tags: ["ламинат", "вишня", "викторианская", "английская", "спецпредложение"]
             },
             {
                 id: "floor_197",
-                name: "Ламинат Сосна Кедровая",
+                name: "Ламинат Верона",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5177,12 +5177,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Сосна Кедровая.jpg",
+                image: "img/catalog/palazzo/Верона.jpg",
                 tags: ["ламинат", "сосна", "кедровая", "ароматическая"]
             },
             {
                 id: "floor_198",
-                name: "Ламинат Ольха Золотая",
+                name: "Ламинат Лоренца Линара",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5204,12 +5204,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ольха Золотая.jpg",
+                image: "img/catalog/palazzo/Лоренца Линара.jpg",
                 tags: ["ламинат", "ольха", "золотая", "желтый", "спецпредложение"]
             },
             {
                 id: "floor_199",
-                name: "Ламинат Клен Сахарный",
+                name: "Ламинат Лоренца Миадор",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5230,12 +5230,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Клен Сахарный.jpg",
+                image: "img/catalog/palazzo/Лоренца Миадор.jpg",
                 tags: ["ламинат", "клен", "сахарный", "кремовый"]
             },
             {
                 id: "floor_200",
-                name: "Ламинат Береза Серебряная",
+                name: "Ламинат Лоренца Митзано",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5257,12 +5257,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Береза Серебряная.jpg",
+                image: "img/catalog/palazzo/Лоренца Митзано.jpg",
                 tags: ["ламинат", "береза", "серебряная", "серый", "спецпредложение"]
             },
             {
                 id: "floor_201",
-                name: "Ламинат Груша Королевская",
+                name: "Ламинат Лоренца Сильвано",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5283,12 +5283,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Груша Королевская.jpg",
+                image: "img/catalog/palazzo/Лоренца Сильвано.jpg",
                 tags: ["ламинат", "груша", "королевская", "изысканная"]
             },
             {
                 id: "floor_202",
-                name: "Ламинат Венге Конго",
+                name: "Ламинат Лоренца Тиара",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5310,12 +5310,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Венге Конго.jpg",
+                image: "img/catalog/palazzo/Лоренца Тиара.jpg",
                 tags: ["ламинат", "венге", "конго", "экзотический", "спецпредложение"]
             },
             {
                 id: "floor_203",
-                name: "Ламинат Мербау Малайский",
+                name: "Ламинат Тоскана",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5336,12 +5336,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Мербау Малайский.jpg",
+                image: "img/catalog/palazzo/Тоскана.jpg",
                 tags: ["ламинат", "мербау", "малайский", "экзотический"]
             },
             {
                 id: "floor_204",
-                name: "Ламинат Тик Бирманский",
+                name: "Ламинат Фабиано Нова",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5363,12 +5363,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Тик Бирманский.jpg",
+                image: "img/catalog/palazzo/Фабиано Нова.jpg",
                 tags: ["ламинат", "тик", "бирманский", "элитный", "спецпредложение"]
             },
             {
                 id: "floor_205",
-                name: "Ламинат Дуб Графитовый",
+                name: "Ламинат Феличе Нова",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5389,12 +5389,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Графитовый.jpg",
+                image: "img/catalog/palazzo/Феличе Нова.jpg",
                 tags: ["ламинат", "дуб", "графитовый", "индустриальный"]
             },
             {
                 id: "floor_206",
-                name: "Ламинат Ясень Мраморный",
+                name: "Ламинат Фьюмичино Нова",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5416,12 +5416,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ясень Мраморный.jpg",
+                image: "img/catalog/palazzo/Фьюмичино Нова.jpg",
                 tags: ["ламинат", "ясень", "мраморный", "прожилки", "спецпредложение"]
             },
             {
                 id: "floor_207",
-                name: "Ламинат Орех Грецкий",
+                name: "Ламинат Дуб Богота",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5442,12 +5442,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Орех Грецкий.jpg",
+                image: "img/catalog/megapolis/Дуб Богота.jpg",
                 tags: ["ламинат", "орех", "грецкий", "коричневый"]
             },
             {
                 id: "floor_208",
-                name: "Ламинат Бук Европейский",
+                name: "Ламинат Дуб Дейли",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5469,12 +5469,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Бук Европейский.jpg",
+                image: "img/catalog/megapolis/Дуб Дейли.jpg",
                 tags: ["ламинат", "бук", "европейский", "классика", "спецпредложение"]
             },
             {
                 id: "floor_209",
-                name: "Ламинат Вишня Испанская",
+                name: "Ламинат Дуб Касабланка",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5495,12 +5495,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Вишня Испанская.jpg",
+                image: "img/catalog/megapolis/Дуб Касабланка.jpg",
                 tags: ["ламинат", "вишня", "испанская", "средиземноморская"]
             },
             {
                 id: "floor_210",
-                name: "Ламинат Сосна Сибирская",
+                name: "Ламинат Дуб Лагос",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5522,12 +5522,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Сосна Сибирская.jpg",
+                image: "img/catalog/megapolis/Дуб Лагос.jpg",
                 tags: ["ламинат", "сосна", "сибирская", "северная", "спецпредложение"]
             },
             {
                 id: "floor_211",
-                name: "Ламинат Ольха Болотная",
+                name: "Ламинат Дуб Лима",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5548,12 +5548,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ольха Болотная.jpg",
+                image: "img/catalog/megapolis/Дуб Лима.jpg",
                 tags: ["ламинат", "ольха", "болотная", "зеленый"]
             },
             {
                 id: "floor_212",
-                name: "Ламинат Клен Красный",
+                name: "Ламинат Дуб Найроби",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5575,12 +5575,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Клен Красный.jpg",
+                image: "img/catalog/megapolis/Дуб Найроби.jpg",
                 tags: ["ламинат", "клен", "красный", "яркий", "спецпредложение"]
             },
             {
                 id: "floor_213",
-                name: "Ламинат Береза Карельская",
+                name: "Ламинат Дуб Нанкин",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5601,12 +5601,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Береза Карельская.jpg",
+                image: "img/catalog/megapolis/Дуб Нанкин.jpg",
                 tags: ["ламинат", "береза", "карельская", "волнистая"]
             },
             {
                 id: "floor_214",
-                name: "Ламинат Груша Азиатская",
+                name: "Ламинат Дуб Сеони",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5628,12 +5628,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Груша Азиатская.jpg",
+                image: "img/catalog/megapolis/Дуб Сеони.jpg",
                 tags: ["ламинат", "груша", "азиатская", "восточная", "спецпредложение"]
             },
             {
                 id: "floor_215",
-                name: "Ламинат Дуб Медовый",
+                name: "Ламинат Дуб Солер",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5654,12 +5654,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Медовый.jpg",
+                image: "img/catalog/megapolis/Дуб Солер.jpg",
                 tags: ["ламинат", "дуб", "медовый", "желтый"]
             },
             {
                 id: "floor_216",
-                name: "Ламинат Ясень Пепельный",
+                name: "Ламинат Дуб Сурат",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5681,12 +5681,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ясень Пепельный.jpg",
+                image: "img/catalog/megapolis/Дуб Сурат.jpg",
                 tags: ["ламинат", "ясень", "пепельный", "монохром", "спецпредложение"]
             },
             {
                 id: "floor_217",
-                name: "Ламинат Орех Черный",
+                name: "Ламинат Дуб Хартум",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5707,12 +5707,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Орех Черный.jpg",
+                image: "img/catalog/megapolis/Дуб Хартум.jpg",
                 tags: ["ламинат", "орех", "черный", "контрастный"]
             },
             {
                 id: "floor_218",
-                name: "Ламинат Бук Американский",
+                name: "Ламинат Дуб Хэфэй",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5734,12 +5734,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Бук Американский.jpg",
+                image: "img/catalog/megapolis/Дуб Хэфэй.jpg",
                 tags: ["ламинат", "бук", "американский", "современный", "спецпредложение"]
             },
             {
                 id: "floor_219",
-                name: "Ламинат Вишня Французская",
+                name: "Ламинат Дуб Ченнаи",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5760,12 +5760,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Вишня Французская.jpg",
+                image: "img/catalog/megapolis/Дуб Ченнаи.jpg",
                 tags: ["ламинат", "вишня", "французская", "элегантная"]
             },
             {
                 id: "floor_220",
-                name: "Ламинат Сосна Скандинавская",
+                name: "Ламинат Дуб Янгон",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5787,12 +5787,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Сосна Скандинавская.jpg",
+                image: "img/catalog/megapolis/Дуб Янгон.jpg",
                 tags: ["ламинат", "сосна", "скандинавская", "северная", "спецпредложение"]
             },
             {
                 id: "floor_221",
-                name: "Ламинат Ольха Розовая",
+                name: "Ламинат Дуб Брайс",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5813,12 +5813,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Ольха Розовая.jpg",
+                image: "img/catalog/phantom/Дуб Брайс.jpg",
                 tags: ["ламинат", "ольха", "розовая", "нежная"]
             },
             {
                 id: "floor_222",
-                name: "Ламинат Клен Зеленый",
+                name: "Ламинат Дуб Лэйдж",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5840,12 +5840,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Клен Зеленый.jpg",
+                image: "img/catalog/phantom/Дуб Лэйдж.jpg",
                 tags: ["ламинат", "клен", "зеленый", "природный", "спецпредложение"]
             },
             {
                 id: "floor_223",
-                name: "Ламинат Береза Гималайская",
+                name: "Ламинат Дуб Роан",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5866,12 +5866,12 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Береза Гималайская.jpg",
+                image: "img/catalog/phantom/Дуб Роан.jpg",
                 tags: ["ламинат", "береза", "гималайская", "экзотическая"]
             },
             {
                 id: "floor_224",
-                name: "Ламинат Груша Европейская",
+                name: "Ламинат Дуб Флайт",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
@@ -5893,22 +5893,739 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Груша Европейская.jpg",
+                image: "img/catalog/phantom/Дуб Флайт.jpg",
                 tags: ["ламинат", "груша", "европейская", "классическая", "спецпредложение"]
             },
+
+            // Группа 5: SPC-ламинат
             {
                 id: "floor_225",
-                name: "Ламинат Дуб Платиновый",
+                name: "SPC-ламиат Дуб Пульсар",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3150,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 85,
+                inStock: true,
+                stockCount: 120,
+                description: "SPC-ламинат с текстурой под дуб цвета морской волны для влажных помещений.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Пульсар.jpg",
+                tags: ["spc-ламинат", "водостойкий", "дуб", "морской"]
+            },
+            {
+                id: "floor_226",
+                name: "SPC-ламинат Дуб Тизоль",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3050,
+                oldPrice: 3600,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 78,
+                inStock: true,
+                stockCount: 130,
+                description: "SPC-ламинат под дуб цвета песка для пляжных интерьеров.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Тизоль.jpg",
+                tags: ["spc-ламинат", "водостойкий", "дуб", "песочный", "спецпредложение"]
+            },
+            {
+                id: "floor_227",
+                name: "SPC-ламинат Дуб Фолибер",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3250,
+                unit: "м²",
+                rating: 4.9,
+                reviews: 92,
+                inStock: true,
+                stockCount: 105,
+                description: "SPC-ламинат под белоснежный дуб для греческих интерьеров.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Фолибер.jpg",
+                tags: ["spc-ламинат", "водостойкий", "дуб", "белый", "греческий"]
+            },
+            {
+                id: "floor_228",
+                name: "SPC-ламинат Дуб Фолио",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2980,
+                oldPrice: 3500,
+                unit: "м²",
+                rating: 4.6,
+                reviews: 74,
+                inStock: true,
+                stockCount: 140,
+                description: "SPC-ламинат под ясень цвета норвежского фьорда.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Фолио.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ясень", "норвежский", "спецпредложение"]
+            },
+            {
+                id: "floor_229",
+                name: "SPC-ламинат Дуб Фуаро",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3350,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 88,
+                inStock: true,
+                stockCount: 95,
+                description: "SPC-ламинат под орех в тосканском стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Фуаро.jpg",
+                tags: ["spc-ламинат", "водостойкий", "орех", "тоскана"]
+            },
+            {
+                id: "floor_230",
+                name: "SPC-ламинат Дуб Хьюмер",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2880,
+                oldPrice: 3400,
+                unit: "м²",
+                rating: 4.5,
+                reviews: 69,
+                inStock: true,
+                stockCount: 155,
+                description: "SPC-ламинат под бук альпийского оттенка.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Хьюмер.jpg",
+                tags: ["spc-ламинат", "водостойкий", "бук", "альпийский", "спецпредложение"]
+            },
+            {
+                id: "floor_231",
+                name: "SPC-ламинат Дуб Шиммер",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3450,
+                unit: "м²",
+                rating: 4.9,
+                reviews: 96,
+                inStock: true,
+                stockCount: 85,
+                description: "SPC-ламинат под вишню в прованском стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Шиммер.jpg",
+                tags: ["spc-ламинат", "водостойкий", "вишня", "прованс"]
+            },
+            {
+                id: "floor_232",
+                name: "SPC-ламинат Дуб Элькар",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2780,
+                oldPrice: 3300,
+                unit: "м²",
+                rating: 4.4,
+                reviews: 62,
+                inStock: true,
+                stockCount: 165,
+                description: "SPC-ламинат под лапландскую сосну.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Элькар.jpg",
+                tags: ["spc-ламинат", "водостойкий", "сосна", "лапландия", "спецпредложение"]
+            },
+            {
+                id: "floor_233",
+                name: "SPC-ламинат Дуб Эриус",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2950,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 71,
+                inStock: true,
+                stockCount: 135,
+                description: "SPC-ламинат под ольху тосканского оттенка.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Дуб Эриус.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ольха", "тоскана"]
+            },
+            {
+                id: "floor_234",
+                name: "SPC-ламинат Клео",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3020,
+                oldPrice: 3550,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 79,
+                inStock: true,
+                stockCount: 125,
+                description: "SPC-ламинат под канадский клен.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Клео.jpg",
+                tags: ["spc-ламинат", "водостойкий", "клен", "канадский", "спецпредложение"]
+            },
+            {
+                id: "floor_235",
+                name: "SPC-ламинат Лаверон",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3120,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 83,
+                inStock: true,
+                stockCount: 115,
+                description: "SPC-ламинат под дуб в стиле Амстердама.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Лаверон.jpg",
+                tags: ["spc-ламинат", "водостойкий", "дуб", "амстердам"]
+            },
+            {
+                id: "floor_236",
+                name: "SPC-ламинат Ноэль",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3050,
+                oldPrice: 3600,
+                unit: "м²",
+                rating: 4.6,
+                reviews: 77,
+                inStock: true,
+                stockCount: 128,
+                description: "SPC-ламинат под ясень в стиле Стокгольма.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/unit/Ноэль.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ясень", "стокгольм", "спецпредложение"]
+            },
+            {
+                id: "floor_237",
+                name: "SPC-ламинат Дуб Аридас",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3280,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 91,
+                inStock: true,
+                stockCount: 102,
+                description: "SPC-ламинат под орех в венском стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Аридас.jpg",
+                tags: ["spc-ламинат", "водостойкий", "орех", "венский"]
+            },
+            {
+                id: "floor_238",
+                name: "SPC-ламинат Дуб Артас",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2920,
+                oldPrice: 3450,
+                unit: "м²",
+                rating: 4.5,
+                reviews: 68,
+                inStock: true,
+                stockCount: 142,
+                description: "SPC-ламинат под бук в стиле Праги.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Артас.jpg",
+                tags: ["spc-ламинат", "водостойкий", "бук", "прага", "спецпредложение"]
+            },
+            {
+                id: "floor_239",
+                name: "SPC-ламинат Дуб Данте",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3380,
+                unit: "м²",
+                rating: 4.9,
+                reviews: 94,
+                inStock: true,
+                stockCount: 92,
+                description: "SPC-ламинат под вишню в парижском стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Данте.jpg",
+                tags: ["spc-ламинат", "водостойкий", "вишня", "париж"]
+            },
+            {
+                id: "floor_240",
+                name: "SPC-ламинат Дуб Каракас",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2850,
+                oldPrice: 3350,
+                unit: "м²",
+                rating: 4.4,
+                reviews: 65,
+                inStock: true,
+                stockCount: 152,
+                description: "SPC-ламинат под сибирскую сосну.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Каракас.jpg",
+                tags: ["spc-ламинат", "водостойкий", "сосна", "сибирь", "спецпредложение"]
+            },
+            {
+                id: "floor_241",
+                name: "SPC-ламинат Дуб Корвус",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2980,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 73,
+                inStock: true,
+                stockCount: 132,
+                description: "SPC-ламинат под ольху в балийском стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Корвус.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ольха", "бали"]
+            },
+            {
+                id: "floor_242",
+                name: "SPC-ламинат Дуб Лауфер",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3080,
+                oldPrice: 3650,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 81,
+                inStock: true,
+                stockCount: 122,
+                description: "SPC-ламинат под японский клен.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Лауфер.jpg",
+                tags: ["spc-ламинат", "водостойкий", "клен", "япония", "спецпредложение"]
+            },
+            {
+                id: "floor_243",
+                name: "SPC-ламинат Дуб Мэйсер",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3180,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 86,
+                inStock: true,
+                stockCount: 112,
+                description: "SPC-ламинат под дуб цвета африканской саванны.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Мэйсер.jpg",
+                tags: ["spc-ламинат", "водостойкий", "дуб", "саванна"]
+            },
+            {
+                id: "floor_244",
+                name: "SPC-ламинат Дуб Одерон",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3020,
+                oldPrice: 3550,
+                unit: "м²",
+                rating: 4.6,
+                reviews: 75,
+                inStock: true,
+                stockCount: 126,
+                description: "SPC-ламинат под ясень лавандового оттенка.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Одерон.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ясень", "лаванда", "спецпредложение"]
+            },
+            {
+                id: "floor_245",
+                name: "SPC-ламинат Дуб Риневар",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3320,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 89,
+                inStock: true,
+                stockCount: 108,
+                description: "SPC-ламинат под орех цвета махагони.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Риневар.jpg",
+                tags: ["spc-ламинат", "водостойкий", "орех", "махагон"]
+            },
+            {
+                id: "floor_246",
+                name: "SPC-ламинат Дуб Рочес",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2950,
+                oldPrice: 3500,
+                unit: "м²",
+                rating: 4.5,
+                reviews: 70,
+                inStock: true,
+                stockCount: 138,
+                description: "SPC-ламинат под бук миндального оттенка.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Рочес.jpg",
+                tags: ["spc-ламинат", "водостойкий", "бук", "миндаль", "спецпредложение"]
+            },
+            {
+                id: "floor_247",
+                name: "SPC-ламинат Дуб Содерс",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3420,
+                unit: "м²",
+                rating: 4.9,
+                reviews: 93,
+                inStock: true,
+                stockCount: 96,
+                description: "SPC-ламинат под вишню гранатового цвета.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Содерс.jpg",
+                tags: ["spc-ламинат", "водостойкий", "вишня", "гранат"]
+            },
+            {
+                id: "floor_248",
+                name: "SPC-ламинат Дуб Тейнир",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 2880,
+                oldPrice: 3400,
+                unit: "м²",
+                rating: 4.4,
+                reviews: 67,
+                inStock: true,
+                stockCount: 148,
+                description: "SPC-ламинат под кедровую сосну.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Тейнир.jpg",
+                tags: ["spc-ламинат", "водостойкий", "сосна", "кедр", "спецпредложение"]
+            },
+            {
+                id: "floor_249",
+                name: "SPC-ламинат Дуб Теоми",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3010,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 76,
+                inStock: true,
+                stockCount: 130,
+                description: "SPC-ламинат под ольху ирисового оттенка.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Теоми.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ольха", "ирис"]
+            },
+            {
+                id: "floor_250",
+                name: "SPC-ламинат Дуб Церея",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3110,
+                oldPrice: 3650,
+                unit: "м²",
+                rating: 4.8,
+                reviews: 84,
+                inStock: true,
+                stockCount: 120,
+                description: "SPC-ламинат под клен карамельного цвета.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Церея.jpg",
+                tags: ["spc-ламинат", "водостойкий", "клен", "карамель", "спецпредложение"]
+            },
+            {
+                id: "floor_251",
+                name: "SPC-ламинат Дуб Элрут",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3220,
+                unit: "м²",
+                rating: 4.7,
+                reviews: 90,
+                inStock: true,
+                stockCount: 110,
+                description: "SPC-ламинат под дуб в рустикальном стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Элрут.jpg",
+                tags: ["spc-ламинат", "водостойкий", "дуб", "рустик"]
+            },
+            {
+                id: "floor_252",
+                name: "SPC-ламинат Дуб Юнит",
+                category: "finishing",
+                subcategory: "Напольные покрытия",
+                type: "spc-laminate",
+                price: 3080,
+                oldPrice: 3650,
+                unit: "м²",
+                rating: 4.6,
+                reviews: 79,
+                inStock: true,
+                stockCount: 124,
+                description: "SPC-ламинат под ясень в индустриальном стиле.",
+                features: ["SPC основа", "100% водостойкость", "Толщина: 8 мм", "Класс износостойкости: 43"],
+                specifications: {
+                    "Размер": "1220x180 мм",
+                    "Толщина": "8 мм",
+                    "Защитный слой": "0.7 мм",
+                    "Класс": "43 AC6",
+                    "Укладка": "Плавающая",
+                    "Основа": "SPC"
+                },
+                image: "img/catalog/genesis/Дуб Юнит.jpg",
+                tags: ["spc-ламинат", "водостойкий", "ясень", "индустриальный", "спецпредложение"]
+            },
+            {
+                id: "floor_253",
+                name: "Ламинат Дуб Хэмонд",
                 category: "finishing",
                 subcategory: "Напольные покрытия",
                 type: "laminate",
-                price: 2080,
+                price: 2200,
+                oldPrice: 2600,
                 unit: "упаковка 2м²",
                 rating: 4.7,
-                reviews: 50,
+                reviews: 52,
                 inStock: true,
-                stockCount: 110,
-                description: "Ламинат 33 класса под платиновый дуб с холодным серым оттенком.",
+                stockCount: 75,
+                description: "Ламинат 33 класса под европейскую грушу для классических интерьеров.",
                 features: ["Класс износостойкости: 33", "Толщина: 12 мм", "Влагостойкость", "Замок Click", "Гарантия: 15 лет"],
                 specifications: {
                     "Размер доски": "1292x193 мм",
@@ -5919,9 +6636,9 @@ class ProductsDatabase {
                     "Соединение": "Click",
                     "Влагостойкость": "H2O-Resist"
                 },
-                image: "img/catalog/additional/Дуб Платиновый.jpg",
-                tags: ["ламинат", "дуб", "платиновый", "серый"]
-            }
+                image: "img/catalog/phantom/Дуб Хэмонд.jpg",
+                tags: ["ламинат", "груша", "европейская", "классическая", "спецпредложение"]
+            },
         ];
 
         // Добавляем все товары в базу данных
