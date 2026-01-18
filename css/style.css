@@ -139,6 +139,7 @@ input, select, textarea {
     transition: all var(--transition-normal);
     height: 70px;
     border-bottom: 1px solid var(--gray-extra-light);
+    
 }
 
 .header.scrolled {
@@ -159,10 +160,14 @@ input, select, textarea {
 
 /* Логотип */
 .logo-container {
+    position: absolute;
+    left: 20px;
+    top: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
+    z-index: 1000;
 }
 
 .logo {
@@ -221,6 +226,8 @@ input, select, textarea {
     flex: 1;
     max-width: 600px;
     margin: 0 auto;
+    margin-left: 280px; /* ← Добавьте эту строку */
+
 }
 
 .nav-list {

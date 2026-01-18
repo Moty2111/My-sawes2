@@ -187,6 +187,24 @@
             border-color: var(--accent-color);
         }
         
+        /* Стили для ленивой загрузки изображений */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+        
+        .product-image {
+            background-color: #f5f5f5;
+        }
+        
+        .product-modal-image {
+            background-color: #f8f9fa;
+        }
+        
         /* Адаптивные стили */
         @media (max-width: 992px) {
             .pagination-container {
@@ -1171,6 +1189,7 @@
                             <li><a href="services.html" class="nav-link"><i class="fas fa-tools"></i> <span>Услуги</span></a></li>
                             <li><a href="contact.html" class="nav-link"><i class="fas fa-address-book"></i> <span>Контакты</span></a></li>
                             <li><a href="projects.html" class="nav-link"><i class="fas fa-project-diagram"></i> <span>Наши проекты</span></a></li>
+                            <li><a href="account.html" class="nav-link"><i class="fas fa-user-circle"></i> <span>Аккаунт</span></a></li>
                         </ul>
                     </nav>
                     
@@ -1395,16 +1414,67 @@
     <script src="js/products.js"></script>
     
     <script>
-        // Основной JavaScript код для каталога с пагинацией
-        
+        // Основной JavaScript код для каталога с пагинацией и оптимизированной загрузкой изображений
+
         // Переменные для управления состоянием
         let currentProductModal = null;
         let allProducts = [];
         let currentPage = 1;
-        let pageSize = 12; // Количество товаров на странице
-        let totalPages = 19; // Всего страниц для 197 товаров (197/12=16.42, округляем вверх)
+        let pageSize = 12;
+        let totalPages = 19;
         let filteredProducts = [];
-        
+        let imageObserver = null;
+        let searchTimeout = null;
+        let priceTimeout = null;
+
+        // Функция для инициализации Intersection Observer для ленивой загрузки
+        function initLazyLoadObserver() {
+            if ('IntersectionObserver' in window) {
+                imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const src = img.getAttribute('data-src');
+                            
+                            if (src) {
+                                // Загружаем изображение
+                                img.src = src;
+                                img.removeAttribute('data-src');
+                                
+                                // Добавляем класс loaded для плавного появления
+                                img.onload = () => {
+                                    img.classList.add('loaded');
+                                };
+                            }
+                            
+                            // Прекращаем наблюдение после загрузки
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '100px 0px', // Начинаем загрузку за 100px до появления в viewport
+                    threshold: 0.01
+                });
+            }
+        }
+
+        // Функция для предзагрузки изображений для текущей страницы
+        function preloadPageImages(products) {
+            if (!products || products.length === 0) return;
+            
+            // Предзагружаем первые 6 изображений (первые два ряда)
+            const imagesToPreload = Math.min(6, products.length);
+            
+            for (let i = 0; i < imagesToPreload; i++) {
+                const product = products[i];
+                if (product && product.image) {
+                    const img = new Image();
+                    img.src = product.image;
+                    product._preloadedImage = img;
+                }
+            }
+        }
+
         // Функция для загрузки товаров из products.js
         function loadProducts() {
             // Используем ProductsDB из products.js
@@ -1446,6 +1516,10 @@
                             
                             return product;
                         });
+                        
+                        // Предзагружаем изображения для первой страницы
+                        const firstPageProducts = allProducts.slice(0, pageSize);
+                        preloadPageImages(firstPageProducts);
                     }
                     
                     // Для 197 товаров при 12 на странице показываем 17 страниц (197/12=16.42)
@@ -1464,9 +1538,12 @@
                 totalPages = 1;
             }
             
+            // Инициализируем ленивую загрузку
+            initLazyLoadObserver();
+            
             applyFilters();
         }
-        
+
         // Функция для генерации HTML карточки товара
         function generateProductCardHTML(product, isFavorite = false) {
             const isInCart = isProductInCart(product.id);
@@ -1499,8 +1576,15 @@
                     </button>
                     
                     <div class="product-image-container">
-                        <img src="${product.image || 'img/catalog/default-floor.jpg'}" alt="${product.name || 'Товар'}" class="product-image" 
-                             onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
+                        <img 
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='280' viewBox='0 0 350 280'%3E%3Crect width='350' height='280' fill='%23f5f5f5'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='16' fill='%23999' text-anchor='middle' dy='.3em'%3EЗагрузка...%3C/text%3E%3C/svg%3E" 
+                            data-src="${product.image || 'img/catalog/default-floor.jpg'}" 
+                            alt="${product.name || 'Товар'}" 
+                            class="product-image lazy-load"
+                            loading="lazy"
+                            width="350"
+                            height="280"
+                            onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
                     </div>
                     
                     <div class="product-info">
@@ -1542,8 +1626,8 @@
                 </div>
             `;
         }
-        
-        // Функция для генерации модального окна товара
+
+        // Функция для генерации модального окна товара с оптимизированной загрузкой изображений
         function generateProductModalHTML(product) {
             const isFavorite = localStorage.getItem(`favorite_${product.id}`) === 'true';
             const isInCart = isProductInCart(product.id);
@@ -1596,8 +1680,13 @@
                         </div>
                         <div class="product-modal-body">
                             <div class="product-modal-image-container">
-                                <img src="${product.image || 'img/catalog/default-floor.jpg'}" alt="${product.name || 'Товар'}" class="product-modal-image"
-                                     onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
+                                <img 
+                                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%23f8f9fa'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='20' fill='%23999' text-anchor='middle' dy='.3em'%3EЗагрузка изображения...%3C/text%3E%3C/svg%3E"
+                                    data-src="${product.image || 'img/catalog/default-floor.jpg'}" 
+                                    alt="${product.name || 'Товар'}" 
+                                    class="product-modal-image lazy-load-modal"
+                                    loading="eager"
+                                    onerror="this.onerror=null; this.src='img/catalog/default-floor.jpg';">
                             </div>
                             
                             <div class="product-modal-specs">
@@ -1685,7 +1774,7 @@
                 </div>
             `;
         }
-        
+
         // Функция для отображения товаров с пагинацией
         function renderProducts(products) {
             const container = document.getElementById('catalogItems');
@@ -1740,7 +1829,14 @@
             }
             
             let html = '';
-            productsToShow.forEach(product => {
+            productsToShow.forEach((product, index) => {
+                // Предзагружаем первые 2 изображения каждой страницы
+                if (index < 2 && product.image && !product._preloadedImage) {
+                    const img = new Image();
+                    img.src = product.image;
+                    product._preloadedImage = img;
+                }
+                
                 const isFavorite = localStorage.getItem(`favorite_${product.id}`) === 'true';
                 html += generateProductCardHTML(product, isFavorite);
             });
@@ -1751,10 +1847,123 @@
             // Обновляем пагинацию
             renderPagination();
             
+            // Инициализация ленивой загрузки для новых изображений
+            initLazyLoadForNewImages();
+            
             // Инициализация обработчиков событий для карточек товаров
             initProductCardEvents();
         }
-        
+
+        // Функция для инициализации ленивой загрузки для новых изображений
+        function initLazyLoadForNewImages() {
+            if (!imageObserver) return;
+            
+            const lazyImages = document.querySelectorAll('.lazy-load:not([data-src=""])');
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Функция для предзагрузки изображений модального окна
+        function preloadModalImage(productId) {
+            const product = allProducts.find(p => p.id == productId);
+            if (!product || !product.image) return;
+            
+            const img = new Image();
+            img.src = product.image;
+            
+            // Сохраняем ссылку на изображение для быстрого доступа
+            product._preloadedModalImage = img;
+        }
+
+        // Функция для открытия модального окна товара
+        function openProductModal(productId) {
+            const product = allProducts.find(p => p.id == productId);
+            if (!product) return;
+            
+            // Предзагружаем изображение для модального окна
+            if (!product._preloadedModalImage && product.image) {
+                preloadModalImage(productId);
+            }
+            
+            // Создаем модальное окно, если его еще нет
+            let modal = document.getElementById(`product-modal-${productId}`);
+            if (!modal) {
+                const modalHTML = generateProductModalHTML(product);
+                const modalsContainer = document.getElementById('productModalsContainer');
+                if (modalsContainer) {
+                    modalsContainer.insertAdjacentHTML('beforeend', modalHTML);
+                    modal = document.getElementById(`product-modal-${productId}`);
+                    initProductModalEvents(productId);
+                    
+                    // Загружаем изображение в модальном окне сразу
+                    const modalImg = modal.querySelector('.product-modal-image');
+                    if (modalImg && modalImg.dataset.src) {
+                        modalImg.src = modalImg.dataset.src;
+                        modalImg.removeAttribute('data-src');
+                        modalImg.classList.add('loaded');
+                    }
+                }
+            } else {
+                // Если модальное окно уже существует, загружаем изображение
+                const modalImg = modal.querySelector('.product-modal-image');
+                if (modalImg && modalImg.dataset.src) {
+                    modalImg.src = modalImg.dataset.src;
+                    modalImg.removeAttribute('data-src');
+                    modalImg.classList.add('loaded');
+                }
+            }
+            
+            // Закрываем текущее модальное окно, если есть
+            if (currentProductModal) {
+                closeProductModal(currentProductModal);
+            }
+            
+            // Открываем новое модальное окно
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                currentProductModal = productId;
+            }
+        }
+
+        // Функция для закрытия модального окна товара
+        function closeProductModal(productId) {
+            const modal = document.getElementById(`product-modal-${productId}`);
+            if (!modal) return;
+            
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentProductModal = null;
+        }
+
+        // Функция переключения избранного
+        function toggleFavorite(productId, button) {
+            const isFavorite = localStorage.getItem(`favorite_${productId}`) === 'true';
+            
+            if (isFavorite) {
+                localStorage.removeItem(`favorite_${productId}`);
+                button.classList.remove('active');
+                button.querySelector('i').className = 'far fa-heart';
+                button.title = 'Добавить в избранное';
+                showNotification('Товар удален из избранного');
+            } else {
+                localStorage.setItem(`favorite_${productId}`, 'true');
+                button.classList.add('active');
+                button.querySelector('i').className = 'fas fa-heart';
+                button.title = 'Удалить из избранного';
+                showNotification('Товар добавлен в избранное');
+            }
+            
+            // Обновляем все сердца с этим productId
+            document.querySelectorAll(`.product-wishlist[data-id="${productId}"], .product-modal-wishlist[data-id="${productId}"]`).forEach(btn => {
+                if (btn === button) return;
+                btn.classList.toggle('active', !isFavorite);
+                btn.querySelector('i').className = !isFavorite ? 'fas fa-heart' : 'far fa-heart';
+                btn.title = !isFavorite ? 'Удалить из избранного' : 'Добавить в избранное';
+            });
+        }
+
         // Функция для обновления информации о страницах
         function updatePageInfo() {
             const currentPageNum = document.getElementById('currentPageNum');
@@ -1767,7 +1976,7 @@
             if (mobileCurrentPage) mobileCurrentPage.textContent = currentPage;
             if (mobileTotalPages) mobileTotalPages.textContent = totalPages;
         }
-        
+
         // Функция для рендеринга пагинации с динамическим отображением соседних страниц
         function renderPagination() {
             const paginationContainer = document.getElementById('pagination');
@@ -1849,7 +2058,7 @@
                 });
             });
         }
-        
+
         // Функция перехода на конкретную страницу
         function goToPage(page) {
             if (page < 1 || page > totalPages || page === currentPage) return;
@@ -1865,6 +2074,9 @@
                 const endIndex = Math.min(startIndex + pageSize, filteredProducts.length);
                 const productsToShow = filteredProducts.slice(startIndex, endIndex);
                 
+                // Предзагружаем изображения для новой страницы
+                preloadPageImages(productsToShow);
+                
                 // Обновляем отображение
                 renderProducts(filteredProducts);
             }
@@ -1878,7 +2090,7 @@
                 });
             }
         }
-        
+
         // Функция для фильтрации товаров
         function filterProducts(type = 'all', maxPrice = 10000, searchTerm = '') {
             let filtered = [...allProducts];
@@ -1904,7 +2116,7 @@
             
             return filtered;
         }
-        
+
         // Функция для сортировки товаров
         function sortProducts(products, sortType) {
             const sorted = [...products];
@@ -1934,7 +2146,7 @@
                     });
             }
         }
-        
+
         // Функция применения фильтров
         function applyFilters() {
             const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
@@ -1948,9 +2160,13 @@
             // Сбрасываем текущую страницу на первую при применении фильтров
             currentPage = 1;
             
+            // Предзагружаем изображения для первой страницы
+            const firstPageProducts = filteredProducts.slice(0, pageSize);
+            preloadPageImages(firstPageProducts);
+            
             renderProducts(filteredProducts);
         }
-        
+
         // Функция сброса фильтров
         function resetFilters() {
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1980,7 +2196,7 @@
             
             applyFilters();
         }
-        
+
         // Вспомогательные функции
         function getTypeLabel(type) {
             const labels = {
@@ -2065,73 +2281,6 @@
             
             saveCart(cart);
             showNotification(`Товар "${product.name || 'Напольное покрытие'}" добавлен в корзину`);
-        }
-        
-        // Функция для открытия модального окна товара
-        function openProductModal(productId) {
-            const product = allProducts.find(p => p.id == productId);
-            if (!product) return;
-            
-            // Создаем модальное окно, если его еще нет
-            let modal = document.getElementById(`product-modal-${productId}`);
-            if (!modal) {
-                const modalHTML = generateProductModalHTML(product);
-                const modalsContainer = document.getElementById('productModalsContainer');
-                if (modalsContainer) {
-                    modalsContainer.insertAdjacentHTML('beforeend', modalHTML);
-                    modal = document.getElementById(`product-modal-${productId}`);
-                    initProductModalEvents(productId);
-                }
-            }
-            
-            // Закрываем текущее модальное окно, если есть
-            if (currentProductModal) {
-                closeProductModal(currentProductModal);
-            }
-            
-            // Открываем новое модальное окно
-            if (modal) {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                currentProductModal = productId;
-            }
-        }
-        
-        // Функция для закрытия модального окна товара
-        function closeProductModal(productId) {
-            const modal = document.getElementById(`product-modal-${productId}`);
-            if (!modal) return;
-            
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            currentProductModal = null;
-        }
-        
-        // Функция переключения избранного
-        function toggleFavorite(productId, button) {
-            const isFavorite = localStorage.getItem(`favorite_${productId}`) === 'true';
-            
-            if (isFavorite) {
-                localStorage.removeItem(`favorite_${productId}`);
-                button.classList.remove('active');
-                button.querySelector('i').className = 'far fa-heart';
-                button.title = 'Добавить в избранное';
-                showNotification('Товар удален из избранного');
-            } else {
-                localStorage.setItem(`favorite_${productId}`, 'true');
-                button.classList.add('active');
-                button.querySelector('i').className = 'fas fa-heart';
-                button.title = 'Удалить из избранного';
-                showNotification('Товар добавлен в избранное');
-            }
-            
-            // Обновляем все сердца с этим productId
-            document.querySelectorAll(`.product-wishlist[data-id="${productId}"], .product-modal-wishlist[data-id="${productId}"]`).forEach(btn => {
-                if (btn === button) return;
-                btn.classList.toggle('active', !isFavorite);
-                btn.querySelector('i').className = !isFavorite ? 'fas fa-heart' : 'far fa-heart';
-                btn.title = !isFavorite ? 'Удалить из избранного' : 'Добавить в избранное';
-            });
         }
         
         // Функция обновления счетчика корзины
@@ -2363,7 +2512,28 @@
                 });
             }
         }
-        
+
+        // Функция для предзагрузки важных ресурсов
+        function preloadImportantResources() {
+            // Предзагружаем favicon
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon && favicon.href) {
+                const img = new Image();
+                img.src = favicon.href;
+            }
+            
+            // Предзагружаем изображение по умолчанию
+            const defaultImg = new Image();
+            defaultImg.src = 'img/catalog/default-floor.jpg';
+        }
+
+        // Функция для очистки наблюдателей при смене страницы
+        function cleanupObservers() {
+            if (imageObserver) {
+                imageObserver.disconnect();
+            }
+        }
+
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация фильтров
@@ -2375,11 +2545,14 @@
                 });
             });
             
-            // Инициализация поиска
+            // Инициализация поиска с debounce
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchInput.addEventListener('input', function() {
-                    applyFilters();
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        applyFilters();
+                    }, 300);
                 });
             }
             
@@ -2391,7 +2564,7 @@
                 });
             }
             
-            // Инициализация слайдера цены
+            // Инициализация слайдера цены с debounce
             const priceSlider = document.getElementById('priceSlider');
             const currentPriceDisplay = document.getElementById('currentPriceDisplay');
             
@@ -2399,7 +2572,11 @@
                 priceSlider.addEventListener('input', function() {
                     const value = parseInt(this.value);
                     currentPriceDisplay.textContent = `До ${value.toLocaleString()} ₽`;
-                    applyFilters();
+                    
+                    clearTimeout(priceTimeout);
+                    priceTimeout = setTimeout(() => {
+                        applyFilters();
+                    }, 500);
                 });
             }
             
@@ -2425,9 +2602,23 @@
             updateCartCount();
             updateCartButtons();
             
+            // Предзагружаем важные ресурсы
+            preloadImportantResources();
+            
             // Загрузка товаров
             loadProducts();
         });
+
+        // Добавляем обработчик для загрузки изображений при скролле
+        window.addEventListener('scroll', () => {
+            // Принудительно запускаем проверку Intersection Observer при скролле
+            if (imageObserver) {
+                // Можно добавить дополнительную логику если нужно
+            }
+        }, { passive: true });
+
+        // Вызываем cleanup при смене страницы
+        window.addEventListener('beforeunload', cleanupObservers);
     </script>
 </body>
 </html>
