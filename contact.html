@@ -8,8 +8,93 @@
     <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- MapLibre GL CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^5.0.1/dist/maplibre-gl.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/manifest.json">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        .map-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .map-overlay h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        .map-overlay p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        .map-overlay i {
+            color: #e74c3c;
+            margin-right: 8px;
+        }
+        
+        .maplibregl-ctrl-group {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .maplibregl-ctrl-group button {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .maplibregl-popup {
+            max-width: 250px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .maplibregl-popup-content {
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        .maplibregl-popup-content h4 {
+            margin: 0 0 8px 0;
+            color: #e74c3c;
+            font-size: 16px;
+        }
+        .maplibregl-popup-content p {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .maplibregl-popup-close-button {
+            font-size: 18px;
+            padding: 5px 8px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            #map {
+                height: 300px;
+            }
+            .map-overlay {
+                padding: 10px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -66,9 +151,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Наш адрес</h3>
-                            <p>г. Москва, ул. Строителей, д. 10</p>
-                            <p>Ближайшая станция метро: Стройгородская</p>
-                            <p class="contact-note">Парковка на 50 автомобилей</p>
+                            <p>454081, Челябинская обл, г Челябинск, Тракторозаводский р-н, ул Артиллерийская, д 106, кв 77</p>
                         </div>
                     </div>
                     
@@ -78,9 +161,8 @@
                         </div>
                         <div class="contact-details">
                             <h3>Телефоны</h3>
-                            <p>+7 (495) 123-45-67</p>
-                            <p>+7 (800) 555-35-35</p>
-                            <p class="contact-note">Звонок бесплатный по России</p>
+                            <p>+7 (912) 897-73-29</p>
+                            <p>+7 (912) 329-73-78</p>
                         </div>
                     </div>
                     
@@ -90,9 +172,8 @@
                         </div>
                         <div class="contact-details">
                             <h3>Часы работы</h3>
-                            <p>Пн-Пт: 8:00 - 20:00</p>
-                            <p>Сб-Вс: 9:00 - 18:00</p>
-                            <p class="contact-note">Доставка работает круглосуточно</p>
+                            <p>Пн-Пт: 10:00 - 17:00</p>
+                            <p>Сб-Вс: Выходной</p>
                         </div>
                     </div>
                     
@@ -102,20 +183,17 @@
                         </div>
                         <div class="contact-details">
                             <h3>Электронная почта</h3>
-                            <p>info@buildcraft.ru</p>
-                            <p>sales@buildcraft.ru</p>
-                            <p class="contact-note">Ответим в течение 2 часов</p>
+                            <p>89128977329@mail.ru</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-map">
                     <div class="map-container">
-                        <div class="map-placeholder"></div>
+                        <div id="map"></div>
                         <div class="map-overlay">
                             <h4><i class="fas fa-map-marker-alt"></i> BuildCraft Магазин</h4>
-                            <p>г. Москва, ул. Строителей, д. 10</p>
-                            <p>Парковка на 50 автомобилей</p>
+                            <p>454081, Челябинская обл, г Челябинск, Тракторозаводский р-н, ул Артиллерийская, д 106, кв 77</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +202,7 @@
             <div class="callback-form">
                 <div class="form-header">
                     <h3>Заказать обратный звонок</h3>
-                    <p>Заполните форму и наш менеджер свяжется с вами в течение 15 минут</p>
+                    <p>Заполните форму и наш менеджер свяжется с вами в течение рабочего дня</p>
                 </div>
                 <form id="callbackForm">
                     <div class="form-row">
@@ -157,7 +235,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Доставка в пределах МКАД - 1500 ₽, за МКАД - 1500 ₽ + 50 ₽ за км. При заказе от 50 000 ₽ доставка бесплатная в пределах 50 км от МКАД.</p>
+                            <p>Доставка осуществляется по индивидуальному расчету в зависимости от объема и места доставки. Свяжитесь с нами для уточнения стоимости.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -166,7 +244,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Да, вы можете забрать заказ с нашего склада по адресу: г. Москва, ул. Строителей, д. 10. График работы склада: Пн-Вс 8:00-20:00.</p>
+                            <p>Да, вы можете забрать заказ по нашему адресу в Челябинске в рабочее время (Пн-Пт с 10:00 до 17:00).</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -175,7 +253,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Мы предоставляем гарантию на все строительные материалы от 1 года. На инструменты - гарантия от производителя от 2 лет.</p>
+                            <p>Мы предоставляем гарантию на все строительные материалы в соответствии с законодательством РФ и гарантиями производителей.</p>
                         </div>
                     </div>
                 </div>
@@ -272,7 +350,103 @@
         </div>
     </footer>
 
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl@^5.0.1/dist/maplibre-gl.js"></script>
+    
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
+    
+    <script>
+        // Инициализация карты после загрузки страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Точные координаты для маркера: 55.175221, 61.429808
+            // MapLibre GL использует формат [долгота, широта]
+            const exactCoords = [61.429808, 55.175221];
+            
+            // Проверка доступности MapLibre
+            if (typeof maplibregl === 'undefined') {
+                console.error('MapLibre GL не загружен. Проверьте подключение к сети или CDN.');
+                document.getElementById('map').innerHTML = 
+                    '<div style="padding: 20px; text-align: center; color: #666;">' +
+                    '<i class="fas fa-map-marked-alt" style="font-size: 48px; margin-bottom: 15px;"></i>' +
+                    '<p>Карта временно недоступна. Мы работаем над устранением проблемы.</p>' +
+                    '</div>';
+                return;
+            }
+            
+            try {
+                // Создание карты с центром в указанных координатах
+                const map = new maplibregl.Map({
+                    container: 'map',
+                    style: 'https://tiles.stadiamaps.com/styles/alidade_smooth.json',
+                    center: exactCoords,
+                    zoom: 16, // Увеличенный зум для точного позиционирования
+                    attributionControl: true
+                });
+                
+                // Добавление элементов управления
+                map.addControl(new maplibregl.NavigationControl(), 'top-right');
+                map.addControl(new maplibregl.ScaleControl({
+                    maxWidth: 200,
+                    unit: 'metric'
+                }));
+                
+                // Добавление маркера после загрузки карты
+                map.once('load', function() {
+                    // Создание маркера с попапом по точным координатам
+                    const marker = new maplibregl.Marker({
+                        color: '#e74c3c',
+                        draggable: false
+                    })
+                    .setLngLat(exactCoords)
+                    .setPopup(new maplibregl.Popup({
+                        offset: 25,
+                        closeButton: true,
+                        closeOnClick: false
+                    }).setHTML(
+                        '<h4><i class="fas fa-hard-hat"></i> BuildCraft</h4>' +
+                        '<p><strong>Точное местоположение:</strong></p>' +
+                        '<p><i class="fas fa-home"></i> ул. Артиллерийская, д. 106, кв 77</p>' +
+                        '<p>Челябинск, Тракторозаводский район</p>' +
+                        '<hr style="margin: 10px 0;">' +
+                        '<p><i class="fas fa-clock"></i> <strong>Часы работы:</strong><br>Пн-Пт: 10:00-17:00</p>' +
+                        '<p><i class="fas fa-phone"></i> <strong>Телефон:</strong><br>+7 (912) 897-73-29</p>'
+                    ))
+                    .addTo(map);
+                    
+                    // Автоматическое открытие попапа при загрузке
+                    marker.togglePopup();
+                    
+                    // Адаптация карты при изменении размера окна
+                    window.addEventListener('resize', function() {
+                        map.resize();
+                    });
+                    
+                    // Логирование координат для отладки
+                    console.log('Маркер установлен по координатам:', exactCoords);
+                    console.log('Широта (latitude): 55.175221');
+                    console.log('Долгота (longitude): 61.429808');
+                });
+                
+                // Обработка ошибок загрузки карты
+                map.on('error', function(e) {
+                    console.error('Ошибка загрузки карты:', e.error);
+                });
+                
+                // Добавляем обработчик клика по карте для отображения координат (для отладки)
+                map.on('click', function(e) {
+                    console.log('Клик по карте - координаты:', e.lngLat);
+                });
+                
+            } catch (error) {
+                console.error('Ошибка инициализации карты:', error);
+                document.getElementById('map').innerHTML = 
+                    '<div style="padding: 20px; text-align: center; color: #666;">' +
+                    '<i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 15px; color: #e74c3c;"></i>' +
+                    '<p>Не удалось загрузить карту. Пожалуйста, попробуйте обновить страницу.</p>' +
+                    '</div>';
+            }
+        });
+    </script>
 </body>
 </html>
