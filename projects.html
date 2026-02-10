@@ -11,7 +11,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="manifest" href="manifest.json">
     <style>
-        /* Базовые стили */
+        /* Все предыдущие стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -39,19 +39,16 @@
             width: 100%;
         }
         
-        /* Основной контент должен занимать всё пространство */
         .main-content {
             flex: 1 0 auto;
             width: 100%;
         }
         
-        /* Футер прижат к низу */
         .footer {
             flex-shrink: 0;
             width: 100%;
         }
         
-        /* Стили для модальных окон проектов */
         .project-modal {
             display: none;
             position: fixed;
@@ -134,7 +131,6 @@
             max-height: calc(100vh - 200px);
         }
         
-        /* Галерея изображений */
         .gallery-container {
             margin: 25px 0 40px;
             position: relative;
@@ -171,21 +167,6 @@
             -webkit-user-select: none;
         }
         
-        .gallery-main img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: none;
-            pointer-events: none;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-user-drag: none;
-        }
-        
-        /* Стиль для защищенных изображений */
         .protected-image {
             position: absolute;
             top: 0;
@@ -207,11 +188,6 @@
             display: block;
         }
         
-        .gallery-main img.active {
-            display: block;
-        }
-        
-        /* Элементы управления зумом */
         .zoom-controls {
             position: absolute;
             bottom: 20px;
@@ -268,7 +244,6 @@
             -webkit-user-select: none;
         }
         
-        /* Мобильные элементы управления зумом */
         .mobile-zoom-controls {
             display: none;
             position: absolute;
@@ -572,7 +547,6 @@
             color: #ff6b35;
         }
         
-        /* Стили для кнопки Подробнее (оранжевая) */
         .btn-details {
             margin-top: 20px;
             background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
@@ -632,7 +606,6 @@
             transform: translateX(5px);
         }
         
-        /* Дополнительные стили */
         .project-meta {
             display: flex;
             flex-wrap: wrap;
@@ -685,7 +658,6 @@
             color: #ff6b35;
         }
         
-        /* Секция теххарактеристик */
         .tech-specs {
             background: #f8fafc;
             padding: 30px;
@@ -743,7 +715,6 @@
             font-weight: 500;
         }
         
-        /* Стили для проекта карточек */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -807,7 +778,6 @@
             flex-grow: 1;
         }
         
-        /* Адаптивные стили */
         @media (max-width: 768px) {
             .modal-content {
                 width: 98%;
@@ -917,7 +887,6 @@
             }
         }
         
-        /* Стили для тегов проектов */
         .project-tag {
             display: inline-block;
             background: rgba(255, 107, 53, 0.2);
@@ -933,7 +902,6 @@
             -webkit-user-select: none;
         }
         
-        /* Анимация загрузки для изображений */
         .loading-spinner {
             position: absolute;
             top: 50%;
@@ -954,7 +922,6 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
-        /* Инструкция по зуму */
         .zoom-hint {
             position: absolute;
             top: 20px;
@@ -976,7 +943,6 @@
             margin-right: 5px;
         }
         
-        /* Мобильная подсказка */
         .mobile-zoom-hint {
             position: absolute;
             top: 20px;
@@ -993,7 +959,6 @@
             -webkit-user-select: none;
         }
         
-        /* Стили для placeholder изображений */
         .placeholder-img {
             background: linear-gradient(45deg, #f5f5f5 25%, #e0e0e0 50%, #f5f5f5 75%);
             background-size: 200% 200%;
@@ -1012,7 +977,6 @@
             100% { background-position: -200% 0; }
         }
         
-        /* Защитный слой поверх изображений */
         .image-protector {
             position: absolute;
             top: 0;
@@ -1024,7 +988,6 @@
             cursor: default;
         }
         
-        /* Стили для уведомлений */
         .toast {
             position: fixed;
             top: 20px;
@@ -1056,7 +1019,6 @@
             to { transform: translateX(100%); opacity: 0; }
         }
         
-        /* Стили для заголовков */
         .section-title {
             font-size: 36px;
             color: #000000;
@@ -1071,7 +1033,6 @@
             margin-bottom: 40px;
         }
         
-        /* Фильтры проектов */
         .projects-filters {
             display: flex;
             flex-wrap: wrap;
@@ -1096,7 +1057,6 @@
             color: white;
         }
         
-        /* Статистика */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1124,7 +1084,6 @@
             color: #666;
         }
         
-        /* CTA секция с зеленым градиентом */
         .projects-cta {
             background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
             color: white;
@@ -1147,7 +1106,6 @@
             flex-wrap: wrap;
         }
         
-        /* Стили для футера */
         .footer {
             background: #2c3e50;
             color: white;
@@ -1339,7 +1297,6 @@
             text-decoration: underline;
         }
         
-        /* Мобильная адаптация футера */
         @media (max-width: 768px) {
             .footer {
                 padding: 40px 0 20px;
@@ -1407,7 +1364,6 @@
             }
         }
         
-        /* Дополнительные стили для детального отображения помещений */
         .rooms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -1612,12 +1568,76 @@
                         </div>
                         <p class="project-description">Строительство современного офисного центра класса А в деловом центре "Москва-Сити". Полный цикл работ от проектирования до сдачи "под ключ".</p>
                         <div class="project-features">
-                            <span class="project-feature"><i class="fas fa-check"></i> Современные системы вентиляции</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Современные систем вентиляции</span>
                             <span class="project-feature"><i class="fas fa-check"></i> Высокоскоростные лифты</span>
                             <span class="project-feature"><i class="fas fa-check"></i> Подземный паркинг на 500 мест</span>
                             <span class="project-feature"><i class="fas fa-check"></i> Системы безопасности</span>
                         </div>
                         <button class="btn-details" data-modal="modal-project-4">
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Проект 5: Коттеджный поселок "Зеленый Бор" -->
+                <div class="project-card" data-category="residential individual">
+                    <div class="project-image" style="background-image: url('img/projects/cottage-village/cover.jpg');">
+                        <div class="project-overlay">
+                            <h4>Коттеджный поселок "Зеленый Бор"</h4>
+                            <p>Ленинградская область, 2023-2024</p>
+                            <span class="project-tag">Коттеджный поселок</span>
+                            <span class="project-tag">25 домов</span>
+                            <span class="project-tag">6 изображений</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Коттеджный поселок "Зеленый Бор"</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ленинградская область</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2023-2024</span>
+                            <span><i class="fas fa-home"></i> 3,5 га</span>
+                            <span><i class="fas fa-tree"></i> 25 домовладений</span>
+                        </div>
+                        <p class="project-description">Строительство элитного коттеджного поселка с полной инфраструктурой, охраняемой территорией и всеми коммуникациями. Каждый дом построен по индивидуальному проекту.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check"></i> Охраняемая территория</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Центральные коммуникации</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Детская и спортивная площадки</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Общая зона отдыха</span>
+                        </div>
+                        <button class="btn-details" data-modal="modal-project-5">
+                            <i class="fas fa-search-plus"></i> Подробнее о проекте
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Проект 6: Школа будущего "Лидер" -->
+                <div class="project-card" data-category="commercial">
+                    <div class="project-image" style="background-image: url('img/projects/school/cover.jpg');">
+                        <div class="project-overlay">
+                            <h4>Школа будущего "Лидер"</h4>
+                            <p>Новосибирск, 2023-2024</p>
+                            <span class="project-tag">Образовательное учреждение</span>
+                            <span class="project-tag">5 этажей</span>
+                            <span class="project-tag">6 изображений</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Школа будущего "Лидер"</h3>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Новосибирск</span>
+                            <span><i class="fas fa-calendar-alt"></i> 2023-2024</span>
+                            <span><i class="fas fa-building"></i> 12 500 м²</span>
+                            <span><i class="fas fa-graduation-cap"></i> 1 200 учеников</span>
+                        </div>
+                        <p class="project-description">Строительство современной школы с передовыми технологиями обучения, цифровыми классами, научными лабораториями и спортивным комплексом.</p>
+                        <div class="project-features">
+                            <span class="project-feature"><i class="fas fa-check"></i> Цифровые классы</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Научные лаборатории</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Спортивный комплекс</span>
+                            <span class="project-feature"><i class="fas fa-check"></i> Актовый зал на 500 мест</span>
+                        </div>
+                        <button class="btn-details" data-modal="modal-project-6">
                             <i class="fas fa-search-plus"></i> Подробнее о проекте
                         </button>
                     </div>
@@ -2657,6 +2677,480 @@
         </div>
     </div>
 
+    <!-- Модальное окно для проекта 5: Коттеджный поселок "Зеленый Бор" (6 изображений) -->
+    <div id="modal-project-5" class="project-modal">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <div class="modal-header">
+                <h2>Коттеджный поселок "Зеленый Бор"</h2>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Ленинградская область</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2023-2024</span>
+                    <span><i class="fas fa-ruler-combined"></i> 3,5 га</span>
+                    <span><i class="fas fa-images"></i> 6 изображений проекта</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Галерея изображений с защитой -->
+                <div class="gallery-container">
+                    <div class="zoom-hint" id="zoom-hint-5">
+                        <i class="fas fa-info-circle"></i> Зажмите Ctrl и используйте колесико мыши для масштабирования
+                    </div>
+                    <div class="mobile-zoom-hint" id="mobile-zoom-hint-5">
+                        <i class="fas fa-info-circle"></i> Используйте два пальца для масштабирования
+                    </div>
+                    <div class="gallery-main-container" id="gallery-main-container-5">
+                        <div class="loading-spinner" id="loading-spinner-5"></div>
+                        <div class="gallery-main" id="gallery-main-5">
+                            <!-- Защищенные изображения будут добавлены через JavaScript -->
+                        </div>
+                        <div class="gallery-counter">1 / 6</div>
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" id="zoom-out-5" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <div class="zoom-level" id="zoom-level-5">100%</div>
+                            <button class="zoom-btn" id="zoom-in-5" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="zoom-btn" id="zoom-reset-5" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <!-- Мобильные кнопки управления зумом -->
+                        <div class="mobile-zoom-controls">
+                            <button class="mobile-zoom-btn" id="mobile-zoom-in-5" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-out-5" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-reset-5" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-thumbs-container">
+                        <button class="gallery-nav prev" id="prev-5"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-thumbs" id="gallery-thumbs-5">
+                            <!-- 6 миниатюр для проекта -->
+                            <!-- Изображения будут добавлены через JavaScript -->
+                        </div>
+                        <button class="gallery-nav next" id="next-5"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="tech-specs">
+                    <h3><i class="fas fa-home"></i> Характеристики проекта</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-value">3,5 га</div>
+                            <div class="spec-label">Общая площадь поселка</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">25</div>
+                            <div class="spec-label">Коттеджей</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">150-350 м²</div>
+                            <div class="spec-label">Площадь домов</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">10-20 соток</div>
+                            <div class="spec-label">Участки</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Описание проекта</h3>
+                <p>Строительство элитного коттеджного поселка в экологически чистом районе Ленинградской области. Поселок расположен в сосновом бору вблизи озера, что создает уникальные условия для комфортного проживания.</p>
+                
+                <p>Каждый коттедж построен по индивидуальному проекту с учетом пожеланий заказчика. Все дома оснащены современными инженерными системами, системами "умный дом" и видеонаблюдения. Поселок имеет охраняемую территорию с контрольно-пропускным пунктом.</p>
+                
+                <div class="project-details-grid">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-drafting-compass"></i> Архитектурные решения</h4>
+                        <ul>
+                            <li>Индивидуальные проекты домов</li>
+                            <li>Современный и классический стили</li>
+                            <li>Панорамное остекление</li>
+                            <li>Террасы и веранды</li>
+                            <li>Экологичные материалы</li>
+                            <li>Энергоэффективные решения</li>
+                            <li>Ландшафтный дизайн участков</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-cube"></i> Инфраструктура поселка</h4>
+                        <ul>
+                            <li>Охраняемая территория с КПП</li>
+                            <li>Детские игровые площадки</li>
+                            <li>Спортивная зона с тренажерами</li>
+                            <li>Зона для пикников с мангалами</li>
+                            <li>Прогулочные дорожки</li>
+                            <li>Общественный клуб-ресторан</li>
+                            <li>Фитнес-центр с бассейном</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-check-circle"></i> Коммуникации</h4>
+                        <ul>
+                            <li>Центральное водоснабжение</li>
+                            <li>Автономная канализация</li>
+                            <li>Электроснабжение 15 кВт на дом</li>
+                            <li>Газоснабжение</li>
+                            <li>Интернет оптоволокно</li>
+                            <li>Система видеонаблюдения</li>
+                            <li>Охранная сигнализация</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Типовые планировки домов</h3>
+                <div class="rooms-grid">
+                    <div class="room-item">
+                        <div class="room-name">Таунхаус 150 м²</div>
+                        <div class="room-area">3 спальни, 2 с/у</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Коттедж 220 м²</div>
+                        <div class="room-area">4 спальни, 3 с/у</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Коттедж 280 м²</div>
+                        <div class="room-area">5 спален, 4 с/у, кабинет</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Особняк 350 м²</div>
+                        <div class="room-area">6 спален, 5 с/у, спортзал</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Дуплекс 180 м²</div>
+                        <div class="room-area">3 спальни, 2 с/у, гардероб</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Таунхаус 200 м²</div>
+                        <div class="room-area">4 спальни, 3 с/у, кладовые</div>
+                    </div>
+                </div>
+                
+                <h3>Основные материалы проекта</h3>
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>Материал</th>
+                            <th>Применение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Керамические блоки Porotherm</td>
+                            <td>Наружные стены</td>
+                        </tr>
+                        <tr>
+                            <td>Газобетонные блоки</td>
+                            <td>Внутренние перегородки</td>
+                        </tr>
+                        <tr>
+                            <td>Монолитный железобетон</td>
+                            <td>Фундаменты, перекрытия</td>
+                        </tr>
+                        <tr>
+                            <td>Натуральная черепица</td>
+                            <td>Кровля</td>
+                        </tr>
+                        <tr>
+                            <td>Деревянные клееные балки</td>
+                            <td>Стропильная система</td>
+                        </tr>
+                        <tr>
+                            <td>Утеплитель каменная вата</td>
+                            <td>Теплоизоляция</td>
+                        </tr>
+                        <tr>
+                            <td>СИП панели</td>
+                            <td>Энергоэффективные дома</td>
+                        </tr>
+                        <tr>
+                            <td>Керамогранит</td>
+                            <td>Отделка фасадов</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-star"></i> Индивидуальное проектирование каждого дома</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Система "умный дом" в каждом коттедже</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Видеонаблюдение по периметру поселка</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Автоматические ворота с дистанционным управлением</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Система пожаротушения</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Ландшафтное освещение</span>
+                </div>
+                
+                <h3>Дополнительные услуги</h3>
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-edit"></i> Разработка индивидуального проекта дома</span>
+                    <span class="project-feature"><i class="fas fa-paint-roller"></i> Внутренняя отделка "под ключ"</span>
+                    <span class="project-feature"><i class="fas fa-tree"></i> Ландшафтный дизайн участка</span>
+                    <span class="project-feature"><i class="fas fa-couch"></i> Меблировка и оформление интерьеров</span>
+                    <span class="project-feature"><i class="fas fa-handshake"></i> Юридическое сопровождение сделки</span>
+                </div>
+                
+                <div class="modal-actions">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-file-contract"></i> Забронировать участок
+                    </a>
+                    <a href="catalog.html" class="btn btn-secondary">
+                        <i class="fas fa-shopping-cart"></i> Материалы для коттеджа
+                    </a>
+                    <button class="btn btn-outline close-modal-btn">
+                        <i class="fas fa-times"></i> Закрыть
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для проекта 6: Школа будущего "Лидер" (6 изображений) -->
+    <div id="modal-project-6" class="project-modal">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <div class="modal-header">
+                <h2>Школа будущего "Лидер"</h2>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Новосибирск</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2023-2024</span>
+                    <span><i class="fas fa-ruler-combined"></i> 12 500 м²</span>
+                    <span><i class="fas fa-images"></i> 6 изображений проекта</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Галерея изображений с защитой -->
+                <div class="gallery-container">
+                    <div class="zoom-hint" id="zoom-hint-6">
+                        <i class="fas fa-info-circle"></i> Зажмите Ctrl и используйте колесико мыши для масштабирования
+                    </div>
+                    <div class="mobile-zoom-hint" id="mobile-zoom-hint-6">
+                        <i class="fas fa-info-circle"></i> Используйте два пальца для масштабирования
+                    </div>
+                    <div class="gallery-main-container" id="gallery-main-container-6">
+                        <div class="loading-spinner" id="loading-spinner-6"></div>
+                        <div class="gallery-main" id="gallery-main-6">
+                            <!-- Защищенные изображения будут добавлены через JavaScript -->
+                        </div>
+                        <div class="gallery-counter">1 / 6</div>
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" id="zoom-out-6" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <div class="zoom-level" id="zoom-level-6">100%</div>
+                            <button class="zoom-btn" id="zoom-in-6" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="zoom-btn" id="zoom-reset-6" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <!-- Мобильные кнопки управления зумом -->
+                        <div class="mobile-zoom-controls">
+                            <button class="mobile-zoom-btn" id="mobile-zoom-in-6" title="Приблизить">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-out-6" title="Уменьшить">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="mobile-zoom-btn" id="mobile-zoom-reset-6" title="Сбросить масштаб">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-thumbs-container">
+                        <button class="gallery-nav prev" id="prev-6"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-thumbs" id="gallery-thumbs-6">
+                            <!-- 6 миниатюр для проекта -->
+                            <!-- Изображения будут добавлены через JavaScript -->
+                        </div>
+                        <button class="gallery-nav next" id="next-6"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="tech-specs">
+                    <h3><i class="fas fa-graduation-cap"></i> Характеристики проекта</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-value">12 500 м²</div>
+                            <div class="spec-label">Общая площадь</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">5</div>
+                            <div class="spec-label">Этажей</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">1 200</div>
+                            <div class="spec-label">Учеников</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-value">45</div>
+                            <div class="spec-label">Классных комнат</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Описание проекта</h3>
+                <p>Строительство современной школы с передовыми технологиями обучения. Школа оснащена цифровыми классами, научными лабораториями, спортивным комплексом и творческими студиями. Проект реализован с использованием энергоэффективных технологий и экологичных материалов.</p>
+                
+                <p>Школа "Лидер" стала флагманским образовательным учреждением в регионе, обеспечивающим высокий уровень образования в комфортных и безопасных условиях. В школе создана безбарьерная среда для детей с ограниченными возможностями здоровья.</p>
+                
+                <div class="project-details-grid">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-drafting-compass"></i> Архитектурные решения</h4>
+                        <ul>
+                            <li>Современная архитектура с элементами бионики</li>
+                            <li>Просторные атриумы и рекреации</li>
+                            <li>Панорамное остекление учебных зон</li>
+                            <li>Зеленые зоны внутри здания</li>
+                            <li>Экологичные материалы отделки</li>
+                            <li>Естественное освещение всех помещений</li>
+                            <li>Безбарьерная среда</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-cube"></i> Учебные помещения</h4>
+                        <ul>
+                            <li>Цифровые классы с интерактивными досками</li>
+                            <li>Научные лаборатории: физика, химия, биология</li>
+                            <li>Лингвистические кабинеты</li>
+                            <li>Компьютерные классы</li>
+                            <li>Библиотека с медиатекой</li>
+                            <li>Творческие мастерские</li>
+                            <li>Актовый зал на 500 мест</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-check-circle"></i> Спортивная инфраструктура</h4>
+                        <ul>
+                            <li>Спортивный зал 30x18 м</li>
+                            <li>Тренажерный зал</li>
+                            <li>Бассейн 25 м на 4 дорожки</li>
+                            <li>Спортивные площадки на улице</li>
+                            <li>Скалодром</li>
+                            <li>Танцевальный зал</li>
+                            <li>Тир для стрельбы</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>Распределение площадей</h3>
+                <div class="rooms-grid">
+                    <div class="room-item">
+                        <div class="room-name">Учебные классы</div>
+                        <div class="room-area">4 500 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Спортивный комплекс</div>
+                        <div class="room-area">2 800 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Административные помещения</div>
+                        <div class="room-area">1 200 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Столовая и пищеблок</div>
+                        <div class="room-area">850 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Медицинский блок</div>
+                        <div class="room-area">350 м²</div>
+                    </div>
+                    <div class="room-item">
+                        <div class="room-name">Технические помещения</div>
+                        <div class="room-area">1 000 м²</div>
+                    </div>
+                </div>
+                
+                <h3>Основные материалы проекта</h3>
+                <table class="materials-table">
+                    <thead>
+                        <tr>
+                            <th>Материал</th>
+                            <th>Применение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Монолитный железобетон</td>
+                            <td>Каркас здания</td>
+                        </tr>
+                        <tr>
+                            <td>Вентилируемые фасады</td>
+                            <td>Наружная отделка</td>
+                        </tr>
+                        <tr>
+                            <td>Энергосберегающие стеклопакеты</td>
+                            <td>Оконные системы</td>
+                        </tr>
+                        <tr>
+                            <td>Керамогранит</td>
+                            <td>Напольные покрытия</td>
+                        </tr>
+                        <tr>
+                            <td>Гипсокартонные системы</td>
+                            <td>Внутренние перегородки</td>
+                        </tr>
+                        <tr>
+                            <td>Акустические панели</td>
+                            <td>Шумоизоляция</td>
+                        </tr>
+                        <tr>
+                            <td>Современные системы отопления</td>
+                            <td>Инженерные системы</td>
+                        </tr>
+                        <tr>
+                            <td>Солнечные панели</td>
+                            <td>Альтернативная энергия</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-star"></i> Цифровая образовательная среда</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Система видеонаблюдения и безопасности</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Энергоэффективные технологии</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Система контроля доступа</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Современная система вентиляции</span>
+                    <span class="project-feature"><i class="fas fa-star"></i> Зона Wi-Fi по всей территории</span>
+                </div>
+                
+                <h3>Дополнительные услуги</h3>
+                <div class="project-features">
+                    <span class="project-feature"><i class="fas fa-edit"></i> Проектирование образовательных учреждений</span>
+                    <span class="project-feature"><i class="fas fa-paint-roller"></i> Внутренняя отделка учебных заведений</span>
+                    <span class="project-feature"><i class="fas fa-desktop"></i> Оснащение цифровым оборудованием</span>
+                    <span class="project-feature"><i class="fas fa-dumbbell"></i> Комплектация спортивным инвентарем</span>
+                    <span class="project-feature"><i class="fas fa-handshake"></i> Сопровождение на всех этапах</span>
+                </div>
+                
+                <div class="modal-actions">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-file-contract"></i> Обсудить строительство школы
+                    </a>
+                    <a href="catalog.html" class="btn btn-secondary">
+                        <i class="fas fa-shopping-cart"></i> Материалы для строительства
+                    </a>
+                    <button class="btn btn-outline close-modal-btn">
+                        <i class="fas fa-times"></i> Закрыть
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Полноценный футер -->
     <footer class="footer">
         <div class="container">
@@ -2836,6 +3330,46 @@
             'Фасад в вечернее время'
         ];
         
+        // Массив с путями к 6 изображениям для пятого проекта (коттеджный поселок)
+        const project5Images = [
+            'img/projects/cottage-village/1.jpg',
+            'img/projects/cottage-village/2.jpg',
+            'img/projects/cottage-village/3.jpg',
+            'img/projects/cottage-village/4.jpg',
+            'img/projects/cottage-village/5.jpg',
+            'img/projects/cottage-village/6.jpg'
+        ];
+        
+        // Описания для 6 изображений пятого проекта
+        const project5Descriptions = [
+            'Вид на поселок с воздуха',
+            'Типовой коттедж фасад',
+            'Интерьер гостиной',
+            'Детская площадка',
+            'Общественный клуб',
+            'План поселка'
+        ];
+        
+        // Массив с путями к 6 изображениям для шестого проекта (школа)
+        const project6Images = [
+            'img/projects/school/1.jpg',
+            'img/projects/school/2.jpg',
+            'img/projects/school/3.jpg',
+            'img/projects/school/4.jpg',
+            'img/projects/school/5.jpg',
+            'img/projects/school/6.jpg'
+        ];
+        
+        // Описания для 6 изображений шестого проекта
+        const project6Descriptions = [
+            'Фасад школы',
+            'Входная группа',
+            'Цифровой класс',
+            'Спортивный зал',
+            'Библиотека',
+            'План здания'
+        ];
+        
         // Функция для показа уведомлений
         function showToast(message, type = 'info') {
             // Удаляем старые уведомления
@@ -2896,6 +3430,10 @@
                 initGallery('3', project3Images, project3Descriptions);
             } else if (modalId === 'modal-project-4') {
                 initGallery('4', project4Images, project4Descriptions);
+            } else if (modalId === 'modal-project-5') {
+                initGallery('5', project5Images, project5Descriptions);
+            } else if (modalId === 'modal-project-6') {
+                initGallery('6', project6Images, project6Descriptions);
             }
         }
         

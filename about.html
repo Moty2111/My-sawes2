@@ -15,6 +15,67 @@
     <meta name="theme-color" content="#4CAF50">
     <meta name="mobile-web-app-capable" content="yes">
     <style>
+        /* Стили для нумерованного списка материалов */
+        .materials-list {
+            list-style-type: none;
+            counter-reset: material-counter;
+            padding-left: 0;
+            margin: 25px 0;
+        }
+        
+        .materials-list li {
+            counter-increment: material-counter;
+            margin-bottom: 15px;
+            padding-left: 45px;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+        
+        .materials-list li:before {
+            content: counter(material-counter);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-bright));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid white;
+        }
+        
+        .materials-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Анимация для элементов списка */
+        .materials-list li {
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: fadeInRight 0.5s ease-out forwards;
+        }
+        
+        .materials-list li:nth-child(1) { animation-delay: 0.1s; }
+        .materials-list li:nth-child(2) { animation-delay: 0.2s; }
+        .materials-list li:nth-child(3) { animation-delay: 0.3s; }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
         /* Уникальные стили для блока "Наши направления" */
         .our-directions-wrapper {
             margin-top: 50px;
@@ -379,6 +440,17 @@
             .additional-image-overlay p {
                 font-size: 0.95rem;
             }
+            
+            .materials-list li {
+                padding-left: 40px;
+                font-size: 1rem;
+            }
+            
+            .materials-list li:before {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -426,6 +498,18 @@
             
             .additional-image-overlay p {
                 font-size: 0.9rem;
+            }
+            
+            .materials-list li {
+                padding-left: 35px;
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+            }
+            
+            .materials-list li:before {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
             }
         }
         
@@ -570,20 +654,22 @@
         <div class="container">
             <div class="about-header">
                 <h2 class="section-title">О компании BuildCraft</h2>
-                <p class="section-subtitle">От надежного партнера специализирующегося на заготовке, хранение, переработке и реализации лома чёрных и цветных металлов — к комплексным решениям для строительства и комфорта</p>
+                <p class="section-subtitle">ООО «КрепкийДом» — динамично развивающаяся компания, основанная в 2026 году</p>
             </div>
             
             <div class="about-content">
                 <div class="about-text">
-                    <p class="intro-text">Мы — динамично развивающаяся компания с десятилетней историей надежности и экспертизы. С 15 января 2015 года нашим фундаментом и основным направлением лицензионной деятельности является заготовка, хранение, переработка и реализация лома черных и цветных металлов. За это время мы заслужили репутацию стабильного партнера, обеспечивающего качество и оперативность.</p>
+                    <p class="intro-text">Наша миссия — создание надежных и долговечных Домов, которые станут прочной опорой для ваших семейных традиций и благополучия. Мы гордимся своим подходом «строим как для себя», вкладывая душу и профессионализм в каждую стройку. Работая с лучшими материалами и новейшими технологиями, мы стремимся сделать ваше жилье комфортным и безопасным на многие десятилетия вперед. С нами вы можете смело планировать свое будущее, зная, что оно начинается с надежного фундамента.</p>
                     
-                    <p class="intro-text">Опираясь на накопленный опыт, понимание рынка и доверие клиентов, в декабре 2025 года мы приняли стратегическое решение о диверсификации и выходе на новые рынки. Это естественный этап нашего развития, позволяющий предложить комплексный сервис для строительства и обустройства комфортного жилья.</p>
+                    <p class="intro-text">Кроме строительства, мы предлагаем услуги по комплектации объектов высококачественными строительными материалами, включая:</p>
                     
-                    <!-- Этот блок будет перемещен под изображение -->
-                    <div class="mission">
-                        <h3>Наша философия</h3>
-                        <p><strong>От прочного каркаса до уютного дома и его идеальной отделки.</strong> Мы создаем ценность, качество и доверие на каждом этапе.</p>
-                    </div>
+                    <ol class="materials-list">
+                        <li>Ламинат</li>
+                        <li>Кварцинил</li>
+                        <li>Другие современные отделочные материалы</li>
+                    </ol>
+                    
+                    <p class="intro-text">Обращаясь к нам, вы получаете комплексное решение, которое обеспечит комфорт и надежность вашего дома на долгие годы.</p>
                 </div>
                 <div class="about-image">
                     <div class="construction-image" style="background-image: url('img/about/warehouse.webp');">
@@ -826,8 +912,7 @@
     </main>
 
     <!-- Footer -->
-      <!-- Footer -->
-      <footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo">
