@@ -1422,7 +1422,6 @@
                     <div class="filter-buttons">
                         <button class="filter-btn active" data-filter="all">Все покрытия</button>
                         <button class="filter-btn" data-filter="laminate">Ламинат</button>
-                        <button class="filter-btn" data-filter="quartz-vinyl">Кварц-винил</button>
                         <button class="filter-btn" data-filter="spc-laminate">SPC-ламинат</button>
                     </div>
                 </div>
@@ -1691,7 +1690,9 @@
             if (typeof ProductsDB !== 'undefined' && ProductsDB.getAllProducts) {
                 try {
                     allProducts = ProductsDB.getAllProducts();
-                    console.log('Загружено товаров из products.js:', allProducts.length);
+                    // Фильтруем товары, исключая кварц-винил (если такие есть)
+                    allProducts = allProducts.filter(p => p.type !== 'quartz-vinyl');
+                    console.log('Загружено товаров после фильтрации:', allProducts.length);
                     
                     // Проверяем структуру товаров
                     if (allProducts.length > 0) {
@@ -1732,7 +1733,6 @@
                         preloadPageImages(firstPageProducts);
                     }
                     
-                    // Для 197 товаров при 12 на странице показываем 17 страниц (197/12=16.42)
                     totalPages = Math.ceil(allProducts.length / pageSize);
                 } catch (error) {
                     console.error('Ошибка при загрузке товаров:', error);
@@ -2571,7 +2571,6 @@
         function getTypeLabel(type) {
             const labels = {
                 'laminate': 'Ламинат',
-                'quartz-vinyl': 'Кварц-винил',
                 'spc-laminate': 'SPC-ламинат'
             };
             return labels[type] || 'Ламинат';
