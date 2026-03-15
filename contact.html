@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Leaflet CSS (бесплатная карта) -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.3.1/ol.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/manifest.json">
     <style>
@@ -25,34 +25,91 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        /* Стили для всплывающей подсказки Leaflet */
-        .leaflet-popup-content {
+        /* Стили для всплывающей подсказки OpenLayers */
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 15px;
             font-family: 'Open Sans', sans-serif;
             font-size: 14px;
             line-height: 1.4;
+            max-width: 250px;
+            border: 1px solid #ddd;
+            bottom: 12px;
+            left: -50px;
+            transform: translateY(-100%);
         }
-        .leaflet-popup-content h4 {
+        .ol-popup:after, .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+        .ol-popup:before {
+            border-top-color: #ddd;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+        .ol-popup h4 {
             margin: 0 0 8px 0;
             color: #e74c3c;
             font-size: 16px;
         }
-        .leaflet-popup-content p {
+        .ol-popup p {
             margin: 0 0 5px 0;
         }
-        .leaflet-popup-content hr {
+        .ol-popup hr {
             margin: 10px 0;
             border: none;
             border-top: 1px solid #eee;
         }
-        .leaflet-popup-content i {
+        .ol-popup i {
             color: #e74c3c;
             margin-right: 5px;
         }
-        .leaflet-container a.leaflet-popup-close-button {
-            color: #333;
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 5px;
+            right: 8px;
             font-size: 18px;
+            color: #333;
         }
-        .leaflet-control-attribution {
+        .ol-popup-closer:hover {
+            color: #e74c3c;
+        }
+        /* Адаптация масштаба */
+        .ol-zoom {
+            top: 10px;
+            left: 10px;
+        }
+        .ol-zoom button {
+            background-color: rgba(255,255,255,0.9);
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .ol-zoom button:hover {
+            background-color: #f0f0f0;
+        }
+        .ol-attribution {
             font-size: 10px;
             background-color: rgba(255,255,255,0.7);
         }
@@ -61,7 +118,7 @@
                 height: 300px;
             }
         }
-        /* Панель с адресом под картой (дополнительно) */
+        /* Панель с адресом под картой */
         .map-address {
             background: #f8f9fa;
             padding: 15px 20px;
@@ -340,22 +397,22 @@
         </div>
     </footer>
 
-    <!-- Leaflet JS (бесплатная карта) -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- OpenLayers JS -->
+    <script src="https://cdn.jsdelivr.net/npm/ol@v10.3.1/dist/ol.js"></script>
     
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
     
     <script>
-        // Инициализация карты после загрузки страницы
+        // Инициализация карты с помощью OpenLayers
         document.addEventListener('DOMContentLoaded', function() {
-            // Координаты: широта, долгота
-            const lat = 55.175221;
+            // Координаты: долгота, широта (OpenLayers использует [lng, lat])
             const lng = 61.429808;
+            const lat = 55.175221;
             
-            // Проверка доступности Leaflet
-            if (typeof L === 'undefined') {
-                console.error('Leaflet не загружен. Проверьте подключение.');
+            // Проверка доступности OpenLayers
+            if (typeof ol === 'undefined') {
+                console.error('OpenLayers не загружен. Проверьте подключение.');
                 document.getElementById('map').innerHTML = 
                     '<div style="padding: 20px; text-align: center; color: #666;">' +
                     '<i class="fas fa-map-marked-alt" style="font-size: 48px; margin-bottom: 15px;"></i>' +
@@ -365,23 +422,57 @@
             }
             
             try {
-                // Создаём карту с центром в указанных координатах
-                const map = L.map('map').setView([lat, lng], 16);
+                // Создаём слой тайлов OpenStreetMap
+                const rasterLayer = new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                });
                 
-                // Добавляем бесплатный тайловый слой OpenStreetMap
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                    maxZoom: 19
-                }).addTo(map);
+                // Создаём карту
+                const map = new ol.Map({
+                    target: 'map',
+                    layers: [rasterLayer],
+                    view: new ol.View({
+                        center: ol.proj.fromLonLat([lng, lat]),
+                        zoom: 16
+                    }),
+                    controls: ol.control.defaults.defaults({
+                        attributionOptions: {
+                            collapsible: false
+                        },
+                        zoomOptions: {
+                            zoomInTipLabel: 'Приблизить',
+                            zoomOutTipLabel: 'Отдалить'
+                        }
+                    })
+                });
                 
-                // Создаём маркер с попапом
-                const marker = L.marker([lat, lng], {
-                    title: 'BuildCraft',
-                    riseOnHover: true
-                }).addTo(map);
+                // Создаём маркер (точку)
+                const marker = new ol.Feature({
+                    geometry: new ol.geom.Point(ol.proj.fromLonLat([lng, lat]))
+                });
                 
-                // Добавляем всплывающую подсказку с подробной информацией
-                marker.bindPopup(`
+                // Стиль маркера (красный кружок с иконкой Font Awesome не поддерживается, используем стандартный стиль)
+                marker.setStyle(new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 8,
+                        fill: new ol.style.Fill({ color: '#e74c3c' }),
+                        stroke: new ol.style.Stroke({ color: '#fff', width: 2 })
+                    })
+                }));
+                
+                // Добавляем маркер на слой векторов
+                const vectorLayer = new ol.layer.Vector({
+                    source: new ol.source.Vector({
+                        features: [marker]
+                    })
+                });
+                map.addLayer(vectorLayer);
+                
+                // Создаём элемент для всплывающей подсказки
+                const popupElement = document.createElement('div');
+                popupElement.className = 'ol-popup';
+                popupElement.innerHTML = `
+                    <a href="#" id="popup-closer" class="ol-popup-closer">&times;</a>
                     <h4><i class="fas fa-hard-hat"></i> BuildCraft</h4>
                     <p><strong>Точное местоположение:</strong></p>
                     <p><i class="fas fa-home"></i> ул. Артиллерийская, д. 106, кв 77</p>
@@ -389,21 +480,48 @@
                     <hr>
                     <p><i class="fas fa-clock"></i> <strong>Часы работы:</strong><br>Пн-Пт: 10:00-17:00</p>
                     <p><i class="fas fa-phone"></i> <strong>Телефон:</strong><br>+7 (912) 897-73-29</p>
-                `);
+                `;
+                
+                // Создаём оверлей для попапа
+                const popup = new ol.Overlay({
+                    element: popupElement,
+                    positioning: 'bottom-center',
+                    stopEvent: false,
+                    offset: [0, -15]
+                });
+                map.addOverlay(popup);
+                
+                // Показываем попап при клике на маркер
+                map.on('click', function(evt) {
+                    const feature = map.forEachFeatureAtPixel(evt.pixel, function(feat) {
+                        return feat;
+                    });
+                    if (feature) {
+                        // Устанавливаем позицию оверлея в координаты маркера
+                        popup.setPosition(feature.getGeometry().getCoordinates());
+                    } else {
+                        popup.setPosition(undefined);
+                    }
+                });
+                
+                // Закрытие попапа по кнопке
+                document.getElementById('popup-closer').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popup.setPosition(undefined);
+                });
                 
                 // Автоматически открыть попап при загрузке
-                marker.openPopup();
-                
-                // Добавляем масштаб
-                L.control.scale({ metric: true, imperial: false }).addTo(map);
+                setTimeout(() => {
+                    popup.setPosition(ol.proj.fromLonLat([lng, lat]));
+                }, 500);
                 
                 // Адаптация при изменении размера окна
                 window.addEventListener('resize', function() {
-                    map.invalidateSize();
+                    map.updateSize();
                 });
                 
-                // Логирование для отладки
-                console.log('Карта инициализирована с координатами:', lat, lng);
+                // Логирование
+                console.log('OpenLayers карта инициализирована с координатами:', lat, lng);
                 
             } catch (error) {
                 console.error('Ошибка инициализации карты:', error);
