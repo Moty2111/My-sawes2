@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- MapLibre GL CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@^5.0.1/dist/maplibre-gl.css" />
+    <!-- Leaflet CSS (бесплатная карта) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/manifest.json">
     <style>
@@ -25,74 +25,63 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .map-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 20px;
-            border-top: 1px solid #eee;
-            z-index: 1000;
-            pointer-events: none;
+        /* Стили для всплывающей подсказки Leaflet */
+        .leaflet-popup-content {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
         }
-        .map-overlay h4 {
+        .leaflet-popup-content h4 {
+            margin: 0 0 8px 0;
+            color: #e74c3c;
+            font-size: 16px;
+        }
+        .leaflet-popup-content p {
+            margin: 0 0 5px 0;
+        }
+        .leaflet-popup-content hr {
+            margin: 10px 0;
+            border: none;
+            border-top: 1px solid #eee;
+        }
+        .leaflet-popup-content i {
+            color: #e74c3c;
+            margin-right: 5px;
+        }
+        .leaflet-container a.leaflet-popup-close-button {
+            color: #333;
+            font-size: 18px;
+        }
+        .leaflet-control-attribution {
+            font-size: 10px;
+            background-color: rgba(255,255,255,0.7);
+        }
+        @media screen and (max-width: 768px) {
+            #map {
+                height: 300px;
+            }
+        }
+        /* Панель с адресом под картой (дополнительно) */
+        .map-address {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 0 0 8px 8px;
+            border-top: 1px solid #dee2e6;
+        }
+        .map-address h4 {
             margin: 0 0 8px 0;
             color: #2c3e50;
             font-size: 16px;
         }
-        .map-overlay p {
+        .map-address p {
             margin: 0;
             font-size: 14px;
             color: #666;
             line-height: 1.4;
         }
-        .map-overlay i {
+        .map-address i {
             color: #e74c3c;
             margin-right: 8px;
-        }
-        
-        .maplibregl-ctrl-group {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .maplibregl-ctrl-group button {
-            width: 30px;
-            height: 30px;
-        }
-        
-        .maplibregl-popup {
-            max-width: 250px;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .maplibregl-popup-content {
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-        }
-        .maplibregl-popup-content h4 {
-            margin: 0 0 8px 0;
-            color: #e74c3c;
-            font-size: 16px;
-        }
-        .maplibregl-popup-content p {
-            margin: 0 0 5px 0;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-        .maplibregl-popup-close-button {
-            font-size: 18px;
-            padding: 5px 8px;
-        }
-        
-        @media screen and (max-width: 768px) {
-            #map {
-                height: 300px;
-            }
-            .map-overlay {
-                padding: 10px 15px;
-            }
         }
     </style>
 </head>
@@ -191,7 +180,8 @@
                 <div class="contact-map">
                     <div class="map-container">
                         <div id="map"></div>
-                        <div class="map-overlay">
+                        <!-- Дополнительная информационная панель под картой -->
+                        <div class="map-address">
                             <h4><i class="fas fa-map-marker-alt"></i> BuildCraft Магазин</h4>
                             <p>454081, Челябинская обл, г Челябинск, Тракторозаводский р-н, ул Артиллерийская, д 106, кв 77</p>
                         </div>
@@ -350,8 +340,8 @@
         </div>
     </footer>
 
-    <!-- MapLibre GL JS -->
-    <script src="https://unpkg.com/maplibre-gl@^5.0.1/dist/maplibre-gl.js"></script>
+    <!-- Leaflet JS (бесплатная карта) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <script src="js/script.js"></script>
     <script src="js/mobile.js"></script>
@@ -359,13 +349,13 @@
     <script>
         // Инициализация карты после загрузки страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Точные координаты для маркера: 55.175221, 61.429808
-            // MapLibre GL использует формат [долгота, широта]
-            const exactCoords = [61.429808, 55.175221];
+            // Координаты: широта, долгота
+            const lat = 55.175221;
+            const lng = 61.429808;
             
-            // Проверка доступности MapLibre
-            if (typeof maplibregl === 'undefined') {
-                console.error('MapLibre GL не загружен. Проверьте подключение к сети или CDN.');
+            // Проверка доступности Leaflet
+            if (typeof L === 'undefined') {
+                console.error('Leaflet не загружен. Проверьте подключение.');
                 document.getElementById('map').innerHTML = 
                     '<div style="padding: 20px; text-align: center; color: #666;">' +
                     '<i class="fas fa-map-marked-alt" style="font-size: 48px; margin-bottom: 15px;"></i>' +
@@ -375,68 +365,45 @@
             }
             
             try {
-                // Создание карты с центром в указанных координатах
-                const map = new maplibregl.Map({
-                    container: 'map',
-                    style: 'https://tiles.stadiamaps.com/styles/alidade_smooth.json',
-                    center: exactCoords,
-                    zoom: 16, // Увеличенный зум для точного позиционирования
-                    attributionControl: true
+                // Создаём карту с центром в указанных координатах
+                const map = L.map('map').setView([lat, lng], 16);
+                
+                // Добавляем бесплатный тайловый слой OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19
+                }).addTo(map);
+                
+                // Создаём маркер с попапом
+                const marker = L.marker([lat, lng], {
+                    title: 'BuildCraft',
+                    riseOnHover: true
+                }).addTo(map);
+                
+                // Добавляем всплывающую подсказку с подробной информацией
+                marker.bindPopup(`
+                    <h4><i class="fas fa-hard-hat"></i> BuildCraft</h4>
+                    <p><strong>Точное местоположение:</strong></p>
+                    <p><i class="fas fa-home"></i> ул. Артиллерийская, д. 106, кв 77</p>
+                    <p>Челябинск, Тракторозаводский район</p>
+                    <hr>
+                    <p><i class="fas fa-clock"></i> <strong>Часы работы:</strong><br>Пн-Пт: 10:00-17:00</p>
+                    <p><i class="fas fa-phone"></i> <strong>Телефон:</strong><br>+7 (912) 897-73-29</p>
+                `);
+                
+                // Автоматически открыть попап при загрузке
+                marker.openPopup();
+                
+                // Добавляем масштаб
+                L.control.scale({ metric: true, imperial: false }).addTo(map);
+                
+                // Адаптация при изменении размера окна
+                window.addEventListener('resize', function() {
+                    map.invalidateSize();
                 });
                 
-                // Добавление элементов управления
-                map.addControl(new maplibregl.NavigationControl(), 'top-right');
-                map.addControl(new maplibregl.ScaleControl({
-                    maxWidth: 200,
-                    unit: 'metric'
-                }));
-                
-                // Добавление маркера после загрузки карты
-                map.once('load', function() {
-                    // Создание маркера с попапом по точным координатам
-                    const marker = new maplibregl.Marker({
-                        color: '#e74c3c',
-                        draggable: false
-                    })
-                    .setLngLat(exactCoords)
-                    .setPopup(new maplibregl.Popup({
-                        offset: 25,
-                        closeButton: true,
-                        closeOnClick: false
-                    }).setHTML(
-                        '<h4><i class="fas fa-hard-hat"></i> BuildCraft</h4>' +
-                        '<p><strong>Точное местоположение:</strong></p>' +
-                        '<p><i class="fas fa-home"></i> ул. Артиллерийская, д. 106, кв 77</p>' +
-                        '<p>Челябинск, Тракторозаводский район</p>' +
-                        '<hr style="margin: 10px 0;">' +
-                        '<p><i class="fas fa-clock"></i> <strong>Часы работы:</strong><br>Пн-Пт: 10:00-17:00</p>' +
-                        '<p><i class="fas fa-phone"></i> <strong>Телефон:</strong><br>+7 (912) 897-73-29</p>'
-                    ))
-                    .addTo(map);
-                    
-                    // Автоматическое открытие попапа при загрузке
-                    marker.togglePopup();
-                    
-                    // Адаптация карты при изменении размера окна
-                    window.addEventListener('resize', function() {
-                        map.resize();
-                    });
-                    
-                    // Логирование координат для отладки
-                    console.log('Маркер установлен по координатам:', exactCoords);
-                    console.log('Широта (latitude): 55.175221');
-                    console.log('Долгота (longitude): 61.429808');
-                });
-                
-                // Обработка ошибок загрузки карты
-                map.on('error', function(e) {
-                    console.error('Ошибка загрузки карты:', e.error);
-                });
-                
-                // Добавляем обработчик клика по карте для отображения координат (для отладки)
-                map.on('click', function(e) {
-                    console.log('Клик по карте - координаты:', e.lngLat);
-                });
+                // Логирование для отладки
+                console.log('Карта инициализирована с координатами:', lat, lng);
                 
             } catch (error) {
                 console.error('Ошибка инициализации карты:', error);
